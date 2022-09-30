@@ -1,0 +1,37 @@
+.assessment-container {
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    /* Teal-2 Linear */
+    background: linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%);
+    border-radius: 3.75523px;
+}
+
+.assessment-pattern {
+    /* Patten */
+    left: 0%;
+    right: 0%;
+    top: 74.01%;
+    bottom: 0%;
+}
+
+.header {
+    height: 44px;
+}
+
+.radar {
+    height: 234px;
+}
+
+.card-container {
+    height: 280px;
+}
+
+.card {
+    margin: 0 30px;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+}

@@ -4,11 +4,6 @@
     height: 100%;
 }
 
-.answer-container ul {
-    padding: 0;
-    margin: 0;
-}
-
-.answer-container li {
-    display: inline;
+.answer-container img {
+    flex: auto
 }

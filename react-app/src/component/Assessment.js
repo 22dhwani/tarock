@@ -6,7 +6,7 @@ import './Assessment.css';
 const Assessment = ({ assessment_group_id }) => {
     const [assessment, setAssessment] = useState({index: 0, data: []});
     useEffect(() => {
-        fetch('http://35.184.195.100:8080/api/assessments')
+        fetch('http://35.184.195.100:3000/api/assessments')
             .then((response) => response.json())
             .then((data) => {
                 setAssessment({index: 0, data: data});

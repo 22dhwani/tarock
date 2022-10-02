@@ -10,14 +10,6 @@ function About() {
   );
 }
 
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
-
 function App() {
   return (
     <div className="container">
@@ -26,7 +18,6 @@ function App() {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/about" element={ <About/> }/>
-          <Route path="/dashboard" element={ <Dashboard/> }/>
           <Route index path="/" element={ <Assessment assessment_group_id="1"/> }/>
         </Routes>
       </Router>

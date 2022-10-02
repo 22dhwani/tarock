@@ -1,0 +1,14 @@
+.answer-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.answer-container ul {
+    padding: 0;
+    margin: 0;
+}
+
+.answer-container li {
+    display: inline;
+}

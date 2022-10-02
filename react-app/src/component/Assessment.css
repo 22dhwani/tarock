@@ -1,8 +1,13 @@
 .assessment-container {
+    position: relative;
     left: 0%;
     right: 0%;
     top: 0%;
     bottom: 0%;
+    height: 100%;
+    padding-top: 41px;
+    display: flex;
+    flex-direction: column;
 
     /* Teal-2 Linear */
     background: linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%);
@@ -10,11 +15,14 @@
 }
 
 .assessment-pattern {
-    /* Patten */
-    left: 0%;
-    right: 0%;
-    top: 74.01%;
-    bottom: 0%;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 211px;
+    background-image: url("../assets/assessmentPattern.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
 }
 
 .header {
@@ -23,15 +31,29 @@
 
 .radar {
     height: 234px;
+    margin-top: 35px;
+    margin-left: 43px;
+    margin-right: 43px;
 }
 
 .card-container {
-    height: 280px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 44px;
+    flex: 1;
 }
 
 .card {
-    margin: 0 30px;
     height: 100%;
     background: #FFFFFF;
     border-radius: 10px;
+    padding-top: 15px;
+}
+
+.button-container {
+    height: 80px;
+    margin-top: 32px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 60px;
 }

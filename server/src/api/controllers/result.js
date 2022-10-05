@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     const result = new Result({
         userId: req.body.userId,
         assessmentGroupId: req.body.assessmentGroupId,
-        num_of_questions: req.body.answers.length,
+        numOfQuestions: req.body.answers.length,
         duration: req.body.duration,
         code: 'SLI'
     });

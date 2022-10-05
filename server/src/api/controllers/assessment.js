@@ -9,5 +9,7 @@ exports.getAll = (req, res) => {
                 res.send(data);
             }
         });
+    } else {
+        res.status(400).json({error_msg: "Group ID is required!"});
     }
 };

@@ -9,6 +9,8 @@ exports.getByUser = (req, res) => {
                 res.send(data);
             }
         });
+    } else {
+        res.status(400).send({error_msg: "User ID is required!"});
     }
 };
 

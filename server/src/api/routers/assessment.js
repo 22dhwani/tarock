@@ -4,7 +4,7 @@ module.exports = app => {
 
     const router = express.Router();
 
-    router.get("/", assessment.findAll);
+    router.get("/", assessment.getAll);
 
-    app.use("/api/assessments", router);
+    app.use("/api/assessment", router);
 }

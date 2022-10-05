@@ -1,7 +1,13 @@
 const Assessment = require("../models/assessment.js");
 
-exports.findAll = (req, res) => {
-    Assessment.getAll((err, data) => {
-        res.send(data);
-    });
+exports.getAll = (req, res) => {
+    if (req.query.groupId) {
+        Assessment.getAllByGroupId(req.query.groupId, (err, data) => {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                res.send(data);
+            }
+        });
+    }
 };

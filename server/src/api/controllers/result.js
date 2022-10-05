@@ -2,7 +2,7 @@ const Result = require("../models/result.js");
 
 exports.getByUser = (req, res) => {
     if (req.query.userId) {
-        Result.getByUser(req.query.groupId, (err, data) => {
+        Result.getByUser(req.query.userId, (err, data) => {
             if (err) {
                 res.status(400).send(err);
             } else {

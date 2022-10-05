@@ -10,6 +10,7 @@ const Result = function(result) {
 }
 
 Result.getByUser = (userId, cb) => {
+    // Need to update this SQL to get the latest record.
     sql.query("SELECT * FROM user_assessment_result WHERE internal_user_id = ? AND question_group_id = ?", [userId, defaultAssessmentGroupId], (err, res) => {
         if (err) {
             console.log("error: ", err);

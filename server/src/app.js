@@ -9,7 +9,7 @@ const passport = require('passport');
 // const csrf = require('csurf');
 
 const corsOptions = {
-  origin: "http://localhost:8080",
+  origin: "*",
   credentials: true // allow session cookie from browser to pass through
 };
 

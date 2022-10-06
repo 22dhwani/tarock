@@ -1,0 +1,338 @@
+[
+  {
+    "personality_code": "ILE",
+    "personality_category": "DEBATER",
+    "personality_socionic_code": "ENTp",
+    "personality_socionic_quadra": "Alpha",
+    "description": {
+      "STRENGTHS": "Well-developed learning-oriented thinking.",
+      "WEAKNESS": "Poorly tolerates strict regulation and routine work, Cant live according to a strict schedule",
+      "RECOMMENDATIONS": "If possible, it is best to give the ILE a free and flexible work schedule. It is desirable that the work is interesting to him and provides him with diversified experiences."
+    },
+    "dimensional_values": {
+      "LOGIC": 0.85,
+      "EMOTION": 0.15,
+      "STRUCTURE": 0.0125,
+      "OPENNESS": 0.9875,
+      "EXTRAVERSION": 0.775,
+      "INTROVERSION": 0.225,
+      "EXECUTION": 0.2125,
+      "STRATEGY": 0.7875
+    }
+  },
+  {
+    "personality_code": "LII",
+    "personality_category": "ANALYST",
+    "personality_socionic_code": "INTj",
+    "personality_socionic_quadra": "Alpha",
+    "description": {
+      "STRENGTHS": "Has highly developed logic and excels in analytical thinking, By nature he is kind, but puts objective factors above personal interests and relationships, good sense of time.",
+      "WEAKNESS":"Insufficiently flexible in relation, Doesnt like doing many things at once, Doesnt like doing many things at once.",
+      "RECOMMENDATIONS":"Research and analytical work, analysis of complex phenomena and objects. Development of new ideas for practical application. Analyst work well everywhere where there is demand for system analysis, for creation and development of classification schemes and forwarding of alternative concepts. In the U.S. this type of work is called business reorganizer."
+    },
+    "dimensional_values": {
+      "LOGIC": 0.875,
+      "EMOTION": 0.125,
+      "STRUCTURE": 0.25,
+      "OPENNESS": 0.75,
+      "EXTRAVERSION": 0,
+      "INTROVERSION": 1,
+      "EXECUTION": 0.375,
+      "STRATEGY": 0.625
+    }
+  },
+  {
+    "personality_code": "ESE",
+    "personality_category": "CAREGIVER",
+    "personality_socionic_code": "ESFj",
+    "personality_socionic_quadra": "Alpha",
+    "description": {
+      "STRENGTHS":"Active, optimistic, and well-wishing person, pleasant and charming conversation partner.",
+      "WEAKNESS":"Not very economical, has a tendency to overload himself with unnecessary tasks and activities",
+      "RECOMMENDATIONS":"improving the infrastructure of society; advertising, sociological work, medicine, healthcare, design and decoration"
+    },
+    "dimensional_values": {
+      "LOGIC": 0.0125,
+      "EMOTION": 0.9875,
+      "STRUCTURE": 0.875,
+      "OPENNESS": 0.125,
+      "EXTRAVERSION": 0.9375,
+      "INTROVERSION": 0.0625,
+      "EXECUTION": 0.5,
+      "STRATEGY": 0.5
+    }
+  },
+  {
+    "personality_code": "SEI",
+    "personality_category": "ARTIST",
+    "personality_socionic_code": "ISFp",
+    "personality_socionic_quadra": "Alpha",
+    "description": {
+      "STRENGTHS": "Good taste and sense of measure and proportions, Caring and attentive to others, Diplomatic, Friendly, Attentive.",
+      "WEAKNESS": "Vulnerable, Pretends that he can do much when it is not possible.",
+      "RECOMMENDATIONS": "He is well capable of establishing and maintaining beneficial business contacts. Successful in spheres where he needs to look out for needs of a specific individual. SEI is a specialist in creating and maintaining the infrastructure of society. He is the best supplier, trader of small wholesale, director of a small company, the manager-diplomat. They make good quality evaluators, designers, and organizers."
+    },
+    "dimensional_values": {
+      "LOGIC": 0.0625,
+      "EMOTION": 0.9375,
+      "STRUCTURE": 0.1375,
+      "OPENNESS": 0.8625,
+      "EXTRAVERSION": 0.1625,
+      "INTROVERSION": 0.8375,
+      "EXECUTION": 0.9,
+      "STRATEGY": 0.1
+    }
+  },
+  {
+     "personality_code":"SLE",
+     "personality_category":"PERSUADER",
+     "personality_socionic_code":"ESTp",
+     "personality_socionic_quadra":"Beta",
+     "description":{
+        "STRENGTHS":"leadership character.",
+        "WEAKNESS":"Quite aggressive, has difficulty establishing smooth",
+        "RECOMMENDATIONS":"SLE manages other people well, allocates responsibilities, clarifies roles."
+     },
+     "dimensional_values":{
+        "LOGIC":0.85,
+        "EMOTION":0.15,
+        "STRUCTURE":0.0375,
+        "OPENNESS":0.9625,
+        "EXTRAVERSION":0.9,
+        "INTROVERSION":0.1,
+        "EXECUTION":0.9875,
+        "STRATEGY":0.0125
+     }
+  },
+  {
+     "personality_code":"LSI",
+     "personality_category":"INSPECTOR",
+     "personality_socionic_code":"ISTj",
+     "personality_socionic_quadra":"Beta",
+     "description":{
+        "STRENGTHS":"Hard worker, with a strong sense of duty,dislikes improvisations, Good at analyzing specifics.",
+        "WEAKNESS":"Lacks flexibility in dealing with people, Afraid of change.",
+        "RECOMMENDATIONS":"Performs well at assigning duties and monitoring their implementation. Can be effective at hands-on administrative positions especially if the group does not exceed 8-10 persons. Great for departmental supervision. Can do quality designs, tinker with anything with his hands. Works well in technical fields. Can become an instructor, supervisor, mechanic, tax inspector, investigator."
+     },
+     "dimensional_values":{
+        "LOGIC":0.875,
+        "EMOTION":0.125,
+        "STRUCTURE":0.9375,
+        "OPENNESS":0.0625,
+        "EXTRAVERSION":0.125,
+        "INTROVERSION":0.875,
+        "EXECUTION":0.1875,
+        "STRATEGY":0.8125
+     }
+  },
+  {
+     "personality_code":"EIE",
+     "personality_category":"GIVER",
+     "personality_socionic_code":"ENFj",
+     "personality_socionic_quadra":"Beta",
+     "description":{
+        "STRENGTHS":"Emotional, Can inspire people with their emotions and make them follow him, Farsighted and shrewd",
+        "WEAKNESS":"Has much difficulty achieving inner balance, Self-immolating, vulnerable, Does not like being interrupted and rushed",
+        "RECOMMENDATIONS":"Humanitarian sphere, where it is necessary to promote any idea, philosophy, or religion. Can be great in sales and insurance business, where it is necessary to emotionally engage the customer."
+     },
+     "dimensional_values":{
+        "LOGIC":0.0625,
+        "EMOTION":0.9375,
+        "STRUCTURE":0.225,
+        "OPENNESS":0.775,
+        "EXTRAVERSION":0.9,
+        "INTROVERSION":0.1,
+        "EXECUTION":0.25,
+        "STRATEGY":0.75
+     }
+  },
+  {
+     "personality_code":"IEI",
+     "personality_category":"MEDIATOR",
+     "personality_socionic_code":"INFp",
+     "personality_socionic_quadra":"Beta",
+     "description":{
+        "STRENGTHS":"Considerate, tactful, gentle person.",
+        "WEAKNESS":"Intrinsically vulnerable, contradictory. Somewhat unsure of himself. Prone to experiencing doubts and fluctuations in arriving at a decision",
+        "RECOMMENDATIONS":"Best if occupation relates to humanities. Can work well anywhere where he is required to elegantly communicate with a small group of people. Recommended professions include translator, librarian, writer, journalist, editor, may realize themselves in the field of arts as critics, writers, and poets."
+     },
+     "dimensional_values":{
+        "LOGIC":0.0125,
+        "EMOTION":0.9875,
+        "STRUCTURE":0.0875,
+        "OPENNESS":0.9125,
+        "EXTRAVERSION":0.1625,
+        "INTROVERSION":0.8375,
+        "EXECUTION":0.625,
+        "STRATEGY":0.375
+     }
+  },
+  {
+     "personality_code":"LIE",
+     "personality_category":"VISIONIST",
+     "personality_socionic_code":"ENTj",
+     "personality_socionic_quadra":"Gamma",
+     "description":{
+        "STRENGTHS":"Very dynamic, agile, energetic and active person, Considers it to be unacceptable to fall behind, hard worker",
+        "WEAKNESS":"Often builds far-reaching but poorly thought-out plans,Impatient by nature.",
+        "RECOMMENDATIONS":"LIE best realizes himself in innovative fields that require an open mind and creative approach to business, as well as ability to adapt theoretical developments to practice. May be a good inventor and rationalizer. Given the high tempo of his work and mobility, he is recommended highly dynamic types of work that require frequent travel and trips. People of this type are usually not afraid of commercial risk, so they can be trailblazers and pioneers of new enterprises. They can engage in a variety of work, if it is interesting, challenging, and does not require special meticulousness."
+     },
+     "dimensional_values":{
+        "LOGIC":0.9875,
+        "EMOTION":0.0125,
+        "STRUCTURE":0.3125,
+        "OPENNESS":0.6875,
+        "EXTRAVERSION":0.8125,
+        "INTROVERSION":0.1875,
+        "EXECUTION":0.5,
+        "STRATEGY":0.5
+     }
+  },
+  {
+     "personality_code":"ILI",
+     "personality_category":"THINKER",
+     "personality_socionic_code":"INTp",
+     "personality_socionic_quadra":"Gamma",
+     "description":{
+        "STRENGTHS":"Oriented at making rational, gainful actions, Economical, fastidious in work, conscientious and operative, Erudite, Remembers what he has read in great detail and vividly recounts it for others,strong intuition, Punctual.",
+        "WEAKNESS":"Poorly maintains internal balance, Cautious and hesitant in new endeavors",
+        "RECOMMENDATIONS":"Applied research in fields of physics, mathematics, macroeconomics; conceptual analysis of complex problems; assessments of levels of risk, counseling and prognosis; philosophy, history and archaeology; informatics, archives and library work."
+     },
+     "dimensional_values":{
+        "LOGIC":0.9875,
+        "EMOTION":0.0125,
+        "STRUCTURE":0.1,
+        "OPENNESS":0.9,
+        "EXTRAVERSION":0.125,
+        "INTROVERSION":0.875,
+        "EXECUTION":0.1375,
+        "STRATEGY":0.8625
+     }
+  },
+  {
+     "personality_code":"SEE",
+     "personality_category":"PERFORMER",
+     "personality_socionic_code":"ESFp",
+     "personality_socionic_quadra":"Gamma",
+     "description":{
+        "STRENGTHS":"Has good diplomatic and business capabilities.",
+        "WEAKNESS":"Quite disorganized, inclined to get distracted at work by minor details.",
+        "RECOMMENDATIONS":"Social sphere: trade (especially wholesale), supply of material resources; diplomatic representation"
+     },
+     "dimensional_values":{
+        "LOGIC":0.15,
+        "EMOTION":0.85,
+        "STRUCTURE":0.0375,
+        "OPENNESS":0.9625,
+        "EXTRAVERSION":0.9,
+        "INTROVERSION":0.1,
+        "EXECUTION":0.825,
+        "STRATEGY":0.175
+     }
+  },
+  {
+     "personality_code":"ESI",
+     "personality_category":"PROJECTOR",
+     "personality_socionic_code":"ISFj",
+     "personality_socionic_quadra":"Gamma",
+     "description":{
+        "STRENGTHS":"Well versed in relations between people. Conscientious, responsible, punctual, creates order, Stable in his habits and affections",
+        "WEAKNESS":"Painfully endures injustice and unethical behavior. Vulnerable and impressionable",
+        "RECOMMENDATIONS":"The social sphere, areas that require interaction with people. Tedious work with physical component that requires focus and concentration, such as medicine and health (especially applied fields: dentistry, massage, working nurse, acupuncture, physical therapy, X-ray, biochemical diagnostics). Service and commodities sector: accounting, bookkeeping, seller and cashier."
+     },
+     "dimensional_values":{
+        "LOGIC":0.15,
+        "EMOTION":0.85,
+        "STRUCTURE":0.9375,
+        "OPENNESS":0.0625,
+        "EXTRAVERSION":0.1875,
+        "INTROVERSION":0.8125,
+        "EXECUTION":0.25,
+        "STRATEGY":0.75
+     }
+  },
+  {
+     "personality_code":"LSE",
+     "personality_category":"ORGANIZER",
+     "personality_socionic_code":"ESTj",
+     "personality_socionic_quadra":"Delta",
+     "description":{
+        "STRENGTHS":"Energetic and assertive person",
+        "WEAKNESS":"Dislikes admitting to his mistakes, Poorly receives criticism, Sensitive to stress.",
+        "RECOMMENDATIONS":"Management sphere, positions where there is a need to manage and direct people and coordinate their work and activities (under stable conditions and laws)"
+     },
+     "dimensional_values":{
+        "LOGIC":0.9875,
+        "EMOTION":0.0125,
+        "STRUCTURE":0.7875,
+        "OPENNESS":0.2125,
+        "EXTRAVERSION":0.8375,
+        "INTROVERSION":0.1625,
+        "EXECUTION":0.25,
+        "STRATEGY":0.75
+     }
+  },
+  {
+     "personality_code":"SLI",
+     "personality_category":"CRAFTER",
+     "personality_socionic_code":"ISTp",
+     "personality_socionic_quadra":"Delta",
+     "description":{
+        "STRENGTHS":"Resonable, aimed at some pragmatic purpose, knows how to adept to new ideas, Organises things for Leisure, diligence, perseverance.",
+        "WEAKNESS":"Skeptic, Likes to analyze and ridicule, Very dependent on internal moods and states, Reserverd and usually doesnt like excessive familiarity",
+        "RECOMMENDATIONS":"Rational management and maintenance, maintenance of precise and delicate equipment; quality design of products, interior design, management of small business."
+     },
+     "dimensional_values":{
+        "LOGIC":0.9875,
+        "EMOTION":0.0125,
+        "STRUCTURE":0.1875,
+        "OPENNESS":0.8125,
+        "EXTRAVERSION":0.125,
+        "INTROVERSION":0.875,
+        "EXECUTION":0.6875,
+        "STRATEGY":0.3125
+     }
+  },
+  {
+     "personality_code":"IEE",
+     "personality_category":"CHAMPION",
+     "personality_socionic_code":"ENFp",
+     "personality_socionic_quadra":"Delta",
+     "description":{
+        "STRENGTHS":"Communicative and emotional. Know how to approach any person in case of need.",
+        "WEAKNESS":"Due to his desire to maintain positive relations with many people, he can overload himself with useless contacts.",
+        "RECOMMENDATIONS":"The humanitarian sphere. Teaching, art, journalism, psychology"
+     },
+     "dimensional_values":{
+        "LOGIC":0.15,
+        "EMOTION":0.85,
+        "STRUCTURE":0.0125,
+        "OPENNESS":0.9875,
+        "EXTRAVERSION":0.775,
+        "INTROVERSION":0.225,
+        "EXECUTION":0.3125,
+        "STRATEGY":0.6875
+     }
+  },
+  {
+     "personality_code":"EII",
+     "personality_category":"ADVOCATE",
+     "personality_socionic_code":"INFj",
+     "personality_socionic_quadra":"Delta",
+     "description":{
+        "STRENGTHS":"Well versed in human relationships. Strives for self-improvement and erudition, understanding and tolerance.",
+        "WEAKNESS":"Impressionable and vulnerable, Poorly tolerates loneliness, Very meticulous.",
+        "RECOMMENDATIONS":"Educational work with young people, psychotherapy, work in theoretical and humanitarian spheres, photography and digital arts."
+     },
+     "dimensional_values":{
+        "LOGIC":0.15,
+        "EMOTION":0.85,
+        "STRUCTURE":0.25,
+        "OPENNESS":0.75,
+        "EXTRAVERSION":0.1875,
+        "INTROVERSION":0.8125,
+        "EXECUTION":0.1,
+        "STRATEGY":0.9
+     }
+  }
+]

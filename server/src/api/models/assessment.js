@@ -4,15 +4,14 @@ const Assessment = function(assessment) {
     this.content = assessment.content;
 }
 
-Assessment.getAll = result => {
-    sql.query("SELECT * FROM question", (err, res) => {
+Assessment.getAllByGroupId = (groupId, cb) => {
+    sql.query("SELECT content FROM question WHERE group_id = ?", [groupId], (err, res) => {
         if (err) {
             console.log("error: ", err);
-            result(null, err);
+            cb(err, null);
             return;
         }
-        console.log("questions: ", res);
-        result(null, res);
+        cb(null, res);
     });
 }
 

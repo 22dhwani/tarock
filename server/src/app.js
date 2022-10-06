@@ -47,6 +47,7 @@ app.get("/", (req, res) => {
 require("./api/routers/assessment")(app);
 require("./api/routers/credential")(app);
 require("./api/routers/user")(app);
+require("./api/routers/result")(app);
 
 var authRouter = require('./auth/auth');
 app.use('/', authRouter);

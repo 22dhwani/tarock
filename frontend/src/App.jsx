@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import UserProfile from './components/profileScreen/UserProfile';
 import Welcome from './components/welcomeScreen/Welcome';
 import SignInScreen from './components/SignInScreen/SignInScreen';
+import { GlobalContextProvider } from './context'
+
 function About() {
   return (
     <div>
@@ -22,6 +24,7 @@ function App() {
       <Router>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
+        <GlobalContextProvider>
         <Routes>
           <Route path="/about" element={ <About/> }/>
           {/* <Route index path="/" element={ <Assessment assessment_group_id="1"/> }/> */}
@@ -29,6 +32,7 @@ function App() {
           <Route index path="/" element={ <Welcome/> }/>
           <Route index path="signin" element={ <SignInScreen/> }/>
         </Routes>
+        </GlobalContextProvider>
       </Router>
     </div>
   );

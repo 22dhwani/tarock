@@ -44,7 +44,7 @@ function SignInScreen(props) {
             })
             const data = await response.json();
             console.log(data);
-            navigate("/test")
+            navigate("/home")
         } catch (error) {
             console.log(error);
         }

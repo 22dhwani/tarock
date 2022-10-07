@@ -13,11 +13,11 @@ function Welcome() {
     // Get user fingerprint
     const {data} = useVisitorData();
     if (data) {
-        setUserID(data.visitorId);
-        console.log("User fingerprint: " + userID);
+        console.log("User fingerprint: " + data.visitorId);
     }
 
     function handleClick() {
+        setUserID(data.visitorId);
          redirect("/signin");
     }
     return (

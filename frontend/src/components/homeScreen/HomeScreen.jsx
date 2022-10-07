@@ -6,18 +6,14 @@ import meActive from '../../assets/meActive.svg'
 import cards from '../../assets/cards.svg'
 import FeedCard from "../feedItems/FeedCard";
 import testImageFeed from '../../assets/testImageFeed.svg'
-
+import { Link } from "react-router-dom";
 function HomeScreen() {
     const bottomNavItems = [testTick, cards, meActive]
 
     //get data from api and store in state
     const data = [
         {
-            title: 'Title 1',
-            image: testImageFeed
-        },
-        {
-            title: 'Title 2',
+            title: 'Tarock Personality Test',
             image: testImageFeed
         },
     ]
@@ -32,9 +28,12 @@ function HomeScreen() {
             {data.map((item, index) => {
                 return (
                     <Row key={index} className='pb-4'>
+                        {/* add color:'black' to style prop if you want to change text color */}
+                        <Link to='/test' style={{textDecoration:'none'}}>
                         <FeedCard
                             title={item.title}
                             image={item.image} />
+                        </Link>
                     </Row>
                 )
             })}
@@ -46,7 +45,7 @@ function HomeScreen() {
                 }}>
                     {bottomNavItems.map((bottomNavItem, index) => {
                         return (
-                            <div key={index} className='px-5'>
+                            <div key={index} className='px-5' style={{cursor:'pointer'}}>
                                 <img src={bottomNavItem} alt='button' />
                             </div>
                         )

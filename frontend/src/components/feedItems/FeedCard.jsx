@@ -1,7 +1,7 @@
 
 function FeedCard(props){
     return (
-        <div className="d-flex flex-column mx-auto" style={{width:'fit-content'}}>
+        <div className="d-flex flex-column mx-auto" style={{width:'fit-content', cursor:'pointer'}}>
             <p style={{
                 fontWeight: '700',
                 fontSize: '14px',

@@ -68,7 +68,7 @@ function UserProfile() {
             }}>
                 {bottomNavItems.map((bottomNavItem, index) => {
                     return (
-                        <div key={index} className='px-5'>
+                        <div key={index} className='px-5' style={{cursor:'pointer'}}>
                             <img src={bottomNavItem} alt='button' />
                         </div>
                     )

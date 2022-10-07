@@ -64,12 +64,13 @@ function SignInScreen(props) {
         event.preventDefault();
         try {
             const response = await fetch(`http://35.184.195.100:3000/api/user/${userID}`);
-            obj = await response.json();
+            let obj = await response.json();
             console.log(obj)
+            //check for email password in future
         } catch (error) {
             console.log(error);
         }
-        //check for email password in future
+        
     }
 
     function createAvatar() {

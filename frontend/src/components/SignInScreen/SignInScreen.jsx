@@ -6,12 +6,14 @@ import { useState } from 'react';
 import AvatarCreation from '../avatarCreationScreen.jsx/AvatarCreation';
 import { GlobalContext } from '../../context';
 import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function SignInScreen(props) {
     const [user, setUser] = useState('');
     const [avatar, setAvatar] = useState(false);
     const [avatarPage, setAvatarPage] = useState(true);
     const { userID } = useContext(GlobalContext);
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
         {
@@ -39,9 +41,10 @@ function SignInScreen(props) {
                     //Email: formData.email,
                     //Password: formData.password
                 })
-            });
+            })
             const data = await response.json();
             console.log(data);
+            navigate("/test")
         } catch (error) {
             console.log(error);
         }
@@ -88,7 +91,7 @@ function SignInScreen(props) {
         setAvatar(true);
     }
     return (
-        <Container style={{ backgroundColor: '#FBF2DC' }}>
+        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC' }}>
             {avatarPage ? <>
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                     margin: '0 auto',

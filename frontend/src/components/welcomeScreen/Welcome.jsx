@@ -21,7 +21,7 @@ function Welcome() {
          redirect("/signin");
     }
     return (
-        <Container style={{ backgroundColor: '#FBF2DC'}}>
+        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC'}}>
             <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                 margin: '0 auto',
             }} />

@@ -48,6 +48,7 @@ require("./api/routers/assessment")(app);
 require("./api/routers/credential")(app);
 require("./api/routers/user")(app);
 require("./api/routers/result")(app);
+require("./api/routers/card")(app);
 
 var authRouter = require('./auth/auth');
 app.use('/', authRouter);

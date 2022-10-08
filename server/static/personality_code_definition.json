@@ -1,5 +1,5 @@
-[
-  {
+{
+  "ILE": {
     "personality_code": "ILE",
     "personality_category": "DEBATER",
     "personality_socionic_code": "ENTp",
@@ -20,7 +20,7 @@
       "STRATEGY": 0.7875
     }
   },
-  {
+  "LII": {
     "personality_code": "LII",
     "personality_category": "ANALYST",
     "personality_socionic_code": "INTj",
@@ -41,7 +41,7 @@
       "STRATEGY": 0.625
     }
   },
-  {
+  "ESE": {
     "personality_code": "ESE",
     "personality_category": "CAREGIVER",
     "personality_socionic_code": "ESFj",
@@ -62,7 +62,7 @@
       "STRATEGY": 0.5
     }
   },
-  {
+  "SEI": {
     "personality_code": "SEI",
     "personality_category": "ARTIST",
     "personality_socionic_code": "ISFp",
@@ -83,7 +83,7 @@
       "STRATEGY": 0.1
     }
   },
-  {
+  "SLE": {
      "personality_code":"SLE",
      "personality_category":"PERSUADER",
      "personality_socionic_code":"ESTp",
@@ -104,7 +104,7 @@
         "STRATEGY":0.0125
      }
   },
-  {
+  "LSI": {
      "personality_code":"LSI",
      "personality_category":"INSPECTOR",
      "personality_socionic_code":"ISTj",
@@ -125,7 +125,7 @@
         "STRATEGY":0.8125
      }
   },
-  {
+  "EIE": {
      "personality_code":"EIE",
      "personality_category":"GIVER",
      "personality_socionic_code":"ENFj",
@@ -146,7 +146,7 @@
         "STRATEGY":0.75
      }
   },
-  {
+  "IEI": {
      "personality_code":"IEI",
      "personality_category":"MEDIATOR",
      "personality_socionic_code":"INFp",
@@ -167,7 +167,7 @@
         "STRATEGY":0.375
      }
   },
-  {
+  "LIE": {
      "personality_code":"LIE",
      "personality_category":"VISIONIST",
      "personality_socionic_code":"ENTj",
@@ -188,7 +188,7 @@
         "STRATEGY":0.5
      }
   },
-  {
+  "ILI": {
      "personality_code":"ILI",
      "personality_category":"THINKER",
      "personality_socionic_code":"INTp",
@@ -209,7 +209,7 @@
         "STRATEGY":0.8625
      }
   },
-  {
+  "SEE": {
      "personality_code":"SEE",
      "personality_category":"PERFORMER",
      "personality_socionic_code":"ESFp",
@@ -230,7 +230,7 @@
         "STRATEGY":0.175
      }
   },
-  {
+  "ESI": {
      "personality_code":"ESI",
      "personality_category":"PROJECTOR",
      "personality_socionic_code":"ISFj",
@@ -251,7 +251,7 @@
         "STRATEGY":0.75
      }
   },
-  {
+  "LSE": {
      "personality_code":"LSE",
      "personality_category":"ORGANIZER",
      "personality_socionic_code":"ESTj",
@@ -272,7 +272,7 @@
         "STRATEGY":0.75
      }
   },
-  {
+  "SLI": {
      "personality_code":"SLI",
      "personality_category":"CRAFTER",
      "personality_socionic_code":"ISTp",
@@ -293,7 +293,7 @@
         "STRATEGY":0.3125
      }
   },
-  {
+  "IEE": {
      "personality_code":"IEE",
      "personality_category":"CHAMPION",
      "personality_socionic_code":"ENFp",
@@ -314,7 +314,7 @@
         "STRATEGY":0.6875
      }
   },
-  {
+  "EII": {
      "personality_code":"EII",
      "personality_category":"ADVOCATE",
      "personality_socionic_code":"INFj",
@@ -335,4 +335,4 @@
         "STRATEGY":0.9
      }
   }
-]
+}

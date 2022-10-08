@@ -9,7 +9,7 @@ const User = function(user) {
 }
 
 User.create = (user, cb) => {
-    sql.query("INSERT INTO tmp_user (name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?)", [user.name, user.gender, user.avatarIndex, user.id], (err, res) => {
+    sql.query("INSERT INTO tmp_user (name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?);", [user.name, user.gender, user.avatarIndex, user.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);
@@ -20,7 +20,7 @@ User.create = (user, cb) => {
 }
 
 User.query = (id, cb) => {
-    sql.query("SELECT * FROM tmp_user WHERE internal_user_id = ?", [id], (err, res) => {
+    sql.query("SELECT * FROM tmp_user WHERE internal_user_id = ?;", [id], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);
@@ -31,7 +31,7 @@ User.query = (id, cb) => {
 }
 
 User.update = (user, cb) => {
-    sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?", [user.name, user.gender, user.avatarIndex, user.dob, user.id], (err, res) => {
+    sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);

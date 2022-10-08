@@ -10,8 +10,7 @@ const Result = function(result) {
 }
 
 Result.getByUser = (userId, cb) => {
-    // Need to update this SQL to get the latest record.
-    sql.query("SELECT * FROM user_assessment_result WHERE internal_user_id = ? AND question_group_id = ?", [userId, defaultAssessmentGroupId], (err, res) => {
+    sql.query("SELECT * FROM user_assessment_result WHERE internal_user_id = ? AND question_group_id = ? order by created_at desc limit 1;", [userId, defaultAssessmentGroupId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);
@@ -22,7 +21,7 @@ Result.getByUser = (userId, cb) => {
 }
 
 Result.create = (result, cb) => {
-    sql.query("INSERT INTO user_assessment_result (internal_user_id, question_group_id, num_of_questions, duration, result_code) VALUES (?, ?, ?, ?, ?)", [result.userId, result.assessmentGroupId, result.numOfQuestions, result.duration, result.code], (err, res) => {
+    sql.query("INSERT INTO user_assessment_result (internal_user_id, question_group_id, num_of_questions, duration, result_code) VALUES (?, ?, ?, ?, ?);", [result.userId, result.assessmentGroupId, result.numOfQuestions, result.duration, result.code], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);

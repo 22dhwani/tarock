@@ -5,7 +5,7 @@ const Assessment = function(assessment) {
 }
 
 Assessment.getAllByGroupId = (groupId, cb) => {
-    sql.query("SELECT content FROM question WHERE group_id = ?", [groupId], (err, res) => {
+    sql.query("SELECT content FROM question WHERE group_id = ?;", [groupId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);

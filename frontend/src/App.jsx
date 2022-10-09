@@ -7,6 +7,7 @@ import Welcome from './components/welcomeScreen/Welcome';
 import SignInScreen from './components/signInScreen/SignInScreen';
 import { GlobalContextProvider } from './context'
 import HomeScreen from './components/homeScreen/HomeScreen';
+import MyCardScreen from './components/myCardScreen/MyCardScreen';
 
 function About() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route index path="/" element={ <Welcome/> }/>
           <Route index path="signin" element={ <SignInScreen/> }/>
           <Route index path="home" element={ <HomeScreen/> }/>
+          <Route index path="myCard" element={ <MyCardScreen/> }/>
         </Routes>
         </GlobalContextProvider>
       </Router>

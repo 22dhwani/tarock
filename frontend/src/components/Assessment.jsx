@@ -9,11 +9,13 @@ import btn1 from '../assets/btn_1.svg';
 import btn2 from '../assets/btn_2.svg';
 import sampleRadar from '../assets/sampleRadar.svg';
 import { GlobalContext } from '../context';
+import { useNavigate } from "react-router-dom";
 
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
     const { userID } = useContext(GlobalContext);
+    const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://35.184.195.100:3000/api/assessment?groupId=${assessmentGroupId}`)
             .then((response) => response.json())
@@ -26,12 +28,12 @@ const Assessment = ({ assessmentGroupId }) => {
     }, []);
 
     function onBtnClick(index) {
-        console.log(userID);
         const content = assessment.data[assessment.index].content;
         const jsonObj = JSON.parse(content);
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {
+            console.log(answers);
             fetch('http://35.184.195.100:3000/api/result', {
                 method: 'POST',
                 headers: {
@@ -47,7 +49,7 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log('Navigate to result page');
+                    navigate("/myCard");
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -69,7 +71,7 @@ const Assessment = ({ assessmentGroupId }) => {
             <Row className='mx-auto'>
                 <img src={sampleRadar} atl="radar"/>
             </Row>
-            <div className="card-container w-75 mx-auto">
+            <div className="card-container w-75 mx-auto overflow-auto">
                 <div className="card">
                     {
                         assessment.index < assessment.data.length && <Question data={assessment.data[assessment.index].content} />

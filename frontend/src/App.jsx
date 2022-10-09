@@ -28,7 +28,7 @@ function App() {
         <GlobalContextProvider>
         <Routes>
           <Route path="/about" element={ <About/> }/>
-           <Route index path="/test" element={ <Assessment assessment_group_id="1"/> }/>
+           <Route index path="/test" element={ <Assessment assessmentGroupId="1"/> }/>
           <Route index path="user" element={ <UserProfile/> }/>
           <Route index path="/" element={ <Welcome/> }/>
           <Route index path="signin" element={ <SignInScreen/> }/>

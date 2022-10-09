@@ -3,15 +3,15 @@ import './Question.css';
 
 const Question = ({ data }) => {
     const jsonObj = JSON.parse(data);
-    const options = jsonObj.options.map((option, index) =>(
+    const options = jsonObj.answers.map((option, index) =>(
         <li key={index}>
-            { option }
+            { option.content }
         </li>
     ));
     return (
         <div className="question-container">
             <div>
-                <div>{ jsonObj?.description }</div>
+                <div>{ jsonObj?.question }</div>
                 <ol>
                     { options }
                 </ol>

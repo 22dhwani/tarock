@@ -1,9 +1,0 @@
-.answer-container {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-}
-
-.answer-container img {
-    flex: auto
-}

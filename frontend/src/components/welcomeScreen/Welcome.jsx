@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg';
 import pattern from '../../assets/pattern.svg';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { redirect } from "react-router-dom";
 import { useContext } from 'react';
 import { GlobalContext } from '../../context';

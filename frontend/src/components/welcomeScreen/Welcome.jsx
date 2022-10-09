@@ -37,7 +37,7 @@ function Welcome() {
             }}>
                 <span>Welcome back,</span>
                 <br />
-                <span>User Name!</span>
+                <span>{data ? data.visitorId : 'User Name'}!</span>
             </div>
            
         <Link to="/signin"  className='rounded-5 py-3' style={{

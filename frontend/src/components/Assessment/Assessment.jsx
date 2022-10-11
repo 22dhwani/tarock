@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import Question from './Question';
+import Question from '../Question/Question';
 import './Assessment.css';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import logo from '../assets/tarockLogo.svg'
-import btn1 from '../assets/btn_1.svg';
-import btn2 from '../assets/btn_2.svg';
-import sampleRadar from '../assets/sampleRadar.svg';
-import { GlobalContext } from '../context';
+import logo from '../../assets/tarockLogo.svg';
+import btn1 from '../../assets/btn_1.svg';
+import btn2 from '../../assets/btn_2.svg';
+import sampleRadar from '../../assets/sampleRadar.svg';
+import { GlobalContext } from '../../context';
 import { useNavigate } from "react-router-dom";
 
 const Assessment = ({ assessmentGroupId }) => {
@@ -49,7 +49,12 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    navigate("/myCard");
+                    //set type later on
+                    fetch('http://35.184.195.100:3000/api/card/EII')
+                        .then(response => response.json())
+                        .then(data => {
+                            navigate("/myCard", { state: { card: data.dimensional_values } });
+                        });
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -63,13 +68,13 @@ const Assessment = ({ assessmentGroupId }) => {
             backgroundColor: '#FBF2DC',
             height: 'fit-content',
             background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)'
-        }}> 
-            
+        }}>
+
             <Row>
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5 mx-auto' />
             </Row>
             <Row className='mx-auto'>
-                <img src={sampleRadar} atl="radar"/>
+                <img src={sampleRadar} atl="radar" />
             </Row>
             <div className="card-container w-75 mx-auto overflow-auto">
                 <div className="card">
@@ -80,10 +85,10 @@ const Assessment = ({ assessmentGroupId }) => {
             </div>
             <Row className="w-75 mx-auto">
                 <Col className="col-6 d-flex justify-content-center">
-                    <img src={btn1} alt="btn1" onClick={(e) => {onBtnClick(0)}}/>
+                    <img src={btn1} alt="btn1" onClick={(e) => { onBtnClick(0) }} />
                 </Col>
                 <Col className="col-6 d-flex justify-content-center">
-                    <img src={btn2} alt="btn2" onClick={(e) => {onBtnClick(1)}}/>
+                    <img src={btn2} alt="btn2" onClick={(e) => { onBtnClick(1) }} />
                 </Col>
             </Row>
         </Container>

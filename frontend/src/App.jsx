@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Assessment from "./components/Assessment";
+import Assessment from "./components/Assessment/Assessment";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserProfile from './components/profileScreen/UserProfile';
 import Welcome from './components/welcomeScreen/Welcome';
@@ -8,7 +8,7 @@ import SignInScreen from './components/signInScreen/SignInScreen';
 import { GlobalContextProvider } from './context'
 import HomeScreen from './components/homeScreen/HomeScreen';
 import MyCardScreen from './components/myCardScreen/MyCardScreen';
-
+import RadarChart from './components/Charts/RadarChart';
 function About() {
   return (
     <div>
@@ -35,6 +35,7 @@ function App() {
           <Route index path="signin" element={ <SignInScreen/> }/>
           <Route index path="home" element={ <HomeScreen/> }/>
           <Route index path="myCard" element={ <MyCardScreen/> }/>
+          <Route index path="chart" element={ <RadarChart/> }/>
         </Routes>
         </GlobalContextProvider>
       </Router>

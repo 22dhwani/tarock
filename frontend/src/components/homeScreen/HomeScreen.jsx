@@ -1,59 +1,71 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import logo from '../../assets/tarockLogo.svg';
-import testTick from '../../assets/testTick.svg'
-import meActive from '../../assets/meActive.svg'
-import cards from '../../assets/cards.svg'
 import FeedCard from "../feedItems/FeedCard";
 import testImageFeed from '../../assets/testImageFeed.svg'
 import { Link } from "react-router-dom";
+import Header from '../common/Header';
+import Loading from '../common/Loading';
+import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
+import { useContext } from "react";
+import { GlobalContext } from '../../context';
+import { useNavigate } from "react-router-dom";
+import Footer from '../common/Footer';
+
 function HomeScreen() {
-    const bottomNavItems = [testTick, cards, meActive]
+    const { userId, setUserId } = useContext(GlobalContext);
+    const { isLoading, data } = useVisitorData();
+    const navigate = useNavigate();
+    if (isLoading) {
+        return <Loading/>;
+    }
+    if (data) {
+        // Determine if user exists in database.
+        fetch(`http://35.184.195.100:3000/api/user/${data.visitorId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    setUserId(data[0].internal_user_id);
+                } else {
+                    navigate('/signin');
+                }
+            })
+            .catch((err) => {
+                console.log(err.message)
+            });
+    }
 
-    //get data from api and store in state
-    const data = [
-        {
-            title: 'Tarock Personality Test',
-            image: testImageFeed
-        },
-    ]
-    return (
-        <Container fluid className='bg-light pb-5 min-vh-100'>
-            <Row>
-                <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
-                    margin: '0 auto',
-                }} />
-            </Row>
-
-            {data.map((item, index) => {
-                return (
-                    <Row key={index} className='pb-4'>
-                        {/* add color:'black' to style prop if you want to change text color */}
-                        <Link to='/test' style={{textDecoration:'none'}}>
-                        <FeedCard
-                            title={item.title}
-                            image={item.image} />
-                        </Link>
-                    </Row>
-                )
-            })}
-
-            <Row className="fixed-bottom py-3 mb-2 bg-light">
-                <div className='d-flex py-4' style={{
-                    width: 'fit-content',
-                    margin: '0 auto',
-                }}>
-                    {bottomNavItems.map((bottomNavItem, index) => {
+    // Only render if user ID exists.
+    if (userId) {
+        // Get data from api and store in state
+        const feedData = [
+            {
+                title: 'Tarock Personality Test',
+                image: testImageFeed
+            },
+        ]
+        return (
+            <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FFFFFF' }}>
+                <Header/>
+                
+                <Container className="flex-grow-1 overflow-auto">
+                    {feedData.map((item, index) => {
                         return (
-                            <div key={index} className='px-5' style={{cursor:'pointer'}}>
-                                <img src={bottomNavItem} alt='button' />
-                            </div>
+                            <Row key={index} className='pb-4'>
+                                {/* add color:'black' to style prop if you want to change text color */}
+                                <Link to='/test' style={{textDecoration:'none'}}>
+                                <FeedCard
+                                    title={item.title}
+                                    image={item.image} />
+                                </Link>
+                            </Row>
                         )
                     })}
-                </div>
-            </Row>
-        </Container>
-    )
+                </Container>
+
+                <Footer isTestActive={true}/>
+            </Container>
+        )
+    }
 }
 
 export default HomeScreen;

@@ -5,22 +5,22 @@ import male from '../../assets/avatarMale.svg'
 import female from '../../assets/avatarFemale.svg'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
+
 function AvatarCreation(props) {
 
     return (
-        <div>
-            <div className="d-flex justify-content-between ">
-                <img src={buttonBack} alt="buttonBack" onClick={props.handleBack} />
-                <img src={logo} alt="logo" />
-                <img src={buttonOk} alt="buttonOk" onClick={props.handleOk} />
+        <div className="min-vh-100 " >
+            <div className="d-flex justify-content-around ">
+                <img className='px-3' src={buttonBack} alt="buttonBack" onClick={props.handleBack} />
+                <img className='px-5' src={logo} alt="logo" />
+                <img className='px-3' src={buttonOk} alt="buttonOk" onClick={props.handleOk} />
             </div>
 
             <div className='mx-auto pb-5' style={{ width: 'fit-content' }}>
                 <img src={props.gender ? male : female} alt="maleNoBg" height={220} />
             </div>
 
-            <Row className="p-3 rounded-4 mx-auto px-4" style={{ backgroundColor: "white", width: 'fit-content' }}>
+            <Row className="rounded-4 mx-auto py-3" style={{ backgroundColor: "white",width:'fit-content'}}>
                 <Col className='d-flex justify-content-center' onClick={() => props.setGender(data => {
                     return {
                         ...data,

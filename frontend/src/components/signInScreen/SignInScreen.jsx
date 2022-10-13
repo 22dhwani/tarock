@@ -92,7 +92,7 @@ function SignInScreen(props) {
         setAvatar(true);
     }
     return (
-        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC' }}>
+        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC'}}>
             {avatarPage ? <>
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                     margin: '0 auto',
@@ -107,13 +107,13 @@ function SignInScreen(props) {
                     paddingBottom: '25px',
                     paddingTop: '10px'
                 }}>
-                    <span>Welcome to Tarock, the personality test app that tells you more</span>
+                    <span>Welcome to Tarock, <br></br>the personality test app <br></br>that tells you more</span>
 
                 </div>
 
                 <div style={{
-                    position: 'relative',
-                    top: '100px',
+                   position: 'relative',
+                   top: '8rem',
                     zIndex: '1000',
                     display: 'flex',
                     flexDirection: 'column',
@@ -134,7 +134,7 @@ function SignInScreen(props) {
                                 value={formData.password} />
                         </Form.Group>}
 
-                        {!avatar && <button
+                        {/* {!avatar && <button
                             onClick={handleSignIn}
                             className='w-100 rounded-5 py-3' style={{
                                 backgroundColor: '#49304D',
@@ -143,12 +143,12 @@ function SignInScreen(props) {
                                 lineHeight: '14px',
                                 border: 'none',
 
-                            }}>Sign In</button>}
+                            }}>Sign In</button>} */}
                     </Form>
 
                     {/* Update required for all buttons, move them to map function.
                     Using separate forms for Login and signup will be better for code maintainence */}
-                    {!avatar && <button
+                    {/* {!avatar && <button
                         onClick={handleUser}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: 'transparent',
@@ -158,7 +158,7 @@ function SignInScreen(props) {
                             fontWeight: '700',
 
                         }}>Sign Up</button>
-                    }
+                    } */}
 
                     {!avatar && <button
                         onClick={handelGuest}
@@ -195,8 +195,8 @@ function SignInScreen(props) {
                         }}> {'<-- Go back'} </button>}
                 </div>
 
-                <img src={pattern} alt="pattern" height='210px'
-                    className='fixed-bottom' style={{ zIndex: '100' }} />
+                <img src={pattern} alt="pattern" 
+                    className=' w-100' style={{ zIndex: '100' }} />
             </> : <AvatarCreation
                 gender={formData.gender}
                 setGender={setFormData}

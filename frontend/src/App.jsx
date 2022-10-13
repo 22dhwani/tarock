@@ -14,21 +14,22 @@ import { GlobalContextProvider } from './context'
 
 const App = () => {
   return (
-      <div className="min-vw-100 min-vh-100" style={{
+      <div className="globalContainer min-vh-100" style={{
         backgroundColor: '#F3F3F3',
-        height: 'fit-content'
+        height: 'fit-content',
+        width: 'fit-content',
       }}>
         <div className="min-vh-100 mx-auto" style={{
-          maxWidth: '500px'
+          maxWidth: '100%'
         }}>
           <Router>
             <GlobalContextProvider>
               <Routes>
                 <Route index path="/test" element={ <Assessment assessmentGroupId={ 1 }/> }/>
                 <Route index path="/user" element={ <UserProfile/> }/>
-                <Route index path="/welcome" element={ <Welcome/> }/>
+                <Route index path="/home" element={ <HomeScreen/> }/>
                 <Route index path="/signin" element={ <SignInScreen/> }/>
-                <Route index path="/" element={ <HomeScreen/> }/>
+                <Route index path="/" element={ <Welcome/> }/>
                 <Route index path="/myCard" element={ <MyCardScreen/> }/>
                 <Route index path="/chart" element={ <RadarChart/> }/>
                 <Route index path="/share/:id" element={ <ShareScreen/> }/>

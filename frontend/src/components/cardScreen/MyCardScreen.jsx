@@ -13,12 +13,12 @@ import superpower from '../../assets/myCard/superpower.svg';
 import blindSpot from '../../assets/myCard/blindSpot.svg';
 import idealEnv from '../../assets/myCard/idealEnv.svg';
 import share from '../../assets/myCard/share.svg';
-
+import {Link} from 'react-router-dom';
 function MyCard() {
     const { userID } = useContext(GlobalContext);
     const location = useLocation();
     return (
-        <Container className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>
+        <Container className='d-flex flex-column min-vh-100 my-2 rounded-4' style={{ backgroundColor: '#3069B3' }}>
             <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                 margin: '0 auto',
             }} />
@@ -48,94 +48,101 @@ function MyCard() {
                     color: '#FFFFFF',
                     alignItems: 'center',
                     textAlign: 'center'
-                }}>
+                }}
+                    className='py-3'>
                     {userID} is Advisor, Altruistic, Personable, Intuitive, Diplomat.
                 </div>
+
                 <div style={{
                     background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
                     backdropFilter: 'blur(10px)',
                     borderRadius: '8px',
                     height: '300px',
                     margin: '0 auto',
-                }}>
+                }} >
                     <div className='d-flex justify-content-center'>
                         <div className='mx-auto'>
                             <RadarChart data={location.state.card} />
                         </div>
                     </div>
                 </div>
-                <Row className='mx-auto' style={{
-                    background: '#FFFFFF',
-                    borderRadius: '8px 8px 0px 0px'
-                }}>
-                    <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={strengths} alt='strengths'/>
-                    </Col>
-                    <Col>
-                        <div>
-                            Advisor, Altruistic, Personable, Intuitive, Diplomat
-                        </div>
-                    </Col>
-                </Row>
-                <Row className='mx-auto' style={{
-                    background: '#FFFFFF',
-                    opacity: '0.9',
-                    backdropFilter: 'blur(10px)'
-                }}>
-                    <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={weakness} alt='weakness'/>
-                    </Col>
-                    <Col>
-                        <div>
-                            Goes on tengents, Not meticulous
-                        </div>
-                    </Col>
-                </Row>
-                <Row className='mx-auto' style={{
-                    background: '#FFFFFF',
-                    opacity: '0.8',
-                    backdropFilter: 'blur(10px)'
-                }}>
-                    <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={superpower} alt='superpower'/>
-                    </Col>
-                    <Col>
-                        <div>
-                            Intuition
-                        </div>
-                    </Col>
-                </Row>
-                <Row className='mx-auto' style={{
-                    background: '#FFFFFF',
-                    opacity: '0.7',
-                    backdropFilter: 'blur(10px)'
-                }}>
-                    <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={blindSpot} alt='blind spot'/>
-                    </Col>
-                    <Col>
-                        <div>
-                            Organization
-                        </div>
-                    </Col>
-                </Row>
-                <Row className='mx-auto' style={{
-                    background: '#FFFFFF',
-                    opacity: '0.6',
-                    backdropFilter: 'blur(10px)'
-                }}>
-                    <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={idealEnv} alt='ideal environment'/>
-                    </Col>
-                    <Col>
-                        <div>
-                            Group
-                        </div>
-                    </Col>
-                </Row>
-                <div className='d-flex justify-content-center'>
-                    <img src={share} alt='share'/>
+                <div className='py-3'>
+                    <Row className='mx-auto' style={{
+                        background: '#FFFFFF',
+                        borderRadius: '8px 8px 0px 0px'
+                    }} >
+                        <Col className='col-4 d-flex justify-content-center align-self-center'>
+                            <img src={strengths} alt='strengths' />
+                        </Col>
+                        <Col>
+                            <div>
+                                Advisor, Altruistic, Personable, Intuitive, Diplomat
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className='mx-auto' style={{
+                        background: '#FFFFFF',
+                        opacity: '0.9',
+                        backdropFilter: 'blur(10px)'
+                    }}>
+                        <Col className='col-4 d-flex justify-content-center align-self-center'>
+                            <img src={weakness} alt='weakness' />
+                        </Col>
+                        <Col>
+                            <div>
+                                Goes on tengents, Not meticulous
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className='mx-auto' style={{
+                        background: '#FFFFFF',
+                        opacity: '0.8',
+                        backdropFilter: 'blur(10px)'
+                    }}>
+                        <Col className='col-4 d-flex justify-content-center align-self-center'>
+                            <img src={superpower} alt='superpower' />
+                        </Col>
+                        <Col>
+                            <div>
+                                Intuition
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className='mx-auto' style={{
+                        background: '#FFFFFF',
+                        opacity: '0.7',
+                        backdropFilter: 'blur(10px)'
+                    }}>
+                        <Col className='col-4 d-flex justify-content-center align-self-center'>
+                            <img src={blindSpot} alt='blind spot' />
+                        </Col>
+                        <Col>
+                            <div>
+                                Organization
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className='mx-auto py-2' style={{
+                        background: '#FFFFFF',
+                        opacity: '0.6',
+                        backdropFilter: 'blur(10px)',
+                        borderRadius: '0px 0px 8px 8px'
+                    }}>
+                        <Col className='col-4 d-flex justify-content-center align-self-center'>
+                            <img src={idealEnv} alt='ideal environment' />
+                        </Col>
+                        <Col>
+                            <div>
+                                Group
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
+                <Link to= '/user'>
+                <div className='d-flex justify-content-center py-3'>
+                    <img src={share} alt='share' />
+                </div>
+                </Link>
             </div>
         </Container>
     );

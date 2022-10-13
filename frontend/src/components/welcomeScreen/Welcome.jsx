@@ -21,7 +21,7 @@ function Welcome() {
         redirect("/signin");
     }
     return (
-        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC'}}>
+        <Container className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#FBF2DC'}}>
             <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                 margin: '0 auto',
             }} />
@@ -39,14 +39,14 @@ function Welcome() {
                 <br />
                 <span>{data ? data.visitorId : 'User Name'}!</span>
             </div>
-           
+           <div className='d-flex flex-column mt-auto'>
         <Link to="/signin"  className='rounded-5 py-3' style={{
                         backgroundColor: '#49304D',
                         color: '#999999',
                         fontSize: '16px',
                         lineHeight: '14px',
                         position: 'relative',
-                        top: '320px',
+                        top: '8rem',
                         zIndex: '1000',
                         border: 'none',
                         textDecoration: 'none',
@@ -64,8 +64,9 @@ function Welcome() {
                 </button>
             </Link>
 
-            <img src={pattern} alt="pattern" height='210px' 
-            className='fixed-bottom' style={{zIndex:'100'}} />
+            <img src={pattern} alt="pattern" 
+            className='  w-100' style={{zIndex:'100'}} />
+            </div>
         </Container>
     )
 }

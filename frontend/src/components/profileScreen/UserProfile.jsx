@@ -16,11 +16,12 @@ import Header from '../common/Header';
 function UserProfile() {
     const buttonItems = [
         [editInfo, modifyAvatar],
-        [articles, community],
-        [privacy, about, contact]
+        [articles,contact],
+        // [articles, community],
+        // [privacy, about, contact]
     ]
     return (
-        <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FBF2DC'}}>
+        <Container className='d-flex flex-column min-vh-100 my-3 rounded-5' style={{ backgroundColor: '#FBF2DC'}}>
             <Header/>
             <Row>
                 <img src={avatar} alt="avatar" height='120px' width='120px' style={{

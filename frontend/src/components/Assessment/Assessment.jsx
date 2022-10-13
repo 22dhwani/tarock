@@ -10,7 +10,7 @@ import btn2 from '../../assets/btn_2.svg';
 import sampleRadar from '../../assets/sampleRadar.svg';
 import { GlobalContext } from '../../context';
 import { useNavigate } from "react-router-dom";
-
+import buttonBack from '../../assets/buttonBack.svg';
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
@@ -71,6 +71,7 @@ const Assessment = ({ assessmentGroupId }) => {
         }}>
 
             <Row>
+                {/* back button here */}
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5 mx-auto' />
             </Row>
             <Row className='mx-auto'>

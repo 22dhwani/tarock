@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Footer = ({ isTestActive, isCardsActive, isMeActive }) => {
     const navigate = useNavigate();
     const onTestClick = () => {
-        navigate('/');
+        navigate('/test');
     }
     const onCardsClick = () => {
         navigate('/cards');

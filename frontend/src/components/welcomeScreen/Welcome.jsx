@@ -18,7 +18,7 @@ function Welcome() {
 
     function handleClick() {
         setUserID(data.visitorId);
-         redirect("/signin");
+        redirect("/signin");
     }
     return (
         <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC'}}>

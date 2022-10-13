@@ -10,9 +10,8 @@ import about from '../../assets/about.svg'
 import contact from '../../assets/contact.svg'
 import ButtonGroup from './ButtonGroup';
 import Row from 'react-bootstrap/Row';
-import testTick from '../../assets/testTick.svg'
-import meActive from '../../assets/meActive.svg'
-import cards from '../../assets/cards.svg'
+import Footer from '../common/Footer';
+import Header from '../common/Header';
 
 function UserProfile() {
     const buttonItems = [
@@ -20,14 +19,10 @@ function UserProfile() {
         [articles, community],
         [privacy, about, contact]
     ]
-    const bottomNavItems = [testTick, cards, meActive]
     return (
-        <Container fluid style={{ backgroundColor: '#FBF2DC', height: 'fit-content' }}>
+        <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FBF2DC'}}>
+            <Header/>
             <Row>
-                <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
-                    margin: '0 auto',
-                }} />
-
                 <img src={avatar} alt="avatar" height='120px' width='120px' style={{
                     margin: '0 auto',
                 }} />
@@ -62,18 +57,7 @@ function UserProfile() {
             }
             )}
 
-            <div className='d-flex py-4' style={{
-                width: 'fit-content',
-                margin: '0 auto',
-            }}>
-                {bottomNavItems.map((bottomNavItem, index) => {
-                    return (
-                        <div key={index} className='px-5' style={{cursor:'pointer'}}>
-                            <img src={bottomNavItem} alt='button' />
-                        </div>
-                    )
-                })}
-            </div>
+            <Footer isMeActive={true}/>
 
         </Container>
     );

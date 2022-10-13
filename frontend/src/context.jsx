@@ -5,11 +5,11 @@ const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   // the value that will be given to the context
-  const [userID, setUserID] = useState('');
+  const [userId, setUserId] = useState('');
 
   return (
     // the Provider gives access to the context to its children
-    <GlobalContext.Provider value={{ userID, setUserID }}>
+    <GlobalContext.Provider value={{ userId, setUserId }}>
       {children}
     </GlobalContext.Provider>
   );

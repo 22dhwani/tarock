@@ -64,7 +64,7 @@ const Assessment = ({ assessmentGroupId }) => {
     };
 
     return (
-        <Container className='d-flex flex-column min-vw-100 min-vh-100' style={{
+        <Container className='d-flex flex-column min-vh-100' style={{
             backgroundColor: '#FBF2DC',
             height: 'fit-content',
             background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)'

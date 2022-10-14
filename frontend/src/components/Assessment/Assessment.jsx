@@ -4,7 +4,7 @@ import './Assessment.css';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import logo from '../../assets/tarockLogo.svg';
+import Header from '../common/Header';
 import btn1 from '../../assets/btn_1.svg';
 import btn2 from '../../assets/btn_2.svg';
 import RadarChart from "../Charts/RadarChart";
@@ -72,6 +72,17 @@ const Assessment = ({ assessmentGroupId }) => {
         setAssessment({ index: (assessment.index + 1) % assessment.data.length, data: assessment.data });
     };
 
+    const goBack = () => {
+        if (assessment.index == 0) {
+            navigate(-1);
+        } else {
+            setAssessment({
+                index: assessment.index - 1,
+                data: assessment.data
+            });
+        }
+    }
+
     return (
         <Container className='d-flex flex-column min-vh-100' style={{
             backgroundColor: '#FBF2DC',
@@ -79,10 +90,7 @@ const Assessment = ({ assessmentGroupId }) => {
             background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)'
         }}>
 
-            <Row>
-                {/* back button here */}
-                <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5 mx-auto' />
-            </Row>
+            <Header goBackFunc={goBack}/>
             <Row className='mx-auto'>
                 <div style={{ height: '200px', width: '200px' }}>
                     <RadarChart apiResponse={randomRadarData()} enableLabels={false}/>

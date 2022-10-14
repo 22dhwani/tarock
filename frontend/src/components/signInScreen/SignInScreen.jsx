@@ -12,7 +12,7 @@ function SignInScreen(props) {
     const [user, setUser] = useState('');
     const [avatar, setAvatar] = useState(false);
     const [avatarPage, setAvatarPage] = useState(true);
-    const { userID } = useContext(GlobalContext);
+    const { userId } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
@@ -20,7 +20,7 @@ function SignInScreen(props) {
             name: "",
             gender: 0,
             password: "",
-            userID: userID
+            userId: userId
         }
     )
 
@@ -37,7 +37,7 @@ function SignInScreen(props) {
                     name: formData.name,
                     avatarIndex: formData.gender,
                     gender: formData.gender ? 'Male' : 'Female',
-                    userId: formData.userID,
+                    userId: formData.userId,
                     //Email: formData.email,
                     //Password: formData.password
                 })
@@ -63,7 +63,7 @@ function SignInScreen(props) {
     async function handleSignIn(event) {
         event.preventDefault();
         try {
-            const response = await fetch(`http://35.184.195.100:3000/api/user/${userID}`);
+            const response = await fetch(`http://35.184.195.100:3000/api/user/${userId}`);
             let obj = await response.json();
             console.log(obj)
             //check for email password in future

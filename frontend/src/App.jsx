@@ -41,7 +41,7 @@ const App = () => {
               <Route index path="/" element={<Welcome/>}/>
               <Route index path="/myCard" element={<MyCardScreen/>}/>
               <Route index path="/chart" element={<RadarChart/>}/>
-              <Route index path="/share/:id" element={<ShareScreen/>}/>
+              <Route index path="/share/:userId" element={<ShareScreen/>}/>
               <Route index path="/cards" element={<CardsScreen/>}/>
             </Routes>
           </Router>

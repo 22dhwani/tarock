@@ -1,5 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import male from '../../assets/avatarMale.svg';
+import female from '../../assets/avatarFemale.svg';
 import RadarChart from '../Charts/RadarChart';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
@@ -16,9 +17,15 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
     return (
         <Container className='d-flex flex-column h-100 flex-grow-1'>
             <Header/>
-            {/* Need to update according to user avatar index */}
             <div className='d-flex justify-content-center'>
-                <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
+                {
+                    (userData.avatar_index == 1) &&
+                    <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
+                }
+                {
+                    (userData.avatar_index == 0) &&
+                    <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
+                }
             </div>
             <div style={{
                 fontFamily: 'Montserrat',

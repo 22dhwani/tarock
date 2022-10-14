@@ -31,9 +31,7 @@ const App = () => {
       <div className="vh-100 vw-100" style={{
         backgroundColor: '#F3F3F3'
       }}>
-        <div className="vh-100 mx-auto" style={{
-          maxWidth: '498px'
-        }}>
+        <div className="vh-100 mx-auto global-container">
           <Router>
             <Routes>
               <Route index path="/test" element={<Assessment assessmentGroupId={1}/>}/>

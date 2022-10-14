@@ -49,12 +49,7 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    //set type later on
-                    fetch('http://35.184.195.100:3000/api/card/EII')
-                        .then(response => response.json())
-                        .then(data => {
-                            navigate("/myCard", { state: { card: data.dimensional_values } });
-                        });
+                    navigate("/myCard");
                 })
                 .catch((err) => {
                     console.log(err.message);

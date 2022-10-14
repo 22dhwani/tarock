@@ -61,11 +61,20 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                 </div>
                 {
                     showDescription &&
-                    <div className='py-3'>
-                        <Row className='mx-auto' style={{
+                    <div className='py-3' style={{
+                        fontFamily: 'Montserrat',
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        color: '#49304D'
+                    }}>
+                        <Row className='mx-auto p-3' style={{
                             background: '#FFFFFF',
-                            borderRadius: '8px 8px 0px 0px'
-                        }} >
+                            borderRadius: '8px 8px 0px 0px',
+                            fontSize: '18px',
+                            lineHeight: '24px'
+                        }}>
                             <Col className='col-4 d-flex justify-content-center align-self-center'>
                                 <img src={strengths} alt='strengths' />
                             </Col>
@@ -81,10 +90,16 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                                 }
                             </Col>
                         </Row>
-                        <Row className='mx-auto' style={{
+                        <Row className='mx-auto p-3' style={{
                             background: '#FFFFFF',
                             opacity: '0.9',
-                            backdropFilter: 'blur(10px)'
+                            backdropFilter: 'blur(10px)',
+                            fontFamily: 'Montserrat',
+                            fontStyle: 'normal',
+                            fontWeight: '700',
+                            fontSize: '14px',
+                            lineHeight: '20px',
+                            color: '#49304D',
                         }}>
                             <Col className='col-4 d-flex justify-content-center align-self-center'>
                                 <img src={weakness} alt='weakness' />
@@ -101,7 +116,7 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                                 }
                             </Col>
                         </Row>
-                        <Row className='mx-auto' style={{
+                        <Row className='mx-auto p-3' style={{
                             background: '#FFFFFF',
                             opacity: '0.8',
                             backdropFilter: 'blur(10px)'
@@ -115,7 +130,7 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                                 </div>
                             </Col>
                         </Row>
-                        <Row className='mx-auto' style={{
+                        <Row className='mx-auto p-3' style={{
                             background: '#FFFFFF',
                             opacity: '0.7',
                             backdropFilter: 'blur(10px)'
@@ -129,7 +144,7 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                                 </div>
                             </Col>
                         </Row>
-                        <Row className='mx-auto py-2' style={{
+                        <Row className='mx-auto p-3' style={{
                             background: '#FFFFFF',
                             opacity: '0.6',
                             backdropFilter: 'blur(10px)',

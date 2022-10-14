@@ -7,14 +7,28 @@ import Col from 'react-bootstrap/Col';
 import logo from '../../assets/tarockLogo.svg';
 import btn1 from '../../assets/btn_1.svg';
 import btn2 from '../../assets/btn_2.svg';
-import sampleRadar from '../../assets/sampleRadar.svg';
+import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
 import { useNavigate } from "react-router-dom";
 import buttonBack from '../../assets/buttonBack.svg';
+
+const randomRadarData = () => {
+    return {
+        LOGIC: Math.random(),
+        EMOTION: Math.random(),
+        STRUCTURE: Math.random(),
+        OPENNESS: Math.random(),
+        EXTRAVERSION: Math.random(),
+        INTROVERSION: Math.random(),
+        EXECUTION: Math.random(),
+        STRATEGY: Math.random()
+    };
+}
+
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
-    const { userID } = useContext(GlobalContext);
+    const { userId } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://35.184.195.100:3000/api/assessment?groupId=${assessmentGroupId}`)
@@ -41,7 +55,7 @@ const Assessment = ({ assessmentGroupId }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: userID,
+                    userId: userId,
                     assessmentGroupId: assessmentGroupId,
                     answers: answers,
                     duration: 60 // Hard code
@@ -70,7 +84,9 @@ const Assessment = ({ assessmentGroupId }) => {
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5 mx-auto' />
             </Row>
             <Row className='mx-auto'>
-                <img src={sampleRadar} atl="radar" />
+                <div style={{ height: '200px', width: '200px' }}>
+                    <RadarChart apiResponse={randomRadarData()} enableLabels={false}/>
+                </div>
             </Row>
             <div className="card-container w-75 mx-auto overflow-auto">
                 <div className="card">

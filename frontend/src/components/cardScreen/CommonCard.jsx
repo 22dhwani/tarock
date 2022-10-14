@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ userData, cardData, showDescription, showShare }) => {
     return (
-        <Container className='d-flex flex-column h-100'>
+        <Container className='d-flex flex-column h-100 flex-grow-1'>
             <Header/>
             {/* Need to update according to user avatar index */}
             <div className='d-flex justify-content-center'>
@@ -55,7 +55,7 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                 }} >
                     <div className='d-flex justify-content-center'>
                         <div className='mx-auto'>
-                            <RadarChart data={cardData.dimensional_values} />
+                            <RadarChart apiResponse={cardData.dimensional_values} enableLabels={true}/>
                         </div>
                     </div>
                 </div>

@@ -43,7 +43,7 @@ const Card = ({ userData, cardData, showDescription, showShare }) => {
                 textAlign: 'center'
             }}
                 className='py-3'>
-                {userData.name} is {cardData.description.STRENGTHS.replace(';', ',')}.
+                {userData.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
             </div>
             <Container className="flex-grow-1 overflow-auto">
                 <div style={{

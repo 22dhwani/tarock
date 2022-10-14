@@ -14,13 +14,11 @@ import { GlobalContextProvider } from './context'
 
 const App = () => {
   return (
-      <div className="globalContainer min-vh-100" style={{
-        backgroundColor: '#F3F3F3',
-        height: 'fit-content',
-        width: 'fit-content',
+      <div className="vh-100 vw-100" style={{
+        backgroundColor: '#F3F3F3'
       }}>
-        <div className="min-vh-100 mx-auto" style={{
-          maxWidth: '100%'
+        <div className="vh-100 mx-auto" style={{
+          maxWidth: '498px'
         }}>
           <Router>
             <GlobalContextProvider>

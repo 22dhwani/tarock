@@ -10,34 +10,45 @@ import MyCardScreen from './components/cardScreen/MyCardScreen';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/cardScreen/ShareScreen';
 import CardsScreen from './components/cardScreen/CardsScreen';
-import { GlobalContextProvider } from './context'
+import Loading from './components/common/Loading';
+import { useContext, useEffect } from "react";
+import { GlobalContext } from './context';
+import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 
 const App = () => {
-  return (
+  const { userId, setUserId } = useContext(GlobalContext);
+  const { isLoading, data } = useVisitorData();
+  useEffect(() => {
+    if (data) {
+      setUserId(data.visitorId);
+    }
+  }, [data]);
+  if (isLoading) {
+    return <Loading/>;
+  }
+  if (userId) {
+    return (
       <div className="vh-100 vw-100" style={{
         backgroundColor: '#F3F3F3'
       }}>
-        <div className="vh-100 mx-auto" style={{
-          maxWidth: '498px'
-        }}>
+        <div className="vh-100 mx-auto global-container">
           <Router>
-            <GlobalContextProvider>
-              <Routes>
-                <Route index path="/test" element={ <Assessment assessmentGroupId={ 1 }/> }/>
-                <Route index path="/user" element={ <UserProfile/> }/>
-                <Route index path="/home" element={ <HomeScreen/> }/>
-                <Route index path="/signin" element={ <SignInScreen/> }/>
-                <Route index path="/" element={ <Welcome/> }/>
-                <Route index path="/myCard" element={ <MyCardScreen/> }/>
-                <Route index path="/chart" element={ <RadarChart/> }/>
-                <Route index path="/share/:id" element={ <ShareScreen/> }/>
-                <Route index path="/cards" element={ <CardsScreen/> }/>
-              </Routes>
-            </GlobalContextProvider>
+            <Routes>
+              <Route index path="/test" element={<Assessment assessmentGroupId={1}/>}/>
+              <Route index path="/user" element={<UserProfile/>}/>
+              <Route index path="/home" element={<HomeScreen/>}/>
+              <Route index path="/signin" element={<SignInScreen/>}/>
+              <Route index path="/" element={<Welcome/>}/>
+              <Route index path="/myCard" element={<MyCardScreen/>}/>
+              <Route index path="/chart" element={<RadarChart/>}/>
+              <Route index path="/share/:id" element={<ShareScreen/>}/>
+              <Route index path="/cards" element={<CardsScreen/>}/>
+            </Routes>
           </Router>
         </div>
       </div>
-  );
+    );
+  }
 }
 
 export default App;

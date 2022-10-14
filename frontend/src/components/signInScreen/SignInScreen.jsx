@@ -92,7 +92,7 @@ function SignInScreen(props) {
         setAvatar(true);
     }
     return (
-        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC'}}>
+        <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FBF2DC'}}>
             {avatarPage ? <>
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                     margin: '0 auto',
@@ -107,7 +107,7 @@ function SignInScreen(props) {
                     paddingBottom: '25px',
                     paddingTop: '10px'
                 }}>
-                    <span>Welcome to Tarock, <br></br>the personality test app <br></br>that tells you more</span>
+                    <span>Welcome to Tarock, where personality is harnessed</span>
 
                 </div>
 
@@ -196,7 +196,7 @@ function SignInScreen(props) {
                 </div>
 
                 <img src={pattern} alt="pattern" 
-                    className=' w-100' style={{ zIndex: '100' }} />
+                    className=' w-100 mt-auto' style={{ zIndex: '100' }} />
             </> : <AvatarCreation
                 gender={formData.gender}
                 setGender={setFormData}

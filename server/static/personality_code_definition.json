@@ -1,7 +1,7 @@
 {
    "ILE": {
      "personality_code": "ILE",
-     "personality_category": "DEBATER",
+     "personality_category": "Challenger",
      "personality_socionic_code": "ENTp",
      "personality_socionic_quadra": "Alpha",
      "description": {
@@ -24,12 +24,12 @@
    },
    "LII": {
      "personality_code": "LII",
-     "personality_category": "ANALYST",
+     "personality_category": "Analyst",
      "personality_socionic_code": "INTj",
      "personality_socionic_quadra": "Alpha",
      "description": {
-       "STRENGTHS": "Tenacious, Systematic, Cautious, Intellectual, Future-focused",
-       "WEAKNESS": "Unhealthy approach to dealing with emotions; Holds high expectations; Stubborn; Over-analyze; Accepting and readjusting",
+       "STRENGTHS": "Determination, Systematic, Cautious, Intellectual, Future-focused",
+       "WEAKNESS": "Holds high expectations; Stubborn; Over-analyze; Accepting and readjusting",
        "SUPERPOWER": "Logical analysis",
        "BLINDSPOT": "Overlooking the present",
        "IDEALENVIRONMENT": "Seeks independence"
@@ -47,7 +47,7 @@
    },
    "ESE": {
      "personality_code": "ESE",
-     "personality_category": "CAREGIVER",
+     "personality_category": "Enthusiast",
      "personality_socionic_code": "ESFj",
      "personality_socionic_quadra": "Alpha",
      "description": {
@@ -70,12 +70,12 @@
    },
    "SEI": {
      "personality_code": "SEI",
-     "personality_category": "ARTIST",
+     "personality_category": "Artist",
      "personality_socionic_code": "ISFp",
      "personality_socionic_quadra": "Alpha",
      "description": {
        "STRENGTHS": "Practical; Diplomatic; Generous; Attentive; Sense of measure",
-       "WEAKNESS": "Takes criticism to heart (and may withdraw and not engage); Rigid structure; Can be highly sensitive; Most likely will see things as a competition; Does not like being in a hurry",
+       "WEAKNESS": "Takes criticism to heart (May withdraw/not engage); Rigid structure; Can be highly sensitive; Most likely will see things as a competition; Does not like being in a hurry",
        "SUPERPOWER": "Tuned sensory details",
        "BLINDSPOT": "Organization/preparation",
        "IDEALENVIRONMENT": "Alone or small group"
@@ -93,7 +93,7 @@
    },
    "SLE": {
       "personality_code":"SLE",
-      "personality_category":"PERSUADER",
+      "personality_category":"Persuader",
       "personality_socionic_code":"ESTp",
       "personality_socionic_quadra":"Beta",
       "description":{
@@ -116,7 +116,7 @@
    },
    "LSI": {
       "personality_code":"LSI",
-      "personality_category":"INSPECTOR",
+      "personality_category":"Inspector",
       "personality_socionic_code":"ISTj",
       "personality_socionic_quadra":"Beta",
       "description":{
@@ -139,7 +139,7 @@
    },
    "EIE": {
       "personality_code":"EIE",
-      "personality_category":"GIVER",
+      "personality_category":"Visionary",
       "personality_socionic_code":"ENFj",
       "personality_socionic_quadra":"Beta",
       "description":{
@@ -162,12 +162,12 @@
    },
    "IEI": {
       "personality_code":"IEI",
-      "personality_category":"MEDIATOR",
+      "personality_category":"Mediator",
       "personality_socionic_code":"INFp",
       "personality_socionic_quadra":"Beta",
       "description":{
-          "STRENGTHS": "Humor; Caring; Creative; Flexible; Vision",
-          "WEAKNESS": "Taking initiative; Dwells on past victories and defeats; Dreaming rather than doing; Unrealistic view of practical abilities",
+          "STRENGTHS": "Vision; Caring; Creative; Flexible; Humor",
+          "WEAKNESS": "Taking initiative; Dwells on past victories and defeats; Dreaming rather than doing; Mood swings",
           "SUPERPOWER": "Detecting phoniness",
           "BLINDSPOT": "Attention to detail",
           "IDEALENVIRONMENT": "Distracted by others, needs personalized space"
@@ -185,7 +185,7 @@
    },
    "LIE": {
       "personality_code":"LIE",
-      "personality_category":"VISIONIST",
+      "personality_category":"Tenacious",
       "personality_socionic_code":"ENTj",
       "personality_socionic_quadra":"Gamma",
       "description":{
@@ -208,7 +208,7 @@
    },
    "ILI": {
       "personality_code":"ILI",
-      "personality_category":"THINKER",
+      "personality_category":"Foreseer",
       "personality_socionic_code":"INTp",
       "personality_socionic_quadra":"Gamma",
       "description":{
@@ -231,7 +231,7 @@
    },
    "SEE": {
       "personality_code":"SEE",
-      "personality_category":"PERFORMER",
+      "personality_category":"Performer",
       "personality_socionic_code":"ESFp",
       "personality_socionic_quadra":"Gamma",
       "description":{
@@ -254,7 +254,7 @@
    },
    "ESI": {
       "personality_code":"ESI",
-      "personality_category":"PROJECTOR",
+      "personality_category":"Protector",
       "personality_socionic_code":"ISFj",
       "personality_socionic_quadra":"Gamma",
       "description":{
@@ -277,7 +277,7 @@
    },
    "LSE": {
       "personality_code":"LSE",
-      "personality_category":"ORGANIZER",
+      "personality_category":"Organizer",
       "personality_socionic_code":"ESTj",
       "personality_socionic_quadra":"Delta",
       "description":{
@@ -300,7 +300,7 @@
    },
    "SLI": {
       "personality_code":"SLI",
-      "personality_category":"CRAFTER",
+      "personality_category":"Crafter",
       "personality_socionic_code":"ISTp",
       "personality_socionic_quadra":"Delta",
       "description":{
@@ -323,7 +323,7 @@
    },
    "IEE": {
       "personality_code":"IEE",
-      "personality_category":"CHAMPION",
+      "personality_category":"Journalist",
       "personality_socionic_code":"ENFp",
       "personality_socionic_quadra":"Delta",
       "description":{
@@ -346,11 +346,11 @@
    },
    "EII": {
       "personality_code":"EII",
-      "personality_category":"ADVOCATE",
+      "personality_category":"Counsel",
       "personality_socionic_code":"INFj",
       "personality_socionic_quadra":"Delta",
       "description":{
-          "STRENGTHS": "Empathy; Visionary; Perfectionistic; Value-Driven; Conscientious",
+          "STRENGTHS": "Problem solving; Visionary; Perfectionistic; Value-Driven; Conscientious",
           "WEAKNESS": "Self-isolating; Self-critical; Uncomfortable when things aren't clearly defined; Quickly offended by criticism",
           "SUPERPOWER": "Empathy",
           "BLINDSPOT": "Always looking ahead",

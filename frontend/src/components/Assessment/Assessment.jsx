@@ -73,7 +73,7 @@ const Assessment = ({ assessmentGroupId }) => {
 
     const goBack = () => {
         if (assessment.index == 0) {
-            navigate(-1);
+            navigate('/home');
         } else {
             setAssessment({
                 index: assessment.index - 1,

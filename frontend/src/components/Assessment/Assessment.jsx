@@ -47,7 +47,6 @@ const Assessment = ({ assessmentGroupId }) => {
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {
-            console.log(answers);
             fetch('http://35.184.195.100:3000/api/result', {
                 method: 'POST',
                 headers: {
@@ -58,7 +57,7 @@ const Assessment = ({ assessmentGroupId }) => {
                     userId: userId,
                     assessmentGroupId: assessmentGroupId,
                     answers: answers,
-                    duration: 60 // Hard code
+                    duration: 60 // TODO(Zane): calculate duration
                 })
             })
                 .then((response) => response.json())

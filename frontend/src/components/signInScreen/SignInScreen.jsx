@@ -12,7 +12,7 @@ function SignInScreen(props) {
     const [user, setUser] = useState('');
     const [avatar, setAvatar] = useState(false);
     const [avatarPage, setAvatarPage] = useState(true);
-    const { userID } = useContext(GlobalContext);
+    const { userId } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
@@ -20,6 +20,7 @@ function SignInScreen(props) {
             name: "",
             gender: 0,
             password: "",
+           
         }
     )
 
@@ -36,7 +37,7 @@ function SignInScreen(props) {
                     name: formData.name,
                     avatarIndex: formData.gender,
                     gender: formData.gender ? 'Male' : 'Female',
-                    userId: userID,
+                    userId: userId,
                     //Email: formData.email,
                     //Password: formData.password
                 })
@@ -62,7 +63,7 @@ function SignInScreen(props) {
     async function handleSignIn(event) {
         event.preventDefault();
         try {
-            const response = await fetch(`http://35.184.195.100:3000/api/user/${userID}`);
+            const response = await fetch(`http://35.184.195.100:3000/api/user/${userId}`);
             let obj = await response.json();
             console.log(obj)
             //check for email password in future
@@ -91,7 +92,7 @@ function SignInScreen(props) {
         setAvatar(true);
     }
     return (
-        <Container className='d-flex flex-column' style={{ backgroundColor: '#FBF2DC'}}>
+        <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FBF2DC'}}>
             {avatarPage ? <>
                 <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
                     margin: '0 auto',
@@ -106,7 +107,7 @@ function SignInScreen(props) {
                     paddingBottom: '25px',
                     paddingTop: '10px'
                 }}>
-                    <span>Welcome to Tarock, <br></br>the personality test app <br></br>that tells you more</span>
+                    <span>Welcome to Tarock, where personality is harnessed</span>
 
                 </div>
 
@@ -194,7 +195,7 @@ function SignInScreen(props) {
                 </div>
 
                 <img src={pattern} alt="pattern" 
-                    className=' w-100' style={{ zIndex: '100' }} />
+                    className=' w-100 mt-auto' style={{ zIndex: '100' }} />
             </> : <AvatarCreation
                 gender={formData.gender}
                 setGender={setFormData}

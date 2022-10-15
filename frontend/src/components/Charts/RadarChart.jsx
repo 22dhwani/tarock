@@ -19,8 +19,7 @@ ChartJS.register(
     Legend
 );
 
-function RadarChart(props) {
-    const apiResponse = props.data
+function RadarChart({ apiResponse, enableLabels }) {
     const data = {
         labels: ['LOGIC', 'STRUCTURE', 'EXTRAVERSION', 'EXECUTION', 'EMOTION', 'OPENNESS', 'INTROVERSION', 'STRATEGY'],
         
@@ -37,17 +36,34 @@ function RadarChart(props) {
         ],
     };
     const options = {
+        plugins: {
+            legend: {
+                display: false
+            },
+        },
+        elements: {
+            point: {
+                pointRadius: 0
+            },
+            line: {
+                tension: 0.2
+            }  
+        },
         scales: {
             r: {
                 ticks: {
                     display: false,
                 },
                 pointLabels: {
+                    display: enableLabels,
                     color: '#49304D',
                     font: {
                       size: 12,
                       weight: '700',
                     }
+                },
+                grid: {
+                    circular: true
                 }
             },
         },

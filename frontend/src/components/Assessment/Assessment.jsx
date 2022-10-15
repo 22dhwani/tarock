@@ -4,17 +4,31 @@ import './Assessment.css';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import logo from '../../assets/tarockLogo.svg';
+import Header from '../common/Header';
 import btn1 from '../../assets/btn_1.svg';
 import btn2 from '../../assets/btn_2.svg';
-import sampleRadar from '../../assets/sampleRadar.svg';
+import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
 import { useNavigate } from "react-router-dom";
 import buttonBack from '../../assets/buttonBack.svg';
+
+const randomRadarData = () => {
+    return {
+        LOGIC: Math.random(),
+        EMOTION: Math.random(),
+        STRUCTURE: Math.random(),
+        OPENNESS: Math.random(),
+        EXTRAVERSION: Math.random(),
+        INTROVERSION: Math.random(),
+        EXECUTION: Math.random(),
+        STRATEGY: Math.random()
+    };
+}
+
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
-    const { userID } = useContext(GlobalContext);
+    const { userId } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://35.184.195.100:3000/api/assessment?groupId=${assessmentGroupId}`)
@@ -33,7 +47,6 @@ const Assessment = ({ assessmentGroupId }) => {
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {
-            console.log(answers);
             fetch('http://35.184.195.100:3000/api/result', {
                 method: 'POST',
                 headers: {
@@ -41,20 +54,15 @@ const Assessment = ({ assessmentGroupId }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: userID,
+                    userId: userId,
                     assessmentGroupId: assessmentGroupId,
                     answers: answers,
-                    duration: 60 // Hard code
+                    duration: 60 // TODO(Zane): calculate duration
                 })
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    //set type later on
-                    fetch('http://35.184.195.100:3000/api/card/EII')
-                        .then(response => response.json())
-                        .then(data => {
-                            navigate("/myCard", { state: { card: data.dimensional_values } });
-                        });
+                    navigate("/myCard");
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -63,6 +71,17 @@ const Assessment = ({ assessmentGroupId }) => {
         setAssessment({ index: (assessment.index + 1) % assessment.data.length, data: assessment.data });
     };
 
+    const goBack = () => {
+        if (assessment.index == 0) {
+            navigate('/home');
+        } else {
+            setAssessment({
+                index: assessment.index - 1,
+                data: assessment.data
+            });
+        }
+    }
+
     return (
         <Container className='d-flex flex-column min-vh-100' style={{
             backgroundColor: '#FBF2DC',
@@ -70,12 +89,11 @@ const Assessment = ({ assessmentGroupId }) => {
             background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)'
         }}>
 
-            <Row>
-                {/* back button here */}
-                <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5 mx-auto' />
-            </Row>
+            <Header goBackFunc={goBack}/>
             <Row className='mx-auto'>
-                <img src={sampleRadar} atl="radar" />
+                <div style={{ height: '200px', width: '200px' }}>
+                    <RadarChart apiResponse={randomRadarData()} enableLabels={false}/>
+                </div>
             </Row>
             <div className="card-container w-75 mx-auto overflow-auto">
                 <div className="card">

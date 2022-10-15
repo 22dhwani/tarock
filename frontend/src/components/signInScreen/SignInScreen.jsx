@@ -20,7 +20,6 @@ function SignInScreen(props) {
             name: "",
             gender: 0,
             password: "",
-            userID: userID
         }
     )
 
@@ -37,14 +36,14 @@ function SignInScreen(props) {
                     name: formData.name,
                     avatarIndex: formData.gender,
                     gender: formData.gender ? 'Male' : 'Female',
-                    userId: formData.userID,
+                    userId: userID,
                     //Email: formData.email,
                     //Password: formData.password
                 })
             })
             const data = await response.json();
             console.log(data);
-            navigate("/home")
+            navigate("/test")
         } catch (error) {
             console.log(error);
         }
@@ -119,7 +118,7 @@ function SignInScreen(props) {
                     flexDirection: 'column',
                     gap: '20px',
                 }}>
-                    <Form onSubmit={handleUser}>
+                    {/* <Form onSubmit={handleUser}>
                         <Form.Group className="mb-3" controlId="forEmail" >
                             <Form.Control className='py-3' type="email" placeholder="First and Last name"
                                 onChange={handleChange}
@@ -134,7 +133,7 @@ function SignInScreen(props) {
                                 value={formData.password} />
                         </Form.Group>}
 
-                        {/* {!avatar && <button
+                        {!avatar && <button
                             onClick={handleSignIn}
                             className='w-100 rounded-5 py-3' style={{
                                 backgroundColor: '#49304D',
@@ -143,12 +142,11 @@ function SignInScreen(props) {
                                 lineHeight: '14px',
                                 border: 'none',
 
-                            }}>Sign In</button>} */}
+                            }}>Sign In</button>}
                     </Form>
 
-                    {/* Update required for all buttons, move them to map function.
-                    Using separate forms for Login and signup will be better for code maintainence */}
-                    {/* {!avatar && <button
+                 
+                    {!avatar && <button
                         onClick={handleUser}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: 'transparent',

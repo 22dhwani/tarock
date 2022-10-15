@@ -11,7 +11,7 @@ import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/cardScreen/ShareScreen';
 import CardsScreen from './components/cardScreen/CardsScreen';
 import { GlobalContextProvider } from './context'
-
+import EditProfile from './components/profileScreen/EditProfile';
 const App = () => {
   return (
       <div className="globalContainer min-vh-100" style={{
@@ -27,6 +27,7 @@ const App = () => {
               <Routes>
                 <Route index path="/test" element={ <Assessment assessmentGroupId={ 1 }/> }/>
                 <Route index path="/user" element={ <UserProfile/> }/>
+                <Route index path="/editProfile" element={ <EditProfile/> }/>
                 <Route index path="/home" element={ <HomeScreen/> }/>
                 <Route index path="/signin" element={ <SignInScreen/> }/>
                 <Route index path="/" element={ <Welcome/> }/>

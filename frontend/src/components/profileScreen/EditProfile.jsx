@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 import buttonBack from '../../assets/buttonBack.svg';
 import { Link } from 'react-router-dom';
 function EditProfile() {
-    const { userID } = useContext(GlobalContext);
+    const { userId } = useContext(GlobalContext);
     const placeholders = ["First and Last Name", "mm/dd/yyyy", ""];
     const formItems = ['Name', 'DOB', 'Gender']
     const [formData, setFormData] = useState(
@@ -37,7 +37,7 @@ function EditProfile() {
                     avatarIndex: avatarIndex,
                     gender: formData.Gender,
                     dob: formData.DOB,
-                    userId: userID,
+                    userId: userId,
                     //Email: formData.email,
                     //Password: formData.password
                 })

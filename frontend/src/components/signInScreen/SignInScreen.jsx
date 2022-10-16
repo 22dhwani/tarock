@@ -119,15 +119,15 @@ function SignInScreen(props) {
                     flexDirection: 'column',
                     gap: '20px',
                 }}>
-                    {/* <Form onSubmit={handleUser}>
-                        <Form.Group className="mb-3" controlId="forEmail" >
-                            <Form.Control className='py-3' type="email" placeholder="First and Last name"
+                    <Form onSubmit={handleUser}>
+                        <Form.Group className="mb-3">
+                            <Form.Control className='py-3' type="text" placeholder="First and Last name"
                                 onChange={handleChange}
                                 name='name'
                                 value={formData.name} />
                         </Form.Group>
 
-                        {!avatar && <Form.Group className="mb-3" controlId="formPassword">
+                        {/* {!avatar && <Form.Group className="mb-3" controlId="formPassword">
                             <Form.Control className='py-3' type="password" placeholder="Password"
                                 onChange={handleChange}
                                 name='password'
@@ -143,7 +143,7 @@ function SignInScreen(props) {
                                 lineHeight: '14px',
                                 border: 'none',
 
-                            }}>Sign In</button>}
+                            }}>Sign In</button>} */}
                     </Form>
 
                  
@@ -157,7 +157,7 @@ function SignInScreen(props) {
                             fontWeight: '700',
 
                         }}>Sign Up</button>
-                    } */}
+                    }
 
                     {!avatar && <button
                         onClick={handelGuest}

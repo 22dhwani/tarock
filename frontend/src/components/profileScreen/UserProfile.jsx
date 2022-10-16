@@ -15,11 +15,29 @@ import Header from '../common/Header';
 
 function UserProfile() {
     const buttonItems = [
-        [editInfo, modifyAvatar],
-        [articles,contact],
+        // [editInfo, modifyAvatar],
+        // [articles,contact],
         // [articles, community],
         // [privacy, about, contact]
+        [{
+            button: editInfo,
+            link: '/editProfile'
+        },
+        {
+            button: modifyAvatar,
+            link: '/modifyAvatar'
+        }],
+        [{
+            button: articles,
+            link: '/articles'
+        },
+        {
+            button: contact,
+            link: '/contact'
+        }],
     ]
+
+    
     return (
         <Container className='d-flex flex-column min-vh-100 my-3 rounded-5' style={{ backgroundColor: '#FBF2DC'}}>
             <Header/>
@@ -50,7 +68,10 @@ function UserProfile() {
                     }}>
                         {buttonItem.map((button, index) => {
                             return (
-                                <ButtonGroup key={index} buttons={[button]} />
+                                <ButtonGroup 
+                                key={index} 
+                                buttons={[button]}
+                                />
                             )
                         })}
                     </div>

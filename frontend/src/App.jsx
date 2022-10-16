@@ -10,10 +10,12 @@ import MyCardScreen from './components/cardScreen/MyCardScreen';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/cardScreen/ShareScreen';
 import CardsScreen from './components/cardScreen/CardsScreen';
+import EditProfile from './components/profileScreen/EditProfile';
 import Loading from './components/common/Loading';
 import { useContext, useEffect } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
+
 
 const App = () => {
   const { userId, setUserId } = useContext(GlobalContext);
@@ -33,10 +35,12 @@ const App = () => {
       }}>
         <div className="vh-100 mx-auto global-container">
           <Router>
+
             <Routes>
               <Route index path="/test" element={<Assessment assessmentGroupId={1}/>}/>
               <Route index path="/user" element={<UserProfile/>}/>
               <Route index path="/home" element={<HomeScreen/>}/>
+              <Route index path="/editProfile" element={ <EditProfile/> }/>
               <Route index path="/signin" element={<SignInScreen/>}/>
               <Route index path="/" element={<Welcome/>}/>
               <Route index path="/myCard" element={<MyCardScreen/>}/>
@@ -44,6 +48,7 @@ const App = () => {
               <Route index path="/share/:userId" element={<ShareScreen/>}/>
               <Route index path="/cards" element={<CardsScreen/>}/>
             </Routes>
+
           </Router>
         </div>
       </div>

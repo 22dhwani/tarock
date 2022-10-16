@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 function ButtonGroup(props) {
     const buttonStyle = {
         border: 'none',
@@ -8,9 +8,11 @@ function ButtonGroup(props) {
         <div>
             {props.buttons && props.buttons.map((button, index) => {
                 return (
-                    <button key={index} style={buttonStyle}>
-                        <img src={button} alt='button' />
+                    <Link to={button.link} key={index}>
+                    <button style={buttonStyle}>
+                        <img src={button.button} alt='button' />
                     </button>
+                    </Link>
                 )
             })}
         </div>

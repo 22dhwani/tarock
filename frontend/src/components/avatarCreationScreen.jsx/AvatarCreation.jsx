@@ -27,7 +27,7 @@ function AvatarCreation(props) {
                         gender: 1
                     }
                 })}>
-                    <img className='bg-warning rounded-4' src={male} alt="male" />
+                    <img className='rounded-4' src={male} alt="male" style={{ backgroundColor: '#D9D9D9' }} />
                 </Col>
                 <Col className='d-flex justify-content-center' onClick={() => props.setGender(data => {
                     return {

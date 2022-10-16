@@ -124,6 +124,7 @@ function SignInScreen(props) {
                             <Form.Control className='py-3' type="text" placeholder="First and Last name"
                                 onChange={handleChange}
                                 name='name'
+                                required
                                 value={formData.name} />
                         </Form.Group>
 

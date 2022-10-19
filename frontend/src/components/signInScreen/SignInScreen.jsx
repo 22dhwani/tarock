@@ -113,7 +113,7 @@ function SignInScreen(props) {
 
                 <div style={{
                    position: 'relative',
-                   top: '8rem',
+                   top: '15rem',
                     zIndex: '1000',
                     display: 'flex',
                     flexDirection: 'column',
@@ -148,7 +148,7 @@ function SignInScreen(props) {
                     </Form>
 
                  
-                    {!avatar && <button
+                    {/* {!avatar && <button
                         onClick={handleUser}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: 'transparent',
@@ -158,9 +158,9 @@ function SignInScreen(props) {
                             fontWeight: '700',
 
                         }}>Sign Up</button>
-                    }
+                    } */}
 
-                    {!avatar && <button
+                    {/* {!avatar && <button
                         onClick={handelGuest}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: 'transparent',
@@ -170,9 +170,9 @@ function SignInScreen(props) {
                             fontWeight: '700',
 
                         }}>Continue as guest</button>
-                    }
+                    } */}
 
-                    {avatar && <button
+                    {!avatar && <button
                         onClick={createAvatar}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: '#49304D',
@@ -183,7 +183,7 @@ function SignInScreen(props) {
 
                         }}>Create Avatar</button>}
 
-                    {avatar && <button
+                    {/* {avatar && <button
                         onClick={handleBack}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: 'transparent',
@@ -192,7 +192,7 @@ function SignInScreen(props) {
                             lineHeight: '14px',
                             fontWeight: '700',
 
-                        }}> {'<-- Go back'} </button>}
+                        }}> {'<-- Go back'} </button>} */}
                 </div>
 
                 <img src={pattern} alt="pattern" 

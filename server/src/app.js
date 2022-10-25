@@ -9,7 +9,7 @@ const session = require('express-session');
 // const csrf = require('csurf');
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: process.env['CLIENT_BASE_URL'],
   credentials: true // allow session cookie from browser to pass through
 };
 

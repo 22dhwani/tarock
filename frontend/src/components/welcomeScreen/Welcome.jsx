@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg';
-import pattern from '../../assets/pattern.svg';
+import patternTarock from '../../assets/patternTarock.svg';
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
@@ -79,7 +79,7 @@ function Welcome() {
                 </button>
             </Link>
 
-            <img src={pattern} alt="pattern" 
+            <img src={patternTarock} alt="pattern" 
             className='  w-100' style={{zIndex:'100'}} />
             </div>
         </Container>

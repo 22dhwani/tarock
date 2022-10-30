@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
 import Loading from '../common/Loading';
-import Card2 from './CommonCard2';
+import CommonCard from './CommonCard';
 import { useNavigate } from "react-router-dom";
 
 const MyCard = () => {

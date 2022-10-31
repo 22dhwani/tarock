@@ -1,8 +1,7 @@
-import pattern from '../../assets/pattern.svg';
-import pattern1 from '../../assets/pattern1.svg';
+import patternTarockBlue from '../../assets/patternTarockBlue.svg';
+import patternWaves from '../../assets/patternWaves.svg';
 import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
-import { useEffect } from 'react';
 
 export default function GenCard(props) {
     let userColor;
@@ -25,7 +24,7 @@ export default function GenCard(props) {
     return (
         <div className='d-flex flex-column m-3'>
             <div style={{
-                backgroundImage: `url(${props.cardType == 'match' ? pattern1 : pattern})`,
+                backgroundImage: `url(${props.cardType == 'match' ? patternWaves : patternTarockBlue})`,
                 backgroundColor: props.cardType == 'match' ? 'black' : userColor,
                 backgroundRepeat: 'no-repeat',
                 
@@ -38,10 +37,10 @@ export default function GenCard(props) {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {props.avatar_index ? <img className='rounded-circle w-50'
+                {props.avatar_index ? <img className='rounded-circle'
                     src={props.avatar_index ? male : female}
                     alt="male"
-                    style={{ backgroundColor: '#FFFFFF' }}
+                    style={{ backgroundColor: '#FFFFFF'}}
                 />
                     :
                     <div className='d-flex flex-column gap-5 align-items-center'>

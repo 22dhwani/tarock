@@ -17,7 +17,7 @@ function EditProfile() {
         }
     )
     async function handleSubmit() {
-        //hide api
+
         let avatarIndex;
         if (formData.Gender === "Male") {
             avatarIndex = 1;

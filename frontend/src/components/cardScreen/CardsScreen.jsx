@@ -54,18 +54,29 @@ const CardsScreen = () => {
                     </Col>
                 </Row>
                 {/* add card button */}
-                <Row lg={2} className='my-3'>
-                    <Col className='justify-content-center d-flex'>
+                <Row lg={2} className='my-3 '>
+                    <Col className='justify-content-center d-flex flex-column align-items-center'>
                     <div className='button1' style={{
                         borderRadius: '10px',
-                        height: '280px',
-                        width: '200px',
+                        width: '9rem',
+                        height: '14.375rem',
                         border: '1px dashed  #49304D',
                         display: 'flex',
                     }}>
                         <img src={add} alt='add' className='m-auto'/>
                     </div>
-                       
+                        <div className='col-12 d-flex justify-content-center mt-2' style={{
+                            fontFamily: 'Montserrat',
+                            fontStyle: 'normal',
+                            fontWeight: '700',
+                            fontSize: '14px',
+                            lineHeight: '14px',
+                            color: '#49304D',
+                        }}>
+                            Add a new card
+                        </div>
+                    </Col>
+                    <Col>
                     </Col>
                 </Row>
                 

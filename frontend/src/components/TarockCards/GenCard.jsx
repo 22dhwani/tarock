@@ -22,14 +22,14 @@ export default function GenCard(props) {
     
     //const quadraImage = [pattern, pattern1, pattern, pattern1];
     return (
-        <div className='d-flex flex-column m-3'>
+        <div className='d-flex flex-column my-3 '>
             <div style={{
                 backgroundImage: `url(${props.cardType == 'match' ? patternWaves : patternTarockBlue})`,
                 backgroundColor: props.cardType == 'match' ? 'black' : userColor,
                 backgroundRepeat: 'no-repeat',
                 
-                width: '200px',
-                height: '300px',
+                width: '9rem',
+                height: '14.375rem',
                 backgroundSize: 'cover',
                 borderRadius: '20px',
                 display: 'flex',
@@ -37,9 +37,9 @@ export default function GenCard(props) {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {props.avatar_index ? <img className='rounded-circle'
+                {props.cardType !== 'match' ? <img className='rounded-circle'
                     src={props.avatar_index ? male : female}
-                    alt="male"
+                    alt="avatar"
                     style={{ backgroundColor: '#FFFFFF'}}
                 />
                     :

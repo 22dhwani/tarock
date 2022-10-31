@@ -38,8 +38,8 @@ const MyCard = () => {
     }, [userId]);
     if (userData.name && cardData.description) {
         return (
-            <div className='d-flex flex-column vh-100' style={{ backgroundColor: '#3069B3' }}>
-                <Card2 userData={userData} cardData={cardData} showDescription={true} showShare={true}/>
+            <div className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>
+                <CommonCard userData={userData} cardData={cardData} showDescription={true} showShare={true}/>
             </div>
         );
     } else {

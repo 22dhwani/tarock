@@ -14,3 +14,7 @@
     color: #fff;
     transform: translateY(-7px);
   }
+
+  .carousel-indicators{
+    margin-bottom: -2rem!important;
+  }

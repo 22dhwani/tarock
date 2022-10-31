@@ -14,10 +14,9 @@ import share from '../../assets/myCard/share.svg';
 import { Link } from 'react-router-dom';
 import Swipper from '../Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
+import './card.css'
 const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
-    const radarView = <div style={{
-        marginBottom: '6.5rem',
-    }}>
+    const radarView = <div>
         <div style={{
             fontFamily: 'Montserrat',
             fontStyle: 'normal',
@@ -50,7 +49,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
     const descriptionView = <>
 
         {showDescription &&
-            <div className='py-3' style={{
+            <div className='py-0' style={{
                 fontFamily: 'Montserrat',
                 fontStyle: 'normal',
                 fontWeight: '700',
@@ -58,7 +57,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                 lineHeight: '20px',
                 color: '#49304D'
             }}>
-                <Row className='mx-auto p-3' style={{
+                <Row className='mx-auto px-3 py-1' style={{
                     background: '#FFFFFF',
                     borderRadius: '8px 8px 0px 0px',
                     fontSize: '18px',
@@ -79,7 +78,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                         }
                     </Col>
                 </Row>
-                <Row className='mx-auto p-3' style={{
+                <Row className='mx-auto px-3 py-1' style={{
                     background: '#FFFFFF',
                     opacity: '0.9',
                     backdropFilter: 'blur(10px)',
@@ -105,7 +104,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                         }
                     </Col>
                 </Row>
-                <Row className='mx-auto p-3' style={{
+                <Row className='mx-auto px-3 py-1' style={{
                     background: '#FFFFFF',
                     opacity: '0.8',
                     backdropFilter: 'blur(10px)'
@@ -133,7 +132,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                         </div>
                     </Col>
                 </Row>
-                <Row className='mx-auto p-3' style={{
+                <Row className='mx-auto pz-3 py-1' style={{
                     background: '#FFFFFF',
                     opacity: '0.6',
                     backdropFilter: 'blur(10px)',
@@ -153,13 +152,11 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
     </>
 
     return (
-        <Container className='d-flex flex-column h-100' >
+        <Container className='d-flex flex-column min-vh-100' >
             <div style={{
-                backgroundImage: `url(${patternBlue})`,
+                backgroundImage: `url(${patternTarockBlue})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
-
-
             }}>
                 <Header />
                 <div className='d-flex justify-content-center'>
@@ -187,21 +184,21 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
             </div>
 
 
-            <Container className="overflow-auto d-flex flew=grow flex-column m-auto" style={{
+            {/* <Container className="overflow-auto d-flex flex-column m-auto" style={{
 
-            }}>
+            }}> */}
                 <Swipper data={
                     [radarView, descriptionView]
                 } />
                 {
                     showShare &&
-                    <Link to={`/share/${userData.internal_user_id}`} >
-                        <div className='d-flex justify-content-center py-3 mt-auto'>
+                    <Link to={`/share/${userData.internal_user_id}`}>
+                        <div className='d-flex justify-content-center mt-5'>
                             <img src={share} alt='share' />
                         </div>
                     </Link>
                 }
-            </Container>
+            {/* </Container> */}
 
         </Container>
     );

@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
 import Loading from '../common/Loading';
-import Card from './CommonCard';
+import CommonCard from './CommonCard';
 import { useNavigate } from "react-router-dom";
 
 const MyCard = () => {
@@ -38,8 +38,8 @@ const MyCard = () => {
     }, [userId]);
     if (userData.name && cardData.description) {
         return (
-            <div className='d-flex flex-column vh-100' style={{ backgroundColor: '#3069B3' }}>
-                <Card userData={userData} cardData={cardData} showDescription={true} showShare={true}/>
+            <div className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>
+                <CommonCard userData={userData} cardData={cardData} showDescription={true} showShare={true}/>
             </div>
         );
     } else {

@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg'
-import pattern from '../../assets/pattern.svg'
+import pattern from '../../assets/patternTarock.svg'
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import AvatarCreation from '../avatarCreationScreen.jsx/AvatarCreation';

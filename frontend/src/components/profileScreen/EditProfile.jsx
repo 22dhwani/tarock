@@ -25,7 +25,7 @@ function EditProfile() {
             avatarIndex = 0;
         }
         try {
-            const response = await fetch('http://35.184.195.100:3000/api/user', {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',

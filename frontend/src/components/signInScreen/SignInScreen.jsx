@@ -28,7 +28,7 @@ function SignInScreen(props) {
     async function handleSubmit() {
         //hide api
         try {
-            const response = await fetch('http://35.184.195.100:3000/api/user', {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -65,7 +65,7 @@ function SignInScreen(props) {
     async function handleSignIn(event) {
         event.preventDefault();
         try {
-            const response = await fetch(`http://35.184.195.100:3000/api/user/${userId}`);
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}`);
             let obj = await response.json();
             console.log(obj)
             //check for email password in future

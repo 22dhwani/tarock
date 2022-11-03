@@ -21,7 +21,7 @@ ChartJS.register(
 
 function RadarChart({ apiResponse, enableLabels }) {
     const data = {
-        labels: ['LOGIC', 'STRUCTURE', 'EXTRAVERSION', 'EXECUTION', 'EMOTION', 'OPENNESS', 'INTROVERSION', 'STRATEGY'],
+        labels: ['LOGIC', 'STRUCTURE', ['EXTRA-', 'VERSION'], 'EXECUTION', 'EMOTION', 'OPENNESS', ['INTRO-', 'VERSION'], 'STRATEGY'],
         
         datasets: [
             {
@@ -51,6 +51,7 @@ function RadarChart({ apiResponse, enableLabels }) {
         },
         scales: {
             r: {
+                min: -0.3, // Make radar points away from zero point.
                 ticks: {
                     display: false,
                 },

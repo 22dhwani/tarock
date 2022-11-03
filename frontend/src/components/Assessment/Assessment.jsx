@@ -31,7 +31,7 @@ const Assessment = ({ assessmentGroupId }) => {
     const { userId, userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://35.184.195.100:3000/api/assessment?groupId=${assessmentGroupId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/assessment?groupId=${assessmentGroupId}`)
             .then((response) => response.json())
             .then((data) => {
                 setAssessment({ index: 0, data: data });
@@ -47,7 +47,7 @@ const Assessment = ({ assessmentGroupId }) => {
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {
-            fetch('http://35.184.195.100:3000/api/result', {
+            fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

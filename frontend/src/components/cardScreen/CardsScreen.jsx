@@ -17,7 +17,7 @@ const CardsScreen = () => {
         navigate('/myCard');
     }
     useEffect(() => {
-        fetch(`http://35.184.195.100:3000/api/user/${userId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {

@@ -1,4 +1,5 @@
 const Result = require("../models/result.js");
+const User = require("../models/user.js");
 
 getSocionicsResult = (answers) => {
     const count = {
@@ -55,11 +56,22 @@ getSocionicsResult = (answers) => {
 
 exports.getByUser = (req, res) => {
     if (req.query.userId) {
-        Result.getByUser(req.query.userId, (err, data) => {
+        let id = req.query.userId;
+        // Find tmp user id if exists
+        User.queryTmpId(id, (err, data) => {
             if (err) {
                 res.status(400).send(err);
-            } else {
-                res.send(data);
+            } else  {
+                if (data.length > 0) {
+                    id = data[0].tmp_user_id;
+                }
+                Result.getByUser(id, (err, data) => {
+                    if (err) {
+                        res.status(400).send(err);
+                    } else {
+                        res.send(data);
+                    }
+                });
             }
         });
     } else {

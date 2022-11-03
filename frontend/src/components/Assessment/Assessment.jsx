@@ -62,7 +62,7 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    if (userData != 'REAL') {
+                    if (userData.type != 'REAL') {
                         navigate("/signin");
                     } else {
                         navigate("/myCard");

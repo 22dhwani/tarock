@@ -53,6 +53,17 @@ User.queryRealId = (id, cb) => {
     });
 }
 
+User.queryTmpId = (id, cb) => {
+    sql.query("SELECT * FROM tmp_user_to_real_user WHERE real_user_id = ? order by created_at desc limit 1;", [id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            cb(err, null);
+            return;
+        }
+        cb(null, res);
+    });
+}
+
 User.createTmpIdToRealId = (tmpId, realId, cb) => {
     sql.query("SELECT * FROM tmp_user_to_real_user WHERE tmp_user_id = ? AND real_user_id = ?;", [tmpId, realId], (err, res) => {
         if (err) {

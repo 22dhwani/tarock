@@ -28,7 +28,7 @@ const randomRadarData = () => {
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
-    const { userId } = useContext(GlobalContext);
+    const { userId, userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://35.184.195.100:3000/api/assessment?groupId=${assessmentGroupId}`)
@@ -62,7 +62,11 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    navigate("/myCard");
+                    if (userData != 'REAL') {
+                        navigate("/signin");
+                    } else {
+                        navigate("/myCard");
+                    }
                 })
                 .catch((err) => {
                     console.log(err.message);

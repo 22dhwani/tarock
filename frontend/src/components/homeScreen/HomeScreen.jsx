@@ -5,6 +5,8 @@ import testImageFeed from '../../assets/testImageFeed.svg'
 import { Link } from "react-router-dom";
 import Header from '../common/Header';
 import Footer from '../common/Footer';
+import { useContext, useEffect } from 'react';
+import { GlobalContext } from '../../context';
 
 function HomeScreen() {
     // Get data from api and store in state
@@ -14,6 +16,25 @@ function HomeScreen() {
             image: testImageFeed
         },
     ]
+    const { userId, setUserId, userData, setUserData } = useContext(GlobalContext);
+
+    const updateUserStatus = () => {
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${userId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                userData.type = data.userType;
+                setUserData(userData);
+                setUserId(data.id);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
+
+    useEffect(() => {
+        updateUserStatus();
+    }, []);
+
     return (
         <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FFFFFF' }}>
             <Header/>

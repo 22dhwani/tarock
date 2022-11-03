@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import Swipper from '../Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import './card.css'
-const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
+const CommonCard = ({ user, cardData, showDescription, showShare }) => {
     const radarView = <div>
         <div style={{
             fontFamily: 'Montserrat',
@@ -28,7 +28,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
             textAlign: 'center'
         }}
             className='py-3'>
-            {userData.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
+            {user.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
         </div>
         <div style={{
             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
@@ -161,11 +161,11 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                 <Header />
                 <div className='d-flex justify-content-center'>
                     {
-                        (userData.avatar_index == 1) &&
+                        (user.avatar_index == 1) &&
                         <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
                     }
                     {
-                        (userData.avatar_index == 0) &&
+                        (user.avatar_index == 0) &&
                         <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
                     }
                 </div>
@@ -179,7 +179,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                     alignItems: 'center',
                     textAlign: 'center'
                 }}>
-                    Let's meet {userData.name}
+                    Let's meet {user.name}
                 </div>
             </div>
 
@@ -192,7 +192,7 @@ const CommonCard = ({ userData, cardData, showDescription, showShare }) => {
                 } />
                 {
                     showShare &&
-                    <Link to={`/share/${userData.internal_user_id}`}>
+                    <Link to={`/share/${user.internal_user_id}`}>
                         <div className='d-flex justify-content-center mt-5'>
                             <img src={share} alt='share' />
                         </div>

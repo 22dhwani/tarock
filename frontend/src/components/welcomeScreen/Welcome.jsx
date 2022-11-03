@@ -1,34 +1,70 @@
 import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg';
 import patternTarock from '../../assets/patternTarock.svg';
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
 import Loading from '../common/Loading';
 
 function Welcome() {
-    const { userId, setUserId } = useContext(GlobalContext);
+    const { userId, setUserId, userData, setUserData } = useContext(GlobalContext);
     const [userName, setUserName] = useState('');
+    const [userType, setUserType] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // Determine if user exists in database.
-        fetch(`http://35.184.195.100:3000/api/user/${userId}`)
+    const getUser = (id, userType) => {
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=${userType}`)
             .then((response) => response.json())
             .then((data) => {
                 if (data.length > 0) {
                     setUserName(data[0].name);
+                }
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
+
+    const getUserStatus = () => {
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${userId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                userData.type = data.userType;
+                setUserData(userData);
+                if (data.userType === 'REAL' || data.userType === 'TMP') {
+                    setUserId(data.id);
+                    setUserType(data.userType);
+                    getUser(data.id, data.userType);
                 } else {
                     navigate('/signin');
                 }
             })
             .catch((err) => {
-                console.log(err.message)
+                console.log(err.message);
             });
+    }
+
+    useEffect(() => {
+        // Update page or navigate depending on the user status.
+        getUserStatus();
     }, []);
     
     function handleClick() {
-        redirect("/home");
+        if (userType === 'REAL') {
+            fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login/success`, {credentials: 'include'})
+                .then((response) => {
+                    if (!response.ok) {
+                        navigate("/signin");
+                    } else {
+                        navigate("/home");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        } else {
+            navigate("/test");
+        }
     }
 
     if (!userName) {
@@ -55,7 +91,7 @@ function Welcome() {
                 <span>{userName}!</span>
             </div>
            <div className='d-flex flex-column mt-auto'>
-        <Link to="/home"  className='rounded-5 py-3' style={{
+        <div className='rounded-5 py-3' style={{
                         backgroundColor: '#49304D',
                         color: '#999999',
                         fontSize: '16px',
@@ -77,7 +113,7 @@ function Welcome() {
                    >
                     Next
                 </button>
-            </Link>
+            </div>
 
             <img src={patternTarock} alt="pattern" 
             className='  w-100' style={{zIndex:'100'}} />

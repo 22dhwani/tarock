@@ -70,7 +70,7 @@ const App = () => {
 
   useEffect(() => {
     if (data) {
-      initUser('test11052309');
+      initUser(data.visitorId);
     }
   }, [data]);
 

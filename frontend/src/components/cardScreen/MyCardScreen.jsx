@@ -5,13 +5,13 @@ import CommonCard from './CommonCard';
 import { useNavigate } from "react-router-dom";
 
 const MyCard = () => {
-    const { userId, userData } = useContext(GlobalContext);
+    const { userData } = useContext(GlobalContext);
     const [cardData, setCardData] = useState({});
     const [user, setUser] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}?userType=${userData.type}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}?userType=${userData.type}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
@@ -19,7 +19,7 @@ const MyCard = () => {
                 }
             })
             .catch(err => console.log(err.message));
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result?userId=${userId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result?userId=${userData.id}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
@@ -35,7 +35,7 @@ const MyCard = () => {
                 }
             })
             .catch(err => console.log(err.message));
-    }, [userId]);
+    }, []);
     if (user.name && cardData.description) {
         return (
             <div className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>

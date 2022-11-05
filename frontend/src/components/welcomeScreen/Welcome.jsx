@@ -4,73 +4,29 @@ import patternTarock from '../../assets/patternTarock.svg';
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import Loading from '../common/Loading';
 
 function Welcome() {
-    const { userId, setUserId, userData, setUserData } = useContext(GlobalContext);
-    const [userName, setUserName] = useState('');
-    const [userType, setUserType] = useState('');
+    const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
 
-    const getUser = (id, userType) => {
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=${userType}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.length > 0) {
-                    setUserName(data[0].name);
-                }
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }
-
-    const getUserStatus = () => {
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${userId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                userData.type = data.userType;
-                setUserData(userData);
-                if (data.userType === 'REAL' || data.userType === 'TMP') {
-                    setUserId(data.id);
-                    setUserType(data.userType);
-                    getUser(data.id, data.userType);
-                } else {
-                    navigate('/signin');
-                }
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }
-
     useEffect(() => {
-        // Update page or navigate depending on the user status.
-        getUserStatus();
+        if (userData.type === 'NEW') {
+            navigate("/signin");
+        }
     }, []);
     
     function handleClick() {
-        if (userType === 'REAL') {
-            fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login/success`, {credentials: 'include'})
-                .then((response) => {
-                    if (!response.ok) {
-                        navigate("/signin");
-                    } else {
-                        navigate("/home");
-                    }
-                })
-                .catch((err) => {
-                    console.log(err.message);
-                });
-        } else {
+        if (userData.type === 'REAL') {
+            if (userData.isAuthorized) {
+                navigate("/home");
+            } else {
+                navigate("/signin");
+            }
+        } else if (userData.type === 'TMP') {
             navigate("/test");
         }
     }
 
-    if (!userName) {
-        return <Loading/>;
-    }
-    
     return (
         <Container className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#FBF2DC'}}>
             <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
@@ -88,7 +44,7 @@ function Welcome() {
             }}>
                 <span>Welcome back,</span>
                 <br />
-                <span>{userName}!</span>
+                <span>{userData.name}!</span>
             </div>
            <div className='d-flex flex-column mt-auto'>
         <div className='rounded-5 py-3' style={{

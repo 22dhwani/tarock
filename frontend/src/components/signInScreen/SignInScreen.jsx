@@ -13,7 +13,7 @@ function SignInScreen(props) {
     const [user, setUser] = useState('');
     const [avatar, setAvatar] = useState(false);
     const [avatarPage, setAvatarPage] = useState(true);
-    const { userId, userData, setUserData } = useContext(GlobalContext);
+    const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
@@ -38,15 +38,20 @@ function SignInScreen(props) {
                     name: formData.name,
                     avatarIndex: formData.gender,
                     gender: formData.gender ? 'Male' : 'Female',
-                    userId: userId,
+                    userId: userData.id,
                     //Email: formData.email,
                     //Password: formData.password
                 })
             })
             const data = await response.json();
-            userData.type = 'TMP';
-            setUserData(userData);
-            navigate("/test")
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: data.name,
+                gender: data.gender,
+                avatarIndex: data.avatar_index,
+                type: 'TMP'
+            }));
+            navigate("/test");
         } catch (error) {
             console.log(error);
         }
@@ -65,7 +70,7 @@ function SignInScreen(props) {
     async function handleSignIn(event) {
         event.preventDefault();
         try {
-            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}`);
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}`);
             let obj = await response.json();
             console.log(obj)
             //check for email password in future
@@ -95,7 +100,7 @@ function SignInScreen(props) {
     }
 
     function handleGoogleSignin() {
-        const url = `${import.meta.env.VITE_SERVER_BASE_URL}/login/federated/google?id=${userId}&redirect=home&type=${userData.type}`;
+        const url = `${import.meta.env.VITE_SERVER_BASE_URL}/login/federated/google?id=${userData.id}&redirect=home&type=${userData.type}`;
         window.location.href = url;
     }
 

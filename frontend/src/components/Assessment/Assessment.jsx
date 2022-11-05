@@ -10,7 +10,6 @@ import btn2 from '../../assets/btn_2.svg';
 import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
 import { useNavigate } from "react-router-dom";
-import buttonBack from '../../assets/buttonBack.svg';
 
 const randomRadarData = () => {
     return {
@@ -28,7 +27,7 @@ const randomRadarData = () => {
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
-    const { userId, userData } = useContext(GlobalContext);
+    const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/assessment?groupId=${assessmentGroupId}`)
@@ -54,7 +53,7 @@ const Assessment = ({ assessmentGroupId }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: userId,
+                    userId: userData.id,
                     assessmentGroupId: assessmentGroupId,
                     answers: answers,
                     duration: 60 // TODO(Zane): calculate duration

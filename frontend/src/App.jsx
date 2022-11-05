@@ -12,23 +12,71 @@ import ShareScreen from './components/cardScreen/ShareScreen';
 import CardsScreen from './components/cardScreen/CardsScreen';
 import EditProfile from './components/profileScreen/EditProfile';
 import Loading from './components/common/Loading';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
-
+import { getUser, isAuthorized } from './utils/userUtil';
 
 const App = () => {
-  const { userId, setUserId } = useContext(GlobalContext);
-  const { isLoading, data } = useVisitorData();
+  const { setUserData } = useContext(GlobalContext);
+  const { isLoadingFingerprint, data } = useVisitorData();
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
+
+  const getUserType = async (id) => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${id}`)
+    const data = await response.json();
+    return data;
+  }
+
+  const initUser = async (id) => {
+    const typeData = await getUserType(id);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      type: typeData.userType,
+      id: typeData.id
+    }));
+    const authorized = await isAuthorized();
+    if (authorized) { // Real user with cookie
+      const authorizedUserData = await getUser(typeData.id, typeData.userType);
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        name: authorizedUserData.name,
+        gender: authorizedUserData.gender,
+        avatarIndex: authorizedUserData.avatar_index,
+        email: authorizedUserData.email,
+        dob: authorizedUserData.birth_date,
+        id: authorizedUserData.internal_user_id,
+        type: 'REAL',
+        isAuthorized: true
+      }));
+    } else { // No authorized cookie, need to determine user type.
+      if (typeData.userType != 'NEW') {
+        const tmpUserData = await getUser(typeData.id, typeData.userType);
+        setUserData((prevUserData) => ({
+          ...prevUserData,
+          name: tmpUserData.name,
+          gender: tmpUserData.gender,
+          avatarIndex: tmpUserData.avatar_index
+        }));
+      } else { // New user, set ID.
+        setUserData((prevUserData) => ({
+          ...prevUserData,
+          id: id
+        }));
+      }
+    }
+    setIsLoadingUser(false);
+  };
+
   useEffect(() => {
     if (data) {
-      setUserId(data.visitorId);
+      initUser('test11052309');
     }
   }, [data]);
-  if (isLoading) {
+
+  if (isLoadingFingerprint || isLoadingUser) {
     return <Loading/>;
-  }
-  if (userId) {
+  } else {
     return (
       <div className="vh-100 vw-100" style={{
         backgroundColor: '#F3F3F3'

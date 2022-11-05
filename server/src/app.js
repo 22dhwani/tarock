@@ -65,6 +65,7 @@ require("./api/routers/credential")(app);
 require("./api/routers/user")(app);
 require("./api/routers/result")(app);
 require("./api/routers/card")(app);
+require("./api/routers/match")(app);
 
 const authRouter = require('./auth/auth');
 app.use('/', authRouter);

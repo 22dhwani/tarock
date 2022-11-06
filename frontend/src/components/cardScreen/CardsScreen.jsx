@@ -8,24 +8,14 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
 import add from '../../assets/add.svg';
-import './card.css'
+import './card.css';
+
 const CardsScreen = () => {
-    const { userId } = useContext(GlobalContext);
-    const [userData, setUserData] = useState('');
+    const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     const onMyCardClick = () => {
         navigate('/myCard');
     }
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    setUserData(data[0]);
-                }
-            })
-            .catch(err => console.log(err.message));
-    }, [userId]);
 
     return (
         <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FAE8E7' }}>
@@ -47,7 +37,7 @@ const CardsScreen = () => {
                         <GenCard 
                         //quadra={userData.personality_socionic_quadra}
                         quadra='Alpha'
-                        avatar_index={userData.avatar_index} />
+                        avatar_index={userData.avatarIndex} />
                     </Col>
                     <Col style={{ cursor: 'pointer' }} onClick={onMyCardClick} className='justify-content-center d-flex'>
                         <GenCard cardType='match' />

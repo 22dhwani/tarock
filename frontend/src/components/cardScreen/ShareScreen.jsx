@@ -10,22 +10,22 @@ const Share = () => {
     const { userId } = useParams();
     const location = useLocation();
     const [cardData, setCardData] = useState({});
-    const [userData, setUserData] = useState('');
+    const [user, setUser] = useState({});
     useEffect(() => {
-        fetch(`http://35.184.195.100:3000/api/user/${userId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}?userType=REAL`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
-                    setUserData(data[0]);
+                    setUser(data[0]);
                 }
             })
             .catch(err => console.log(err.message));
-        fetch(`http://35.184.195.100:3000/api/result?userId=${userId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result?userId=${userId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
                     const type = data[0].result_code;
-                    fetch(`http://35.184.195.100:3000/api/card/${type}`)
+                    fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/${type}`)
                         .then(response => response.json())
                         .then(data => setCardData(data))
                         .catch(err => console.log(err.message));
@@ -33,10 +33,10 @@ const Share = () => {
             })
             .catch(err => console.log(err.message));
     }, [userId]);
-    if (userData.name && cardData.description) {
+    if (user.name && cardData.description) {
         return (
             <div className='d-flex flex-column vh-100' style={{ backgroundColor: '#3069B3' }}>
-                <Card userData={userData} cardData={cardData} showDescription={false} showShare={false}/>
+                <Card user={user} cardData={cardData} showDescription={false} showShare={false}/>
                 <Row className='m-5'>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
                         <QRCode value={ window.location.href } size={64}/>

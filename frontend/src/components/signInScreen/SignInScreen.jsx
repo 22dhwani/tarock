@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg'
 import pattern from '../../assets/patternTarock.svg'
+import googleSignin from '../../assets/signin/btn_google_signin_dark_normal_web@2x.png';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import AvatarCreation from '../avatarCreationScreen.jsx/AvatarCreation';
@@ -12,7 +13,7 @@ function SignInScreen(props) {
     const [user, setUser] = useState('');
     const [avatar, setAvatar] = useState(false);
     const [avatarPage, setAvatarPage] = useState(true);
-    const { userId } = useContext(GlobalContext);
+    const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
@@ -27,7 +28,7 @@ function SignInScreen(props) {
     async function handleSubmit() {
         //hide api
         try {
-            const response = await fetch('http://35.184.195.100:3000/api/user', {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -37,14 +38,20 @@ function SignInScreen(props) {
                     name: formData.name,
                     avatarIndex: formData.gender,
                     gender: formData.gender ? 'Male' : 'Female',
-                    userId: userId,
+                    userId: userData.id,
                     //Email: formData.email,
                     //Password: formData.password
                 })
             })
             const data = await response.json();
-            console.log(data);
-            navigate("/test")
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: data.name,
+                gender: data.gender,
+                avatarIndex: data.avatar_index,
+                type: 'TMP'
+            }));
+            navigate("/test");
         } catch (error) {
             console.log(error);
         }
@@ -63,7 +70,7 @@ function SignInScreen(props) {
     async function handleSignIn(event) {
         event.preventDefault();
         try {
-            const response = await fetch(`http://35.184.195.100:3000/api/user/${userId}`);
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}`);
             let obj = await response.json();
             console.log(obj)
             //check for email password in future
@@ -91,6 +98,12 @@ function SignInScreen(props) {
         setUser('Guest');
         setAvatar(true);
     }
+
+    function handleGoogleSignin() {
+        const url = `${import.meta.env.VITE_SERVER_BASE_URL}/login/federated/google?id=${userData.id}&redirect=home&type=${userData.type}`;
+        window.location.href = url;
+    }
+
     return (
         <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FBF2DC'}}>
             {avatarPage ? <>
@@ -113,13 +126,13 @@ function SignInScreen(props) {
 
                 <div style={{
                    position: 'relative',
-                   top: '15rem',
+                   top: '20rem',
                     zIndex: '1000',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '20px',
                 }}>
-                    <Form onSubmit={handleUser}>
+                    {userData.type === 'NEW' && <Form onSubmit={handleUser}>
                         <Form.Group className="mb-3">
                             <Form.Control className='py-3' type="text" placeholder="First and Last name"
                                 onChange={handleChange}
@@ -145,7 +158,7 @@ function SignInScreen(props) {
                                 border: 'none',
 
                             }}>Sign In</button>} */}
-                    </Form>
+                    </Form>}
 
                  
                     {/* {!avatar && <button
@@ -172,7 +185,7 @@ function SignInScreen(props) {
                         }}>Continue as guest</button>
                     } */}
 
-                    {!avatar && <button
+                    {userData.type === 'NEW' && <button
                         onClick={createAvatar}
                         className='w-100 rounded-5 py-3' style={{
                             backgroundColor: '#49304D',
@@ -182,6 +195,11 @@ function SignInScreen(props) {
                             border: 'none',
 
                         }}>Create Avatar</button>}
+
+                    {(userData.type === 'REAL' || userData.type === 'TMP') && <img
+                        onClick={handleGoogleSignin}
+                        className='mx-5'
+                        src={googleSignin}/>}
 
                     {/* {avatar && <button
                         onClick={handleBack}

@@ -5,26 +5,26 @@ import CommonCard from './CommonCard';
 import { useNavigate } from "react-router-dom";
 
 const MyCard = () => {
-    const { userId } = useContext(GlobalContext);
+    const { userData } = useContext(GlobalContext);
     const [cardData, setCardData] = useState({});
-    const [userData, setUserData] = useState('');
+    const [user, setUser] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://35.184.195.100:3000/api/user/${userId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}?userType=${userData.type}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
-                    setUserData(data[0]);
+                    setUser(data[0]);
                 }
             })
             .catch(err => console.log(err.message));
-        fetch(`http://35.184.195.100:3000/api/result?userId=${userId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result?userId=${userData.id}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
                     const type = data[0].result_code;
-                    fetch(`http://35.184.195.100:3000/api/card/${type}`)
+                    fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/${type}`)
                         .then(response => response.json())
                         .then(data => setCardData(data))
                         .catch(err => console.log(err.message));
@@ -35,11 +35,11 @@ const MyCard = () => {
                 }
             })
             .catch(err => console.log(err.message));
-    }, [userId]);
-    if (userData.name && cardData.description) {
+    }, []);
+    if (user.name && cardData.description) {
         return (
             <div className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>
-                <CommonCard userData={userData} cardData={cardData} showDescription={true} showShare={true}/>
+                <CommonCard user={user} cardData={cardData} showDescription={true} showShare={true}/>
             </div>
         );
     } else {

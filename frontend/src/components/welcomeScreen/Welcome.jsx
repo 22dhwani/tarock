@@ -1,40 +1,32 @@
 import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg';
 import patternTarock from '../../assets/patternTarock.svg';
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import Loading from '../common/Loading';
 
 function Welcome() {
-    const { userId, setUserId } = useContext(GlobalContext);
-    const [userName, setUserName] = useState('');
+    const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Determine if user exists in database.
-        fetch(`http://35.184.195.100:3000/api/user/${userId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.length > 0) {
-                    setUserName(data[0].name);
-                } else {
-                    navigate('/signin');
-                }
-            })
-            .catch((err) => {
-                console.log(err.message)
-            });
+        if (userData.type === 'NEW') {
+            navigate("/signin");
+        }
     }, []);
     
     function handleClick() {
-        redirect("/home");
+        if (userData.type === 'REAL') {
+            if (userData.isAuthorized) {
+                navigate("/home");
+            } else {
+                navigate("/signin");
+            }
+        } else if (userData.type === 'TMP') {
+            navigate("/test");
+        }
     }
 
-    if (!userName) {
-        return <Loading/>;
-    }
-    
     return (
         <Container className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#FBF2DC'}}>
             <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
@@ -52,10 +44,10 @@ function Welcome() {
             }}>
                 <span>Welcome back,</span>
                 <br />
-                <span>{userName}!</span>
+                <span>{userData.name}!</span>
             </div>
            <div className='d-flex flex-column mt-auto'>
-        <Link to="/home"  className='rounded-5 py-3' style={{
+        <div className='rounded-5 py-3' style={{
                         backgroundColor: '#49304D',
                         color: '#999999',
                         fontSize: '16px',
@@ -77,7 +69,7 @@ function Welcome() {
                    >
                     Next
                 </button>
-            </Link>
+            </div>
 
             <img src={patternTarock} alt="pattern" 
             className='  w-100' style={{zIndex:'100'}} />

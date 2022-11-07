@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 import buttonBack from '../../assets/buttonBack.svg';
 import { Link } from 'react-router-dom';
 function EditProfile() {
-    const { userId } = useContext(GlobalContext);
+    const { userData } = useContext(GlobalContext);
     const placeholders = ["First and Last Name", "mm/dd/yyyy", ""];
     const formItems = ['Name', 'DOB', 'Gender']
     const [formData, setFormData] = useState(
@@ -25,7 +25,7 @@ function EditProfile() {
             avatarIndex = 0;
         }
         try {
-            const response = await fetch('http://35.184.195.100:3000/api/user', {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -37,7 +37,7 @@ function EditProfile() {
                     avatarIndex: avatarIndex,
                     gender: formData.Gender,
                     dob: formData.DOB,
-                    userId: userId,
+                    userId: userData.id,
                     //Email: formData.email,
                     //Password: formData.password
                 })

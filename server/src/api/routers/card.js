@@ -4,6 +4,7 @@ module.exports = app => {
 
     const router = express.Router();
 
+    router.get("/user/:id", card.getByUser);
     router.get("/:type", card.getByType);
 
     app.use("/api/card", router);

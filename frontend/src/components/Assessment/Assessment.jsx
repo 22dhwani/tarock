@@ -10,7 +10,6 @@ import btn2 from '../../assets/btn_2.svg';
 import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
 import { useNavigate } from "react-router-dom";
-import buttonBack from '../../assets/buttonBack.svg';
 
 const randomRadarData = () => {
     return {
@@ -28,10 +27,10 @@ const randomRadarData = () => {
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
     const [answers, setAnswers] = useState([]);
-    const { userId } = useContext(GlobalContext);
+    const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://35.184.195.100:3000/api/assessment?groupId=${assessmentGroupId}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/assessment?groupId=${assessmentGroupId}`)
             .then((response) => response.json())
             .then((data) => {
                 setAssessment({ index: 0, data: data });
@@ -47,14 +46,14 @@ const Assessment = ({ assessmentGroupId }) => {
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {
-            fetch('http://35.184.195.100:3000/api/result', {
+            fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: userId,
+                    userId: userData.id,
                     assessmentGroupId: assessmentGroupId,
                     answers: answers,
                     duration: 60 // TODO(Zane): calculate duration
@@ -62,7 +61,11 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    navigate("/myCard");
+                    if (userData.type != 'REAL') {
+                        navigate("/signin");
+                    } else {
+                        navigate("/myCard");
+                    }
                 })
                 .catch((err) => {
                     console.log(err.message);

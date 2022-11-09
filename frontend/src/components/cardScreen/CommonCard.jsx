@@ -192,13 +192,9 @@ const CommonCard = ({ user, cardData, showDescription, showShare, children }) =>
                 {
                     showShare &&
                     <Link to={`/share/${user.internal_user_id}`}>
-                        <div className='d-flex mt-5'>
-                            <img src={share} alt='share' className='px-3'/>
+                        <div className='d-flex justify-content-center gap-2'>
+                            <img src={share} alt='share' className='w-75' />
                             <div style={{
-                                display: 'flex',
-                                width: 'fit-content',
-                                alignItems: 'center',
-                                margin: 'auto',
                                 borderRadius: '8px',
                                 backgroundColor: 'black',
                                 color: 'white',

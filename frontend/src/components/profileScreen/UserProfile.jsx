@@ -39,7 +39,7 @@ function UserProfile() {
 
     
     return (
-        <Container className='d-flex flex-column min-vh-100 my-3 rounded-5' style={{ backgroundColor: '#FBF2DC'}}>
+        <Container className='d-flex flex-column min-vh-100 ' style={{ backgroundColor: '#FBF2DC'}}>
             <Header/>
             <Row>
                 <img src={avatar} alt="avatar" height='120px' width='120px' style={{

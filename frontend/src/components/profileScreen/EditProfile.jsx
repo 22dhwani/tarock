@@ -60,7 +60,7 @@ function EditProfile() {
         })
     }
     return (
-        <Container className='d-flex flex-column min-vh-100 px-5 rounded-5 my-1' style={{ backgroundColor: '#FBF2DC' }}>
+        <Container className='d-flex flex-column min-vh-100 p-5 ' style={{ backgroundColor: '#FBF2DC' }}>
 
             <div className="d-flex align-items-center gap-5 " style={{
                 position: 'relative',

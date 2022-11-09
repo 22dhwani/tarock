@@ -121,8 +121,8 @@ function SignInScreen(props) {
                     paddingTop: '10px'
                 }}>
                     <span>Welcome to Tarock, where personality is harnessed</span>
-
                 </div>
+               
 
                 <div style={{
                    position: 'relative',

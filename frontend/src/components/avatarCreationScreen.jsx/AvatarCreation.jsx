@@ -13,7 +13,7 @@ function AvatarCreation(props) {
             <div className="d-flex justify-content-around ">
                 <img className='px-3' src={buttonBack} alt="buttonBack" onClick={props.handleBack} />
                 <img className='px-5' src={logo} alt="logo" />
-                <img className='px-3' src={buttonOk} alt="buttonOk" onClick={props.handleOk} />
+                <img className='px-3' src={buttonOk} alt="buttonOk" onClick={props.handleOk} style={{cursor:'pointer'}}/>
             </div>
 
             <div className='mx-auto pb-5' style={{ width: 'fit-content' }}>

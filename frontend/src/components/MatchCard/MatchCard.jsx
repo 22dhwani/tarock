@@ -79,7 +79,6 @@ function MatchCard() {
                             <p style={{
                                 fontWeight: '500',
                                 fontSize: '14px',
-                                lineHeight: '10px',
                                 color: 'white',
                                 lineHeight: '20px',
                             }}>
@@ -116,7 +115,6 @@ function MatchCard() {
                             <p style={{
                                 fontWeight: '500',
                                 fontSize: '14px',
-                                lineHeight: '10px',
                                 color: 'white',
                                 lineHeight: '20px',
                             }}>

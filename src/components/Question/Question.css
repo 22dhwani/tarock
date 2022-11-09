@@ -1,0 +1,12 @@
+.question-container {
+    max-height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 14px;
+    font-family: 'Montserrat'; 
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    color: #49504D;
+    overflow-y: auto;
+}

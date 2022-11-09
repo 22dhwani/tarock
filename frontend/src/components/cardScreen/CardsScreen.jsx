@@ -13,8 +13,11 @@ import './card.css';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
-    const onMyCardClick = () => {
+    function onMyCardClick(){
         navigate('/myCard');
+    }
+    function onMatchCardClick(){
+        navigate('/matchCard');
     }
 
     return (
@@ -39,7 +42,7 @@ const CardsScreen = () => {
                         quadra='Alpha'
                         avatar_index={userData.avatarIndex} />
                     </Col>
-                    <Col style={{ cursor: 'pointer' }} onClick={onMyCardClick} className='justify-content-center d-flex'>
+                    <Col style={{ cursor: 'pointer' }} onClick={onMatchCardClick} className='justify-content-center d-flex'>
                         <GenCard cardType='match' />
                     </Col>
                 </Row>

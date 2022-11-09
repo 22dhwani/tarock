@@ -14,8 +14,9 @@ import share from '../../assets/myCard/share.svg';
 import { Link } from 'react-router-dom';
 import Swipper from '../Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
+import deck from '../../assets/footer/cards.svg';
 import './card.css'
-const CommonCard = ({ user, cardData, showDescription, showShare }) => {
+const CommonCard = ({ user, cardData, showDescription, showShare, children }) => {
     const radarView = <div>
         <div style={{
             fontFamily: 'Montserrat',
@@ -187,19 +188,32 @@ const CommonCard = ({ user, cardData, showDescription, showShare }) => {
             {/* <Container className="overflow-auto d-flex flex-column m-auto" style={{
 
             }}> */}
-                <Swipper data={
-                    [radarView, descriptionView]
-                } />
+                {showShare ? <Swipper data={ [radarView, descriptionView]} /> : radarView}
                 {
                     showShare &&
                     <Link to={`/share/${user.internal_user_id}`}>
-                        <div className='d-flex justify-content-center mt-5'>
-                            <img src={share} alt='share' />
+                        <div className='d-flex mt-5'>
+                            <img src={share} alt='share' className='px-3'/>
+                            <div style={{
+                                display: 'flex',
+                                width: 'fit-content',
+                                alignItems: 'center',
+                                margin: 'auto',
+                                borderRadius: '8px',
+                                backgroundColor: 'black',
+                                color: 'white',
+                                cursor:'pointer',
+                                padding: '10px',
+                            }}
+                            onClick={() => navigate('/cards')}
+                            >
+                                <img src={deck} alt='deck' width='40px' />
+                            </div>
                         </div>
                     </Link>
                 }
             {/* </Container> */}
-
+                {children}
         </Container>
     );
 }

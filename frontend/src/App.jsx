@@ -16,6 +16,7 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 import { getUser, isAuthorized } from './utils/userUtil';
+import MatchCard from './components/MatchCard/MatchCard';
 
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
@@ -78,10 +79,10 @@ const App = () => {
     return <Loading/>;
   } else {
     return (
-      <div className="vh-100 vw-100" style={{
+      <div className="min-vh-100" style={{
         backgroundColor: '#F3F3F3'
       }}>
-        <div className="vh-100 mx-auto global-container">
+        <div className="min-vh-100 mx-auto global-container">
           <Router>
 
             <Routes>
@@ -95,7 +96,9 @@ const App = () => {
               <Route index path="/chart" element={<RadarChart/>}/>
               <Route index path="/share/:userId" element={<ShareScreen/>}/>
               <Route index path="/cards" element={<CardsScreen/>}/>
+              <Route index path="matchCard" element={<MatchCard/>}/>
             </Routes>
+{/* add new route */}
 
           </Router>
         </div>

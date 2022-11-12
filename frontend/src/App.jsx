@@ -96,7 +96,7 @@ const App = () => {
               <Route index path="/chart" element={<RadarChart/>}/>
               <Route index path="/share/:userId" element={<ShareScreen/>}/>
               <Route index path="/cards" element={<CardsScreen/>}/>
-              <Route index path="matchCard" element={<MatchCard/>}/>
+              <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/>
             </Routes>
 {/* add new route */}
 

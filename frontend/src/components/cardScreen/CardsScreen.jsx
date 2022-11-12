@@ -12,13 +12,30 @@ import './card.css';
 
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
+    const [matchedCardsData, setMatchedCardsData] = useState([]);
     const navigate = useNavigate();
-    function onMyCardClick(){
+    const onMyCardClick = () => {
         navigate('/myCard');
     }
-    function onMatchCardClick(){
-        navigate('/matchCard');
+    const onMatchCardClick = (origId, matchedId) => {
+        if (matchedId === userData.id) {
+            matchedId = origId;
+        }
+        navigate(`/matchCard/${matchedId}`);
     }
+
+    const getCardData = async () => {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`);
+        const data = await response.json();
+        // Set matched cards data.
+        if (data.length > 1) {
+            setMatchedCardsData(data[1].data);
+        }
+    }
+
+    useEffect(() => {
+        getCardData();
+    }, []);
 
     return (
         <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FAE8E7' }}>
@@ -34,7 +51,6 @@ const CardsScreen = () => {
                 Tarock Cards
             </div>
             <Container className='flex-grow-1 overflow-auto '>
-                {/* map over data when API updates */}
                 <Row lg={2} className='my-3'>
                     <Col  style={{ cursor: 'pointer' }} onClick={onMyCardClick} className='justify-content-center d-flex'>
                         <GenCard 
@@ -42,22 +58,24 @@ const CardsScreen = () => {
                         quadra='Alpha'
                         avatar_index={userData.avatarIndex} />
                     </Col>
-                    <Col style={{ cursor: 'pointer' }} onClick={onMatchCardClick} className='justify-content-center d-flex'>
-                        <GenCard cardType='match' />
-                    </Col>
-                </Row>
-                {/* add card button */}
-                <Row lg={2} className='my-3 '>
+                    {
+                        matchedCardsData.map((data) => {
+                            return <Col key={data.id} style={{ cursor: 'pointer' }} onClick={() => onMatchCardClick(data.orig_user_id, data.matched_user_id)} className='justify-content-center d-flex'>
+                                <GenCard cardType='match' />
+                            </Col>
+                        })
+                    }
+                    {/* add card button */}
                     <Col className='justify-content-center d-flex flex-column align-items-center'>
-                    <div className='button1' style={{
-                        borderRadius: '10px',
-                        width: '9rem',
-                        height: '14.375rem',
-                        border: '1px dashed  #49304D',
-                        display: 'flex',
-                    }}>
-                        <img src={add} alt='add' className='m-auto'/>
-                    </div>
+                        <div className='button1' style={{
+                            borderRadius: '10px',
+                            width: '9rem',
+                            height: '14.375rem',
+                            border: '1px dashed  #49304D',
+                            display: 'flex',
+                        }}>
+                            <img src={add} alt='add' className='m-auto'/>
+                        </div>
                         <div className='col-12 d-flex justify-content-center mt-2' style={{
                             fontFamily: 'Montserrat',
                             fontStyle: 'normal',
@@ -69,10 +87,7 @@ const CardsScreen = () => {
                             Add a new card
                         </div>
                     </Col>
-                    <Col>
-                    </Col>
                 </Row>
-                
             </Container>
             <Footer isCardsActive={true} />
         </Container>

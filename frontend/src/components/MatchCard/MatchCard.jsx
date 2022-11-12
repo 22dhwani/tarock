@@ -6,20 +6,21 @@ import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
 import logo from '../../assets/tarockLogo.svg';
 import RadarChart from '../Charts/RadarChart';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import share from '../../assets/myCard/share.svg';
 import deck from '../../assets/footer/cards.svg';
 import Header from '../common/Header';
 function MatchCard() {
+    const { matchedUserId } = useParams();
     const { userData } = useContext(GlobalContext);
     const [cardData, setCardData] = useState({});
-    const [matchedUser, setMatchedUser] = useState();
+    const [matchedUser, setMatchedUser] = useState('');
     const [matchedCard, setMatchedCard] = useState({});
     const [user, setUser] = useState('');
     const navigate = useNavigate();
 
-    function fetchUserData(setUser, setCardData) {
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}?userType=${userData.type}`)
+    function fetchUserData(setUser, setCardData, id) {
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=REAL`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
@@ -27,7 +28,7 @@ function MatchCard() {
                 }
             })
             .catch(err => console.log(err.message));
-        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result?userId=${userData.id}`)
+        fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result?userId=${id}`)
             .then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
@@ -36,21 +37,17 @@ function MatchCard() {
                         .then(response => response.json())
                         .then(data => setCardData(data))
                         .catch(err => console.log(err.message));
-                } else {
-                    // User hasn't tested, navigate to the test page.
-                    // TODO(Zane): show popup window.
-                    navigate("/test");
                 }
             })
             .catch(err => console.log(err.message));
     }
     useEffect(() => {
-        fetchUserData(setUser, setCardData);
-        if (userData.matchedUser) {
-            fetchUserData(setMatchedUser, setMatchedCard);
+        fetchUserData(setUser, setCardData, userData.id);
+        if (matchedUserId) {
+            fetchUserData(setMatchedUser, setMatchedCard, matchedUserId);
         }
     }, []);
-    if (user.name && cardData.description) {
+    if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
         return (
             <div className='pb-3' style={{
                 backgroundImage: `url(${patternWaves})`,

@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import GenCard from '../TarockCards/GenCard';
 import Footer from '../common/Footer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
 import add from '../../assets/add.svg';
@@ -14,9 +14,13 @@ const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
     const navigate = useNavigate();
+    const search = useLocation().search;
+    const matchUserId = new URLSearchParams(search).get('match');
+
     const onMyCardClick = () => {
         navigate('/myCard');
     }
+
     const onMatchCardClick = (origId, matchedId) => {
         if (matchedId === userData.id) {
             matchedId = origId;
@@ -33,8 +37,31 @@ const CardsScreen = () => {
         }
     }
 
+    const matchUser = async () => {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/match`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                origUserId: matchUserId,
+                matchedUserId: userData.id
+            })
+        });
+        if (response.ok) {
+            navigate(`/matchCard/${matchUserId}`);
+        } else {
+            getCardData();
+        }
+    }
+
     useEffect(() => {
-        getCardData();
+        if (matchUserId && matchUserId != userData.Id) {
+            matchUser();
+        } else {
+            getCardData();
+        }
     }, []);
 
     return (

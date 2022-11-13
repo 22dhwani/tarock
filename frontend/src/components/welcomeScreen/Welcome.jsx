@@ -1,21 +1,40 @@
 import Container from 'react-bootstrap/Container';
 import logo from '../../assets/tarockLogo.svg';
 import patternTarock from '../../assets/patternTarock.svg';
-import { useNavigate } from "react-router-dom";
-import { useContext, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
+import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context';
 
 function Welcome() {
     const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
+    const search = useLocation().search;
+    const matchUserId = new URLSearchParams(search).get('match');
+
+    const handleRedirect = () => {
+        if (userData.type === 'REAL') {
+            if (userData.isAuthorized) {
+                navigate(`/cards?match=${matchUserId}`);
+            } else {
+                navigate(`/signin?match=${matchUserId}`);
+            }
+        } else if (userData.type === 'TMP') {
+            navigate(`/test?match=${matchUserId}`);
+        } else if (userData.type === 'NEW') {
+            navigate(`/signin?match=${matchUserId}`);
+        }
+    }
 
     useEffect(() => {
+        if (matchUserId) {
+            handleRedirect();
+        }
         if (userData.type === 'NEW') {
             navigate("/signin");
         }
     }, []);
     
-    function handleClick() {
+    const handleClick = () => {
         if (userData.type === 'REAL') {
             if (userData.isAuthorized) {
                 navigate("/home");

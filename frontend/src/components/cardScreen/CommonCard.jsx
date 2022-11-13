@@ -40,7 +40,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
             backdropFilter: 'blur(10px)',
             borderRadius: '8px',
-            height: '360px',
+            height: onMatchClick ? '360px' : '300px',
             margin: '0 auto',
             width: '100%',
         }} >

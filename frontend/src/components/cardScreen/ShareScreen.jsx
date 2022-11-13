@@ -60,7 +60,7 @@ const Share = () => {
                                     Scan QR code to start
                                 </div>
                                 <div style={{ lineHeight: '16px' }}>
-                                    Or visit:<br />Tarock.me{location.pathname}
+                                    Or visit:<br />tarock.servehttp.com:8080{location.pathname}
                                 </div>
                             </Col>
                         </Row>

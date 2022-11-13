@@ -1,7 +1,7 @@
-const User = require('../models/user');
-const crypto = require('crypto');
+import User from '../models/user';
+import crypto from 'crypto';
 
-exports.create = (req, res) => {
+function create(req, res) {
     const user = new User({
         id: req.body.userId,
         name: req.body.name,
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     }
 };
 
-exports.query = (req, res) => {
+function query(req, res) {
     if (req.query.userType === 'REAL') {
         User.queryReal(req.params.id, (err, data) => {
             if (err) {
@@ -50,7 +50,7 @@ exports.query = (req, res) => {
     }
 };
 
-exports.update = (req, res) => {
+function update(req, res) {
     const user = new User({
         id: req.body.userId,
         name: req.body.name,
@@ -77,7 +77,7 @@ exports.update = (req, res) => {
     }
 };
 
-exports.getUserStatus = (req, res) => {
+function getUserStatus (req, res) {
     User.queryReal(req.params.id, (err, data) => {
         if (err) {
             res.status(400).send(err);
@@ -105,7 +105,7 @@ exports.getUserStatus = (req, res) => {
     });
 };
 
-exports.createTmpIdToRealId = (req, res) => {
+function createTmpIdToRealId (req, res) {
     User.createTmpIdToRealId(req.body.tmpId, req.body.realId, (err, data) => {
         if (err) {
             res.status(400).send(err);
@@ -114,3 +114,5 @@ exports.createTmpIdToRealId = (req, res) => {
         }
     });
 }
+
+export default { create, query, update, getUserStatus, createTmpIdToRealId};

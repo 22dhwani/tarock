@@ -1,6 +1,6 @@
-const Assessment = require("../models/assessment.js");
+import Assessment from "../models/assessment.js";
 
-exports.getAll = (req, res) => {
+function getAll(req, res) {
     if (req.query.groupId) {
         Assessment.getAllByGroupId(req.query.groupId, (err, data) => {
             if (err) {
@@ -13,3 +13,5 @@ exports.getAll = (req, res) => {
         res.status(400).json({error_msg: "Group ID is required!"});
     }
 };
+
+export default { getAll };

@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+import sql from "./db.js";
 
 const Match = function(match) {
     this.origUserId = match.origUserId;
@@ -36,4 +36,4 @@ Match.create = (match, cb) => {
     });
 }
 
-module.exports = Match;
+export default Match;

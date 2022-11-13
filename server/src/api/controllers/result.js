@@ -1,7 +1,7 @@
-const Result = require("../models/result.js");
-const User = require("../models/user.js");
+import Result from "../models/result.js";
+import User from "../models/user.js";
 
-getSocionicsResult = (answers) => {
+function getSocionicsResult(answers) {
     const count = {
         J: 0,
         P: 0,
@@ -54,7 +54,7 @@ getSocionicsResult = (answers) => {
     return result;
 }
 
-exports.getByUser = (req, res) => {
+function getByUser(req, res) {
     if (req.query.userId) {
         let id = req.query.userId;
         // Find tmp user id if exists
@@ -79,7 +79,7 @@ exports.getByUser = (req, res) => {
     }
 };
 
-exports.create = (req, res) => {
+function create(req, res) {
     const result = new Result({
         userId: req.body.userId,
         assessmentGroupId: req.body.assessmentGroupId,
@@ -95,3 +95,5 @@ exports.create = (req, res) => {
         }
     });
 };
+
+export default { getSocionicsResult, getByUser, create};

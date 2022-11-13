@@ -1,6 +1,6 @@
-const Match = require('../models/match');
+import Match from '../models/match';
 
-exports.create = (req, res) => {
+function create(req, res) {
     if (req.body.origUserId === req.body.matchedUserId) {
         res.status(400).send({ err: 'Original user ID and matched user ID cannot be the same.' });
     } else {
@@ -17,3 +17,5 @@ exports.create = (req, res) => {
         });
     }
 };
+
+export default { create };

@@ -1,16 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const User = require('../models/user');
-const Result = require('../models/result');
-const Match = require('../models/match');
+import fs from 'fs';
+import path from 'path';
+import User from '../models/user';
+import Result from '../models/result';
+import Match from '../models/match';
 
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../static/personality_code_definition.json')));
 
-exports.getByType = (req, res) => {
+function getByType(req, res) {
     res.send(data[req.params.type]);
 }
 
-exports.getByUser = (req, res) => {
+function getByUser(req, res) {
     const result = [];
     let id = req.params.id;
     // Find tmp user id if exists
@@ -47,3 +47,5 @@ exports.getByUser = (req, res) => {
         }
     });
 }
+
+export default { getByType, getByUser };

@@ -1,4 +1,4 @@
-exports.check = (req, res) => {
+function check(req, res) {
     if (req.user) {
       res.json({ message: 'User Authenticated', user: req.user });
     } else {
@@ -8,3 +8,5 @@ exports.check = (req, res) => {
       });
     }
 };
+
+export default { check };

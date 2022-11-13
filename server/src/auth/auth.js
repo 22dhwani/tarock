@@ -1,9 +1,7 @@
-const express = require('express');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
-const db = require('../api/models/db');
-const User = require('../api/models/user');
-const crypto = require('crypto');
+import express from 'express';
+import passport from 'passport';
+import GoogleStrategy from 'passport-google-oauth20';
+import crypto from 'crypto';
 
 const router = express.Router();
 
@@ -128,4 +126,5 @@ router.post('/logout', function(req, res, next) {
     });
   });
 
-module.exports = router;
+
+export default router;

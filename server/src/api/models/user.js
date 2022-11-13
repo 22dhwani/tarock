@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+import sql from "./db.js";
 
 const User = function(user) {
     this.id = user.id;
@@ -108,4 +108,4 @@ User.updateReal = (user, cb) => {
     });
 }
 
-module.exports = User;
+export default User;

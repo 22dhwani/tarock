@@ -1,4 +1,5 @@
-const sql = require("./db.js");
+import result from "../routers/result.js";
+import sql from "./db.js";
 
 const defaultAssessmentGroupId = 1;
 const Result = function(result) {
@@ -31,4 +32,4 @@ Result.create = (result, cb) => {
     });
 }
 
-module.exports = Result;
+export default Result;

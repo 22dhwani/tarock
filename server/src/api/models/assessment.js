@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+import sql from "./db.js";
 
 const Assessment = function(assessment) {
     this.content = assessment.content;
@@ -15,4 +15,4 @@ Assessment.getAllByGroupId = (groupId, cb) => {
     });
 }
 
-module.exports = Assessment;
+export default Assessment;

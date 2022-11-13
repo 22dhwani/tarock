@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+import mysql from 'mysql';
 
 const con = mysql.createPool({
   host: "34.173.211.162",
@@ -7,4 +7,4 @@ const con = mysql.createPool({
   database: "tarock"
 });
 
-module.exports = con;
+export default con;

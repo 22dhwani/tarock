@@ -1,13 +1,21 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+import express from 'express';
+import cors from "cors";
+import path from 'path';
+import passport from 'passport';
+import session from 'express-session';
+import authRouter from './auth/auth';
+// import csurf from 'csurf';
+import assessment from './api/routers/assessment';
+import credential from './api/routers/credential';
+import user from './api/routers/user';
+import result from './api/routers/result';
+import card from './api/routers/card';
+import match from './api/routers/match';
 
-const express = require('express');
+
+dotenv.config();
 const app = express();
-const cors = require("cors");
-const path = require('path');
-const passport = require('passport');
-const session = require('express-session');
-// const csrf = require('csurf');
-
 const corsOptions = {
   origin: process.env['CLIENT_BASE_URL'],
   credentials: true // allow session cookie from browser to pass through
@@ -60,14 +68,14 @@ app.get("/", (req, res) => {
   }
 });
 
-require("./api/routers/assessment")(app);
-require("./api/routers/credential")(app);
-require("./api/routers/user")(app);
-require("./api/routers/result")(app);
-require("./api/routers/card")(app);
-require("./api/routers/match")(app);
+assessment(app);
+credential(app);
+user(app);
+result(app);
+card(app);
+match(app);
 
-const authRouter = require('./auth/auth');
+
 app.use('/', authRouter);
 
 const port = process.env.PORT || 3000;

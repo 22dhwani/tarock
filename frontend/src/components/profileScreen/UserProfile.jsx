@@ -12,8 +12,10 @@ import ButtonGroup from './ButtonGroup';
 import Row from 'react-bootstrap/Row';
 import Footer from '../common/Footer';
 import Header from '../common/Header';
-
+import { GlobalContext } from '../../context';
+import { useContext } from 'react';
 function UserProfile() {
+    const { userData, setUserData } = useContext(GlobalContext);
     const buttonItems = [
         // [editInfo, modifyAvatar],
         // [articles,contact],
@@ -60,7 +62,7 @@ function UserProfile() {
                 paddingBottom: '25px',
                 paddingTop: '10px'
             }}>
-                User Name
+                {userData.name}
             </div>
 
             {buttonItems.map((buttonItem, index) => {
@@ -82,9 +84,7 @@ function UserProfile() {
                 )
             }
             )}
-
             <Footer isMeActive={true}/>
-
         </Container>
     );
 }

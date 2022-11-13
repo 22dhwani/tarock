@@ -32,6 +32,10 @@ function UserProfile() {
             link: '/articles'
         },
         {
+            button: about,
+            link: '/about'
+        },
+        {
             button: contact,
             link: '/contact'
         }],

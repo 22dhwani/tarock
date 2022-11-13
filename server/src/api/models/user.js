@@ -65,24 +65,13 @@ User.queryTmpId = (id, cb) => {
 }
 
 User.createTmpIdToRealId = (tmpId, realId, cb) => {
-    sql.query("SELECT * FROM tmp_user_to_real_user WHERE tmp_user_id = ? AND real_user_id = ?;", [tmpId, realId], (err, res) => {
+    sql.query("INSERT INTO tmp_user_to_real_user (tmp_user_id, real_user_id) VALUES (?, ?);", [tmpId, realId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             cb(err, null);
             return;
         }
-        if (res.length > 0) {
-            cb({ err: "Data already exists!" }, null);
-            return;
-        }
-        sql.query("INSERT INTO tmp_user_to_real_user (tmp_user_id, real_user_id) VALUES (?, ?);", [tmpId, realId], (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                cb(err, null);
-                return;
-            }
-            cb(null, res);
-        });
+        cb(null, res);
     });
 }
 

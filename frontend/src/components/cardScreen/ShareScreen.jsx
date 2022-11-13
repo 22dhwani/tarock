@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../common/Loading';
 import CommonCard from './CommonCard';
 import Row from "react-bootstrap/Row";
@@ -11,6 +11,8 @@ const Share = () => {
     const location = useLocation();
     const [cardData, setCardData] = useState({});
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}?userType=REAL`)
             .then(response => response.json())
@@ -41,6 +43,7 @@ const Share = () => {
                     cardData={cardData}
                     showDescription={false}
                     showShare={false}
+                    onMatchClick={() => navigate(`/?match=${userId}`)}
                     children={
                         <Row className='m-5'>
                             <Col className='col-4 d-flex justify-content-center align-self-center'>

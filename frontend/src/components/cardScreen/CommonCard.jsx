@@ -15,10 +15,11 @@ import { Link } from 'react-router-dom';
 import Swipper from '../Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import deck from '../../assets/footer/cards.svg';
+import match from '../../assets/myCard/match.svg';
 import { useNavigate } from 'react-router-dom';
 import './card.css';
 
-const CommonCard = ({ user, cardData, showDescription, showShare, children }) => {
+const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
     const navigate = useNavigate();
     
     const radarView = <div>
@@ -39,7 +40,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, children }) =>
             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
             backdropFilter: 'blur(10px)',
             borderRadius: '8px',
-            height: '300px',
+            height: '360px',
             margin: '0 auto',
             width: '100%',
         }} >
@@ -48,6 +49,12 @@ const CommonCard = ({ user, cardData, showDescription, showShare, children }) =>
                     <RadarChart apiResponse={cardData.dimensional_values} enableLabels={true} />
                 </div>
             </div>
+            {
+                onMatchClick &&
+                <div className='d-flex justify-content-center' onClick={() => onMatchClick()}>
+                    <img src={match} alt='match'/>
+                </div>
+            }
         </div>
     </div>
 

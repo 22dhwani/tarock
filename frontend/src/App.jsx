@@ -84,7 +84,6 @@ const App = () => {
       }}>
         <div className="min-vh-100 mx-auto global-container">
           <Router>
-
             <Routes>
               <Route index path="/test" element={<Assessment assessmentGroupId={1}/>}/>
               <Route index path="/user" element={<UserProfile/>}/>
@@ -98,8 +97,6 @@ const App = () => {
               <Route index path="/cards" element={<CardsScreen/>}/>
               <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/>
             </Routes>
-{/* add new route */}
-
           </Router>
         </div>
       </div>

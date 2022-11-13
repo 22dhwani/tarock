@@ -7,7 +7,7 @@ import { useState } from 'react';
 import AvatarCreation from '../avatarCreationScreen.jsx/AvatarCreation';
 import { GlobalContext } from '../../context';
 import { useContext } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function SignInScreen(props) {
     const [user, setUser] = useState('');
@@ -15,6 +15,8 @@ function SignInScreen(props) {
     const [avatarPage, setAvatarPage] = useState(true);
     const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
+    const search = useLocation().search;
+    const matchUserId = new URLSearchParams(search).get('match');
 
     const [formData, setFormData] = useState(
         {
@@ -51,7 +53,8 @@ function SignInScreen(props) {
                 avatarIndex: data.avatar_index,
                 type: 'TMP'
             }));
-            navigate("/test");
+            const nav = '/test' + (matchUserId ? `?match=${matchUserId}` : '');
+            navigate(nav);
         } catch (error) {
             console.log(error);
         }
@@ -100,7 +103,13 @@ function SignInScreen(props) {
     }
 
     function handleGoogleSignin() {
-        const url = `${import.meta.env.VITE_SERVER_BASE_URL}/login/federated/google?id=${userData.id}&redirect=home&type=${userData.type}`;
+        let url = `${import.meta.env.VITE_SERVER_BASE_URL}/login/federated/google?id=${userData.id}&type=${userData.type}`;
+        if (matchUserId) {
+            const path = `/cards?match=${matchUserId}`;
+            url += `&redirect=${encodeURIComponent(path)}`;
+        } else {
+            url += `&redirect=${encodeURIComponent('/home')}`;
+        }
         window.location.href = url;
     }
 

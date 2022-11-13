@@ -9,7 +9,7 @@ import btn1 from '../../assets/btn_1.svg';
 import btn2 from '../../assets/btn_2.svg';
 import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const randomRadarData = () => {
     return {
@@ -29,6 +29,9 @@ const Assessment = ({ assessmentGroupId }) => {
     const [answers, setAnswers] = useState([]);
     const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
+    const search = useLocation().search;
+    const matchUserId = new URLSearchParams(search).get('match');
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/assessment?groupId=${assessmentGroupId}`)
             .then((response) => response.json())
@@ -56,13 +59,14 @@ const Assessment = ({ assessmentGroupId }) => {
                     userId: userData.id,
                     assessmentGroupId: assessmentGroupId,
                     answers: answers,
-                    duration: 60 // TODO(Zane): calculate duration
+                    duration: 60 // TODO: calculate duration
                 })
             })
                 .then((response) => response.json())
                 .then((data) => {
                     if (userData.type != 'REAL') {
-                        navigate("/signin");
+                        const nav = '/signin' + (matchUserId ? `?match=${matchUserId}` : '');
+                        navigate(nav);
                     } else {
                         navigate("/myCard");
                     }
@@ -118,18 +122,3 @@ const Assessment = ({ assessmentGroupId }) => {
 };
 
 export default Assessment;
-{/* <div className="assessment-container">
-            <div className="assessment-pattern"></div>
-            <div className="header"></div>
-            <div className="radar"></div>
-            <div className="card-container">
-                <div className="card">
-                    {
-                        assessment.index < assessment.data.length && <Question data={assessment.data[assessment.index].content}/>
-                    }
-                </div>
-            </div>
-            <div className="button-container" onClick={onBtnClick}>
-                <Answer onClick={onBtnClick} count={3}/>
-            </div>
-        </div> */}

@@ -41,57 +41,67 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
     failureRedirect: process.env['CLIENT_BASE_URL'] + '/signin'
   }), function(req, res) {
     const state = req.authInfo.state;
-    // res.redirect(decodeURIComponent(state.redirect));
-    if (state.type === 'TMP') {
-      const email = req.user.email;
-      const hash = crypto.createHash('md5').update(email).digest("hex");
-      User.queryReal(hash, (err, data) => {
-        if (err) {
-          res.status(400).send(err);
-        } else if (data.length == 0) {
-          // No existing real user, create one
-          User.query(state.id, (err, data) => {
-            if (err) {
-              res.status(400).send(err);
-            } else {
-              if (data.length > 0) {
-                const user = new User({
-                  id: hash,
-                  email: email,
-                  name: data[0].name,
-                  gender: data[0].gender,
-                  avatarIndex: data[0].avatar_index
-                });
-                User.createReal(user, (err, data) => {
+    const email = req.user.email;
+    const hash = crypto.createHash('md5').update(email).digest("hex");
+    User.queryReal(hash, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else if (data.length == 0) {
+        // No existing real user, create one.
+        User.query(state.id, (err, data) => {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            if (data.length > 0) {
+              const user = new User({
+                id: hash,
+                email: email,
+                name: data[0].name,
+                gender: data[0].gender,
+                avatarIndex: data[0].avatar_index
+              });
+              User.createReal(user, (err, data) => {
+                if (err) {
+                  res.status(400).send(err);
+                } else {
+                  User.createTmpIdToRealId(state.id, hash, (err, data) => {
+                    if (err) {
+                      res.status(400).send(err);
+                    } else {
+                      res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
+                    }
+                  }); 
+                }
+              });
+            }
+          }
+        });
+      } else {
+        // Found existing real user, build connection.
+        User.queryRealId(state.id, (err, data) => {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            if (data.length > 0) {
+              if (data[0].real_user_id != hash) {
+                // Lastest connection needs to be updated.
+                User.createTmpIdToRealId(state.id, hash, (err, data) => {
                   if (err) {
                     res.status(400).send(err);
                   } else {
-                    User.createTmpIdToRealId(state.id, hash, (err, data) => {
-                      if (err) {
-                        res.status(400).send(err);
-                      } else {
-                        res.redirect(process.env['CLIENT_BASE_URL'] + '/' + state.redirect);
-                      }
-                    }); 
+                    res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
                   }
                 });
+              } else {
+                res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
               }
-            }
-          });
-        } else {
-          // Found existing real user, build connection
-          User.createTmpIdToRealId(state.id, hash, (err, data) => {
-            if (err) {
-              res.status(400).send(err);
             } else {
-              res.redirect(process.env['CLIENT_BASE_URL'] + '/' + state.redirect);
+              res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
             }
-          }); 
-        }
-      });
-    } else {
-      res.redirect(process.env['CLIENT_BASE_URL'] + '/' + state.redirect);
-    }
+          }
+        });
+      }
+    });
   });
 
 // when login is successful, retrieve user info

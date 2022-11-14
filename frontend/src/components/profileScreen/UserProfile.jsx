@@ -35,11 +35,11 @@ function UserProfile() {
         },
         {
             button: about,
-            link: '/about'
+            link: 'https://tarock.webflow.io/about-us'
         },
         {
             button: contact,
-            link: '/contact'
+            link: 'https://tarock.webflow.io/contact-us'
         }],
     ]
 

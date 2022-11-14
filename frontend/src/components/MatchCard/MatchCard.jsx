@@ -135,7 +135,7 @@ function MatchCard() {
                         // props.showShare &&
 
                         <div className='d-flex justify-content-center gap-2'>
-                            <img src={share} alt='share' className='w-75' />
+                            <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${userData.id}`)}/>
                             <div style={{
                                 borderRadius: '8px',
                                 backgroundColor: 'black',

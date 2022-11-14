@@ -29,10 +29,11 @@ function UserProfile() {
             button: modifyAvatar,
             link: '/modifyAvatar'
         }],
-        [{
-            button: articles,
-            link: '/articles'
-        },
+        [
+        // {
+        //     button: articles,
+        //     link: '/articles'
+        // },
         {
             button: about,
             link: 'https://tarock.webflow.io/about-us'

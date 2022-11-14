@@ -96,7 +96,12 @@ function MatchCard() {
                         }} >
                             <div className='d-flex justify-content-center'>
                                 <div className='mx-auto'>
-                                    <RadarChart apiResponse={cardData.dimensional_values} enableLabels={true} />
+                                    <RadarChart 
+                                        userData={cardData.dimensional_values}
+                                        matchData={matchedCard.dimensional_values}
+                                        enableLabels={true} 
+
+                                        />
                                 </div>
                             </div>
                         </div>

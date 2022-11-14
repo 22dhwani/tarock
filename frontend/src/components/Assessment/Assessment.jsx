@@ -99,7 +99,7 @@ const Assessment = ({ assessmentGroupId }) => {
             <Header goBackFunc={goBack}/>
             <Row className='mx-auto'>
                 <div style={{ height: '200px', width: '200px' }}>
-                    <RadarChart apiResponse={randomRadarData()} enableLabels={false}/>
+                    <RadarChart userData={randomRadarData()} enableLabels={false}/>
                 </div>
             </Row>
             <div className="card-container w-75 mx-auto overflow-auto">

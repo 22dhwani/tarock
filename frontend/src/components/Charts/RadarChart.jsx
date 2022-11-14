@@ -1,5 +1,5 @@
 import { Radar } from 'react-chartjs-2';
-import React, { useEffect } from 'react';
+
 import {
     Chart as ChartJS,
     RadialLinearScale,
@@ -19,19 +19,25 @@ ChartJS.register(
     Legend
 );
 
-function RadarChart({ apiResponse, enableLabels }) {
+function RadarChart({ userData, matchData, enableLabels }) {
     const data = {
         labels: ['LOGIC', 'STRUCTURE', ['EXTRA-', 'VERSION'], 'EXECUTION', 'EMOTION', 'OPENNESS', ['INTRO-', 'VERSION'], 'STRATEGY'],
-        
         datasets: [
             {
                 label: 'EII',
-                data: [apiResponse.LOGIC, apiResponse.STRUCTURE, apiResponse.EXTRAVERSION, apiResponse.EXECUTION,
-                    apiResponse.EMOTION, apiResponse.OPENNESS, apiResponse.INTROVERSION, apiResponse.STRATEGY],
-                backgroundColor: 'rgba(255,192,203, 0.2)',
+                data: [userData.LOGIC, userData.STRUCTURE, userData.EXTRAVERSION, userData.EXECUTION,
+                    userData.EMOTION, userData.OPENNESS, userData.INTROVERSION, userData.STRATEGY],
+                backgroundColor: 'rgba(255,192,203, 0.3)',
                 borderColor: '#EC6348',
-                borderWidth: 3,
-                color:'red'
+                borderWidth: 3
+            },
+            {
+                label: 'random label',
+                data: matchData && [matchData.LOGIC, matchData.STRUCTURE, matchData.EXTRAVERSION, matchData.EXECUTION,
+                    matchData.EMOTION, matchData.OPENNESS, matchData.INTROVERSION, matchData.STRATEGY],
+                backgroundColor: 'rgba(105,199,191, 0.3)',
+                borderColor: '#69C7BF',
+                borderWidth: 3
             },
         ],
     };

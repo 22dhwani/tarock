@@ -77,7 +77,7 @@ const App = () => {
   }, [data]);
 
   if (isLoadingFingerprint || isLoadingUser) {
-    return <Loading/>;
+    return <Loading/>
   } else {
     return (
       <div className="min-vh-100" style={{

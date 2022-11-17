@@ -7,9 +7,9 @@ import Footer from '../common/Footer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import add from '../../assets/add.svg';
 import './card.css';
-
+import AddCardButton from '../common/AddCardButton';
+import TabSwitch from '../TabSwitch/TabSwitch';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
@@ -63,57 +63,78 @@ const CardsScreen = () => {
             getCardData();
         }
     }, []);
-
+    const [tab, setTab] = useState(true);
+    function shareCard() {
+        navigate(`/share/${userData.id}`);
+    }
     return (
-        <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FAE8E7' }}>
+        <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Header />
-            <div className='mx-auto' style={{
-                fontFamily: 'Montserrat',
-                fontStyle: 'normal',
-                fontWeight: '700',
-                fontSize: '24px',
-                lineHeight: '28px',
-                color: '#49304D'
-            }}>
-                Tarock Cards
-            </div>
-            <Container className='flex-grow-1 overflow-auto '>
+            <TabSwitch tab={tab} setTab={setTab} />
+            <Container >
                 <Row lg={2} className='my-3'>
-                    <Col  style={{ cursor: 'pointer' }} onClick={onMyCardClick} className='justify-content-center d-flex'>
-                        <GenCard 
-                        //quadra={userData.personality_socionic_quadra}
-                        quadra='Alpha'
-                        avatar_index={userData.avatarIndex} />
-                    </Col>
-                    {
-                        matchedCardsData.map((data) => {
-                            return <Col key={data.id} style={{ cursor: 'pointer' }} onClick={() => onMatchCardClick(data.orig_user_id, data.matched_user_id)} className='justify-content-center d-flex'>
-                                <GenCard cardType='match' />
+                    {tab ?
+                        <>
+                            <Col style={{ cursor: 'pointer' }} onClick={onMyCardClick} className='justify-content-center d-flex'>
+                                <GenCard
+                                    //quadra={userData.personality_socionic_quadra}
+                                    quadra='Alpha'
+                                    avatar_index={userData.avatarIndex} />
                             </Col>
-                        })
+                            <Col className='d-flex align-items-center justify-content-center'>
+                                <AddCardButton />
+                            </Col>
+                        </>
+                        : <>
+                            {
+                                matchedCardsData.length ? <>
+                                    {
+                                        matchedCardsData.map((data) => {
+                                            return <Col
+                                                key={data.id}
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={() => onMatchCardClick(data.orig_user_id, data.matched_user_id)}
+                                                className='justify-content-center d-flex'>
+                                                <GenCard cardType='match' />
+                                            </Col>
+                                        })
+                                    }
+                                    <Col className='d-flex align-items-center justify-content-center' onClick={shareCard}>
+                                        <AddCardButton />
+                                    </Col>
+                                </>
+                                    :
+                                    <div className='d-flex flex-column align-items-center w-100 gap-3' style={{
+                                        marginTop: '10rem'
+                                    }}>
+                                        <h1 style={{
+                                            fontWeight: '700',
+                                            fontSize: '16px',
+                                            lineHeight: '19.5px',
+                                            textAlign: 'center',
+                                            width: '70%',
+                                        }}>
+                                            Share your Tarock card to your friends and start matching.
+                                        </h1>
+                                        <button
+                                            onClick={shareCard}
+                                            style={{
+                                                border: 'none',
+                                                backgroundColor: '#49304D',
+                                                color: '#FFFFFF',
+                                                borderRadius: '50px',
+                                                paddingLeft: '1.5rem',
+                                                paddingRight: '1.5rem',
+                                                paddingTop: '0.5rem',
+                                                paddingBottom: '0.5rem',
+                                                fontWeight: '700',
+                                            }}>
+                                            Share my card
+                                        </button>
+                                    </div>
+                            }
+                        </>
                     }
-                    {/* add card button */}
-                    <Col className='justify-content-center d-flex flex-column align-items-center'>
-                        <div className='button1' style={{
-                            borderRadius: '10px',
-                            width: '9rem',
-                            height: '14.375rem',
-                            border: '1px dashed  #49304D',
-                            display: 'flex',
-                        }}>
-                            <img src={add} alt='add' className='m-auto'/>
-                        </div>
-                        <div className='col-12 d-flex justify-content-center mt-2' style={{
-                            fontFamily: 'Montserrat',
-                            fontStyle: 'normal',
-                            fontWeight: '700',
-                            fontSize: '14px',
-                            lineHeight: '14px',
-                            color: '#49304D',
-                        }}>
-                            Add a new card
-                        </div>
-                    </Col>
                 </Row>
             </Container>
             <Footer isCardsActive={true} />

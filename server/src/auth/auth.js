@@ -82,19 +82,15 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
           if (err) {
             res.status(400).send(err);
           } else {
-            if (data.length > 0) {
-              if (data[0].real_user_id != hash) {
-                // Lastest connection needs to be updated.
-                User.createTmpIdToRealId(state.id, hash, (err, data) => {
-                  if (err) {
-                    res.status(400).send(err);
-                  } else {
-                    res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
-                  }
-                });
-              } else {
-                res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
-              }
+            if (data.length == 0 || data[0].real_user_id != hash) {
+              // Lastest connection needs to be updated.
+              User.createTmpIdToRealId(state.id, hash, (err, data) => {
+                if (err) {
+                  res.status(400).send(err);
+                } else {
+                  res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
+                }
+              });
             } else {
               res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
             }

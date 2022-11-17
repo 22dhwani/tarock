@@ -12,8 +12,10 @@ import ButtonGroup from './ButtonGroup';
 import Row from 'react-bootstrap/Row';
 import Footer from '../common/Footer';
 import Header from '../common/Header';
-
+import { GlobalContext } from '../../context';
+import { useContext } from 'react';
 function UserProfile() {
+    const { userData, setUserData } = useContext(GlobalContext);
     const buttonItems = [
         // [editInfo, modifyAvatar],
         // [articles,contact],
@@ -27,13 +29,18 @@ function UserProfile() {
             button: modifyAvatar,
             link: '/modifyAvatar'
         }],
-        [{
-            button: articles,
-            link: '/articles'
+        [
+        // {
+        //     button: articles,
+        //     link: '/articles'
+        // },
+        {
+            button: about,
+            link: 'https://tarock.webflow.io/about-us'
         },
         {
             button: contact,
-            link: '/contact'
+            link: 'https://tarock.webflow.io/contact-us'
         }],
     ]
 
@@ -56,7 +63,7 @@ function UserProfile() {
                 paddingBottom: '25px',
                 paddingTop: '10px'
             }}>
-                User Name
+                {userData.name}
             </div>
 
             {buttonItems.map((buttonItem, index) => {
@@ -78,9 +85,7 @@ function UserProfile() {
                 )
             }
             )}
-
             <Footer isMeActive={true}/>
-
         </Container>
     );
 }

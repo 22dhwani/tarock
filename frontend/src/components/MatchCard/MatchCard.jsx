@@ -96,7 +96,12 @@ function MatchCard() {
                         }} >
                             <div className='d-flex justify-content-center'>
                                 <div className='mx-auto'>
-                                    <RadarChart apiResponse={cardData.dimensional_values} enableLabels={true} />
+                                    <RadarChart 
+                                        userData={cardData.dimensional_values}
+                                        matchData={matchedCard.dimensional_values}
+                                        enableLabels={true} 
+
+                                        />
                                 </div>
                             </div>
                         </div>
@@ -130,7 +135,7 @@ function MatchCard() {
                         // props.showShare &&
 
                         <div className='d-flex justify-content-center gap-2'>
-                            <img src={share} alt='share' className='w-75' />
+                            <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${userData.id}`)}/>
                             <div style={{
                                 borderRadius: '8px',
                                 backgroundColor: 'black',

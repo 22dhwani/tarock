@@ -38,7 +38,8 @@ function EditProfile() {
                     gender: formData.Gender,
                     dob: formData.DOB,
                     userId: userData.id,
-                    //Email: formData.email,
+                    email: userData.email,
+                    userType: userData.type
                     //Password: formData.password
                 })
             })

@@ -17,7 +17,8 @@ import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 import { getUser, isAuthorized } from './utils/userUtil';
 import MatchCard from './components/MatchCard/MatchCard';
-
+import About from './Pages/About';
+import Contact from './Pages/Contact';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
@@ -76,7 +77,7 @@ const App = () => {
   }, [data]);
 
   if (isLoadingFingerprint || isLoadingUser) {
-    return <Loading/>;
+    return <Loading/>
   } else {
     return (
       <div className="min-vh-100" style={{
@@ -89,6 +90,8 @@ const App = () => {
               <Route index path="/user" element={<UserProfile/>}/>
               <Route index path="/home" element={<HomeScreen/>}/>
               <Route index path="/editProfile" element={ <EditProfile/> }/>
+              <Route index path="/about" element={<About/>}/>
+              <Route index path="/contact" element={<Contact/>}/>
               <Route index path="/signin" element={<SignInScreen/>}/>
               <Route index path="/" element={<Welcome/>}/>
               <Route index path="/myCard" element={<MyCardScreen/>}/>

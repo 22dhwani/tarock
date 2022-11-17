@@ -9,7 +9,7 @@ import HomeScreen from './components/homeScreen/HomeScreen';
 import MyCardScreen from './components/cardScreen/MyCardScreen';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/cardScreen/ShareScreen';
-import CardsScreen from './components/cardScreen/CardsScreen';
+import CardDeck from './pages/CardDeck';
 import EditProfile from './components/profileScreen/EditProfile';
 import Loading from './components/common/Loading';
 import { useContext, useEffect, useState } from "react";
@@ -17,8 +17,8 @@ import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 import { getUser, isAuthorized } from './utils/userUtil';
 import MatchCard from './components/MatchCard/MatchCard';
-import About from './Pages/About';
-import Contact from './Pages/Contact';
+import About from './pages/About';
+import Contact from './pages/Contact';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
@@ -97,7 +97,7 @@ const App = () => {
               <Route index path="/myCard" element={<MyCardScreen/>}/>
               <Route index path="/chart" element={<RadarChart/>}/>
               <Route index path="/share/:userId" element={<ShareScreen/>}/>
-              <Route index path="/cards" element={<CardsScreen/>}/>
+              <Route index path="/cards" element={<CardDeck/>}/>
               <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/>
             </Routes>
           </Router>

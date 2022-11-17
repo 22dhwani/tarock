@@ -1,7 +1,7 @@
-import express from 'express';
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 import crypto from 'crypto';
+import express from 'express';
 
 const router = express.Router();
 
@@ -12,12 +12,13 @@ passport.use(new GoogleStrategy({
     scope: [ 'email', 'profile' ],
     store: true // to store state data
   }, function verify(accessToken, refreshToken, profile, cb) {
-    const user = {
-      email: profile._json.email,
-      name: profile.displayName
-    };
-    cb(null, user);
-  }));
+      const user = {
+        email: profile._json.email,
+        name: profile.displayName
+      };
+      cb(null, user);
+    })
+);
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -124,7 +125,6 @@ router.post('/logout', function(req, res, next) {
       if (err) { return next(err); }
       res.json({message: "signed out"});
     });
-  });
-
+});
 
 export default router;

@@ -1,8 +1,8 @@
-import User from '../models/user';
+import User from '../models/user.js';
 import crypto from 'crypto';
 
 function create(req, res) {
-    const user = new User({
+    const user = new User.User({
         id: req.body.userId,
         name: req.body.name,
         gender: req.body.gender,
@@ -51,7 +51,7 @@ function query(req, res) {
 };
 
 function update(req, res) {
-    const user = new User({
+    const user = new User.User({
         id: req.body.userId,
         name: req.body.name,
         gender: req.body.gender,

@@ -1,4 +1,4 @@
-import credential from '../controllers/credential';
+import credential from '../controllers/credential.js';
 import express from 'express';
 
 export default function(app) {

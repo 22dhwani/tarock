@@ -1,7 +1,5 @@
-import { Router } from 'express';
-import { card } from '../controllers/card';
-
-
+import express from 'express';
+import card from '../controllers/card.js';
 
 export default function(app) {
     const router = express.Router();

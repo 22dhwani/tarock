@@ -1,4 +1,4 @@
-import Match from '../models/match';
+import Match from '../models/match.js';
 
 function create(req, res) {
     if (req.body.origUserId === req.body.matchedUserId) {

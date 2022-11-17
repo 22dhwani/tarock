@@ -1,18 +1,13 @@
-import sql from "./db.js";
+import sql from "../../config/db.js";
 
 const Assessment = function(assessment) {
     this.content = assessment.content;
 }
 
-Assessment.getAllByGroupId = (groupId, cb) => {
-    sql.query("SELECT content FROM question WHERE group_id = ?;", [groupId], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function getAllByGroupId(groupId) {
+
+    const data = await sql.query("SELECT content FROM question WHERE group_id = ?;", [groupId]);
+    return data;
 }
 
-export default Assessment;
+export default { Assessment, getAllByGroupId };

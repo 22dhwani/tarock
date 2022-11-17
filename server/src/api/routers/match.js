@@ -1,4 +1,4 @@
-import match from '../controllers/match';
+import match from '../controllers/match.js';
 import express from 'express';
 
 export default function(app) {

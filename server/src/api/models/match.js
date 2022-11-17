@@ -1,11 +1,11 @@
-import sql from "./db.js";
+import sql from "../../config/db.js";
 
 const Match = function(match) {
     this.origUserId = match.origUserId;
     this.matchedUserId = match.matchedUserId;
 }
 
-Match.query = (id, cb) => {
+async function query(id, cb) {
     sql.query("SELECT * FROM user_match WHERE orig_user_id = ? OR matched_user_id = ?;", [id, id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -16,7 +16,7 @@ Match.query = (id, cb) => {
     });
 };
 
-Match.create = (match, cb) => {
+async function create(match, cb) {
     sql.query("SELECT * FROM user_match WHERE orig_user_id = ? AND matched_user_id = ? OR orig_user_id = ? AND matched_user_id = ? LIMIT 1;", [match.origUserId, match.matchedUserId, match.matchedUserId, match.origUserId], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -36,4 +36,4 @@ Match.create = (match, cb) => {
     });
 }
 
-export default Match;
+export default { Match, query, create} ;

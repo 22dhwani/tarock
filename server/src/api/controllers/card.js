@@ -1,10 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import User from '../models/user';
-import Result from '../models/result';
-import Match from '../models/match';
+import User from '../models/user.js';
+import Result from '../models/result.js';
+import Match from '../models/match.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../static/personality_code_definition.json')));
+const dir = dirname(fileURLToPath(import.meta.url));
+const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../static/personality_code_definition.json')));
 
 function getByType(req, res) {
     res.send(data[req.params.type]);
@@ -48,4 +51,4 @@ function getByUser(req, res) {
     });
 }
 
-export default { getByType, getByUser };
+export default { getByType, getByUser, dir };

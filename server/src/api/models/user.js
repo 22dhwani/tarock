@@ -1,4 +1,4 @@
-import sql from "./db.js";
+import sql from "../../config/db.js";
 
 const User = function(user) {
     this.id = user.id;
@@ -9,7 +9,7 @@ const User = function(user) {
     this.dob = user.dob;
 }
 
-User.create = (user, cb) => {
+async function create(user, cb) {
     sql.query("INSERT INTO tmp_user (name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?);", [user.name, user.gender, user.avatarIndex, user.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -20,7 +20,7 @@ User.create = (user, cb) => {
     });
 }
 
-User.query = (id, cb) => {
+async function query(id, cb) {
     sql.query("SELECT * FROM tmp_user WHERE internal_user_id = ?;", [id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -31,7 +31,7 @@ User.query = (id, cb) => {
     });
 }
 
-User.update = (user, cb) => {
+async function update(user, cb) {
     sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -42,7 +42,7 @@ User.update = (user, cb) => {
     });
 }
 
-User.queryRealId = (id, cb) => {
+async function queryRealId(id, cb) {
     sql.query("SELECT * FROM tmp_user_to_real_user WHERE tmp_user_id = ? order by created_at desc limit 1;", [id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -53,7 +53,7 @@ User.queryRealId = (id, cb) => {
     });
 }
 
-User.queryTmpId = (id, cb) => {
+async function queryTmpId(id, cb) {
     sql.query("SELECT * FROM tmp_user_to_real_user WHERE real_user_id = ? order by created_at desc limit 1;", [id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -64,7 +64,7 @@ User.queryTmpId = (id, cb) => {
     });
 }
 
-User.createTmpIdToRealId = (tmpId, realId, cb) => {
+async function createTmpIdToRealId(tmpId, realId, cb) {
     sql.query("INSERT INTO tmp_user_to_real_user (tmp_user_id, real_user_id) VALUES (?, ?);", [tmpId, realId], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -75,7 +75,7 @@ User.createTmpIdToRealId = (tmpId, realId, cb) => {
     });
 }
 
-User.createReal = (user, cb) => {
+async function createReal (user, cb) {
     sql.query("INSERT INTO user (email, name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?, ?);", [user.email, user.name, user.gender, user.avatarIndex, user.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -86,7 +86,7 @@ User.createReal = (user, cb) => {
     });
 }
 
-User.queryReal = (id, cb) => {
+async function queryReal(id, cb) {
     sql.query("SELECT * FROM user WHERE internal_user_id = ?;", [id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -97,7 +97,7 @@ User.queryReal = (id, cb) => {
     });
 }
 
-User.updateReal = (user, cb) => {
+async function updateReal(user, cb) {
     sql.query("UPDATE user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -108,4 +108,4 @@ User.updateReal = (user, cb) => {
     });
 }
 
-export default User;
+export default { User, create, query, update, queryRealId, queryTmpId, createTmpIdToRealId, createReal, queryReal,updateReal };

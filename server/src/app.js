@@ -1,20 +1,21 @@
-import * as dotenv from 'dotenv';
+import './config/config.js';
 import express from 'express';
 import cors from "cors";
 import path from 'path';
 import passport from 'passport';
 import session from 'express-session';
-import authRouter from './auth/auth';
 // import csurf from 'csurf';
-import assessment from './api/routers/assessment';
-import credential from './api/routers/credential';
-import user from './api/routers/user';
-import result from './api/routers/result';
-import card from './api/routers/card';
-import match from './api/routers/match';
+import router from './auth/auth.js';
+import assessment from './api/routers/assessment.js';
+import credential from './api/routers/credential.js';
+import user from './api/routers/user.js';
+import result from './api/routers/result.js';
+import card from './api/routers/card.js';
+import match from './api/routers/match.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 
-dotenv.config();
 const app = express();
 const corsOptions = {
   origin: process.env['CLIENT_BASE_URL'],
@@ -36,7 +37,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+const dir = dirname(fileURLToPath(import.meta.url));
+app.set('views', path.join(dir, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
@@ -76,7 +78,7 @@ card(app);
 match(app);
 
 
-app.use('/', authRouter);
+app.use('/', router);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

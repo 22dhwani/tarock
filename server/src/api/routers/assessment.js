@@ -1,5 +1,5 @@
 import express from 'express';
-import assessment from '../controllers/assessment'
+import assessment from '../controllers/assessment.js'
 
 export default function(app) {
     const router = express.Router();

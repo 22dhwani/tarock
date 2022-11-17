@@ -1,14 +1,15 @@
 import Assessment from "../models/assessment.js";
 
-function getAll(req, res) {
+async function getAll(req, res) {
     if (req.query.groupId) {
-        Assessment.getAllByGroupId(req.query.groupId, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        try {
+            const data = await Assessment.getAllByGroupId(req.query.groupId);
+            
+            console.log(data);
+            res.send(data[0]);
+        } catch (error) {
+            res.status(400).send(err);
+        }
     } else {
         res.status(400).json({error_msg: "Group ID is required!"});
     }

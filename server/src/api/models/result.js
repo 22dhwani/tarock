@@ -1,7 +1,8 @@
-import result from "../routers/result.js";
-import sql from "./db.js";
+import sql from "../../config/db.js";
 
-const defaultAssessmentGroupId = 1;
+
+
+
 const Result = function(result) {
     this.userId = result.userId;
     this.assessmentGroupId = result.assessmentGroupId;
@@ -10,7 +11,9 @@ const Result = function(result) {
     this.code = result.code;
 }
 
-Result.getByUser = (userId, cb) => {
+const defaultAssessmentGroupId = 1;
+
+export function getByUser(userId, cb) {
     sql.query("SELECT * FROM user_assessment_result WHERE internal_user_id = ? AND question_group_id = ? order by created_at desc limit 1;", [userId, defaultAssessmentGroupId], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -21,7 +24,7 @@ Result.getByUser = (userId, cb) => {
     });
 }
 
-Result.create = (result, cb) => {
+export function create(result, cb) {
     sql.query("INSERT INTO user_assessment_result (internal_user_id, question_group_id, num_of_questions, duration, result_code) VALUES (?, ?, ?, ?, ?);", [result.userId, result.assessmentGroupId, result.numOfQuestions, result.duration, result.code], (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -32,4 +35,4 @@ Result.create = (result, cb) => {
     });
 }
 
-export default Result;
+export default { Result, getByUser, create };

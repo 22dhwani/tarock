@@ -71,7 +71,7 @@ const CardsScreen = () => {
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Header />
             <TabSwitch tab={tab} setTab={setTab} />
-            <Container >
+            <Container className='flex-grow-1 overflow-auto' >
                 <Row lg={2} className='my-3'>
                     {tab ?
                         <>

@@ -1,4 +1,4 @@
-import sql from "../../config/db.js";
+import {con as sql} from "../../config/db.js";
 
 
 

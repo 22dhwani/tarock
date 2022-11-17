@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Assessment from "./components/Assessment/Assessment";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UserProfile from './components/profileScreen/UserProfile';
+import UserProfile from './pages/UserProfile';
 import Welcome from './components/welcomeScreen/Welcome';
 import SignInScreen from './components/signInScreen/SignInScreen';
 import HomeScreen from './components/homeScreen/HomeScreen';

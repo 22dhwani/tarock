@@ -5,23 +5,25 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 import buttonBack from '../../assets/buttonBack.svg';
 import { Link } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
 function EditProfile() {
     const { userData } = useContext(GlobalContext);
     const placeholders = ["First and Last Name", "mm/dd/yyyy", ""];
-    const formItems = ['Name', 'DOB', 'Gender']
+    const formItems = ['Name', 'DOB']
     const [formData, setFormData] = useState(
         {
-            Name: "",
+            name: "",
             DOB: "",
-            Gender: "",
+            gender: "",
         }
     )
+    console.log(formData.gender);
     async function handleSubmit() {
 
         let avatarIndex;
-        if (formData.Gender === "Male") {
+        if (formData.gender === "Male") {
             avatarIndex = 1;
-        } else if (formData.Gender === "Female") {
+        } else if (formData.gender === "Female") {
             avatarIndex = 0;
         }
         try {
@@ -33,9 +35,9 @@ function EditProfile() {
                 },
 
                 body: JSON.stringify({
-                    name: formData.Name,
+                    name: formData.name,
                     avatarIndex: avatarIndex,
-                    gender: formData.Gender,
+                    gender: formData.gender,
                     dob: formData.DOB,
                     userId: userData.id,
                     email: userData.email,
@@ -87,12 +89,36 @@ function EditProfile() {
                 <Form >
                     {formItems.map((item, index) => {
                         return (
-                            <Form.Group className="mb-3" >
+                            <Form.Group className="mb-3" key={index}>
                                 <Form.Label>{item}</Form.Label>
                                 <Form.Control type="text" placeholder={placeholders[index]} name={item} onChange={handleChange} />
                             </Form.Group>
                         )
                     })}
+                    {/* dropdown for gender */}
+                    <Dropdown>
+                        <Dropdown.Toggle style={
+                            {
+                                backgroundColor: '#49304D',
+                                color: '#FFFFFF',
+                            }}>
+                            Gender
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                           {/* Gender = Male, Female */}
+                            {['Male','Female','Prefer not to say'].map((item, index) => {
+                                return (
+                                    <Dropdown.Item key={index} onClick={() => setFormData(prevFormData => {
+                                        return {
+                                            ...prevFormData,
+                                            gender: item
+                                        }
+                                    })}>{item}</Dropdown.Item>
+                                )
+                            })}
+                        </Dropdown.Menu>
+                    </Dropdown>
+
 
                 </Form>
             </div>
@@ -100,11 +126,10 @@ function EditProfile() {
                 onClick={handleSubmit}
                 className='w-100 rounded-5 py-3 mt-auto mb-5' style={{
                     backgroundColor: '#49304D',
-                    color: '#999999',
+                    color: '#FFFFFF',
                     fontSize: '16px',
                     lineHeight: '14px',
                     border: 'none',
-
                 }}>Save</button>
         </Container>
     )

@@ -7,13 +7,12 @@ import Footer from '../common/Footer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import add from '../../assets/add.svg';
 import './card.css';
+import AddCardButton from '../common/AddCardButton';
 import TabSwitch from '../TabSwitch/TabSwitch';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
-    console.log(matchedCardsData);
     const navigate = useNavigate();
     const search = useLocation().search;
     const matchUserId = new URLSearchParams(search).get('match');
@@ -82,26 +81,8 @@ const CardsScreen = () => {
                                     quadra='Alpha'
                                     avatar_index={userData.avatarIndex} />
                             </Col>
-                            <Col className='justify-content-center d-flex flex-column align-items-center'>
-                                <div className='button1' style={{
-                                    borderRadius: '10px',
-                                    width: '9rem',
-                                    height: '14.375rem',
-                                    border: '1px dashed  #49304D',
-                                    display: 'flex',
-                                }}>
-                                    <img src={add} alt='add' className='m-auto' />
-                                </div>
-                                <div className='col-12 d-flex justify-content-center mt-2' style={{
-                                    fontFamily: 'Montserrat',
-                                    fontStyle: 'normal',
-                                    fontWeight: '700',
-                                    fontSize: '14px',
-                                    lineHeight: '14px',
-                                    color: '#49304D',
-                                }}>
-                                    Add a new card
-                                </div>
+                            <Col className='d-flex align-items-center justify-content-center'>
+                                <AddCardButton />
                             </Col>
                         </>
                         : <>
@@ -118,6 +99,9 @@ const CardsScreen = () => {
                                             </Col>
                                         })
                                     }
+                                    <Col className='d-flex align-items-center justify-content-center' onClick={shareCard}>
+                                        <AddCardButton />
+                                    </Col>
                                 </>
                                     :
                                     <div className='d-flex flex-column align-items-center w-100 gap-3' style={{

@@ -10,7 +10,7 @@ import MyCardScreen from './components/cardScreen/MyCardScreen';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/cardScreen/ShareScreen';
 import CardDeck from './pages/CardDeck';
-import EditProfile from './components/profileScreen/EditProfile';
+import EditProfile from './pages/EditProfile';
 import Loading from './components/common/Loading';
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';

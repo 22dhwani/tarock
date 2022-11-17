@@ -1,9 +1,9 @@
 import Form from "react-bootstrap/Form";
-import { GlobalContext } from '../../context';
+import { GlobalContext } from '../context';
 import { useContext } from 'react';
 import { useState } from "react";
 import { Container } from "react-bootstrap";
-import buttonBack from '../../assets/buttonBack.svg';
+import buttonBack from '../assets/buttonBack.svg';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 function EditProfile() {
@@ -17,9 +17,7 @@ function EditProfile() {
             gender: "",
         }
     )
-    console.log(formData.gender);
     async function handleSubmit() {
-
         let avatarIndex;
         if (formData.gender === "Male") {
             avatarIndex = 1;
@@ -102,7 +100,7 @@ function EditProfile() {
                                 backgroundColor: '#49304D',
                                 color: '#FFFFFF',
                             }}>
-                            Gender
+                            {formData.gender === "" ? "Gender" : formData.gender}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                            {/* Gender = Male, Female */}
@@ -118,10 +116,9 @@ function EditProfile() {
                             })}
                         </Dropdown.Menu>
                     </Dropdown>
-
-
                 </Form>
             </div>
+
             <button
                 onClick={handleSubmit}
                 className='w-100 rounded-5 py-3 mt-auto mb-5' style={{

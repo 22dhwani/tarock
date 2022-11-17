@@ -5,9 +5,9 @@
      "personality_socionic_code": "ENTp",
      "personality_socionic_quadra": "Alpha",
      "description": {
-       "STRENGTHS": "Creative; Funny; Adaptable; Inventive; Brainstormer",
-       "WEAKNESS": "Losing focus due to new stimuli; Annoyed by illogical ideas; Intolerant of the mundane; Enjoys a bit of chaos",
-       "SUPERPOWER": "Sharp and alert",
+       "STRENGTHS": "Creative; Funny; Adaptable; Inventive; Brainstormer; Sharp-witted",
+       "WEAKNESS": "Losing focus to new stimuli; Annoyed by illogical ideas; Intolerant of the mundane; Enjoys a bit of chaos",
+       "SUPERPOWER": "Wit",
        "BLINDSPOT": "Attention to details",
        "IDEALENVIRONMENT": "Happy alone and with others, but not with overly emotional"
      },
@@ -28,7 +28,7 @@
      "personality_socionic_code": "INTj",
      "personality_socionic_quadra": "Alpha",
      "description": {
-       "STRENGTHS": "Determination; Systematic; Cautious; Intellectual; Future-focused",
+       "STRENGTHS": "Driven; Systematic; Cautious; Intellectual; Future-focused; Studious",
        "WEAKNESS": "Holds high expectations; Stubborn; Over-analyze; Accepting and readjusting",
        "SUPERPOWER": "Logical analysis",
        "BLINDSPOT": "Overlooking the present",
@@ -51,8 +51,8 @@
      "personality_socionic_code": "ESFj",
      "personality_socionic_quadra": "Alpha",
      "description": {
-       "STRENGTHS": "Warm; Responsible; Attentive; Outgoing; Optimistic",
-       "WEAKNESS": "Struggles to improvise or innovate; Rigid; Vulnerable to criticism; Reliant on approval",
+       "STRENGTHS": "Warm; Responsible; Attentive; Outgoing; Optimistic; Adventurous",
+       "WEAKNESS": "Struggles to improvise; Rigid; Vulnerable to criticism; Reliant on approval",
        "SUPERPOWER": "Helping",
        "BLINDSPOT": "Logical inconsistency",
        "IDEALENVIRONMENT": "Collaborative, people-oriented environment (50/50, grows bored alone but appreciates downtime)"
@@ -74,8 +74,8 @@
      "personality_socionic_code": "ISFp",
      "personality_socionic_quadra": "Alpha",
      "description": {
-       "STRENGTHS": "Practical; Diplomatic; Generous; Attentive; Sense of measure",
-       "WEAKNESS": "Takes criticism to heart (May withdraw/not engage); Rigid structure; Can be highly sensitive; Most likely will see things as a competition; Does not like being in a hurry",
+       "STRENGTHS": "Practical; Diplomatic; Charming; Attentive; Sense of measure; Coordinated",
+       "WEAKNESS": "Takes criticism to heart; Rigid structure; Can be highly sensitive; Most likely will see things as a competition; Does not like being in a hurry",
        "SUPERPOWER": "Tuned sensory details",
        "BLINDSPOT": "Organization/preparation",
        "IDEALENVIRONMENT": "Alone or small group"
@@ -97,7 +97,7 @@
       "personality_socionic_code":"ESTp",
       "personality_socionic_quadra":"Beta",
       "description":{
-          "STRENGTHS": "Observant; Fun; Charming; Practical; Take-Charge",
+          "STRENGTHS": "Observant; Composed; Quick; Charming; Practical; Take-Charge",
           "WEAKNESS": "Distrustful; Short-sighted; Cold callouts; Grasping actions behind emotions; Not having a plan",
           "SUPERPOWER": "“Street smarts”",
           "BLINDSPOT": "Impulsive",
@@ -120,8 +120,8 @@
       "personality_socionic_code":"ISTj",
       "personality_socionic_quadra":"Beta",
       "description":{
-          "STRENGTHS": "Accurate; Methodical; Literal; Loyal; Meticulous",
-          "WEAKNESS": "Instructions must be clear; Pride suffers if another person’s capable; Prone to generalize; Stubborn with goals; Dislikes anything vague",
+          "STRENGTHS": "Accurate; Methodical; Literal; Loyal; Meticulous; Patient",
+          "WEAKNESS": "Instructions must be clear; Pride suffers if another person’s capable; Prone to generalize; Stubborn with goals; Dislikes vagueness",
           "SUPERPOWER": "Reliable",
           "BLINDSPOT": "Overly critical",
           "IDEALENVIRONMENT": "Alone or small group"
@@ -143,9 +143,9 @@
       "personality_socionic_code":"ENFj",
       "personality_socionic_quadra":"Beta",
       "description":{
-          "STRENGTHS": "Affectionate; Emotional Intelligence; Reading rooms; Talkative; Charisma",
-          "WEAKNESS": "If buttons pushed, can be mean; Tends to take feedback critically / cares about others thoughts; Very self aware (capable of manipulation); Overcommitting to plans",
-          "SUPERPOWER": "Spirit",
+          "STRENGTHS": "Affectionate; Harmonious; Emotionally-aware; Curious; Charismatic; Artistic",
+          "WEAKNESS": "If buttons pushed, can be mean; Takes feedback critically; Cares deeply about others thoughts; Very self aware (capable of manipulation); Overcommitting to plans",
+          "SUPERPOWER": "Spirit & EQ",
           "BLINDSPOT": "Overgeneralizing",
           "IDEALENVIRONMENT": "Enjoys company, but needs own space"
       },
@@ -166,7 +166,7 @@
       "personality_socionic_code":"INFp",
       "personality_socionic_quadra":"Beta",
       "description":{
-          "STRENGTHS": "Vision; Caring; Creative; Flexible; Humor",
+          "STRENGTHS": "Visionary; Cheerful; Creative; Flexible; Caring; Humorous",
           "WEAKNESS": "Taking initiative; Dwells on past victories and defeats; Dreaming rather than doing; Mood swings",
           "SUPERPOWER": "Detecting phoniness",
           "BLINDSPOT": "Attention to detail",
@@ -189,7 +189,7 @@
       "personality_socionic_code":"ENTj",
       "personality_socionic_quadra":"Gamma",
       "description":{
-          "STRENGTHS": "Persuasive; Bold; High-Energy; Calculated; Integrity",
+          "STRENGTHS": "Rational; Persuasive; Bold; High-Energy; Calculated; Candid",
           "WEAKNESS": "Indecisive; Impatient; Does not sugar coat; Bites off more than can chew; Comes across unemotional with directness",
           "SUPERPOWER": "Perseverance",
           "BLINDSPOT": "Attention to detail",
@@ -212,7 +212,7 @@
       "personality_socionic_code":"INTp",
       "personality_socionic_quadra":"Gamma",
       "description":{
-          "STRENGTHS": "Witty; Rational; Analytical; Curiosity; Memory",
+          "STRENGTHS": "Witty; Matter-of-fact; Nonchalant; Analytical; Strategic; Reminiscent",
           "WEAKNESS": "Struggles with organization; Anxious risk-aversion; Staying in-the-moment; Keeping a structure; Poor time management (procrastination)",
           "SUPERPOWER": "Knowledge",
           "BLINDSPOT": "lack of openness",
@@ -235,11 +235,11 @@
       "personality_socionic_code":"ESFp",
       "personality_socionic_quadra":"Gamma",
       "description":{
-          "STRENGTHS": "Fun; Free-Spirited; Easy-Going; Entertaining; Confidence",
+          "STRENGTHS": "Enthusiastic; Free-Spirited; Easy-Going; Charming; Present-focused; Confident",
           "WEAKNESS": "Denies unpleasant truths; Long-term planning; Bores easily; Avoids all conflicts",
           "SUPERPOWER": "Instant rapport",
           "BLINDSPOT": "Quick judgement",
-          "IDEALENVIRONMENT": "Small group with talkative crew"
+          "IDEALENVIRONMENT": "Small gathering with chatty group"
       },
       "dimensional_values":{
          "LOGIC":0.15,
@@ -258,11 +258,11 @@
       "personality_socionic_code":"ISFj",
       "personality_socionic_quadra":"Gamma",
       "description":{
-          "STRENGTHS": "Accommodating; Decisive; Observant; Efficient; People-person",
+          "STRENGTHS": "Precise; Stoic; Decisive; Observant; Dexterous; People-person",
           "WEAKNESS": "If offended, openly expresses opinion; Not fan of surprises or “winging it”; Too kind and humble; Does not like to wait",
           "SUPERPOWER": "Loyalty",
           "BLINDSPOT": "Biased judgement",
-          "IDEALENVIRONMENT": "Small group or alone with storage space"
+          "IDEALENVIRONMENT": "Small group or alone (with storage space!)"
       },
       "dimensional_values":{
          "LOGIC":0.15,
@@ -281,8 +281,8 @@
       "personality_socionic_code":"ESTj",
       "personality_socionic_quadra":"Delta",
       "description":{
-          "STRENGTHS": "Diligence; Proactive; Endurance; Energetic; Resourceful",
-          "WEAKNESS": "Close-mindedness; Not comfortable with ambiguity; Tendency to be rigid and inflexible; Seeing others point of view",
+          "STRENGTHS": "Diligent; Proactive; Courageous; Energetic; Resourceful; Rational",
+          "WEAKNESS": "Over-managing; Not comfortable with ambiguity; Tendency to be rigid and inflexible; Seeing others point of view",
           "SUPERPOWER": "Planning",
           "BLINDSPOT": "Close-minded",
           "IDEALENVIRONMENT": "Enjoys extra company"
@@ -304,8 +304,8 @@
       "personality_socionic_code":"ISTp",
       "personality_socionic_quadra":"Delta",
       "description":{
-          "STRENGTHS": "Concise; Hands-on; Resourceful; Down-to-earth; Inventive",
-          "WEAKNESS": "Intolerant of intrusive and imposing people; Doesn’t share inner worries with people; Cannot relax, in a constant rush; Bores easily",
+          "STRENGTHS": "Concise; Hands-on; Resourceful; Down-to-earth; Inventive; Empathetic",
+          "WEAKNESS": "Intolerant of intrusive or imposing people; Holds onto inner worries; Cannot relax (in a constant rush); Bores easily",
           "SUPERPOWER": "X-ray sensing",
           "BLINDSPOT": "Foresight",
           "IDEALENVIRONMENT": "Alone with full independence"
@@ -327,8 +327,8 @@
       "personality_socionic_code":"ENFp",
       "personality_socionic_quadra":"Delta",
       "description":{
-          "STRENGTHS": "People-person; Visionary; Insightful; Adaptable; Energetic",
-          "WEAKNESS": "Fears of letting others down; Procrastination; Impulsive; Accepting criticism; Sensitive",
+          "STRENGTHS": "Perceptive; People-person; Witty; Adaptable; Energetic; Observant",
+          "WEAKNESS": "Fears of letting others down; Procrastinating; Impulsive; Accepting criticism; Sensitive",
           "SUPERPOWER": "Intuition",
           "BLINDSPOT": "Blinded by optimism",
           "IDEALENVIRONMENT": "Discussing ideas, drained when alone for long periods"
@@ -350,8 +350,8 @@
       "personality_socionic_code":"INFj",
       "personality_socionic_quadra":"Delta",
       "description":{
-          "STRENGTHS": "Problem solving; Visionary; Perfectionistic; Value-Driven; Conscientious",
-          "WEAKNESS": "Self-isolating; Self-critical; Uncomfortable when things aren't clearly defined; Quickly offended by criticism",
+          "STRENGTHS": "Persistent; Visionary; Perfectionistic; Values-Driven; Conscientious; Attentive",
+          "WEAKNESS": "Self-isolating; Self-critical; Uncomfortable if things aren't clearly defined; Quickly offended by criticism",
           "SUPERPOWER": "Empathy",
           "BLINDSPOT": "Always looking ahead",
           "IDEALENVIRONMENT": "Alone, gets distracted by people"

@@ -45,7 +45,7 @@ const Assessment = ({ assessmentGroupId }) => {
 
     function onBtnClick(index) {
         const content = assessment.data[assessment.index].content;
-        const jsonObj = JSON.parse(content);
+        const jsonObj = content;
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {

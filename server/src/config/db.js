@@ -1,5 +1,4 @@
-import mysql from "mysql";
-import mysqlp from "mysql2/promise";
+import mysql from "mysql2/promise";
 
 
 const con = mysql.createPool({
@@ -9,11 +8,4 @@ const con = mysql.createPool({
   database: "tarock"
 });
 
-const conp = mysqlp.createPool({
-  host: "34.173.211.162",
-  user: process.env['DB_USER'],
-  password: process.env['DB_PWD'],
-  database: "tarock"
-});
-
-export {con, conp};
+export default con;

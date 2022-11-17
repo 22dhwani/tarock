@@ -2,7 +2,7 @@ import React from "react";
 import './Question.css';
 
 const Question = ({ data }) => {
-    const jsonObj = JSON.parse(data);
+    const jsonObj = data;
     const options = jsonObj.answers.map((option, index) =>(
         <li key={index}>
             { option.content }

@@ -13,42 +13,32 @@ function getByType(req, res) {
     res.send(data[req.params.type]);
 }
 
-function getByUser(req, res) {
+async function getByUser(req, res) {
     const result = [];
     let id = req.params.id;
     // Find tmp user id if exists
     // TODO: optimize this to avoid tmp ID query.
     // TODO: optimize to avoid nested query.
-    User.queryTmpId(id, (err, data) => {
-        if (err) {
-            res.status(400).send(err);
-        } else  {
-            if (data.length > 0) {
-                id = data[0].tmp_user_id;
-            }
-            Result.getByUser(id, (err, data) => {
-                if (err) {
-                    res.status(400).send(err);
-                } else {
-                    result.push({
-                        type: 'Tarock',
-                        data: data
-                    });
-                    Match.query(req.params.id, (err, data) => {
-                        if (err) {
-                            res.status(400).send(err);
-                        } else {
-                            result.push({
-                                type: 'Match',
-                                data: data
-                            });
-                            res.send(result);
-                        }
-                    });
-                }
-            });
+
+    try {
+        const data = await User.queryTmpId(id);
+        if (data.length > 0) {
+            id = data[0].tmp_user_id;
         }
-    });
+        const data2 = await Result.getByUser(id);
+        result.push({
+            type: 'Tarock',
+            data: data2
+        }); 
+        const data3 = await Match.query(req.params.id);
+        result.push({
+            type: 'Match',
+            data: data3
+        });
+        res.send(result);
+    } catch (error) {
+        res.status(400).send(error);
+    }
 }
 
 export default { getByType, getByUser, dir };

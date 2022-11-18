@@ -2,6 +2,7 @@ import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 import crypto from 'crypto';
 import express from 'express';
+import User from '../api/models/user.js' ;
 
 const router = express.Router();
 

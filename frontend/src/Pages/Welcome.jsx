@@ -1,9 +1,9 @@
 import Container from 'react-bootstrap/Container';
-import logo from '../../assets/tarockLogo.svg';
-import patternTarock from '../../assets/patternTarock.svg';
+import logo from '../assets/tarockLogo.svg';
+import patternTarock from '../assets/patternTarock.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useContext, useEffect } from 'react';
-import { GlobalContext } from '../../context';
+import { GlobalContext } from '../context';
 
 function Welcome() {
     const { userData } = useContext(GlobalContext);

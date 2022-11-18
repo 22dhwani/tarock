@@ -9,15 +9,13 @@ import weakness from '../../assets/myCard/weakness.svg';
 import superpower from '../../assets/myCard/superpower.svg';
 import blindSpot from '../../assets/myCard/blindSpot.svg';
 import idealEnv from '../../assets/myCard/idealEnv.svg';
-import Header from '../common/Header';
+import Header from '../Header/Header';
 import share from '../../assets/myCard/share.svg';
-import { Link } from 'react-router-dom';
-import Swipper from '../Swipper';
+import Swipper from '../Swipper/Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import deck from '../../assets/footer/cards.svg';
 import match from '../../assets/myCard/match.svg';
 import { useNavigate } from 'react-router-dom';
-import './card.css';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
     const navigate = useNavigate();

@@ -1,4 +1,5 @@
-import add from '../../assets/add.svg';
+import add from '../../../assets/add.svg';
+import './AddCardButton.css';
 function AddCardButton() {
     return (
         <div>

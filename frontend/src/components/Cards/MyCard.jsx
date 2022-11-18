@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import Loading from '../common/Loading';
+import Loading from '../Loading/Loading';
 import CommonCard from './CommonCard';
 import { useNavigate } from "react-router-dom";
 

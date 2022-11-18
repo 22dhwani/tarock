@@ -1,4 +1,4 @@
-import InfoContainer from "../components/common/InfoContainer";
+import InfoContainer from "../components/InfoContainer/InfoContainer";
 import {contact} from '../contentData/contact'
 
 function Contact(){

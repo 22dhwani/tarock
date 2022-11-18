@@ -6,7 +6,7 @@ import female from '../../assets/avatarFemale.svg'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function AvatarCreation(props) {
+function AvatarSelection(props) {
 
     return (
         <div className="min-vh-100 " >
@@ -42,4 +42,4 @@ function AvatarCreation(props) {
     )
 }
 
-export default AvatarCreation;
+export default AvatarSelection;

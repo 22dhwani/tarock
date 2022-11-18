@@ -1,21 +1,22 @@
 import Container from 'react-bootstrap/Container';
-import Header from '../common/Header';
+import Header from '../components/Header/Header';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import GenCard from '../TarockCards/GenCard';
-import Footer from '../common/Footer';
+import GenCard from '../components/Cards/GenCard';
+import Footer from '../components/Footer/Footer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
-import { GlobalContext } from '../../context';
-import './card.css';
-import AddCardButton from '../common/AddCardButton';
-import TabSwitch from '../TabSwitch/TabSwitch';
+import { GlobalContext } from '../context';
+import AddCardButton from '../components/Buttons/AddCardButton/AddCardButton';
+import TabSwitch from '../components/TabSwitch/TabSwitch';
+import Popup from '../components/PopUp/PopUp';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
     const navigate = useNavigate();
     const search = useLocation().search;
     const matchUserId = new URLSearchParams(search).get('match');
+    const [showNotification, setShowNotification] = useState(false);
 
     const onMyCardClick = () => {
         navigate('/myCard');
@@ -69,6 +70,7 @@ const CardsScreen = () => {
     }
     return (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
+            <Popup show={showNotification} setShow={setShowNotification}/>
             <Header />
             <TabSwitch tab={tab} setTab={setTab} />
             <Container className='flex-grow-1 overflow-auto' >
@@ -81,7 +83,7 @@ const CardsScreen = () => {
                                     quadra='Alpha'
                                     avatar_index={userData.avatarIndex} />
                             </Col>
-                            <Col className='d-flex align-items-center justify-content-center'>
+                            <Col className='d-flex align-items-center justify-content-center' onClick={()=>setShowNotification(true)}>
                                 <AddCardButton />
                             </Col>
                         </>

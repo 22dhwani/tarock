@@ -1,14 +1,14 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import FeedCard from "../feedItems/FeedCard";
-import testImageFeed from '../../assets/testImageFeed.svg'
+import FeedCard from "../components/Feed/FeedCard";
+import testImageFeed from '../assets/testImageFeed.svg'
 import { Link } from "react-router-dom";
-import Header from '../common/Header';
-import Footer from '../common/Footer';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 import { useContext, useEffect } from 'react';
-import { GlobalContext } from '../../context';
+import { GlobalContext } from '../context';
 
-function HomeScreen() {
+function Home() {
     // Get data from api and store in state
     const feedData = [
         {
@@ -40,4 +40,4 @@ function HomeScreen() {
     )
 }
 
-export default HomeScreen;
+export default Home;

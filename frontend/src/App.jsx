@@ -2,23 +2,23 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Assessment from "./components/Assessment/Assessment";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UserProfile from './components/profileScreen/UserProfile';
-import Welcome from './components/welcomeScreen/Welcome';
-import SignInScreen from './components/signInScreen/SignInScreen';
-import HomeScreen from './components/homeScreen/HomeScreen';
-import MyCardScreen from './components/cardScreen/MyCardScreen';
+import UserProfile from './pages/UserProfile';
+import Welcome from './pages/Welcome';
+import SignInScreen from './pages/SignIn';
+import HomeScreen from './pages/Home';
+import MyCardScreen from './components/Cards/MyCard';
 import RadarChart from './components/Charts/RadarChart';
-import ShareScreen from './components/cardScreen/ShareScreen';
-import CardsScreen from './components/cardScreen/CardsScreen';
-import EditProfile from './components/profileScreen/EditProfile';
-import Loading from './components/common/Loading';
+import ShareScreen from './components/Cards/ShareCard';
+import CardDeck from './pages/CardDeck';
+import EditProfile from './pages/EditProfile';
+import Loading from './components/Loading/Loading';
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 import { getUser, isAuthorized } from './utils/userUtil';
-import MatchCard from './components/MatchCard/MatchCard';
-import About from './Pages/About';
-import Contact from './Pages/Contact';
+import MatchCard from './components/Cards/MatchCard';
+import About from './pages/About';
+import Contact from './pages/Contact';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
@@ -97,7 +97,7 @@ const App = () => {
               <Route index path="/myCard" element={<MyCardScreen/>}/>
               <Route index path="/chart" element={<RadarChart/>}/>
               <Route index path="/share/:userId" element={<ShareScreen/>}/>
-              <Route index path="/cards" element={<CardsScreen/>}/>
+              <Route index path="/cards" element={<CardDeck/>}/>
               <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/>
             </Routes>
           </Router>

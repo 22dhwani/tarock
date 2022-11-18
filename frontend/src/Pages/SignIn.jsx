@@ -1,15 +1,15 @@
 import Container from 'react-bootstrap/Container';
-import logo from '../../assets/tarockLogo.svg'
-import pattern from '../../assets/patternTarock.svg'
-import googleSignin from '../../assets/signin/btn_google_signin_dark_normal_web@2x.png';
+import logo from '../assets/tarockLogo.svg'
+import pattern from '../assets/patternTarock.svg'
+import googleSignin from '../assets/signin/btn_google_signin_dark_normal_web@2x.png';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import AvatarCreation from '../avatarCreationScreen.jsx/AvatarCreation';
-import { GlobalContext } from '../../context';
+import AvatarCreation from '../components/AvatarSelection/AvatarSelection';
+import { GlobalContext } from '../context';
 import { useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 
-function SignInScreen(props) {
+function SignIn(props) {
     const [user, setUser] = useState('');
     const [avatar, setAvatar] = useState(false);
     const [avatarPage, setAvatarPage] = useState(true);
@@ -234,4 +234,4 @@ function SignInScreen(props) {
     )
 }
 
-export default SignInScreen;
+export default SignIn;

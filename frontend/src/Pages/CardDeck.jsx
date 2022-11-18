@@ -1,15 +1,15 @@
 import Container from 'react-bootstrap/Container';
-import Header from '../components/common/Header';
+import Header from '../components/Header/Header';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import GenCard from '../components/TarockCards/GenCard';
-import Footer from '../components/common/Footer';
+import GenCard from '../components/Cards/GenCard';
+import Footer from '../components/Footer/Footer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../context';
-import AddCardButton from '../components/common/AddCardButton/AddCardButton';
+import AddCardButton from '../components/Buttons/AddCardButton/AddCardButton';
 import TabSwitch from '../components/TabSwitch/TabSwitch';
-import Popup from '../components/common/PopUp/PopUp';
+import Popup from '../components/PopUp/PopUp';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);

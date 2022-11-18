@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Question from '../Question/Question';
 import './Assessment.css';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import Header from '../common/Header';
+import Header from '../Header/Header';
 import btn1 from '../../assets/btn_1.svg';
 import btn2 from '../../assets/btn_2.svg';
 import RadarChart from "../Charts/RadarChart";

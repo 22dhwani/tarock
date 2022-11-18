@@ -1,22 +1,31 @@
 import Container from 'react-bootstrap/Container';
-import avatar from '../assets/avatar.svg'
-import ButtonGroup from '../components/profileScreen/ButtonGroup';
+import maleAvatar from '../assets/avatarMale.svg'
+import femaleAvatar from '../assets/avatarFemale.svg'
+import ButtonGroup from '../components/Buttons/ButtonGroup/ButtonGroup';
 import Row from 'react-bootstrap/Row';
-import Footer from '../components/common/Footer';
-import Header from '../components/common/Header';
+import Footer from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
 import { GlobalContext } from '../context';
 import { useContext } from 'react';
-import {profileOptions} from '../contentData/profileOptions';
+import { profileOptions } from '../contentData/profileOptions';
 
 function UserProfile() {
-    const { userData, setUserData } = useContext(GlobalContext);
+    const { userData } = useContext(GlobalContext);
     return (
-        <Container className='d-flex flex-column min-vh-100 ' style={{ backgroundColor: '#FBF2DC'}}>
-            <Header/>
-            <Row>
-                <img src={avatar} alt="avatar" height='120px' width='120px' style={{
-                    margin: '0 auto',
-                }} />
+        <Container className='d-flex flex-column min-vh-100 ' style={{ backgroundColor: '#FBF2DC' }}>
+            <Header />
+            <Row className='m-auto'>
+                <div style={{
+                    width: 'fit-content'
+                }}>
+                    <img src={userData.avatarIndex ? maleAvatar : femaleAvatar} alt="avatar" height='120px' width='120px' style={{
+                        margin: '0 auto',
+                        backgroundColor: '#FFFFFF',
+                        borderRadius: '50%',
+                        padding: '10px'
+
+                    }} />
+                </div>
             </Row>
 
             <div style={{
@@ -40,9 +49,9 @@ function UserProfile() {
                     }}>
                         {buttonItem.map((button, index) => {
                             return (
-                                <ButtonGroup 
-                                key={index} 
-                                buttons={[button]}
+                                <ButtonGroup
+                                    key={index}
+                                    buttons={[button]}
                                 />
                             )
                         })}
@@ -50,7 +59,7 @@ function UserProfile() {
                 )
             }
             )}
-            <Footer isMeActive={true}/>
+            <Footer isMeActive={true} />
         </Container>
     );
 }

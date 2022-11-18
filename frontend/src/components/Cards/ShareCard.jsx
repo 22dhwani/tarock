@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import Loading from '../common/Loading';
+import Loading from '../Loading/Loading';
 import CommonCard from './CommonCard';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';

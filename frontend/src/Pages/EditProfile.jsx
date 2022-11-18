@@ -2,30 +2,38 @@ import Form from "react-bootstrap/Form";
 import { GlobalContext } from '../context';
 import { useContext } from 'react';
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import buttonBack from '../assets/buttonBack.svg';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useNavigate } from "react-router-dom";
+import './styles.css'
 function EditProfile() {
-    const { userData } = useContext(GlobalContext);
-    const placeholders = ["First and Last Name", "mm/dd/yyyy", ""];
+    const { userData, setUserData } = useContext(GlobalContext);
+    //console.log(userData)
+    const placeholders = ["First and Last Name", "mm/dd/yyyy"];
     const formItems = ['Name', 'DOB']
+    const [avatarIndex, setAvatarIndex] = useState(0);
     const [formData, setFormData] = useState(
         {
             name: "",
-            DOB: "",
+            dob: "",
             gender: "",
         }
     )
+    // console.log(formData)
+    const navigate = useNavigate();
+
     async function handleSubmit() {
-        let avatarIndex;
+
         if (formData.gender === "Male") {
-            avatarIndex = 1;
+            setAvatarIndex(1);
         } else if (formData.gender === "Female") {
-            avatarIndex = 0;
+            setAvatarIndex(0);
         }
         try {
-            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
+
+            await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -36,16 +44,23 @@ function EditProfile() {
                     name: formData.name,
                     avatarIndex: avatarIndex,
                     gender: formData.gender,
-                    dob: formData.DOB,
+                    dob: formData.dob,
                     userId: userData.id,
                     email: userData.email,
                     userType: userData.type
                     //Password: formData.password
                 })
-            })
-            const data = await response.json();
-            console.log(data);
-            navigate("/user")
+            }).then(response => response.json())
+                .then(data => {
+                    setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        name: formData.name,
+                        gender: formData.gender,
+                        avatarIndex: avatarIndex,
+                        //dob: formData.dob, //not saved
+                    }));
+                    navigate('/user');
+                })
         } catch (error) {
             console.log(error);
         }
@@ -62,12 +77,10 @@ function EditProfile() {
     }
     return (
         <Container className='d-flex flex-column min-vh-100 p-5 ' style={{ backgroundColor: '#FBF2DC' }}>
-
             <div className="d-flex align-items-center gap-5 " style={{
                 position: 'relative',
                 right: '40px',
-                display: 'flex',
-
+                display: 'flex'
             }}>
                 {/* use conditional rendering for faster switch */}
                 <Link to='/user'>
@@ -89,7 +102,7 @@ function EditProfile() {
                         return (
                             <Form.Group className="mb-3" key={index}>
                                 <Form.Label>{item}</Form.Label>
-                                <Form.Control type="text" placeholder={placeholders[index]} name={item} onChange={handleChange} />
+                                <Form.Control type="text" placeholder={placeholders[index]} name={item.toLowerCase()} onChange={handleChange} />
                             </Form.Group>
                         )
                     })}
@@ -103,22 +116,22 @@ function EditProfile() {
                             {formData.gender === "" ? "Gender" : formData.gender}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                           {/* Gender = Male, Female */}
-                            {['Male','Female','Prefer not to say'].map((item, index) => {
+                            {['Male', 'Female'].map((item, index) => {
                                 return (
                                     <Dropdown.Item key={index} onClick={() => setFormData(prevFormData => {
                                         return {
                                             ...prevFormData,
                                             gender: item
                                         }
-                                    })}>{item}</Dropdown.Item>
+                                    })}>
+                                        {item}
+                                    </Dropdown.Item>
                                 )
                             })}
                         </Dropdown.Menu>
                     </Dropdown>
                 </Form>
             </div>
-
             <button
                 onClick={handleSubmit}
                 className='w-100 rounded-5 py-3 mt-auto mb-5' style={{
@@ -127,7 +140,9 @@ function EditProfile() {
                     fontSize: '16px',
                     lineHeight: '14px',
                     border: 'none',
-                }}>Save</button>
+                }}>
+                Save
+            </button>
         </Container>
     )
 }

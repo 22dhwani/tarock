@@ -1,15 +1,14 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import Loading from '../common/Loading';
+import Loading from '../Loading/Loading/';
 import patternWaves from '../../assets/patternWaves.svg';
 import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
-import logo from '../../assets/tarockLogo.svg';
 import RadarChart from '../Charts/RadarChart';
 import { useNavigate, useParams } from "react-router-dom";
 import share from '../../assets/myCard/share.svg';
 import deck from '../../assets/footer/cards.svg';
-import Header from '../common/Header';
+import Header from '../Header/Header';
 function MatchCard() {
     const { matchedUserId } = useParams();
     const { userData } = useContext(GlobalContext);

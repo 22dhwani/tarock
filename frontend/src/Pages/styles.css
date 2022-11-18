@@ -1,0 +1,5 @@
+/* EditProfile Gender dropdown
+Warning: this style will effect all buttons inside a dropdown */
+.dropdown>button {
+    border: none;
+}

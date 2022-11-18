@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-
+import './Swipper.css'
 function Swipper(props) {
   const [index, setIndex] = useState(0);
 

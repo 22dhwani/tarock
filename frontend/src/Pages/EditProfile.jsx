@@ -13,7 +13,7 @@ function EditProfile() {
     //console.log(userData)
     const placeholders = ["First and Last Name", "mm/dd/yyyy"];
     const formItems = ['Name', 'DOB']
-    const [avatarIndex, setAvatarIndex] = useState(0);
+   let avatarIndex = 0;
     const [formData, setFormData] = useState(
         {
             name: "",
@@ -26,11 +26,12 @@ function EditProfile() {
 
     async function handleSubmit() {
 
-        if (formData.gender === "Male") {
-            setAvatarIndex(1);
-        } else if (formData.gender === "Female") {
-            setAvatarIndex(0);
+        if (formData.gender == "Male") {
+            avatarIndex = 1;
+        } else if (formData.gender == "Female") {
+            avatarIndex = 0;
         }
+        console.log(avatarIndex)
         try {
 
             await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {

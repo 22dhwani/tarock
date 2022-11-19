@@ -1,6 +1,8 @@
-const sql = require("./db.js");
+import sql from "../../config/db.js";
 
-const defaultAssessmentGroupId = 1;
+
+
+
 const Result = function(result) {
     this.userId = result.userId;
     this.assessmentGroupId = result.assessmentGroupId;
@@ -9,26 +11,16 @@ const Result = function(result) {
     this.code = result.code;
 }
 
-Result.getByUser = (userId, cb) => {
-    sql.query("SELECT * FROM user_assessment_result WHERE internal_user_id = ? AND question_group_id = ? order by created_at desc limit 1;", [userId, defaultAssessmentGroupId], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+const defaultAssessmentGroupId = 1;
+
+async function getByUser(userId) {
+    const data = await sql.query("SELECT * FROM user_assessment_result WHERE internal_user_id = ? AND question_group_id = ? order by created_at desc limit 1;", [userId, defaultAssessmentGroupId]);
+    return data[0];
 }
 
-Result.create = (result, cb) => {
-    sql.query("INSERT INTO user_assessment_result (internal_user_id, question_group_id, num_of_questions, duration, result_code) VALUES (?, ?, ?, ?, ?);", [result.userId, result.assessmentGroupId, result.numOfQuestions, result.duration, result.code], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function create(result) {
+    const data =  await sql.query("INSERT INTO user_assessment_result (internal_user_id, question_group_id, num_of_questions, duration, result_code) VALUES (?, ?, ?, ?, ?);", [result.userId, result.assessmentGroupId, result.numOfQuestions, result.duration, result.code]);
+    return data[0];
 }
 
-module.exports = Result;
+export default { Result, getByUser, create };

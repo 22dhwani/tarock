@@ -1,39 +1,22 @@
-const sql = require("./db.js");
+import sql from "../../config/db.js";
 
 const Match = function(match) {
     this.origUserId = match.origUserId;
     this.matchedUserId = match.matchedUserId;
 }
 
-Match.query = (id, cb) => {
-    sql.query("SELECT * FROM user_match WHERE orig_user_id = ? OR matched_user_id = ?;", [id, id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function query(id) {
+    const data = await sql.query("SELECT * FROM user_match WHERE orig_user_id = ? OR matched_user_id = ?;", [id, id]);
+    return data[0];
 };
 
-Match.create = (match, cb) => {
-    sql.query("SELECT * FROM user_match WHERE orig_user_id = ? AND matched_user_id = ? OR orig_user_id = ? AND matched_user_id = ? LIMIT 1;", [match.origUserId, match.matchedUserId, match.matchedUserId, match.origUserId], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-        } else if (res.length > 0) {
-            cb({ err: "Duplicated pair." }, null);
-        } else {
-            sql.query("INSERT INTO user_match (orig_user_id, matched_user_id) VALUES (?, ?);", [match.origUserId, match.matchedUserId], (err, res) => {
-                if (err) {
-                    console.log("error: ", err);
-                    cb(err, null);
-                    return;
-                }
-                cb(null, res);
-            });
-        }
-    });
+async function create(match) {
+    const data = await sql.query("SELECT * FROM user_match WHERE orig_user_id = ? AND matched_user_id = ? OR orig_user_id = ? AND matched_user_id = ? LIMIT 1;", [match.origUserId, match.matchedUserId, match.matchedUserId, match.origUserId]);
+    if (data[0].length > 0) {
+        throw new Error("Duplicated pair.");
+    }
+    const data2 = await sql.query("INSERT INTO user_match (orig_user_id, matched_user_id) VALUES (?, ?);", [match.origUserId, match.matchedUserId]);
+    return data2[0];
 }
 
-module.exports = Match;
+export default { Match, query, create} ;

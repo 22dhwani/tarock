@@ -1,7 +1,7 @@
-module.exports = app => {
-    const user = require('../controllers/user');
-    const express = require('express');
+import user from '../controllers/user.js';
+import express from 'express';
 
+export default function(app) {
     const router = express.Router();
 
     router.get("/status/:id", user.getUserStatus);

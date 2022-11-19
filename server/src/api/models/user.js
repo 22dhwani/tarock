@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+import sql from "../../config/db.js";
 
 const User = function(user) {
     this.id = user.id;
@@ -9,103 +9,49 @@ const User = function(user) {
     this.dob = user.dob;
 }
 
-User.create = (user, cb) => {
-    sql.query("INSERT INTO tmp_user (name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?);", [user.name, user.gender, user.avatarIndex, user.id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function create(user) {
+    const data = await sql.query("INSERT INTO tmp_user (name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?);", [user.name, user.gender, user.avatarIndex, user.id]);
+    return data[0];
 }
 
-User.query = (id, cb) => {
-    sql.query("SELECT * FROM tmp_user WHERE internal_user_id = ?;", [id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function query(id) {
+    const data = await sql.query("SELECT * FROM tmp_user WHERE internal_user_id = ?;", [id]);
+    return data[0];
 }
 
-User.update = (user, cb) => {
-    sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function update(user) {
+    const data = await sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id]);
+    return data[0];
 }
 
-User.queryRealId = (id, cb) => {
-    sql.query("SELECT * FROM tmp_user_to_real_user WHERE tmp_user_id = ? order by created_at desc limit 1;", [id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function queryRealId(id) {
+    const data = await sql.query("SELECT * FROM tmp_user_to_real_user WHERE tmp_user_id = ? order by created_at desc limit 1;", [id]);
+    return data[0];
 }
 
-User.queryTmpId = (id, cb) => {
-    sql.query("SELECT * FROM tmp_user_to_real_user WHERE real_user_id = ? order by created_at desc limit 1;", [id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function queryTmpId(id) {
+    const data = await sql.query("SELECT * FROM tmp_user_to_real_user WHERE real_user_id = ? order by created_at desc limit 1;", [id]);
+    return data[0];
 }
 
-User.createTmpIdToRealId = (tmpId, realId, cb) => {
-    sql.query("INSERT INTO tmp_user_to_real_user (tmp_user_id, real_user_id) VALUES (?, ?);", [tmpId, realId], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function createTmpIdToRealId(tmpId, realId) {
+    const data = await sql.query("INSERT INTO tmp_user_to_real_user (tmp_user_id, real_user_id) VALUES (?, ?);", [tmpId, realId]);
+    return data[0];
 }
 
-User.createReal = (user, cb) => {
-    sql.query("INSERT INTO user (email, name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?, ?);", [user.email, user.name, user.gender, user.avatarIndex, user.id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function createReal (user) {
+    const data = await sql.query("INSERT INTO user (email, name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?, ?);", [user.email, user.name, user.gender, user.avatarIndex, user.id]);
+    return data[0];
 }
 
-User.queryReal = (id, cb) => {
-    sql.query("SELECT * FROM user WHERE internal_user_id = ?;", [id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function queryReal(id) {
+    const data = await sql.query("SELECT * FROM user WHERE internal_user_id = ?;", [id]);
+    return data[0];
 }
 
-User.updateReal = (user, cb) => {
-    sql.query("UPDATE user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            cb(err, null);
-            return;
-        }
-        cb(null, res);
-    });
+async function updateReal(user) {
+    const data = await sql.query("UPDATE user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id]);
+    return data[0];
 }
 
-module.exports = User;
+export default { User, create, query, update, queryRealId, queryTmpId, createTmpIdToRealId, createReal, queryReal,updateReal };

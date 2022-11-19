@@ -1,7 +1,7 @@
-const Result = require("../models/result.js");
-const User = require("../models/user.js");
+import Result from "../models/result.js";
+import User from "../models/user.js";
 
-getSocionicsResult = (answers) => {
+function getSocionicsResult(answers) {
     const count = {
         J: 0,
         P: 0,
@@ -54,44 +54,41 @@ getSocionicsResult = (answers) => {
     return result;
 }
 
-exports.getByUser = (req, res) => {
+async function getByUser(req, res) {
     if (req.query.userId) {
         let id = req.query.userId;
         // Find tmp user id if exists
-        User.queryTmpId(id, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else  {
-                if (data.length > 0) {
-                    id = data[0].tmp_user_id;
-                }
-                Result.getByUser(id, (err, data) => {
-                    if (err) {
-                        res.status(400).send(err);
-                    } else {
-                        res.send(data);
-                    }
-                });
+        try {
+            const data = await User.queryTmpId(id);
+            if (data.length > 0 ) {
+                id = data[0].tmp_user_id;
             }
-        });
+            const data2 = await Result.getByUser(id);
+            res.send(data2);
+        } catch (error) {
+            res.status(400).send(error);
+        }
+
     } else {
         res.status(400).send({error_msg: "User ID is required!"});
     }
 };
 
-exports.create = (req, res) => {
-    const result = new Result({
+async function create(req, res) {
+    const result = new Result.Result({
         userId: req.body.userId,
         assessmentGroupId: req.body.assessmentGroupId,
         numOfQuestions: req.body.answers.length,
         duration: req.body.duration,
         code: getSocionicsResult(req.body.answers)
     });
-    Result.create(result, (err, data) => {
-        if (err) {
-            res.status(400).send(err);
-        } else {
-            res.send(data);
-        }
-    });
+
+    try {
+        const data = await Result.create(result);
+        res.send(data);
+    } catch (error) {
+        res.status(400).send(error);
+    }
 };
+
+export default { getSocionicsResult, getByUser, create};

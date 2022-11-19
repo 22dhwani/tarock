@@ -1,49 +1,44 @@
-const fs = require('fs');
-const path = require('path');
-const User = require('../models/user');
-const Result = require('../models/result');
-const Match = require('../models/match');
+import fs from 'fs';
+import path from 'path';
+import User from '../models/user.js';
+import Result from '../models/result.js';
+import Match from '../models/match.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../static/personality_code_definition.json')));
+const dir = dirname(fileURLToPath(import.meta.url));
+const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../static/personality_code_definition.json')));
 
-exports.getByType = (req, res) => {
+function getByType(req, res) {
     res.send(data[req.params.type]);
 }
 
-exports.getByUser = (req, res) => {
+async function getByUser(req, res) {
     const result = [];
     let id = req.params.id;
     // Find tmp user id if exists
     // TODO: optimize this to avoid tmp ID query.
     // TODO: optimize to avoid nested query.
-    User.queryTmpId(id, (err, data) => {
-        if (err) {
-            res.status(400).send(err);
-        } else  {
-            if (data.length > 0) {
-                id = data[0].tmp_user_id;
-            }
-            Result.getByUser(id, (err, data) => {
-                if (err) {
-                    res.status(400).send(err);
-                } else {
-                    result.push({
-                        type: 'Tarock',
-                        data: data
-                    });
-                    Match.query(req.params.id, (err, data) => {
-                        if (err) {
-                            res.status(400).send(err);
-                        } else {
-                            result.push({
-                                type: 'Match',
-                                data: data
-                            });
-                            res.send(result);
-                        }
-                    });
-                }
-            });
+
+    try {
+        const data = await User.queryTmpId(id);
+        if (data.length > 0) {
+            id = data[0].tmp_user_id;
         }
-    });
+        const data2 = await Result.getByUser(id);
+        result.push({
+            type: 'Tarock',
+            data: data2
+        }); 
+        const data3 = await Match.query(req.params.id);
+        result.push({
+            type: 'Match',
+            data: data3
+        });
+        res.send(result);
+    } catch (error) {
+        res.status(400).send(error);
+    }
 }
+
+export default { getByType, getByUser, dir };

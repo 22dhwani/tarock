@@ -1,0 +1,34 @@
+#parent{
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+#radarchart{
+    width: 200px;
+    height: 500px;
+}
+.chart-container{
+    position: relative;
+     width:200vw
+}
+
+/* unvisited link */
+a:link {
+    color: #CAE8E2;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #CAE8E2;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: #CAE8E2;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #CAE8E2;
+  }

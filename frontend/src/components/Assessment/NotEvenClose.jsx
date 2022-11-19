@@ -104,9 +104,7 @@ const Assessment = ({ assessmentGroupId }) => {
             </Row>
             <div className="card-container w-75 mx-auto overflow-auto">
                 <div className="card">
-                    {
-                        assessment.index < assessment.data.length && <Question data={assessment.data[assessment.index].content} />
-                    }
+                 sdfsdf
                 </div>
             </div>
             <Row className="w-75 mx-auto">

@@ -1,6 +1,4 @@
-import React from "react";
 import './Question.css';
-
 const Question = ({ data }) => {
     const jsonObj = JSON.parse(data);
     const options = jsonObj.answers.map((option, index) =>(

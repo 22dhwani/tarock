@@ -1,0 +1,234 @@
+import Container from 'react-bootstrap/Container';
+import male from '../../assets/avatarMale.svg';
+import female from '../../assets/avatarFemale.svg';
+import RadarChart from '../Charts/RadarChart';
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
+import strengths from '../../assets/myCard/strengths.svg';
+import weakness from '../../assets/myCard/weakness.svg';
+import superpower from '../../assets/myCard/superpower.svg';
+import blindSpot from '../../assets/myCard/blindSpot.svg';
+import idealEnv from '../../assets/myCard/idealEnv.svg';
+import Header from '../Header/Header';
+import share from '../../assets/myCard/share.svg';
+import Swipper from '../Swipper/Swipper';
+import patternTarockBlue from '../../assets/patternTarockBlue.svg';
+import deck from '../../assets/footer/cards.svg';
+import match from '../../assets/myCard/match.svg';
+import { useNavigate } from 'react-router-dom';
+import './Cards.module.css'
+
+const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
+    const navigate = useNavigate();
+
+    
+    const radarView = <div>
+        <div style={{
+            fontFamily: 'Montserrat',
+            fontStyle: 'normal',
+            fontWeight: '700',
+            fontSize: '18px',
+            lineHeight: '22px',
+            color: '#FFFFFF',
+            alignItems: 'center',
+            textAlign: 'center'
+        }}
+            className='py-3'>
+            {user.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
+        </div>
+        <div 
+        // style={{
+        //     background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
+        //     backdropFilter: 'blur(10px)',
+        //     borderRadius: '8px',
+        //     height: onMatchClick ? '360px' : '300px',
+        //     margin: '0 auto',
+        //     width: '100%',
+        // }} 
+        >
+            <div  className='justify-content-center'>
+                <div id="radarchart" className='mt-3 mx-auto'>
+                    <RadarChart height={100} userData={cardData.dimensional_values} enableLabels={true} />
+                </div>
+      
+            </div>
+            {
+                onMatchClick &&
+                <div className='d-flex justify-content-center mt-2' onClick={() => onMatchClick()}>
+                    <img src={match} alt='match'/>
+                </div>
+            }
+        </div>
+    </div>
+
+    const descriptionView = <>
+
+        {showDescription &&
+            <div className='py-0' style={{
+                fontFamily: 'Montserrat',
+                fontStyle: 'normal',
+                fontWeight: '700',
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: '#49304D'
+            }}>
+                <Row className='mx-auto px-3 py-1' style={{
+                    background: '#FFFFFF',
+                    borderRadius: '8px 8px 0px 0px',
+                    fontSize: '18px',
+                    lineHeight: '24px'
+                }}>
+                    <Col className='col-4 d-flex justify-content-center align-self-center'>
+                        <img src={strengths} alt='strengths' />
+                    </Col>
+                    <Col>
+                        {
+                            cardData.description.STRENGTHS.split(";").map((strength, index) => {
+                                return (
+                                    <div key={index}>
+                                        {strength.trim()}
+                                    </div>
+                                );
+                            })
+                        }
+                    </Col>
+                </Row>
+                <Row className='mx-auto px-3 py-1' style={{
+                    background: '#FFFFFF',
+                    opacity: '0.9',
+                    backdropFilter: 'blur(10px)',
+                    fontFamily: 'Montserrat',
+                    fontStyle: 'normal',
+                    fontWeight: '700',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    color: '#49304D',
+                }}>
+                    <Col className='col-4 d-flex justify-content-center align-self-center'>
+                        <img src={weakness} alt='weakness' />
+                    </Col>
+                    <Col>
+                        {
+                            cardData.description.WEAKNESS.split(";").map((strength, index) => {
+                                return (
+                                    <div key={index}>
+                                        {strength.trim()}
+                                    </div>
+                                );
+                            })
+                        }
+                    </Col>
+                </Row>
+                <Row className='mx-auto px-3 py-1' style={{
+                    background: '#FFFFFF',
+                    opacity: '0.8',
+                    backdropFilter: 'blur(10px)'
+                }}>
+                    <Col className='col-4 d-flex justify-content-center align-self-center'>
+                        <img src={superpower} alt='superpower' />
+                    </Col>
+                    <Col>
+                        <div>
+                            {cardData.description.SUPERPOWER}
+                        </div>
+                    </Col>
+                </Row>
+                <Row className='mx-auto p-3' style={{
+                    background: '#FFFFFF',
+                    opacity: '0.7',
+                    backdropFilter: 'blur(10px)'
+                }}>
+                    <Col className='col-4 d-flex justify-content-center align-self-center'>
+                        <img src={blindSpot} alt='blind spot' />
+                    </Col>
+                    <Col>
+                        <div>
+                            {cardData.description.BLINDSPOT}
+                        </div>
+                    </Col>
+                </Row>
+                <Row className='mx-auto pz-3 py-1' style={{
+                    background: '#FFFFFF',
+                    opacity: '0.6',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '0px 0px 8px 8px'
+                }}>
+                    <Col className='col-4 d-flex justify-content-center align-self-center'>
+                        <img src={idealEnv} alt='ideal environment' />
+                    </Col>
+                    <Col>
+                        <div>
+                            {cardData.description.IDEALENVIRONMENT}
+                        </div>
+                    </Col>
+                </Row>
+            </div>
+        }
+    </>
+
+    return (
+        <Container className='d-flex flex-column min-vh-100' >
+            <div style={{
+                backgroundImage: `url(${patternTarockBlue})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+            }}>
+                <Header />
+                <div className='d-flex justify-content-center'>
+                    {
+                        (user.avatar_index == 1) &&
+                        <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
+                    }
+                    {
+                        (user.avatar_index == 0) &&
+                        <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
+                    }
+                </div>
+                <div style={{
+                    fontFamily: 'Montserrat',
+                    fontStyle: 'normal',
+                    fontWeight: '400',
+                    fontSize: '14px',
+                    lineHeight: '28px',
+                    color: '#FFFFFF',
+                    alignItems: 'center',
+                    textAlign: 'center'
+                }}>
+                    {user.name} is
+                </div>
+            </div>
+
+
+            {/* <Container className="overflow-auto d-flex flex-column m-auto" style={{
+
+            }}> */}
+                {showShare ? <Swipper data={ [radarView, descriptionView]} /> : radarView}
+                <div style={{
+                    display:showShare?'block':'none'
+                }} className='mt-5'>
+                    <a href='/test' style={{ display: 'flex',justifyContent: 'center',fontSize:'12px'}}>Not even close?</a>
+                </div>
+                {
+                    showShare &&
+                    <div className='d-flex justify-content-center gap-2 mt-5'>
+                        <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${user.internal_user_id}`)} />
+                        <div style={{
+                            borderRadius: '8px',
+                            backgroundColor: 'rgb(48, 105, 179)',
+                            color: 'white',
+                            cursor:'pointer',
+                            padding: '10px',
+                        }}
+                        onClick={() => navigate('/cards')}
+                        >
+                            <img src={deck} alt='deck' width='40px' />
+                        </div>
+                    </div>
+                }
+            {/* </Container> */}
+                {children}
+        </Container>
+    );
+}
+
+export default CommonCard;

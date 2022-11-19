@@ -16,9 +16,11 @@ import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import deck from '../../assets/footer/cards.svg';
 import match from '../../assets/myCard/match.svg';
 import { useNavigate } from 'react-router-dom';
+import './Cards.module.css'
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
     const navigate = useNavigate();
+
     
     const radarView = <div>
         <div style={{
@@ -34,22 +36,25 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             className='py-3'>
             {user.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
         </div>
-        <div style={{
-            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '8px',
-            height: onMatchClick ? '360px' : '300px',
-            margin: '0 auto',
-            width: '100%',
-        }} >
-            <div className='d-flex justify-content-center'>
-                <div className='mx-auto'>
-                    <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
+        <div 
+        // style={{
+        //     background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
+        //     backdropFilter: 'blur(10px)',
+        //     borderRadius: '8px',
+        //     height: onMatchClick ? '360px' : '300px',
+        //     margin: '0 auto',
+        //     width: '100%',
+        // }} 
+        >
+            <div  className='justify-content-center'>
+                <div id="radarchart" className='mt-3 mx-auto'>
+                    <RadarChart height={100} userData={cardData.dimensional_values} enableLabels={true} />
                 </div>
+      
             </div>
             {
                 onMatchClick &&
-                <div className='d-flex justify-content-center' onClick={() => onMatchClick()}>
+                <div className='d-flex justify-content-center mt-2' onClick={() => onMatchClick()}>
                     <img src={match} alt='match'/>
                 </div>
             }
@@ -189,7 +194,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     alignItems: 'center',
                     textAlign: 'center'
                 }}>
-                    Let's meet {user.name}
+                    {user.name} is
                 </div>
             </div>
 
@@ -198,6 +203,11 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
 
             }}> */}
                 {showShare ? <Swipper data={ [radarView, descriptionView]} /> : radarView}
+                <div style={{
+                    display:showShare?'block':'none'
+                }} className='mt-5'>
+                    <a href='/test' style={{ display: 'flex',justifyContent: 'center',fontSize:'12px'}}>Not even close?</a>
+                </div>
                 {
                     showShare &&
                     <div className='d-flex justify-content-center gap-2 mt-5'>

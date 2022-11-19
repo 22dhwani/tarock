@@ -21,14 +21,14 @@ ChartJS.register(
 
 function RadarChart({ userData, matchData, enableLabels }) {
     const data = {
-        labels: ['LOGIC', 'STRUCTURE', ['EXTRA-', 'VERSION'], 'EXECUTION', 'EMOTION', 'OPENNESS', ['INTRO-', 'VERSION'], 'STRATEGY'],
+        labels: ['Logic', 'Structure', ['Extra-', 'version'], 'Execution', 'Emotion', 'Openness', ['Intro-', 'Version'], 'Strategy'],
         datasets: [
             {
                 label: 'EII',
                 data: [userData.LOGIC, userData.STRUCTURE, userData.EXTRAVERSION, userData.EXECUTION,
                     userData.EMOTION, userData.OPENNESS, userData.INTROVERSION, userData.STRATEGY],
-                backgroundColor: 'rgba(255,192,203, 0.3)',
-                borderColor: '#EC6348',
+                backgroundColor: 'rgba(255,192,203, 0.1)',
+                borderColor: 'white',
                 borderWidth: 3
             },
             {
@@ -55,6 +55,7 @@ function RadarChart({ userData, matchData, enableLabels }) {
                 tension: 0.2
             }  
         },
+        maintainAspectRatio :false,
         scales: {
             r: {
                 min: -0.3, // Make radar points away from zero point.
@@ -63,10 +64,11 @@ function RadarChart({ userData, matchData, enableLabels }) {
                 },
                 pointLabels: {
                     display: enableLabels,
-                    color: '#49304D',
+                    color: 'white',
                     font: {
-                      size: 12,
-                      weight: '700',
+                      size: 11,
+                      weight: '600',
+                      style:'Montserrat',
                     }
                 },
                 grid: {
@@ -77,7 +79,10 @@ function RadarChart({ userData, matchData, enableLabels }) {
     };
 
     return (
-        <Radar data={data} options={options} />
+        <div className="chart-container" >
+            <Radar  width={"250%"} height={"250%"}data={data} options={options} />
+        </div>
+        
     )
 }
 

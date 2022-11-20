@@ -1,8 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import FeedCard from "../components/Feed/FeedCard";
-import testImageFeed from '../assets/testImageFeed.svg'
-import { Link } from "react-router-dom";
+import Feeds from "../components/Feed/Feeds";
+import homeHeader from '../assets/header.svg'
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { useContext, useEffect } from 'react';
@@ -12,11 +11,12 @@ function Home() {
     // Get data from api and store in state
     const feedData = [
         {
-            title: 'Tarock Personality Test',
-            image: testImageFeed
-        },
+            header: homeHeader,
+          
+        }
     ]
     return (
+        <>
         <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FFFFFF' }}>
             <Header/>
             
@@ -25,18 +25,21 @@ function Home() {
                     return (
                         <Row key={index} className='pb-4'>
                             {/* add color:'black' to style prop if you want to change text color */}
-                            <Link to='/test' style={{textDecoration:'none'}}>
-                            <FeedCard
-                                title={item.title}
-                                image={item.image} />
-                            </Link>
+                           
+                            <Feeds
+                                header={item.header}
+                              />
+                    
                         </Row>
                     )
                 })}
             </Container>
+            
 
-            <Footer isTestActive={true}/>
+        <Footer isTestActive={true}/>
         </Container>
+        
+        </>
     )
 }
 

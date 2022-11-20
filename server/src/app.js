@@ -1,13 +1,22 @@
-require('dotenv').config();
+import './config/config.js';
+import express from 'express';
+import cors from "cors";
+import path from 'path';
+import passport from 'passport';
+import session from 'express-session';
+// import csurf from 'csurf';
+import router from './auth/auth.js';
+import assessment from './api/routers/assessment.js';
+import credential from './api/routers/credential.js';
+import user from './api/routers/user.js';
+import result from './api/routers/result.js';
+import card from './api/routers/card.js';
+import match from './api/routers/match.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const express = require('express');
+
 const app = express();
-const cors = require("cors");
-const path = require('path');
-const passport = require('passport');
-const session = require('express-session');
-// const csrf = require('csurf');
-
 const corsOptions = {
   origin: process.env['CLIENT_BASE_URL'],
   credentials: true // allow session cookie from browser to pass through
@@ -28,7 +37,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+const dir = dirname(fileURLToPath(import.meta.url));
+app.set('views', path.join(dir, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
@@ -60,15 +70,15 @@ app.get("/", (req, res) => {
   }
 });
 
-require("./api/routers/assessment")(app);
-require("./api/routers/credential")(app);
-require("./api/routers/user")(app);
-require("./api/routers/result")(app);
-require("./api/routers/card")(app);
-require("./api/routers/match")(app);
+assessment(app);
+credential(app);
+user(app);
+result(app);
+card(app);
+match(app);
 
-const authRouter = require('./auth/auth');
-app.use('/', authRouter);
+
+app.use('/', router);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

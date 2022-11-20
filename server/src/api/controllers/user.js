@@ -1,8 +1,8 @@
-const User = require('../models/user');
-const crypto = require('crypto');
+import User from '../models/user.js';
+import crypto from 'crypto';
 
-exports.create = (req, res) => {
-    const user = new User({
+async function create(req, res) {
+    const user = new User.User({
         id: req.body.userId,
         name: req.body.name,
         gender: req.body.gender,
@@ -12,46 +12,42 @@ exports.create = (req, res) => {
         user.email = req.body.email;
         const hash = crypto.createHash('md5').update(user.email).digest("hex");
         user.id = hash;
-        User.createReal(user, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(user);
-            }
-        });
+        try {
+            const data = await User.createReal(user);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send(error);
+        }
     } else {
-        User.create(user, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(user);
-            }
-        });
+        try {
+            const data = await User.create(user);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send(error);
+        }
     }
 };
 
-exports.query = (req, res) => {
+async function query(req, res) {
     if (req.query.userType === 'REAL') {
-        User.queryReal(req.params.id, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        try {
+            const data = await User.queryReal(req.params.id);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send(error);
+        }
     } else {
-        User.query(req.params.id, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        try {
+            const data = await User.query(req.params.id);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send(error);
+        }
     }
 };
 
-exports.update = (req, res) => {
-    const user = new User({
+async function update(req, res) {
+    const user = new User.User({
         id: req.body.userId,
         name: req.body.name,
         gender: req.body.gender,
@@ -59,58 +55,53 @@ exports.update = (req, res) => {
         dob: req.body.dob
     });
     if (req.body.userType === 'REAL') {
-        User.updateReal(user, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        try {
+            const data = await User.updateReal(user);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send(error);
+        }
     } else {
-        User.update(user, (err, data) => {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                res.send(data);
-            }
-        });
+        try {
+            const data = await User.update(user);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send(error);
+        }
     }
 };
 
-exports.getUserStatus = (req, res) => {
-    User.queryReal(req.params.id, (err, data) => {
-        if (err) {
-            res.status(400).send(err);
-        } else if (data.length > 0) {
+async function getUserStatus (req, res) {
+    
+    try {
+        const data = await User.queryReal(req.params.id);
+        if (data.length > 0) {
             res.send({ userType: 'REAL', id: data[0].internal_user_id });
         } else {
-            User.queryRealId(req.params.id, (err, data) => {
-                if (err) {
-                    res.status(400).send(err);
-                } else if (data.length > 0) {
-                    res.send({ userType: 'REAL', id: data[0].real_user_id });
+            const data2 = await User.queryRealId(req.params.id);
+            if (data2.length > 0) {
+                res.send({ userType: 'REAL', id: data2[0].real_user_id });
+            } else {   
+                const data3 = await User.query(req.params.id); 
+                if (data3.length > 0) {
+                    res.send({ userType: 'TMP', id: data3[0].internal_user_id });
                 } else {
-                    User.query(req.params.id, (err, data) => {
-                        if (err) {
-                            res.status(400).send(err);
-                        } else if (data.length > 0) {
-                            res.send({ userType: 'TMP', id: data[0].internal_user_id });
-                        } else {
-                            res.send({ userType: 'NEW', id: '' });
-                        }
-                    });
+                    res.send({ userType: 'NEW', id: '' });
                 }
-            });
-        }
-    });
+            }
+        } 
+    } catch (error) {
+        res.status(400).send(error);
+    }
 };
 
-exports.createTmpIdToRealId = (req, res) => {
-    User.createTmpIdToRealId(req.body.tmpId, req.body.realId, (err, data) => {
-        if (err) {
-            res.status(400).send(err);
-        } else {
-            res.send(data);
-        }
-    });
+async function createTmpIdToRealId (req, res) {
+    try {
+        const data = await User.createTmpIdToRealId(req.body.tmpId, req.body.realId);
+        res.send(data);
+    } catch (error) {
+        res.status(400).send(error);
+    }
 }
+
+export default { create, query, update, getUserStatus, createTmpIdToRealId};

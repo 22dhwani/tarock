@@ -3,6 +3,7 @@ import GoogleStrategy from 'passport-google-oauth20';
 import crypto from 'crypto';
 import express from 'express';
 import User from '../api/models/user.js' ;
+import Result from '../api/models/result.js';
 
 const router = express.Router();
 
@@ -15,7 +16,8 @@ passport.use(new GoogleStrategy({
   }, function verify(accessToken, refreshToken, profile, cb) {
       const user = {
         email: profile._json.email,
-        name: profile.displayName
+        name: profile.displayName,
+        id: crypto.createHash('md5').update(email).digest("hex")
       };
       cb(null, user);
     })
@@ -46,8 +48,10 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
     try {
       const data = await User.queryReal(hash);
       if (data.length == 0) {
+        // User not found in database, create one.
         const data1 = await User.query(state.id);
         if (data1.length > 0) {
+          // Copy info from tmp_user.
           const user = new User({
             id: hash,
             email: email,
@@ -56,21 +60,21 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
             avatarIndex: data1[0].avatar_index
           });
           await User.createReal(user);
-          await User.createTmpIdToRealId(state.id, hash);
-          res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));     
         }
-    
-      } else {
-        // Found existing real user, build connection.
-        const data2 = await User.queryRealId(state.id);
-        if (data2.length == 0 || data2[0].real_user_id != hash) {
-          // Lastest connection needs to be updated.
-          await User.createTmpIdToRealId(state.id, hash);
-          res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
-        } else {
-          res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));
+        // Copy test data
+        const data2 = await Result.getByUser(state.id);
+        if (data2.length > 0) {
+          const result = new Result({
+            userId: hash,
+            assessmentGroupId: data2.question_group_id,
+            numOfQuestions: data2.num_of_questions,
+            duration: data2.duration,
+            code: data2.result_code
+          });
+          await Result.create(result);
         }
       }
+      res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));  
     } catch (error) {
       res.status(400).send(error);
     }

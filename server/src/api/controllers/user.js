@@ -76,18 +76,17 @@ async function getUserStatus (req, res) {
     try {
         const data = await User.queryReal(req.params.id);
         if (data.length > 0) {
-            res.send({ userType: 'REAL', id: data[0].internal_user_id });
+            res.send({ userType: 'REAL' });
         } else {
-            const data2 = await User.queryRealId(req.params.id);
+            const data2 = await User.query(req.params.id);
             if (data2.length > 0) {
-                res.send({ userType: 'REAL', id: data2[0].real_user_id });
-            } else {   
-                const data3 = await User.query(req.params.id); 
-                if (data3.length > 0) {
-                    res.send({ userType: 'TMP', id: data3[0].internal_user_id });
+                if (data2[0].is_permanent_user) {
+                    res.send({ userType: 'REAL' });
                 } else {
-                    res.send({ userType: 'NEW', id: '' });
+                    res.send({ userType: 'TMP' });
                 }
+            } else {   
+                res.send({ userType: 'NEW' });
             }
         } 
     } catch (error) {
@@ -104,4 +103,13 @@ async function createTmpIdToRealId (req, res) {
     }
 }
 
-export default { create, query, update, getUserStatus, createTmpIdToRealId};
+async function updateIsPermanentUser(req, res) {
+    try {
+        const data = await User.updateIsPermanentUser(req.body.id, req.body.isPermanentUser);
+        res.send(data);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+}
+
+export default { create, query, update, getUserStatus, createTmpIdToRealId, updateIsPermanentUser};

@@ -1,18 +1,6 @@
-#parent{
-    position: relative;
-    width: 500px;
-    height: 500px;
+.radarchart{
+    height: 270px !important;
 }
-
-#radarchart{
-    width: 200px;
-    height: 500px;
-}
-.chart-container{
-    position: relative;
-     width:200vw
-}
-
 /* unvisited link */
 a:link {
     color: #CAE8E2;

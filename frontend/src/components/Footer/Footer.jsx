@@ -1,9 +1,9 @@
-import {ReactComponent as TestTick} from '../../assets/footer/Vectorexplore.svg';
-import {ReactComponent as Cards} from '../../assets/footer/Vectorcards.svg';
-import {ReactComponent as Me} from '../../assets/footer/Vectorsettings.svg';
-import {ReactComponent as TestTickActive} from '../../assets/footer/Vectorexploreactive.svg';
-import {ReactComponent as CardsActive} from '../../assets/footer/Vectorcardsactive.svg';
-import {ReactComponent as MeActive} from '../../assets/footer/Vectorsettingsactive.svg';
+import {ReactComponent as TestTick} from '../../assets/footer/Vectorexplore.png';
+import {ReactComponent as Cards} from '../../assets/footer/Vectorcards.png';
+import {ReactComponent as Me} from '../../assets/footer/Vectorsettings.png';
+import {ReactComponent as TestTickActive} from '../../assets/footer/Vectorexploreactive.png';
+import {ReactComponent as CardsActive} from '../../assets/footer/Vectorcardsactive.png';
+import {ReactComponent as MeActive} from '../../assets/footer/Vectorsettingsactive.png';
 import './Footer.css';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';

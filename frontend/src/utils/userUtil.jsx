@@ -6,9 +6,9 @@ const getUser = async (id, userType) => {
     }
 };
 
-const isAuthorized = async () => {
+const getAuthorization = async () => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login/success`, {credentials: 'include'});
-    return response.ok;
+    return await response.json();
 }
 
-export { getUser, isAuthorized };
+export { getUser, getAuthorization };

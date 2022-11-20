@@ -15,7 +15,7 @@ import Loading from './components/Loading/Loading';
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
-import { getUser, isAuthorized } from './utils/userUtil';
+import { getUser, getAuthorization } from './utils/userUtil';
 import MatchCard from './components/Cards/MatchCard';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -37,12 +37,11 @@ const App = () => {
     setUserData((prevUserData) => ({
       ...prevUserData,
       type: typeData.userType,
-      id: typeData.id,
-
+      id: id
     }));
-    const authorized = await isAuthorized();
-    if (authorized) { // Real user with cookie
-      const authorizedUserData = await getUser(typeData.id, typeData.userType);
+    const authorization = await getAuthorization();
+    if (authorization.success) { // Real user with cookie
+      const authorizedUserData = await getUser(authorization.user.id, typeData.userType);
       setUserData((prevUserData) => ({
         ...prevUserData,
         name: authorizedUserData.name,
@@ -51,25 +50,16 @@ const App = () => {
         email: authorizedUserData.email,
         dob: authorizedUserData.birth_date,
         id: authorizedUserData.internal_user_id,
-        type: 'REAL',
         isAuthorized: true
       }));
-
-    } else { // No authorized cookie, need to determine user type.
-      if (typeData.userType != 'NEW') {
-        const tmpUserData = await getUser(typeData.id, typeData.userType);
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          name: tmpUserData.name,
-          gender: tmpUserData.gender,
-          avatarIndex: tmpUserData.avatar_index
-        }));
-      } else { // New user, set ID.
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          id: id
-        }));
-      }
+    } else if (typeData.userType === 'TMP') { // No authorized cookie, need to determine user type.
+      const tmpUserData = await getUser(id, typeData.userType);
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        name: tmpUserData.name,
+        gender: tmpUserData.gender,
+        avatarIndex: tmpUserData.avatar_index
+      }));
     }
     setIsLoadingUser(false);
   };

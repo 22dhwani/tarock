@@ -16,24 +16,16 @@ function getByType(req, res) {
 async function getByUser(req, res) {
     const result = [];
     let id = req.params.id;
-    // Find tmp user id if exists
-    // TODO: optimize this to avoid tmp ID query.
-    // TODO: optimize to avoid nested query.
-
     try {
-        const data = await User.queryTmpId(id);
-        if (data.length > 0) {
-            id = data[0].tmp_user_id;
-        }
-        const data2 = await Result.getByUser(id);
+        const data = await Result.getByUser(req.params.id);
         result.push({
             type: 'Tarock',
-            data: data2
+            data: data
         }); 
-        const data3 = await Match.query(req.params.id);
+        const data2 = await Match.query(req.params.id);
         result.push({
             type: 'Match',
-            data: data3
+            data: data2
         });
         res.send(result);
     } catch (error) {

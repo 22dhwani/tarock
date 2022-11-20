@@ -1,4 +1,6 @@
 .modal-content{
     width: fit-content!important;
     margin: auto!important;
+    background-color: transparent!important;
+    border: none!important;
 }

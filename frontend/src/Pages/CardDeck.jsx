@@ -10,6 +10,8 @@ import { GlobalContext } from '../context';
 import AddCardButton from '../components/Buttons/AddCardButton/AddCardButton';
 import TabSwitch from '../components/TabSwitch/TabSwitch';
 import Popup from '../components/PopUp/PopUp';
+import MyCard from '../components/Cards/MyCard';
+import MatchCard from '../components/Cards/MatchCard';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
@@ -17,16 +19,16 @@ const CardsScreen = () => {
     const search = useLocation().search;
     const matchUserId = new URLSearchParams(search).get('match');
     const [showNotification, setShowNotification] = useState(false);
-
-    const onMyCardClick = () => {
-        navigate('/myCard');
+    const [showCard, setShowCard] = useState(false);
+    const [cardType, setCardType] = useState();
+    const onMyCardClick = (card) => {
+        setCardType(card);
+        setShowCard(true);
     }
 
-    const onMatchCardClick = (origId, matchedId) => {
-        if (matchedId === userData.id) {
-            matchedId = origId;
-        }
-        navigate(`/matchCard/${matchedId}`);
+    const onMatchCardClick = (card) => {
+        setCardType(card);
+        setShowCard(true);
     }
 
     const getCardData = async () => {
@@ -64,23 +66,27 @@ const CardsScreen = () => {
             getCardData();
         }
     }, []);
+ 
     const [tab, setTab] = useState(true);
     function shareCard() {
         navigate(`/share/${userData.id}`);
     }
     return (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
-            <Popup show={showNotification} setShow={setShowNotification}/>
+            <Popup show={showNotification} setShow={setShowNotification} isNotification={true}/>
+            <Popup show={showCard} setShow={setShowCard} isCard={true}>
+                {cardType}
+            </Popup>
+           
             <Header />
             <TabSwitch tab={tab} setTab={setTab} />
             <Container className='flex-grow-1 overflow-auto' >
                 <Row lg={2} className='my-3'>
                     {tab ?
                         <>
-                            <Col style={{ cursor: 'pointer' }} onClick={onMyCardClick} className='justify-content-center d-flex'>
+                            <Col style={{ cursor: 'pointer' }} onClick={()=>onMyCardClick(<MyCard/>)} className='justify-content-center d-flex'>
                                 <GenCard
-                                    //quadra={userData.personality_socionic_quadra}
-                                    quadra='Alpha'
+                                    quadra={userData.quadra}
                                     avatar_index={userData.avatarIndex} />
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center' onClick={()=>setShowNotification(true)}>
@@ -95,7 +101,7 @@ const CardsScreen = () => {
                                             return <Col
                                                 key={data.id}
                                                 style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(data.orig_user_id, data.matched_user_id)}
+                                                onClick={() => onMatchCardClick(<MatchCard origID={data.orig_user_id} matchedUserID={data.matched_user_id}/>)}
                                                 className='justify-content-center d-flex'>
                                                 <GenCard cardType='match' />
                                             </Col>

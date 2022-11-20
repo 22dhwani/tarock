@@ -46,6 +46,7 @@ function SignIn(props) {
                 })
             })
             const data = await response.json();
+            
             setUserData((prevUserData) => ({
                 ...prevUserData,
                 name: data.name,

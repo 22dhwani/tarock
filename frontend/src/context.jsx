@@ -13,7 +13,8 @@ const GlobalContextProvider = ({ children }) => {
     gender: 0, // 0: Female, 1: Male
     avatarIndex: 0,
     dob: '',
-    isAuthorized: false
+    isAuthorized: false,
+    quadra: '',
   });
   return (
     // the Provider gives access to the context to its children

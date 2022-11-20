@@ -5,12 +5,12 @@ import patternWaves from '../../assets/patternWaves.svg';
 import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
 import RadarChart from '../Charts/RadarChart';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import share from '../../assets/myCard/share.svg';
 import deck from '../../assets/footer/cards.svg';
 import Header from '../Header/Header';
-function MatchCard() {
-    const { matchedUserId } = useParams();
+function MatchCard(props) {
+  
     const { userData } = useContext(GlobalContext);
     const [cardData, setCardData] = useState({});
     const [matchedUser, setMatchedUser] = useState('');
@@ -42,8 +42,12 @@ function MatchCard() {
     }
     useEffect(() => {
         fetchUserData(setUser, setCardData, userData.id);
-        if (matchedUserId) {
-            fetchUserData(setMatchedUser, setMatchedCard, matchedUserId);
+        let matchedId = props.matchedUserID;
+        if (matchedId === userData.id) {
+            matchedId = props.origID;
+        }
+        if (matchedId) {
+            fetchUserData(setMatchedUser, setMatchedCard, matchedId);
         }
     }, []);
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {

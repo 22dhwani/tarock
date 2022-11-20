@@ -68,7 +68,6 @@ function RadarChart({ userData, matchData, enableLabels }) {
                     font: {
                       size: 11,
                       weight: '600',
-                      style:'Montserrat',
                     }
                 },
                 grid: {
@@ -79,10 +78,7 @@ function RadarChart({ userData, matchData, enableLabels }) {
     };
 
     return (
-        <div className="chart-container" >
-            <Radar  width={"250%"} height={"250%"}data={data} options={options} />
-        </div>
-        
+            <Radar data={data} options={options} />
     )
 }
 

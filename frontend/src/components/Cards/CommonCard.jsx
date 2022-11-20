@@ -159,7 +159,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
     </>
 
     return (
-        <Container className='d-flex flex-column min-vh-100' >
+        <Container className='d-flex flex-column ' >
             <div style={{
                 backgroundImage: `url(${patternTarockBlue})`,
                 backgroundRepeat: 'no-repeat',

@@ -38,7 +38,7 @@ const MyCard = () => {
     }, []);
     if (user.name && cardData.description) {
         return (
-            <div className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>
+            <div className='d-flex flex-column ' style={{ backgroundColor: '#3069B3' }}>
                 <CommonCard user={user} cardData={cardData} showDescription={true} showShare={true}/>
             </div>
         );

@@ -54,4 +54,9 @@ async function updateReal(user) {
     return data[0];
 }
 
-export default { User, create, query, update, queryRealId, queryTmpId, createTmpIdToRealId, createReal, queryReal,updateReal };
+async function updateIsPermanentUser(id, is_permanent_user) {
+    const data = await sql.query("UPDATE tmp_user SET is_permanent_user = ? WHERE internal_user_id = ?;", [is_permanent_user, id]);
+    return data[0];
+}
+
+export default { User, create, query, update, queryRealId, queryTmpId, createTmpIdToRealId, createReal, queryReal, updateReal, updateIsPermanentUser };

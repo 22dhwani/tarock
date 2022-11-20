@@ -19,9 +19,9 @@ import { getUser, isAuthorized } from './utils/userUtil';
 import MatchCard from './components/Cards/MatchCard';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import AuthGuard from './components/AuthGuard';
+import ProtectedRoute from './components/ProtectedRoute';
 const App = () => {
-  const { userData, setUserData } = useContext(GlobalContext);
+  const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const getUserType = async (id) => {
@@ -30,18 +30,7 @@ const App = () => {
     return data;
   }
 
-  const getUserQuadra = async (id) => {
-    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/${id}`)
-    const data = await response.json();
-    return data;
-  }
-
-  const getUserResultCode = async (id) => {
-    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${id}`)
-    const data = await response.json();
-    return data;
-  }
-
+ 
   const initUser = async (id) => {
     const typeData = await getUserType(id);
 
@@ -54,9 +43,6 @@ const App = () => {
     const authorized = await isAuthorized();
     if (authorized) { // Real user with cookie
       const authorizedUserData = await getUser(typeData.id, typeData.userType);
-      const resultCodeRes = await getUserResultCode(typeData.id);
-      const resultCode = resultCodeRes[0].data[0].result_code;
-      const quadraData = await getUserQuadra(resultCode);
       setUserData((prevUserData) => ({
         ...prevUserData,
         name: authorizedUserData.name,
@@ -66,8 +52,7 @@ const App = () => {
         dob: authorizedUserData.birth_date,
         id: authorizedUserData.internal_user_id,
         type: 'REAL',
-        isAuthorized: true,
-        quadra: quadraData.personality_socionic_quadra
+        isAuthorized: true
       }));
 
     } else { // No authorized cookie, need to determine user type.
@@ -108,34 +93,16 @@ const App = () => {
               <Route index path="/" element={<Welcome />} />
               <Route index path="/signin" element={<SignInScreen />} />
               <Route index path="/test" element={<Assessment assessmentGroupId={1} />} />
-              <Route index path="/home" element={<AuthGuard>
-                <HomeScreen />
-              </AuthGuard>} />
-              <Route index path="/user" element={<AuthGuard>
-                <UserProfile />
-              </AuthGuard>} />
-              <Route index path="/editProfile" element={<AuthGuard>
-                <EditProfile />
-              </AuthGuard>} />
-              <Route index path="/about" element={<AuthGuard>
-                <About />
-              </AuthGuard>} />
-              <Route index path="/contact" element={<AuthGuard>
-                <Contact />
-              </AuthGuard>} />
-              <Route index path="/myCard" element={<AuthGuard>
-                <MyCardScreen />
-              </AuthGuard>} />
+              <Route index path="/home" element={<ProtectedRoute component={<HomeScreen />} />} />
+              <Route index path="/user" element={<ProtectedRoute component={<UserProfile />} />} />
+              <Route index path="/editProfile" element={<ProtectedRoute component={<EditProfile />} />} />
+              <Route index path="/about" element={<ProtectedRoute component={<About />} />} />
+              <Route index path="/contact" element={<ProtectedRoute component={<Contact />} />} />
+              <Route index path="/myCard" element={<ProtectedRoute component={<MyCardScreen />} />} />
+              <Route index path="/chart" element={<ProtectedRoute component={<RadarChart />} />} />
+              <Route index path="/share/:userId" element={<ProtectedRoute component={<ShareScreen />} />} />
+              <Route index path="/cards" element={<ProtectedRoute component={<CardDeck />} />} />
               {/* <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/> */}
-              <Route index path="/chart" element={<AuthGuard>
-                <RadarChart />
-              </AuthGuard>} />
-              <Route index path="/share/:userId" element={<AuthGuard>
-                <ShareScreen />
-              </AuthGuard>} />
-              <Route index path="/cards" element={<AuthGuard>
-                <CardDeck />
-              </AuthGuard>} />
             </Routes>
           </Router>
         </div>

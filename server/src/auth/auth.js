@@ -17,7 +17,7 @@ passport.use(new GoogleStrategy({
       const user = {
         email: profile._json.email,
         name: profile.displayName,
-        id: crypto.createHash('md5').update(email).digest("hex")
+        id: crypto.createHash('md5').update(profile._json.email).digest("hex")
       };
       cb(null, user);
     })
@@ -61,7 +61,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
           });
           await User.createReal(user);
         }
-        // Copy test data
+        // Copy test data.
         const data2 = await Result.getByUser(state.id);
         if (data2.length > 0) {
           const result = new Result({
@@ -74,6 +74,8 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
           await Result.create(result);
         }
       }
+      // Update tmp user is_permanent_user.
+      await User.updateIsPermanentUser(state.id, 1);
       res.redirect(process.env['CLIENT_BASE_URL'] + decodeURIComponent(state.redirect));  
     } catch (error) {
       res.status(400).send(error);

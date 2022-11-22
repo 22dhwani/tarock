@@ -1,18 +1,19 @@
 import User from '../models/user.js';
 import crypto from 'crypto';
+import user from '../routers/user.js';
 
 async function create(req, res) {
     const user = new User.User({
-        id: req.body.userId,
         name: req.body.name,
         gender: req.body.gender,
         avatarIndex: req.body.avatarIndex
     });
     if (req.body.userType === 'REAL') {
-        user.email = req.body.email;
-        const hash = crypto.createHash('md5').update(user.email).digest("hex");
-        user.id = hash;
         try {
+            user.id = crypto.createHash('md5').update(user.email).digest("hex");
+            user.email = req.body.email;
+            user.password = null;
+
             const data = await User.createReal(user);
             res.send(data);
         } catch (error) {
@@ -20,6 +21,7 @@ async function create(req, res) {
         }
     } else {
         try {
+            user.id = req.body.userId;
             const data = await User.create(user);
             res.send(data);
         } catch (error) {
@@ -56,6 +58,7 @@ async function update(req, res) {
     });
     if (req.body.userType === 'REAL') {
         try {
+            user.password = req.body.password;
             const data = await User.updateReal(user);
             res.send(data);
         } catch (error) {
@@ -72,7 +75,6 @@ async function update(req, res) {
 };
 
 async function getUserStatus (req, res) {
-    
     try {
         const data = await User.queryReal(req.params.id);
         if (data.length > 0) {
@@ -94,6 +96,7 @@ async function getUserStatus (req, res) {
     }
 };
 
+/**
 async function createTmpIdToRealId (req, res) {
     try {
         const data = await User.createTmpIdToRealId(req.body.tmpId, req.body.realId);
@@ -102,6 +105,7 @@ async function createTmpIdToRealId (req, res) {
         res.status(400).send(error);
     }
 }
+*/
 
 async function updateIsPermanentUser(req, res) {
     try {
@@ -112,4 +116,4 @@ async function updateIsPermanentUser(req, res) {
     }
 }
 
-export default { create, query, update, getUserStatus, createTmpIdToRealId, updateIsPermanentUser};
+export default { create, query, update, getUserStatus, updateIsPermanentUser};

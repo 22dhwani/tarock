@@ -8,7 +8,7 @@ export default function(app) {
     router.post("/", user.create);
     router.get("/:id", user.query);
     router.put("/", user.update);
-    router.post("/tmpIdToRealId", user.createTmpIdToRealId);
+    //router.post("/tmpIdToRealId", user.createTmpIdToRealId);
     router.post("/updateIsPermanentUser", user.updateIsPermanentUser);
 
     app.use("/api/user", router);

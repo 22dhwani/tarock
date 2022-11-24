@@ -66,7 +66,7 @@ const Assessment = ({ assessmentGroupId }) => {
                 .then((data) => {
                     if (userData.type != 'REAL') {
                         const nav = '/signin' + (matchUserId ? `?match=${matchUserId}` : '');
-                        navigate(nav);
+                        navigate(nav, { state: { stage: 'signup' } });
                     } else {
                         navigate("/myCard");
                     }

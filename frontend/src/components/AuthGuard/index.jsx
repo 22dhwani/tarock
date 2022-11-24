@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 
 function AuthGuard(props) {
     if (!props.authenticated) {
-        return <Navigate to="/signin" replace />;
+        return <Navigate to="/" replace />;
     }
     return props.children;
 };

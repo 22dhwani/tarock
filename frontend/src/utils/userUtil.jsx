@@ -11,4 +11,50 @@ const getAuthorization = async () => {
     return await response.json();
 }
 
-export { getUser, getAuthorization };
+const getUserType = async (id) => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${id}`)
+    const data = await response.json();
+    return data;
+}
+
+const initUser = async (id, setUserData) => {
+    const typeData = await getUserType(id);
+
+    setUserData((prevUserData) => ({
+        ...prevUserData,
+        type: typeData.userType,
+        id: id
+    }));
+    const authorization = await getAuthorization();
+    if (authorization.success) { // Real user with cookie
+        const authorizedUserData = await getUser(authorization.user.id, typeData.userType);
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            name: authorizedUserData.name,
+            gender: authorizedUserData.gender,
+            avatarIndex: authorizedUserData.avatar_index,
+            email: authorizedUserData.email,
+            dob: authorizedUserData.birth_date,
+            id: authorizedUserData.internal_user_id,
+            isAuthorized: true
+        }));
+    } else if (typeData.userType === 'TMP') { // Get temp user data.
+        const tmpUserData = await getUser(id, typeData.userType);
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            name: tmpUserData.name,
+            gender: tmpUserData.gender,
+            avatarIndex: tmpUserData.avatar_index
+        }));
+    }
+};
+
+const logout = async () => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/logout`, {credentials: 'include', method: 'POST'});
+    const data = await response.json();
+    if (data.length > 0) {
+        return data[0];
+    }
+};
+
+export { getUser, getAuthorization, getUserType, logout };

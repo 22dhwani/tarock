@@ -6,7 +6,7 @@ const GlobalContext = createContext();
 const GlobalContextProvider = ({ children }) => {
   // the value that will be given to the context
   const [userData, setUserData] = useState({
-    guestId: '',
+    visitorId: '',
     id: '',
     type: '', // NEW, TMP, REAL
     name: '',

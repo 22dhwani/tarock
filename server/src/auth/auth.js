@@ -66,7 +66,7 @@ router.post('/register', async function(req, res, next) {
       return;
     }
     if (password.length < 6 || password.length > 20) {
-      res.status(400).json({error_msg: "Please enter a valid password, length withing 6 or 20"});
+      res.status(400).json({error_msg: "Please enter a valid password, length within 6 to 20"});
       return;
     }
     const realUsers = await User.queryReal(hashEmail);

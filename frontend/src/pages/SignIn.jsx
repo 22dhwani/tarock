@@ -356,9 +356,10 @@ function SignIn() {
                         <Form.Control className='py-3' type='password' placeholder='Your password'
                             onChange={handleChange}
                             name='password'
+                            pattern='.{6,20}'
                             required
                             value={formData.password} />
-                        <Form.Control.Feedback type="invalid">Please enter a valid password</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">Please enter a valid password, length within 6 to 20</Form.Control.Feedback>
                     </Form.Group>}
                 </Form>
             }

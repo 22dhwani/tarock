@@ -1,6 +1,5 @@
 import User from '../models/user.js';
 import crypto from 'crypto';
-import user from '../routers/user.js';
 
 async function create(req, res) {
     const user = new User.User({
@@ -13,7 +12,6 @@ async function create(req, res) {
             user.id = crypto.createHash('md5').update(user.email).digest("hex");
             user.email = req.body.email;
             user.password = null;
-
             const data = await User.createReal(user);
             res.send(data);
         } catch (error) {

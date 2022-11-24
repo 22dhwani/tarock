@@ -6,7 +6,6 @@ import User from '../api/models/user.js' ;
 import Result from '../api/models/result.js';
 import EmailValidator from 'email-validator';
 import LocalStrategy from 'passport-local';
-import user from '../api/routers/user.js';
 
 const router = express.Router();
 
@@ -23,7 +22,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 router.get('/login', function(req, res, next) {
-res.render('login');
+  res.render('login');
 });
 
 router.get('/register', function(req, res, next) {
@@ -48,8 +47,6 @@ passport.use(new LocalStrategy.Strategy({usernameField: 'email', session: true},
 }));
 
 router.post('/login',passport.authenticate('local',{
-  //successRedirect: process.env['CLIENT_BASE_URL'] + decodeURIComponent('/home'),
-  //failureRedirect: process.env['CLIENT_BASE_URL'] + decodeURIComponent('/login'),
   failureMessage: true
 }), function(req, res, next) {
   res.status(200).json(req.user);
@@ -58,7 +55,7 @@ router.post('/login',passport.authenticate('local',{
 //Apply transaction in the future
 router.post('/register', async function(req, res, next) {
   try {
-    const state = req.body.state;
+    const tempId = req.body.tempId;
     const email = req.body.email;
     const password = req.body.password;
     const hashEmail = crypto.createHash('md5').update(email).digest("hex");
@@ -80,7 +77,7 @@ router.post('/register', async function(req, res, next) {
 
     const queryPromises = [];
 
-    const tempUsers = await User.query(state.id);
+    const tempUsers = await User.query(tempId);
     if (tempUsers.length > 0) {
       const user = new User.User({
         id: hashEmail,
@@ -97,7 +94,7 @@ router.post('/register', async function(req, res, next) {
       return;      
     }
 
-    const oldResults = await Result.getByUser(state.id);
+    const oldResults = await Result.getByUser(tempId);
     if (oldResults.length > 0) {
       const newResult = new Result.Result({
         userId: hashEmail,
@@ -110,7 +107,7 @@ router.post('/register', async function(req, res, next) {
       queryPromises.push(createResultPromise);
     }
 
-    const updateIsPermanentUserPromise = User.updateIsPermanentUser(state.id, 1);
+    const updateIsPermanentUserPromise = User.updateIsPermanentUser(tempId, 1);
     queryPromises.push(updateIsPermanentUserPromise);
     //Waiting parrllely
     await Promise.all(queryPromises);

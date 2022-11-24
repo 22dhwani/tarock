@@ -116,7 +116,7 @@ router.post('/register', async function(req, res, next) {
       if (err) { 
         return next(err); 
       }
-      res.status(200).send("Signup Successfully");
+      res.status(200).json({id: hashEmail});
     });
   } catch (error) {
     res.status(400).send(error);

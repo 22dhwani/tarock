@@ -10,6 +10,7 @@ import btn2 from '../../assets/btn_2.svg';
 import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
 import { useNavigate, useLocation } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const randomRadarData = () => {
     return {
@@ -31,12 +32,15 @@ const Assessment = ({ assessmentGroupId }) => {
     const navigate = useNavigate();
     const search = useLocation().search;
     const matchUserId = new URLSearchParams(search).get('match');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/assessment?groupId=${assessmentGroupId}`)
             .then((response) => response.json())
             .then((data) => {
                 setAssessment({ index: 0, data: data });
+                setIsLoading(false);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -49,6 +53,7 @@ const Assessment = ({ assessmentGroupId }) => {
         const type = jsonObj.answers[index].type;
         answers.push(type);
         if (assessment.index == assessment.data.length - 1) {
+            setIsLoading(true);
             fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/result`, {
                 method: 'POST',
                 headers: {
@@ -64,6 +69,7 @@ const Assessment = ({ assessmentGroupId }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    setIsLoading(false);
                     if (userData.type != 'REAL') {
                         const nav = '/signin' + (matchUserId ? `?match=${matchUserId}` : '');
                         navigate(nav, { state: { stage: 'signup' } });
@@ -89,6 +95,9 @@ const Assessment = ({ assessmentGroupId }) => {
         }
     }
 
+    if (isLoading) {
+        return <Loading/>
+    }
     return (
         <Container className='d-flex flex-column min-vh-100' style={{
             backgroundColor: '#FBF2DC',

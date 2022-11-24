@@ -11,7 +11,7 @@ const GlobalContextProvider = ({ children }) => {
     type: '', // NEW, TMP, REAL
     name: '',
     email: '',
-    gender: 0, // 0: Female, 1: Male
+    gender: '', // Female, Male
     avatarIndex: 0,
     dob: '',
     isAuthorized: false

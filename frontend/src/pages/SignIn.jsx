@@ -36,7 +36,7 @@ function SignIn() {
     const [formData, setFormData] = useState(
         {
             name: "",
-            gender: 0,
+            gender: "",
             password: "",
             email: "",
         }
@@ -52,8 +52,8 @@ function SignIn() {
                 },
                 body: JSON.stringify({
                     name: formData.name,
-                    avatarIndex: formData.gender,
-                    gender: formData.gender ? 'Male' : 'Female',
+                    avatarIndex: formData.gender === 'Female' ? 0 : 1,
+                    gender: formData.gender,
                     userId: userData.id,
                 })
             })
@@ -83,17 +83,79 @@ function SignIn() {
         updateValidation();
     }
 
-    async function handleSignIn(event) {
-        event.preventDefault();
+    async function handleSignIn() {
         try {
-            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}`);
-            let obj = await response.json();
-            console.log(obj)
-            //check for email password in future
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                })
+            });
+            const data = await response.json();
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: data.name,
+                gender: data.gender,
+                avatarIndex: data.avatar_index,
+                email: data.email,
+                dob: data.birth_date,
+                id: data.internal_user_id,
+                type: 'REAL',
+                isAuthorized: true
+            }));
+            if (matchUserId) {
+                navigate(`/cards?match=${matchUserId}`);
+            } else {
+                navigate('/home');
+            }
         } catch (error) {
             console.log(error);
         }
-        
+    }
+
+    async function handleSignUp() {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/register`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                    tempId: userData.visitorId,
+                })
+            });
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            const user = await getUser(data.id, 'REAL');
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: user.name,
+                gender: user.gender,
+                avatarIndex: user.avatar_index,
+                email: user.email,
+                dob: user.birth_date,
+                id: user.internal_user_id,
+                type: 'REAL',
+                isAuthorized: true
+            }));
+            if (matchUserId) {
+                navigate(`/cards?match=${matchUserId}`);
+            } else {
+                navigate('/home');
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     function nextStage() {
@@ -105,9 +167,9 @@ function SignIn() {
         } else if (stage === 'avatar') {
             handleSubmit();
         } else if (stage === 'signup') {
-            console.log('sign up');
+            handleSignUp();
         } else if (stage === 'signin') {
-            console.log('sign in');
+            handleSignIn();
         } else if (stage === 'welcome') {
             navigate('/home');
         }
@@ -126,7 +188,9 @@ function SignIn() {
                     isPermanentUser: 0,
                 })
             })
-            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
             await logout();
             const tmpUserData = await getUser(userData.visitorId, 'TMP');
             setUserData((prevUserData) => ({
@@ -231,7 +295,7 @@ function SignIn() {
                         <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
                             return {
                                 ...data,
-                                gender: 1
+                                gender: 'Male'
                             }
                         })}>
                             <img className='rounded-4' src={male} alt="male" style={{ backgroundColor: 'white', height: '140px'}} />
@@ -241,7 +305,7 @@ function SignIn() {
                         <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
                             return {
                                 ...data,
-                                gender: 0
+                                gender: 'Female'
                             }
                         })}>
                             <img className='rounded-4' src={female} alt="female" style={{ backgroundColor: 'white', height: '140px' }} />
@@ -250,7 +314,7 @@ function SignIn() {
                 </div>
             }
             {
-                <Form className='was-validated' onSubmit={handleSubmit}>
+                <Form className='was-validated'>
                     {stage === 'new' && <Form.Group className='mx-3'>
                         <Form.Label style={{
                             fontFamily: 'Montserrat',

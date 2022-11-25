@@ -10,12 +10,12 @@ function FeedCard(props) {
             <h5 
             style={{
                 fontFamily:'Montserrat',
-                fontWeight:'900',
+                fontWeight:'700',
                 color:'#49304D',
-                lineHeight:'30px',
-                textAlign:'left'
-            }}
-            className=' font-weight-bold' >{title}</h5>
+                lineHeight:'17px',
+                textAlign:'left',
+                fontSize: '14px',
+            }}>{title}</h5>
             <div className='d-flex justify-content-start'>
             <p className="card-text text-left" >By {author}</p>
             <p className="card-text" style={{color:'#B6ACB8', marginLeft:'5em'}} >{time}h ago</p>

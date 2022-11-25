@@ -1,52 +1,63 @@
 import Container from 'react-bootstrap/Container';
-import logo from '../assets/tarockLogo.svg'
-import pattern from '../assets/patternTarock.svg'
-import googleSignin from '../assets/signin/btn_google_signin_dark_normal_web@2x.png';
+import Header from '../components/Header/Header.jsx';
+import signup from '../assets/signin/signup.svg';
+import pattern from '../assets/patternTarock.svg';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import AvatarCreation from '../components/AvatarSelection/AvatarSelection';
 import { GlobalContext } from '../context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import male from '../assets/avatarMale.svg';
+import female from '../assets/avatarFemale.svg';
+import line from '../assets/signin/line.svg';
+import googleSignin from '../assets/signin/googleSignin.svg';
+import googleSignup from '../assets/signin/googleSignup.svg';
+import bg from '../assets/signin/bg.svg';
+import { getUser, logout } from '../utils/userUtil';
 
-function SignIn(props) {
-    const [user, setUser] = useState('');
-    const [avatar, setAvatar] = useState(false);
-    const [avatarPage, setAvatarPage] = useState(true);
+function SignIn() {
     const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
-    const search = useLocation().search;
+    const { state, search } = useLocation();
     const matchUserId = new URLSearchParams(search).get('match');
+    const [stage, setStage] = useState('');
+    const [validation, setValidation] = useState(false);
+
+    useEffect(() => {
+        if (state) {
+            setStage(state.stage);
+        }
+        // Need setTimeout to make updateValidation work.
+        setTimeout(() => {updateValidation()}, 0);
+    }, []);
 
     const [formData, setFormData] = useState(
         {
             name: "",
-            gender: 0,
+            gender: "",
             password: "",
-           
+            email: "",
         }
     )
 
     async function handleSubmit() {
-        //hide api
         try {
             const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
-                method: 'POST',
+                method: userData.type === 'NEW' ? 'POST' : 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     name: formData.name,
-                    avatarIndex: formData.gender,
-                    gender: formData.gender ? 'Male' : 'Female',
+                    avatarIndex: formData.gender === 'Female' ? 0 : 1,
+                    gender: formData.gender,
                     userId: userData.id,
-                    //Email: formData.email,
-                    //Password: formData.password
                 })
             })
             const data = await response.json();
-            
             setUserData((prevUserData) => ({
                 ...prevUserData,
                 name: data.name,
@@ -69,38 +80,152 @@ function SignIn(props) {
                 [name]: type === "checkbox" ? checked : value
             }
         })
+        updateValidation();
     }
 
-    async function handleSignIn(event) {
-        event.preventDefault();
+    async function handleSignIn() {
         try {
-            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userData.id}`);
-            let obj = await response.json();
-            console.log(obj)
-            //check for email password in future
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                })
+            });
+            const data = await response.json();
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: data.name,
+                gender: data.gender,
+                avatarIndex: data.avatar_index,
+                email: data.email,
+                dob: data.birth_date,
+                id: data.internal_user_id,
+                type: 'REAL',
+                isAuthorized: true
+            }));
+            if (matchUserId) {
+                navigate(`/cards?match=${matchUserId}`);
+            } else {
+                navigate('/home');
+            }
         } catch (error) {
             console.log(error);
         }
-        
     }
 
-    function createAvatar() {
-        setAvatarPage(!avatarPage);
+    async function handleSignUp() {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/register`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                    tempId: userData.visitorId,
+                })
+            });
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            const user = await getUser(data.id, 'REAL');
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: user.name,
+                gender: user.gender,
+                avatarIndex: user.avatar_index,
+                email: user.email,
+                dob: user.birth_date,
+                id: user.internal_user_id,
+                type: 'REAL',
+                isAuthorized: true
+            }));
+            if (matchUserId) {
+                navigate(`/cards?match=${matchUserId}`);
+            } else {
+                navigate('/home');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    function nextStage() {
+        if (!validation) {
+            return;
+        }
+        if (stage === 'new') {
+            setStage('avatar');
+        } else if (stage === 'avatar') {
+            handleSubmit();
+        } else if (stage === 'signup') {
+            handleSignUp();
+        } else if (stage === 'signin') {
+            handleSignIn();
+        } else if (stage === 'welcome') {
+            navigate('/home');
+        }
     }
 
-    function handleUser(event) {
-        event.preventDefault();
-        setUser('User');
-        setAvatar(true);
+    async function newGuest() {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/updateIsPermanentUser`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: userData.visitorId,
+                    isPermanentUser: 0,
+                })
+            })
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            await logout();
+            const tmpUserData = await getUser(userData.visitorId, 'TMP');
+            setUserData((prevUserData) => ({
+                ...prevUserData,
+                name: tmpUserData.name,
+                gender: tmpUserData.gender,
+                avatarIndex: tmpUserData.avatar_index,
+                id: prevUserData.visitorId,
+                email: '',
+                dob: '',
+                isAuthorized: false,
+                type: 'TMP',
+            }));
+            setStage('new');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    function handleBack() {
-        setAvatar(false);
+    function updateValidation() {
+        const forms = document.querySelectorAll('.was-validated');
+        if (forms.length > 0) {
+            setValidation(forms[0].checkValidity());
+        }
     }
 
-    function handelGuest(event) {
-        setUser('Guest');
-        setAvatar(true);
+    function getButtonText() {
+        if (stage === 'signup') {
+            return 'Sign Up';
+        } else if (stage === 'signin') {
+            return 'Login';
+        } else if (stage === 'welcome') {
+            return 'Start';
+        }
+        return 'Next';
     }
 
     function handleGoogleSignin() {
@@ -115,122 +240,217 @@ function SignIn(props) {
     }
 
     return (
-        <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FBF2DC'}}>
-            {avatarPage ? <>
-                <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
-                    margin: '0 auto',
-                }} />
-
-                <div style={{
+        <Container className='d-flex flex-column vh-100 px-0 pb-4' style={{
+                backgroundImage: `url(${bg})`,
+                backgroundSize: 'cover'
+            }}>
+            <Header goBackFunc={stage != 'avatar' ? undefined : () => {setStage('new')}}/>
+            {
+                stage === 'signup' &&
+                <img src={signup} alt="signup" className='mx-auto mt-4'/>
+            }
+            {
+                stage != 'avatar' &&
+                <div className='mx-4 pt-2 pb-4 flex-grow-1' style={{
+                    fontFamily: 'Montserrat',
                     fontWeight: '700',
-                    fontSize: '36px',
-                    lineHeight: '36px',
-                    textAlign: 'left',
+                    fontSize: '28px',
+                    lineHeight: '34px',
                     color: '#49304D',
-                    paddingBottom: '25px',
-                    paddingTop: '10px'
                 }}>
-                    <span>Welcome to Tarock, where personality is harnessed</span>
-                </div>
-               
-
-                <div style={{
-                   position: 'relative',
-                   top: '20rem',
-                    zIndex: '1000',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '20px',
-                }}>
-                    {userData.type === 'NEW' && <Form onSubmit={handleUser}>
-                        <Form.Group className="mb-3">
-                            <Form.Control className='py-3' type="text" placeholder="First and Last name"
-                                onChange={handleChange}
-                                name='name'
-                                required
-                                value={formData.name} />
-                        </Form.Group>
-
-                        {/* {!avatar && <Form.Group className="mb-3" controlId="formPassword">
-                            <Form.Control className='py-3' type="password" placeholder="Password"
-                                onChange={handleChange}
-                                name='password'
-                                value={formData.password} />
-                        </Form.Group>}
-
-                        {!avatar && <button
-                            onClick={handleSignIn}
-                            className='w-100 rounded-5 py-3' style={{
-                                backgroundColor: '#49304D',
-                                color: '#999999',
+                    {
+                        (stage === 'new' || stage === 'signin') && 
+                        <span>Welcome to Tarock, where personality comes first.</span>
+                    }
+                    {
+                        stage === 'welcome' &&
+                        <span>Welcome to back, {userData.name}!</span>
+                    }
+                    {
+                        stage === 'signup' &&
+                        <div>
+                            <div>Yayy! Your test result is generated</div>
+                            <div style={{
+                                fontWeight: '500',
                                 fontSize: '16px',
-                                lineHeight: '14px',
-                                border: 'none',
-
-                            }}>Sign In</button>} */}
-                    </Form>}
-
-                 
-                    {/* {!avatar && <button
-                        onClick={handleUser}
-                        className='w-100 rounded-5 py-3' style={{
-                            backgroundColor: 'transparent',
-                            color: 'black',
-                            fontSize: '16px',
-                            lineHeight: '14px',
-                            fontWeight: '700',
-
-                        }}>Sign Up</button>
-                    } */}
-
-                    {/* {!avatar && <button
-                        onClick={handelGuest}
-                        className='w-100 rounded-5 py-3' style={{
-                            backgroundColor: 'transparent',
-                            color: 'black',
-                            fontSize: '16px',
-                            lineHeight: '14px',
-                            fontWeight: '700',
-
-                        }}>Continue as guest</button>
-                    } */}
-
-                    {userData.type === 'NEW' && <button
-                        onClick={createAvatar}
-                        className='w-100 rounded-5 py-3' style={{
-                            backgroundColor: '#49304D',
-                            color: '#999999',
-                            fontSize: '16px',
-                            lineHeight: '14px',
-                            border: 'none',
-
-                        }}>Create Avatar</button>}
-
-                    {(userData.type === 'REAL' || userData.type === 'TMP') && <img
-                        onClick={handleGoogleSignin}
-                        className='mx-5'
-                        src={googleSignin}/>}
-
-                    {/* {avatar && <button
-                        onClick={handleBack}
-                        className='w-100 rounded-5 py-3' style={{
-                            backgroundColor: 'transparent',
-                            color: 'black',
-                            fontSize: '16px',
-                            lineHeight: '14px',
-                            fontWeight: '700',
-
-                        }}> {'<-- Go back'} </button>} */}
+                                lineHeight: '19.5px',
+                            }}>Sign up to view your test results</div>
+                        </div>
+                    }
                 </div>
-
-                <img src={pattern} alt="pattern" 
-                    className=' w-100 mt-auto' style={{ zIndex: '100' }} />
-            </> : <AvatarCreation
-                gender={formData.gender}
-                setGender={setFormData}
-                handleBack={createAvatar}
-                handleOk={handleSubmit}
-            />}
+            }
+            {
+                // Need to update UI with no gender.
+                stage === 'avatar' &&
+                <div className='flex-grow-1'>
+                    <div style={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: '700',
+                        fontSize: '18px',
+                        lineHeight: '22px',
+                        color: '#49304D',
+                        textAlign: 'center',
+                    }}>Choose your avatar</div>
+                    <Row className = 'my-4'>
+                        <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
+                            return {
+                                ...data,
+                                gender: 'Male'
+                            }
+                        })}>
+                            <img className='rounded-4' src={male} alt="male" style={{ backgroundColor: 'white', height: '140px'}} />
+                        </Col>
+                    </Row>
+                    <Row className = 'my-4'>
+                        <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
+                            return {
+                                ...data,
+                                gender: 'Female'
+                            }
+                        })}>
+                            <img className='rounded-4' src={female} alt="female" style={{ backgroundColor: 'white', height: '140px' }} />
+                        </Col>
+                    </Row>
+                </div>
+            }
+            {
+                <Form className='was-validated'>
+                    {stage === 'new' && <Form.Group className='mx-3'>
+                        <Form.Label style={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: '700',
+                            fontSize: '12px',
+                            lineHeight: '12px',
+                            color: '#49304D',
+                        }}>Your name</Form.Label>
+                        <Form.Control className='py-3' type='text' placeholder='First and Last name'
+                            onChange={handleChange}
+                            name='name'
+                            required
+                            value={formData.name} />
+                        <Form.Control.Feedback type="invalid">Please enter a name</Form.Control.Feedback>
+                    </Form.Group>}
+                    {(stage === 'signin' || stage === 'signup') && <Form.Group className='mx-3'>
+                        <Form.Label style={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: '700',
+                            fontSize: '12px',
+                            lineHeight: '12px',
+                            color: '#49304D',
+                        }}>Email</Form.Label>
+                        <Form.Control className='py-3' type='email' placeholder='Your email'
+                            onChange={handleChange}
+                            name='email'
+                            required
+                            value={formData.email} />
+                        <Form.Control.Feedback type="invalid">Please enter a valid email address</Form.Control.Feedback>
+                    </Form.Group>}
+                    {(stage === 'signin' || stage === 'signup') && <Form.Group className='mx-3'>
+                        <Form.Label style={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: '700',
+                            fontSize: '12px',
+                            lineHeight: '12px',
+                            color: '#49304D',
+                        }}>Password</Form.Label>
+                        <Form.Control className='py-3' type='password' placeholder='Your password'
+                            onChange={handleChange}
+                            name='password'
+                            pattern='.{6,20}'
+                            required
+                            value={formData.password} />
+                        <Form.Control.Feedback type="invalid">Please enter a valid password, length within 6 to 20</Form.Control.Feedback>
+                    </Form.Group>}
+                </Form>
+            }
+            {
+                <div
+                    className='rounded-5 py-3 mx-3 mt-3'
+                    onClick={nextStage}
+                    style={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: '700',
+                        backgroundColor: '#49304D',
+                        color: validation ? '#FFFFFF' : '#999999',
+                        fontSize: '16px',
+                        lineHeight: '14px',
+                        border: 'none',
+                        textAlign: 'center',
+                    }}>
+                        {getButtonText()}
+                </div>
+            }
+            {
+                (stage === 'signup' || stage === 'signin') &&
+                <img src={line} alt="line" className='mx-3 mt-4'/>
+            }
+            {
+                stage === 'signup' &&
+                <img onClick={handleGoogleSignin} src={googleSignup} alt="googleSignup" className='mx-3 mt-4'/>
+            }
+            {
+                stage === 'signin' &&
+                <img onClick={handleGoogleSignin} src={googleSignin} alt="googleSignin" className='mx-3 mt-4'/>
+            }
+            {
+                stage != 'signup' &&
+                <div className={'my-5'} style={{
+                    fontFamily: 'Montserrat',
+                    fontWeight: '500',
+                    color: '#49304D',
+                    fontSize: '14px',
+                    lineHeight: '17px',
+                    textAlign: 'center',
+                }}>
+                    {
+                        stage === 'new' &&
+                        <div>
+                            <span>Already have an account? </span>
+                            <span onClick={() => {setStage('signin')}} style={{
+                                fontWeight: '700',
+                                textDecoration: 'underline',
+                            }}>Login</span>
+                        </div>
+                    }
+                    {
+                        stage === 'signin' &&
+                        <div>
+                            <span>Don't have an account? </span>
+                            <span onClick={newGuest} style={{
+                                fontWeight: '700',
+                                textDecoration: 'underline',
+                            }}>Sign up</span>
+                        </div>
+                    }
+                    {
+                        stage === 'welcome' &&
+                        <div>
+                            <span>Not you? </span>
+                            <span onClick={newGuest} style={{
+                                fontWeight: '700',
+                                textDecoration: 'underline',
+                            }}>Create a new account</span>
+                        </div>
+                    }
+                    {
+                        stage === 'avatar' &&
+                        <div>
+                            <span>By clicking Next, I agree to </span>
+                            <a href={'https://www.tarock.me/terms-of-service'} style={{
+                                fontWeight: '700',
+                                textDecoration: 'underline',
+                                color: '#49304D',
+                            }}>Terms of Service</a>
+                            <span> and </span>
+                            <a href={'https://www.tarock.me/privacy-policy'} style={{
+                                fontWeight: '700',
+                                textDecoration: 'underline',
+                                color: '#49304D',
+                            }}>Privacy Policy</a>
+                        </div>
+                    }
+                </div>
+            }
         </Container>
     )
 }

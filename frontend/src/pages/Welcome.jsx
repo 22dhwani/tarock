@@ -4,6 +4,7 @@ import patternTarock from '../assets/patternTarock.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context';
+import Loading from '../components/Loading/Loading';
 
 function Welcome() {
     const { userData } = useContext(GlobalContext);
@@ -16,84 +17,33 @@ function Welcome() {
             if (userData.isAuthorized) {
                 navigate(`/cards?match=${matchUserId}`);
             } else {
-                navigate(`/signin?match=${matchUserId}`);
+                navigate(`/signin?match=${matchUserId}`, { state: { stage: 'signin' } });
             }
         } else if (userData.type === 'TMP') {
             navigate(`/test?match=${matchUserId}`);
         } else if (userData.type === 'NEW') {
-            navigate(`/signin?match=${matchUserId}`);
+            navigate(`/signin?match=${matchUserId}`, { state: { stage: 'new' } });
         }
     }
 
     useEffect(() => {
         if (matchUserId) {
             handleRedirect();
-        }
-        if (userData.type === 'NEW') {
-            navigate("/signin");
-        }
-    }, []);
-    
-    const handleClick = () => {
-        if (userData.type === 'REAL') {
+        } else if (userData.type === 'NEW') {
+            navigate("/signin", { state: { stage: 'new' } });
+        } else if (userData.type === 'REAL') {
             if (userData.isAuthorized) {
-                navigate("/home");
+                navigate("/signin", { state: { stage: 'welcome' } });
             } else {
-                navigate("/signin");
+                navigate("/signin", { state: { stage: 'signin' } });
             }
         } else if (userData.type === 'TMP') {
             navigate("/test");
         }
-    }
-
+    }, []);
+    
     return (
-        <Container className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#FBF2DC'}}>
-            <img src={logo} alt="logo" height='23.83px' width='120px' className='my-5' style={{
-                margin: '0 auto',
-            }} />
-
-            <div style={{
-                fontWeight: '700',
-                fontSize: '36px',
-                lineHeight: '36px',
-                textAlign: 'center',
-                color: '#49304D',
-                paddingBottom: '25px',
-                paddingTop: '10px'
-            }}>
-                <span>Welcome back,</span>
-                <br />
-                <span>{userData.name}!</span>
-            </div>
-           <div className='d-flex flex-column mt-auto'>
-        <div className='rounded-5 py-3' style={{
-                        backgroundColor: '#49304D',
-                        color: '#999999',
-                        fontSize: '16px',
-                        lineHeight: '14px',
-                        position: 'relative',
-                        top: '8rem',
-                        zIndex: '1000',
-                        border: 'none',
-                        textDecoration: 'none',
-                        textAlign: 'center',
-                    }}>
-                <button
-                    onClick={handleClick}
-                    style={{
-                        color: '#999999',
-                        border: 'none',
-                        backgroundColor: 'transparent',
-                    }}
-                   >
-                    Next
-                </button>
-            </div>
-
-            <img src={patternTarock} alt="pattern" 
-            className='  w-100' style={{zIndex:'100'}} />
-            </div>
-        </Container>
+        <Loading/>
     )
 }
 

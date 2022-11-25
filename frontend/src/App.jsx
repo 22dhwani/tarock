@@ -15,7 +15,7 @@ import Loading from './components/Loading/Loading';
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
-import { getUser, getAuthorization } from './utils/userUtil';
+import { getUser, getAuthorization, getUserType } from './utils/userUtil';
 import MatchCard from './components/Cards/MatchCard';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -24,12 +24,6 @@ const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
   const [isLoadingUser, setIsLoadingUser] = useState(true);
-  const getUserType = async (id) => {
-    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${id}`)
-    const data = await response.json();
-    return data;
-  }
-
  
   const initUser = async (id) => {
     const typeData = await getUserType(id);
@@ -52,7 +46,7 @@ const App = () => {
         id: authorizedUserData.internal_user_id,
         isAuthorized: true
       }));
-    } else if (typeData.userType === 'TMP') { // No authorized cookie, need to determine user type.
+    } else if (typeData.userType === 'TMP') { // Get temp user data.
       const tmpUserData = await getUser(id, typeData.userType);
       setUserData((prevUserData) => ({
         ...prevUserData,
@@ -66,6 +60,10 @@ const App = () => {
 
   useEffect(() => {
     if (data) {
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        visitorId: data.visitorId,
+      }));
       initUser(data.visitorId);
     }
   }, [data]);

@@ -6,11 +6,12 @@ const GlobalContext = createContext();
 const GlobalContextProvider = ({ children }) => {
   // the value that will be given to the context
   const [userData, setUserData] = useState({
+    visitorId: '',
     id: '',
     type: '', // NEW, TMP, REAL
     name: '',
     email: '',
-    gender: 0, // 0: Female, 1: Male
+    gender: '', // Female, Male
     avatarIndex: 0,
     dob: '',
     isAuthorized: false

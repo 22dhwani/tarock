@@ -51,6 +51,163 @@
          "[User_ESE] is relatively more rigid and stubborn than [User_ILE].",
          "[User_ESE] tends to have stiffer more angular movements. [User_ILE] tends to have more relaxed fluid movements.",
          "[User_ILE] is often more interested in studying systems, structures, and functionality than [User_ESE]."
+       ],
+       "SEI": [
+         "When describing the stages of an event, [User_SEI] is more likely to focus on how stage A leads to stage B, how stage B leads to stage C, etc. [User_ILE], on the other hand, focuses more on the stages themselves without necessarily seeing or emphasizing the transitions or causes and effects of the stages to the extent that [User_SEI] does.",
+         "[User_SEI] is better at noticing details than [User_ILE]. [User_ILE] on the other hand, is better at seeing the big picture than [User_SEI].",
+         "[User_SEI] often has a smaller, closer network of friends whereas [User_ILE] often has a wider network of friends.",
+         "[User_SEI] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_SEI] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "[User_ILE] tends to be more idealistic with their heads-in-the-cloud. [User_SEI], on the other hand, is more realistic and down-to-earth.",
+         "[User_ILE] is more focused on ideas and concepts than [User_SEI]. On the other hand, [User_SEI] is more focused (than [User_ILE]) on their surroundings.",
+         "[User_SEI] places greater value on their resources than [User_ILE]. For [User_SEI], resources like their money, time, sleep, etc., fall into their inner personal space, and [User_SEI] will be more likely to deprioritize an interest if it starts to drain these resources too much.",
+         "[User_ILE]'s energy levels tend to decrease when they're alone whereas [User_SEI]'s energy levels will decrease when they're interacting with larger groups of people.",
+         "[User_SEI]'s energy levels tend to improve when they're alone whereas [User_ILE]'s energy levels increase when they're interacting with larger groups.",
+         "[User_SEI] is more vulnerable to logical manipulation than [User_ILE]. However [User_ILE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEI]."
+       ],
+       "LSI": [
+         "[User_ILE] has a relatively higher stress tolerance than [User_LSI]. [User_LSI] often struggles with continually changing situations more than [User_ILE] does.",
+         "When getting ready to start a project, [User_ILE] spends more time planning and preparing for the project than [User_LSI]. In particular, [User_ILE] spends more time discussing the plan, discussing options and ways to approach the project, etc.",
+         "[User_ILE]'s attitude towards a specific person (more so than [User_LSI]) is based on their personal characteristics (authority, intellect, personal achievements, etc.). [User_ILE] recognizes superiority of certain individuals drawing from their personal qualities.",
+         "With regards to energy levels, [User_ILE] tends to have higher energy levels than [User_LSI].",
+         "[User_ILE] is more likely than [User_LSI] to perceive and distinguish themselves primarily through personal qualities. [User_ILE] focuses on individualism more than [User_LSI].",
+         "[User_LSI] tends to have stiffer more angular movements. [User_ILE] tends to have more relaxed fluid movements.",
+         "[User_LSI] tends to have a more authoritarian, hierarchical leadership style than [User_ILE].",
+         "[User_LSI] often has a smaller, closer network of friends whereas [User_ILE] often has a wider network of friends.",
+         "[User_ILE] is often more interested in the idea or theory of something, whereas [User_LSI] is more interested in the actual practice or implementation of it.",
+         "[User_ILE] tends to start more tasks and other projects than [User_LSI], but [User_ILE] is less likely to complete all of them."
+       ],
+       "SLE": [
+         "[User_SLE] is more likely than [User_ILE] to tackle a task in its entirety, rather than breaking it up into smaller separate stages.",
+         "When conversing, [User_SLE] is inclined to communicate in the form of monologues, where each party has its 'turn'. Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_ILE] tends to prefer more of a question and answer style format.",
+         "When contemplating a task, it takes [User_ILE] longer time to mobilize than [User_SLE]; i.e., [User_ILE] prefers to spend some time in a more natural state of relaxedness which will then prepare them to subsequently mobilize and concentrate at the crucial moments, improving their performance.",
+         "[User_ILE] is more focused on ideas and concepts than [User_SLE]. On the other hand, [User_SLE] is more focused (than [User_ILE]) on their surroundings.",
+         "[User_ILE]'s attitude towards a specific person (more so than [User_SLE]) is based on their personal characteristics (authority, intellect, personal achievements, etc). [User_ILE] recognizes superiority of certain individuals drawing from their personal qualities.",
+         "When it comes to completing a task, [User_SLE] is more likely than [User_ILE] to mobilize for longer periods of time. Specifically, [User_SLE] tends to mobilize for an action early and stay mobilized for a longer period of time after the task has been completed. For [User_SLE], this state of readiness is their natural state.",
+         "[User_SLE] is better at noticing details than [User_ILE]. [User_ILE] on the other hand, is better at seeing the big picture than [User_SLE].",
+         "[User_ILE] is often more interested in the idea or theory of something, whereas [User_SLE] is more interested in the actual practice or implementation of it.",
+         "When describing why they undertook a project, [User_SLE] is more likely than [User_ILE] to focus on the moment when a decision is made and to speak in detail about the stages of its implementation.",
+         "[User_ILE] is more likely than [User_SLE] to perceive and distinguish themselves primarily through personal qualities. [User_ILE] focuses on individualism more than [User_SLE]."
+       ],
+       "EIE": [
+         "[User_EIE] tends to put more effort than [User_ILE] into finishing any new project they start.",
+         "[User_ILE] is comfortable making changes and adjustments to their decisions quite frequently. [User_EIE], on the other hand, prefers to not make changes to their decisions.",
+         "[User_EIE] is often better at solving and minimizing interpersonal problems, whereas [User_ILE] often struggles understanding them.",
+         "When discussing work, [User_EIE] is more likely than [User_ILE] to focus on the fruits of their labor, about what their effort will yield. [User_ILE] on the other hand is more likely to focus on the environment they work in, e.g., their work conditions, conveniences, commute time, etc.",
+         "When getting ready to start a project, [User_ILE] spends more time planning and preparing for the project than [User_EIE]. In particular, [User_ILE] spends more time discussing the plan, discussing options and ways to approach the project, etc.",
+         "When doing a task, [User_EIE] is inclined to work for the sake of the result (for example, a reward or bonus for completing the task). In contrast to [User_ILE], [User_EIE] can renounce their comforts and conveniences for this; [User_EIE] evaluates their place of work by looking at what returns they get for the effort they invested (e.g., monetary, prestige, etc).",
+         "When [User_EIE] forms opinions of others, these opinions are formed under the influence of their attitude towards the group to which the person belongs. To [User_EIE], it is incomprehensible how it is possible to belong to two opposing groups at the same time:, i.e., 'you're either with us, or with them and against us.'",
+         "When describing reality, [User_ILE] is more likely to talk about the properties and structure of reality. [User_EIE] is more likely to describe reality as movements, interactions, and changes.",
+         "[User_EIE] is more likely than [User_ILE] to tackle a task in its entirety, rather than breaking it up into smaller separate stages.",
+         "[User_ILE] places greater value on their interests than [User_EIE]. For example, [User_ILE] will maintain high levels of energy and focus on an interest they value, even deprioritizing their other resources to maintain the interest. For example, [User_ILE] may spend a large amount of energy on an interest they value, often to the detriment of their time, sleep, relationships, money, etc."
+       ],
+       "IEI": [
+         "When doing a task, [User_IEI] is inclined to work for the sake of the result (for example, a reward or bonus for completing the task). In contrast to [User_ILE], [User_IEI] can renounce their comforts and conveniences for this; [User_IEI] evaluates their place of work by looking at what returns they get for the effort they invested (e.g., monetary, prestige, etc.).",
+         "When discussing work, [User_IEI] is more likely than [User_ILE] to focus on the fruits of their labor, about what their effort will yield. [User_ILE] on the other hand is more likely to focus on the environment they work in, e.g., their work conditions, conveniences, commute time, etc.",
+         "[User_ILE] is more likely to make decisions based on logical reasons than [User_IEI], who is more likely to make decisions based on their own feelings.",
+         "[User_ILE]'s psychic energy more often flows outwards, whereas with [User_IEI], their psychic energy more often flows inward.",
+         "[User_ILE] is often more interested in studying systems, structures, and functionality than [User_IEI].",
+         "With regards to energy levels, [User_ILE] tends to have higher energy levels than [User_IEI].",
+         "[User_IEI] is generally better at concentrating on specific tasks for longer periods of time than [User_ILE].",
+         "When describing their reasoning for their actions, [User_ILE] (more so than [User_IEI]) tends describe how and why they came to a certain decision, and focuses less on the timing and initiation of the action.",
+         "[User_IEI], more than [User_ILE], frequently perceives and defines themselves and other people through group associations. [User_IEI] focuses on collectivism over individualism.",
+         "[User_IEI] is often able to form quicker opinions of others they have just met than [User_ILE]. This is based on the ability of [User_IEI] to draw conclusions about the person based on the groups the person belongs to; [User_ILE] is more reluctant to make these inferences."
+       ],
+       "ESI": [
+         "[User_ILE] tends to be more active and initiating with others whereas [User_ESI] tends to be more passive and less initiating.",
+         "[User_ILE] is more inclined to believe there are relative truths than [User_ESI]. That is, this relativity is perceived by [User_ILE] as an extenuation of the differing beliefs, opinions, intentions, etc. of each person.",
+         "When describing why they undertook a project, [User_ESI] is more likely than [User_ILE] to focus on the moment when a decision is made and to speak in detail about the stages of its implementation.",
+         "[User_ESI] is relatively more rigid and stubborn than [User_ILE].",
+         "When something is perceived by [User_ESI] as being incorrect, they are more likely (than [User_ILE]) to tell the person who made the error what they did wrong and how to do it the right way. [User_ESI] is focused on who made the error and helping them to correct the mistake.",
+         "With regards to energy levels, [User_ILE] tends to have higher energy levels than [User_ESI].",
+         "[User_ESI] is generally better at concentrating on specific tasks for longer periods of time than [User_ILE].",
+         "[User_ESI] is more often focused on their thoughts and feelings whereas [User_ILE] is more often focused on their surroundings.",
+         "[User_ILE]'s psychic energy more often flows outwards, whereas with [User_ESI], their psychic energy more often flows inward.",
+         "[User_ILE] is relatively better at assessing the emotional atmosphere occurring in a group or during an activity than [User_ESI]."
+       ],
+       "SEE": [
+         "[User_SEE] tends to internally combine emotional exchanges with other activities rather than separating them out like [User_ILE]. E.g., [User_SEE] sees having fun occurring simultaneously with other activities, such as work or even serious affairs. [User_ILE] is more likely to internally separate out having fun with other activities, although the two can be interchanged at a high frequency.",
+         "[User_ILE] is more relaxed in their natural state than [User_SEE]. However [User_ILE] will mobilize and concentrate when needed to accomplish an objective. After the task has been completed, [User_ILE] demobilizes again. This state of demobilization is the natural state of [User_ILE].",
+         "[User_ILE] tends to be more idealistic with their heads-in-the-cloud. [User_SEE], on the other hand, is more realistic and down-to-earth.",
+         "When working on a project, [User_ILE] is more likely than [User_SEE] to break up larger tasks into several stages. Then [User_ILE] mobilizes to carry out each stage (and demobilizes between the stages).",
+         "When discussing work, [User_SEE] is more likely than [User_ILE] to focus on the fruits of their labor, about what their effort will yield. [User_ILE] on the other hand is more likely to focus on the environment they work in, e.g., their work conditions, conveniences, commute time, etc.",
+         "When something is perceived by [User_SEE] as being incorrect, they are more likely (than [User_ILE]) to tell the person who made the error what they did wrong and how to do it the right way. [User_SEE] is focused on who made the error and helping them to correct the mistake.",
+         "[User_ILE] is often more interested in studying systems, structures, and functionality than [User_SEE].",
+         "[User_ILE] is more focused on ideas and concepts than [User_SEE]. On the other hand, [User_SEE] is more focused (than [User_ILE]) on their surroundings.",
+         "[User_SEE] is more vulnerable to logical manipulation than [User_ILE]. However [User_ILE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEE].",
+         "When getting ready to start a project, [User_ILE] spends more time planning and preparing for the project than [User_SEE]. In particular, [User_ILE] spends more time discussing the plan, discussing options and ways to approach the project, etc.)."
+       ],
+       "LIE": [
+         "When contemplating a task, it takes [User_ILE] longer time to mobilize than [User_LIE]; i.e., [User_ILE] prefers to spend some time in a more natural state of relaxedness which will then prepare them to subsequently mobilize and concentrate at the crucial moments, improving their performance.",
+         "[User_LIE] is more likely (than [User_ILE]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+         "[User_LIE] tends to have stiffer more angular movements. [User_ILE] tends to have more relaxed fluid movements.",
+         "When something is perceived by [User_ILE] as being incorrect, they are more likely (than [User_LIE]) to ask why it was done that way. Instead of necessarily trying to correct the person who made the error, [User_ILE] attempts to understand the person's reason for their decision/action.",
+         "When doing a task, [User_LIE] is inclined to work for the sake of the result (for example, a reward or bonus for completing the task). In contrast to [User_ILE], [User_LIE] can renounce their comforts and conveniences for this; [User_LIE] evaluates their place of work by looking at what returns they get for the effort they invested (e.g., monetary, prestige, etc.).",
+         "When it comes to completing a task, [User_LIE] is more likely than [User_ILE] to mobilize for longer periods of time. Specifically, [User_LIE] tends to mobilize for an action early and stay mobilized for a longer period of time after the task has been completed. For [User_LIE], this state of readiness is their natural state.",
+         "When developing a plan of action or process, [User_ILE] tends to see themselves as 'within the process'; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_LIE] tends to place themselves 'outside of the process'; they dissociate from it. For them the process or situation is something external from themselves.",
+         "When discussing work, [User_LIE] is more likely than [User_ILE] to focus on the fruits of their labor, about what their effort will yield. [User_ILE] on the other hand is more likely to focus on the environment they work in, e.g., their work conditions, conveniences, commute time, etc.",
+         "[User_LIE] tends to internally combine emotional exchanges with other activities rather than separating them out like [User_ILE]. E.g., [User_LIE] sees having fun occurring simultaneously with other activities, such as work or even serious affairs. [User_ILE] is more likely to internally separate out having fun with other activities, although the two can be interchanged at a high frequency.",
+         "[User_ILE] has a relatively higher stress tolerance than [User_LIE]. [User_LIE] often struggles with continually changing situations more than [User_ILE] does."
+       ],
+       "ILI": [
+         "[User_ILE] is often more cognizant of their outwards appearance and is thus better at presenting themselves than [User_ILI].",
+         "When describing reality, [User_ILE] is more likely to talk about the properties and structure of reality. [User_ILI] is more likely to describe reality as movements, interactions, and changes.",
+         "[User_ILE] is more relaxed in their natural state than [User_ILI]. However [User_ILE] will mobilize and concentrate when needed to accomplish an objective. After the task has been completed, [User_ILE] demobilizes again. This state of demobilization is the natural state of [User_ILE].",
+         "When working on a project, [User_ILE] is more likely than [User_ILI] to break up larger tasks into several stages. Then [User_ILE] mobilizes to carry out each stage (and demobilize between the stages).",
+         "When solving a problem, [User_ILE] is more inclined (than [User_ILI]) to solve it by relying predominantly on only the presently available information. Essentially, [User_ILE] will develop a process or method uniquely fitted towards the present problem, and this method is designed using the present conditions and information.",
+         "[User_ILI] is more often focused on their thoughts and feelings whereas [User_ILE] is more often focused on their surroundings.",
+         "When contemplating a task, it takes [User_ILE] longer time to mobilize than [User_ILI]; i.e., [User_ILE] prefers to spend some time in a more natural state of relaxedness which will then prepare them to subsequently mobilize and concentrate at the crucial moments, improving their performance.",
+         "When discussing work, [User_ILI] is more likely than [User_ILE] to focus on the fruits of their labor, about what their effort will yield. [User_ILE] on the other hand is more likely to focus on the environment they work in, e.g., their work conditions, conveniences, commute time, etc.",
+         "When it comes to completing a task, [User_ILI] is more likely than [User_ILE] to mobilize for longer periods of time. Specifically, [User_ILI] tends to mobilize for an action early and stay mobilized for a longer period of time after the task has been completed. For [User_ILI], this state of readiness is their natural state.",
+         "[User_ILI] often has a smaller, closer network of friends whereas [User_ILE] often has a wider network of friends."
+      ],
+       "EII": [
+         "[User_EII] often has a smaller, closer network of friends whereas [User_ILE] often has a wider network of friends.",
+         "[User_ILE] is able to change and make adjustments to their goals more easily than [User_EII] (depending on how progress is being made, etc.). [User_EII] on the other hand, prefers to stick with their original goals.",
+         "When something is perceived by [User_EII] as being incorrect, they are more likely (than [User_ILE]) to tell the person who made the error what they did wrong and how to do it the right way. [User_EII] is focused on who made the error and helping them to correct the mistake.",
+         "[User_ILE] has a relatively higher stress tolerance than [User_EII]. [User_EII] often struggles with continually changing situations more than [User_ILE] does.",
+         "[User_ILE] tends to have a more democratic leadership style than [User_EII].",
+         "[User_EII]'s energy levels tend to improve when they're alone whereas [User_ILE]'s energy levels increase when they're interacting with larger groups.",
+         "[User_ILE] is often more cognizant of their outwards appearance and is thus better at presenting themselves than [User_EII].",
+         "[User_EII] is often able to form quicker opinions of others they have just met than [User_ILE]. This is based on the ability of [User_EII] to draw conclusions about the person based on the groups the person belongs to; [User_ILE] is more reluctant to make these inferences.",
+         "[User_ILE] is comfortable making changes and adjustments to their decisions quite frequently. [User_EII], on the other hand, prefers to not make changes to their decisions.",
+         "[User_EII] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_EII] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice."
+       ],
+       "IEE": [
+         "When developing a plan of action or process, [User_ILE] tends to see themselves as 'within the process'; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_IEE] tends to place themselves 'outside of the proces'; they dissociate from it. For them the process or situation is something external from themselves.",
+         "[User_IEE] is more vulnerable to logical manipulation than [User_ILE]. However [User_ILE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_IEE].",
+         "[User_IEE] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_IEE] having a negative assessment of various situations and events (e.g., glass half empty). On the other hand, [User_ILE] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full").",
+         "[User_IEE] places greater value on their resources than [User_ILE]. For [User_IEE], resources like their money, time, sleep, etc., fall into their inner personal space, and [User_IEE] will be more likely to deprioritize an interest if it starts to drain these resources too much.",
+         "[User_IEE] is more likely (than [User_ILE]) to use special rituals or other culturally accepted formalities when forming relationships with others. What that means is that the emotional proximity and relationship status for [User_IEE] are more externally predetermined. Additionally, [User_IEE] generally progresses in relationships through stages, and therefore is more familiar with these stages than [User_ILE]. [User_IEE] tends to be more linear in their relationship progression than [User_ILE], and [User_IEE] assigns importance to the formalities of recognizing the start and end to each of these stages.",
+         "When conversing, [User_IEE] is inclined to communicate in the form of monologues, where each party has its 'turn'. Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_ILE] tends to prefer more of a question and answer style format.",
+         "[User_ILE] is more likely than [User_IEE] to use 'emotional anchors' that resonate with their internal emotional condition. These emotional anchors could be a book, a movie, a place, a song, etc. [User_ILE] uses these anchors to strengthen their inner emotional state and thus will repeat the experience: e.g., re-reading a book, re-watching a movie, continually going back to a place to experience the emotions associated with it.",
+         "[User_ILE] is more likely than [User_IEE] to perceive and distinguish themselves primarily through personal qualities. [User_ILE] focuses on individualism more than [User_IEE].",
+         "When working on a project, [User_IEE] experiences more discomfort (than [User_ILE]) if the project does not have a clearly delineated end-goal or result. This happens because [User_IEE] has more difficulty monitoring and understanding how the project is developing than [User_ILE] because they are outside of the process.",
+         "When [User_IEE] forms opinions of others, these opinions are formed under the influence of their attitude towards the group to which the person belongs. To [User_IEE], it is incomprehensible how it is possible to belong to two opposing groups at the same time:, i.e., you're either with us, or with them and against us."
+       ],
+       "LSE": [
+         "[User_ILE]'s attitude towards a specific person (more so than [User_LSE]) is based on their personal characteristics (authority, intellect, personal achievements, etc.) [User_ILE] recognizes superiority of certain individuals drawing from their personal qualities",
+         "When [User_LSE] forms opinions of others, these opinions are formed under the influence of their attitude towards the group to which the person belongs. To [User_LSE], it is incomprehensible how it is possible to belong to two opposing groups at the same time:, i.e., you're either with us, or with them and against us.",
+         "[User_ILE] tends to have a more democratic leadership style than [User_LSE].",
+         "[User_LSE] tends to have stiffer more angular movements. [User_ILE] tends to have more relaxed fluid movements.",
+         "[User_ILE] tends to start more tasks and other projects than [User_LSE], but [User_ILE] is less likely to complete all of them.",
+         "When something is perceived by [User_LSE] as being incorrect, they are more likely (than [User_ILE]) to tell the person who made the error what they did wrong and how to do it the right way. [User_LSE] is focused on who made the error and helping them to correct the mistake.",
+         "[User_LSE] tends to internally combine emotional exchanges with other activities rather than separating them out like [User_ILE]. E.g., [User_LSE] sees having fun occurring simultaneously with other activities, such as work or even serious affairs. [User_ILE] is more likely to internally separate out having fun with other activities, although the two can be interchanged at a high frequency.",
+         "[User_ILE] is often more interested in the idea or theory of something, whereas [User_LSE] is more interested in the actual practice or implementation of it.",
+         "[User_ILE] tends to perceive events in an episodic manner, i.e., they see events evolve in discrete states rather than continuous changes. On the other hand, [User_LSE] tends to perceive events in a continuous sequence; i.e., they see events evolving fluidly rather that one state to the next.",
+         "[User_LSE] is relatively unshakeable, and more rigid and adamant than [User_ILE]."
+       ],
+       "SLI": [
+         "[User_SLI] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_SLI] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "[User_ILE]'s energy levels tend to decrease when they're alone whereas [User_SLI]'s energy levels will decrease when they're interacting with larger groups of people.",
+         "[User_ILE] is more likely than [User_SLI] to perceive and distinguish themselves primarily through personal qualities. [User_ILE] focus on individualism more than [User_SLI].",
+         "[User_ILE]'s attitude towards a specific person (more so than [User_SLI]) is based on their personal characteristics (authority, intellect, personal achievements, etc.). [User_ILE] recognizes superiority of certain individuals drawing from their personal qualities.",
+         "[User_SLI] is generally better at concentrating on specific tasks for longer periods of time than [User_ILE].",
+         "[User_ILE] is more inclined to believe there are relative truths than [User_SLI]. That is, this relativity is perceived by [User_ILE] as an extenuation of the differing beliefs, opinions, intentions, etc. of each person.",
+         "When describing reality, [User_ILE] is more likely to talk about the properties and structure of reality. [User_SLI] is more likely to describe reality as movements, interactions, and changes.",
+         "When describing the stages of an event, [User_SLI] is more likely to focus on how stage A leads to stage B, how stage B leads to stage C, etc. [User_ILE], on the other hand, focuses more on the stages themselves without necessarily seeing or emphasizing the transitions or causes and effects of the stages to the extent that [User_SLI] do.",
+         "[User_SLI] is better at noticing the details than [User_ILE]. [User_ILE] on the other hand, is better at seeing the big picture than [User_SLI].",
+         "[User_ILE] often prefers to work with others in a team whereas [User_SLI] often prefers working alone."
+       ],
        ]
      }
    },
@@ -75,6 +232,27 @@
        "INTROVERSION": 1,
        "EXECUTION": 0.375,
        "STRATEGY": 0.625
+     }, 
+     "summary": [
+       "No doubt, for you, life is a cluster of systems - you believe that everything in life, from the physical universe to interpersonal relationships, must adhere to a predetermined order and that one must work toward the improvement, maintenance, and repair of this order if it is disturbed. As an astute tactician, you are preoccupied with the intricacies of life, bringing ingenuity and logic to all you do.",
+       "Also, your inner life is often secluded and intricate. Most of the time, Analysts take pleasure in their rationality and intelligence, as well as their remarkable ability to observe reality in an objective manner. As an Analyst, you are equipped with solid intellect and strategic thinking, allowing them to overcome seemingly insurmountable challenges.",
+       "However, Analysts may find it challenging to locate someone who can keep up with their ceaseless investigation of the world around them since their thoughts are always active. Analysts are not renowned for their affectionate nature. They tend to stress reason and success above civility and niceties; they would rather be correct than popular.",
+       "You may be very focused in your interactions with others, with little tolerance for frivolity, diversions, or idle chatter. But one thing is certain - you are neither boring nor humorless. Many Analysts are renowned for their irreverent wit, and underneath their solemn exteriors, they often possess a witty, deliciously cynical sense of humor.",
+       "Despite common assumptions about their cold brilliance, these people tend to experience things intensely. Analysts are deeply impacted by the failure of their projects and the suffering they cause, and they spend a great deal of time and effort attempting to understand why things turned out the way they did. They are genuine human beings, even if they do not always place high importance on the use of emotion in making decisions."
+     ],
+     "matching_tips": {
+       "ILE": [
+         "[User_ILE] tends to be more active and initiating with others whereas [User_LII] tends to be more passive and less initiating.",
+         "[User_LII] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_LII] having a negative assessment of various situations and events (.e.g, glass half empty). On the other hand, [User_ILE] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full).",
+         "[User_LII] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_LII] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "[User_ILE]'s energy levels tend to decrease when they're alone whereas [User_LII]'s energy levels will decrease when they're interacting with larger groups of people.",
+         "When solving a problem, [User_ILE] is more inclined (than [User_LII]) to solve it by relying predominantly on only the presently available information. Essentially, [User_ILE] will develop a process or method uniquely fitted towards the present problem, and this method is designed using the present conditions and information.",
+         "[User_ILE] often prefers to work with others in a team whereas [User_LII] often prefers working alone.",
+         "When developing a plan of action or process, [User_ILE] tends to see themselves as within the process; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_LII] tends to place themselves "outside of the process"; they dissociate from it. For them the process or situation is something external from themselves.",
+         "[User_ILE] is often more cognizant of their outwards appearance and is thus better at presenting themselves than [User_LII].",
+         "[User_ILE] is relatively more flexible and tolerant than [User_LII].",
+         "[User_ILE] tends to have a more democratic leadership style than [User_LII]."
+       ],
      }
    },
    "ESE": {

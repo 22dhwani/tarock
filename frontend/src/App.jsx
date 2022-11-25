@@ -60,7 +60,6 @@ const App = () => {
 
   useEffect(() => {
     if (data) {
-      data.visitorId = 'test11260128';
       setUserData((prevUserData) => ({
         ...prevUserData,
         visitorId: data.visitorId,

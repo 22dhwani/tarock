@@ -15,15 +15,22 @@ import Loading from './components/Loading/Loading';
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
-import { getUser, getAuthorization, getUserType } from './utils/userUtil';
+import { getUser, getAuthorization } from './utils/userUtil';
 import MatchCard from './components/Cards/MatchCard';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
+import Test from './pages/Test';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
   const [isLoadingUser, setIsLoadingUser] = useState(true);
+  const getUserType = async (id) => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/status/${id}`)
+    const data = await response.json();
+    return data;
+  }
+
  
   const initUser = async (id) => {
     const typeData = await getUserType(id);
@@ -35,7 +42,7 @@ const App = () => {
     }));
     const authorization = await getAuthorization();
     if (authorization.success) { // Real user with cookie
-      const authorizedUserData = await getUser(authorization.user.id, typeData.userType);
+      const authorizedUserData = await getUser(authorization.user.id, 'REAL');
       setUserData((prevUserData) => ({
         ...prevUserData,
         name: authorizedUserData.name,
@@ -46,7 +53,7 @@ const App = () => {
         id: authorizedUserData.internal_user_id,
         isAuthorized: true
       }));
-    } else if (typeData.userType === 'TMP') { // Get temp user data.
+    } else if (typeData.userType === 'TMP') { // No authorized cookie, need to determine user type.
       const tmpUserData = await getUser(id, typeData.userType);
       setUserData((prevUserData) => ({
         ...prevUserData,
@@ -60,10 +67,6 @@ const App = () => {
 
   useEffect(() => {
     if (data) {
-      setUserData((prevUserData) => ({
-        ...prevUserData,
-        visitorId: data.visitorId,
-      }));
       initUser(data.visitorId);
     }
   }, [data]);
@@ -80,7 +83,7 @@ const App = () => {
             <Routes>
               <Route index path="/" element={<Welcome />} />
               <Route index path="/signin" element={<SignInScreen />} />
-              <Route index path="/test" element={<Assessment assessmentGroupId={1} />} />
+              <Route index path="/test" element={<Test assessmentGroupId={1}/>} />
               <Route index path="/home" element={<ProtectedRoute component={<HomeScreen />} />} />
               <Route index path="/user" element={<ProtectedRoute component={<UserProfile />} />} />
               <Route index path="/editProfile" element={<ProtectedRoute component={<EditProfile />} />} />

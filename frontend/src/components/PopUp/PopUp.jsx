@@ -5,12 +5,12 @@ function CenteredModal(props) {
     <Modal
       size="lg"
       centered
-      style={{ padding: '10px' }}
+      style={{ padding: '10px'}}
       show={props.show}
       onHide={props.onHide}
     >
-      {props.isCard && <Modal.Header closeButton />}
-      {props.isCard && props.children}
+      {props.children && <Modal.Header closeButton />}
+      {props.children && props.children}
 
       {
         props.isNotification &&

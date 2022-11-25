@@ -175,7 +175,7 @@
        "IEE": [
          "When developing a plan of action or process, [User_ILE] tends to see themselves as 'within the process'; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_IEE] tends to place themselves 'outside of the proces'; they dissociate from it. For them the process or situation is something external from themselves.",
          "[User_IEE] is more vulnerable to logical manipulation than [User_ILE]. However [User_ILE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_IEE].",
-         "[User_IEE] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_IEE] having a negative assessment of various situations and events (e.g., glass half empty). On the other hand, [User_ILE] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full").",
+         "[User_IEE] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_IEE] having a negative assessment of various situations and events (e.g., glass half empty). On the other hand, [User_ILE] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full).",
          "[User_IEE] places greater value on their resources than [User_ILE]. For [User_IEE], resources like their money, time, sleep, etc., fall into their inner personal space, and [User_IEE] will be more likely to deprioritize an interest if it starts to drain these resources too much.",
          "[User_IEE] is more likely (than [User_ILE]) to use special rituals or other culturally accepted formalities when forming relationships with others. What that means is that the emotional proximity and relationship status for [User_IEE] are more externally predetermined. Additionally, [User_IEE] generally progresses in relationships through stages, and therefore is more familiar with these stages than [User_ILE]. [User_IEE] tends to be more linear in their relationship progression than [User_ILE], and [User_IEE] assigns importance to the formalities of recognizing the start and end to each of these stages.",
          "When conversing, [User_IEE] is inclined to communicate in the form of monologues, where each party has its 'turn'. Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_ILE] tends to prefer more of a question and answer style format.",
@@ -207,7 +207,7 @@
          "When describing the stages of an event, [User_SLI] is more likely to focus on how stage A leads to stage B, how stage B leads to stage C, etc. [User_ILE], on the other hand, focuses more on the stages themselves without necessarily seeing or emphasizing the transitions or causes and effects of the stages to the extent that [User_SLI] do.",
          "[User_SLI] is better at noticing the details than [User_ILE]. [User_ILE] on the other hand, is better at seeing the big picture than [User_SLI].",
          "[User_ILE] often prefers to work with others in a team whereas [User_SLI] often prefers working alone."
-       ],
+       ]
        ]
      }
    },
@@ -248,11 +248,11 @@
          "[User_ILE]'s energy levels tend to decrease when they're alone whereas [User_LII]'s energy levels will decrease when they're interacting with larger groups of people.",
          "When solving a problem, [User_ILE] is more inclined (than [User_LII]) to solve it by relying predominantly on only the presently available information. Essentially, [User_ILE] will develop a process or method uniquely fitted towards the present problem, and this method is designed using the present conditions and information.",
          "[User_ILE] often prefers to work with others in a team whereas [User_LII] often prefers working alone.",
-         "When developing a plan of action or process, [User_ILE] tends to see themselves as within the process; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_LII] tends to place themselves "outside of the process"; they dissociate from it. For them the process or situation is something external from themselves.",
+         "When developing a plan of action or process, [User_ILE] tends to see themselves as within the process; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_LII] tends to place themselves /"outside of the process"; they dissociate from it. For them the process or situation is something external from themselves.",
          "[User_ILE] is often more cognizant of their outwards appearance and is thus better at presenting themselves than [User_LII].",
          "[User_ILE] is relatively more flexible and tolerant than [User_LII].",
          "[User_ILE] tends to have a more democratic leadership style than [User_LII]."
-       ],
+       ]
      }
    },
    "ESE": {

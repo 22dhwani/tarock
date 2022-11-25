@@ -35,7 +35,7 @@ const App = () => {
     }));
     const authorization = await getAuthorization();
     if (authorization.success) { // Real user with cookie
-      const authorizedUserData = await getUser(authorization.user.id, typeData.userType);
+      const authorizedUserData = await getUser(authorization.user.id, 'REAL');
       setUserData((prevUserData) => ({
         ...prevUserData,
         name: authorizedUserData.name,
@@ -60,6 +60,7 @@ const App = () => {
 
   useEffect(() => {
     if (data) {
+      data.visitorId = 'test11260128';
       setUserData((prevUserData) => ({
         ...prevUserData,
         visitorId: data.visitorId,

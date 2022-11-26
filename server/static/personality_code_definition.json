@@ -20,6 +20,38 @@
        "INTROVERSION": 0.225,
        "EXECUTION": 0.2125,
        "STRATEGY": 0.7875
+     }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     "matching_tips": {
+       "LII": [
+         "[User_LII] often has a smaller, closer network of friends, whereas [User_ILE] often has a wider network of friends.",
+         "[User_ILE] is frequently comfortable making changes and adjustments to their decisions. [User_LII], on the other hand, prefers not to make changes to their decisions.",
+         "When assessing an option or available choice, [User_ILE] tends to focus more on how the choice could benefit them than [User_LII] would. On the other hand, [User_LII] would be more mindful of the potential risks and potential losses that may accompany the decision that [User_ILE] may unconsciously minimize.",
+         "[User_LII] tends to judge their available options by how likely it will help them reach their goal. If a choice no longer helps [User_LII] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "[User_LII]'s energy levels tend to improve when they're alone, whereas [User_ILE]'s energy levels increase when interacting with larger groups.",
+         "When planning to complete something, [User_LII] is more likely to focus their attention on the goal itself, overlooking and deprioritizing the individual actions needed to reach that goal. On the other hand, [User_ILE] tends to focus their attention on each action, in a step by step process.",
+         "[User_ILE]'s energy levels tend to decrease when they're alone whereas [User_LII]'s energy levels will decrease when they're interacting with larger groups of people.",
+         "[User_LII] tends to put more effort than [User_ILE] into finishing any new project they start.",
+         "[User_LII] tends to plan ahead, making decisions early, wheras [User_ILE] tends to prefer a wait and see, more spontaneous approach.",
+         "[User_LII] tends to have a more authoritarian, hierarchical leadership style than [User_ILE]."
+       ],
+       "ESE": [
+         "[User_ILE] is comfortable making changes and adjustments to their decisions quite frequently. [User_ESE], on the other hand, prefers to not make changes to their decisions.",
+         "[User_ESE] tends to put more effort than [User_ILE] into finishing any new project they start.",
+         "[User_ILE] tends to be more idealistic with their heads-in-the-cloud. [User_ESE], on the other hand, is more realistic and down-to-earth.",
+         "When conversing, [User_ESE] is more inclined to communicate in the form of monologues. Because of that [User_ESE] subconsciously attempts to transform a dialogue into a series of monologues. Conversely, [User_ILE] tends to prefer more of a question and answer style format.",
+         "[User_ESE] is more vulnerable to logical manipulation than [User_ILE]. However [User_ILE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_ESE].",
+         "[User_ILE] tends to start more tasks and other projects than [User_ESE], but [User_ILE] is less likely to complete all of them.",
+         "[User_ESE] tends to plan ahead, making decisions early. On the other hand, [User_ILE] tends to prefer a wait and see, more spontaneous approach.",
+         "[User_ESE] is relatively more rigid and stubborn than [User_ILE].",
+         "[User_ESE] tends to have stiffer more angular movements. [User_ILE] tends to have more relaxed fluid movements.",
+         "[User_ILE] is often more interested in studying systems, structures, and functionality than [User_ESE]."
+       ]
      }
    },
    "LII": {

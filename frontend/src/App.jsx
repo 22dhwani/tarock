@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Assessment from "./components/Assessment/Assessment";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserProfile from './pages/UserProfile';
 import Welcome from './pages/Welcome';
@@ -20,6 +19,7 @@ import MatchCard from './components/Cards/MatchCard';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
+import Test from './pages/Test';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
@@ -80,7 +80,7 @@ const App = () => {
             <Routes>
               <Route index path="/" element={<Welcome />} />
               <Route index path="/signin" element={<SignInScreen />} />
-              <Route index path="/test" element={<Assessment assessmentGroupId={1} />} />
+              <Route index path="/test" element={<Test assessmentGroupId={1} />} />
               <Route index path="/home" element={<ProtectedRoute component={<HomeScreen />} />} />
               <Route index path="/user" element={<ProtectedRoute component={<UserProfile />} />} />
               <Route index path="/editProfile" element={<ProtectedRoute component={<EditProfile />} />} />

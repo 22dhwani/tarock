@@ -9,11 +9,11 @@ function Swipper(props) {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
+    <Carousel activeIndex={index} onSelect={handleSelect} interval={null} className='gap-3'>
       {
         props.data && props.data.map((item, index) => {
           return (
-            <Carousel.Item key={index} className='mx-1'>
+            <Carousel.Item key={index} className='px-2'>
               {item}
             </Carousel.Item>
           )

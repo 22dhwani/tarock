@@ -11,7 +11,10 @@ import AddCardButton from '../components/Buttons/AddCardButton/AddCardButton';
 import TabSwitch from '../components/TabSwitch/TabSwitch';
 import Popup from '../components/PopUp/PopUp';
 import MyCard from '../components/Cards/MyCard';
-import MatchCard from '../components/Cards/MatchCard';
+import MatchCard from '../components/Cards/Match/MatchCard';
+import linkButton from '../assets/buttons/link.svg';
+import imgButton from '../assets/buttons/image.svg';
+
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
@@ -22,7 +25,7 @@ const CardsScreen = () => {
     const [showCard, setShowCard] = useState(false);
     const [cardType, setCardType] = useState();
     const [personalityData, setPersonalityData] = useState([]);
-    
+
     const onMyCardClick = (card) => {
         setCardType(card);
         setShowCard(true);
@@ -40,7 +43,7 @@ const CardsScreen = () => {
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`);
         const data = await response.json();
         const resultCode = data[0].data[0].result_code;
-        if(resultCode) {
+        if (resultCode) {
             const quadra = await getUserQuadra(resultCode);
             setPersonalityData(quadra);
         }
@@ -81,12 +84,78 @@ const CardsScreen = () => {
     function shareCard() {
         navigate(`/share/${userData.id}`);
     }
- 
+    const [shareCardOption, setShareCardOption] = useState(false);
     return (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
-            <Popup show={showNotification} setShow={setShowNotification} isNotification={true} />
+            <Popup show={showNotification} setShow={setShowNotification} isNotification={true}>
+                <div className='text-center rounded-3 py-3' style={{ backgroundColor: 'white', color: '#49304D' }}>
+                    <h1 style={{
+                        fontWeight: '700',
+                        fontSize: '22px',
+                        lineHeight: '36px',
+
+                    }}>
+                        Coming Soon
+                    </h1>
+                    <p style={{
+                        fontWeight: '500',
+                        fontSize: '16px',
+                        lineHeight: '19.5px',
+
+                    }}>
+                        We are working hard to develop this feature. <br></br><b>Stay tuned!</b>
+                    </p>
+                    <button
+                        onClick={() => setShowNotification(false)}
+                        style={{
+                            border: 'none',
+                            backgroundColor: '#49304D',
+                            color: '#FFFFFF',
+                            borderRadius: '50px',
+                            paddingLeft: '1.5rem',
+                            paddingRight: '1.5rem',
+                            paddingTop: '0.5rem',
+                            paddingBottom: '0.5rem',
+                            fontWeight: '700',
+                        }}>
+                        Got it
+                    </button>
+                </div>
+            </Popup>
             <Popup show={showCard} setShow={setShowCard} isCard={true}>
-                {cardType}
+                <>
+                    {cardType}
+                    {shareCardOption && <div className='share'></div>}
+                    <button
+                        onClick={() => setShareCardOption(true)}
+                        style={{
+                            border: 'none',
+                            backgroundColor: '#FFD874',
+                            borderRadius: '50px',
+                            paddingTop: '10px',
+                            paddingBottom: '10px',
+                            fontWeight: '900',
+                            width: '60%',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: '33px',
+                        }}>
+                        Share
+                    </button>
+                    <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
+                        <div className='d-flex gap-5 mx-auto' style={{
+                            marginTop: '85%',
+                        }}>
+                            <img src={linkButton} alt='link' style={{
+                                cursor: 'pointer'
+                            }} />
+                            <img src={imgButton} alt='image' style={{
+                                cursor: 'pointer'
+                            }} />
+                        </div>
+                    </Popup>
+                </>
+
             </Popup>
 
             <Header />

@@ -11,6 +11,7 @@ import AddCardButton from '../components/Buttons/AddCardButton/AddCardButton';
 import TabSwitch from '../components/TabSwitch/TabSwitch';
 import Popup from '../components/PopUp/PopUp';
 import MyCard from '../components/Cards/MyCard';
+import Loading from '../components/Loading/Loading';
 import MatchCard from '../components/Cards/Match/MatchCard';
 import linkButton from '../assets/buttons/link.svg';
 import imgButton from '../assets/buttons/image.svg';
@@ -24,8 +25,9 @@ const CardsScreen = () => {
     const [showNotification, setShowNotification] = useState(false);
     const [showCard, setShowCard] = useState(false);
     const [cardType, setCardType] = useState();
-    const [personalityData, setPersonalityData] = useState([]);
-
+    const [quadra, setQuadra] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    
     const onMyCardClick = (card) => {
         setCardType(card);
         setShowCard(true);
@@ -34,19 +36,15 @@ const CardsScreen = () => {
         setCardType(card);
         setShowCard(true);
     }
-    const getUserQuadra = async (id) => {
-        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/${id}`)
-        const data = await response.json();
-        return data;
-    }
     const getCardData = async () => {
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`);
         const data = await response.json();
-        const resultCode = data[0].data[0].result_code;
-        if (resultCode) {
-            const quadra = await getUserQuadra(resultCode);
-            setPersonalityData(quadra);
+        if (data.length == 0 || data[0].type != 'Tarock') {
+            // No Tarock card result for current user, navigate to test page.
+            navigate(matchUserId ? `/test?match=${matchUserId}` : '/test');
+            throw new Error('No Tarock card result found!');
         }
+        setQuadra(data[0].data.quadra);
         // Set matched cards data.
         if (data.length > 1) {
             setMatchedCardsData(data[1].data);
@@ -66,18 +64,22 @@ const CardsScreen = () => {
             })
         });
         if (response.ok) {
-            navigate(`/matchCard/${matchUserId}`);
-        } else {
-            getCardData();
+            setTab(false);
+            onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={matchUserId} />);
         }
     }
 
     useEffect(() => {
-        if (matchUserId && matchUserId != userData.Id) {
-            matchUser();
-        } else {
-            getCardData();
-        }
+        getCardData()
+            .then(async() => {
+                if (matchUserId && matchUserId != userData.Id) {
+                    await matchUser().then(() => getCardData());
+                }
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
     }, []);
 
     const [tab, setTab] = useState(true);
@@ -85,7 +87,8 @@ const CardsScreen = () => {
         navigate(`/share/${userData.id}`);
     }
     const [shareCardOption, setShareCardOption] = useState(false);
-    return (
+ 
+    return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Popup show={showNotification} setShow={setShowNotification} isNotification={true}>
                 <div className='text-center rounded-3 py-3' style={{ backgroundColor: 'white', color: '#49304D' }}>
@@ -166,7 +169,7 @@ const CardsScreen = () => {
                         <>
                             <Col style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} className='justify-content-center d-flex'>
                                 <GenCard
-                                    quadra={personalityData.personality_socionic_quadra}
+                                    quadra={quadra}
                                     avatar_index={userData.avatarIndex} />
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center' onClick={() => setShowNotification(true)}>
@@ -177,11 +180,11 @@ const CardsScreen = () => {
                             {
                                 matchedCardsData.length ? <>
                                     {
-                                        matchedCardsData.map((data) => {
+                                        matchedCardsData.map((data, index) => {
                                             return <Col
-                                                key={data.id}
+                                                key={index}
                                                 style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(<MatchCard origID={data.orig_user_id} matchedUserID={data.matched_user_id} />)}
+                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />)}
                                                 className='justify-content-center d-flex'>
                                                 <GenCard cardType='match' />
                                             </Col>

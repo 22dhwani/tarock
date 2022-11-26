@@ -45,7 +45,8 @@ const App = () => {
         email: authorizedUserData.email,
         dob: authorizedUserData.birth_date,
         id: authorizedUserData.internal_user_id,
-        isAuthorized: true
+        isAuthorized: true,
+        type: 'REAL'
       }));
     } else if (typeData.userType === 'TMP') { // Get temp user data.
       const tmpUserData = await getUser(id, typeData.userType);

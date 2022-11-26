@@ -23,8 +23,7 @@ const CardsScreen = () => {
     const [showCard, setShowCard] = useState(false);
     const [cardType, setCardType] = useState();
     const [quadra, setQuadra] = useState('');
-    const [isLoadingData, setIsLoadingData] = useState(false);
-    const [isMatching, setIsMatching] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     
     const onMyCardClick = (card) => {
         setCardType(card);
@@ -35,24 +34,21 @@ const CardsScreen = () => {
         setShowCard(true);
     }
     const getCardData = async () => {
-        setIsLoadingData(true);
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`);
         const data = await response.json();
         if (data.length == 0 || data[0].type != 'Tarock') {
             // No Tarock card result for current user, navigate to test page.
             navigate(matchUserId ? `/test?match=${matchUserId}` : '/test');
-            return;
+            throw new Error('No Tarock card result found!');
         }
         setQuadra(data[0].data.quadra);
         // Set matched cards data.
         if (data.length > 1) {
             setMatchedCardsData(data[1].data);
         }
-        setIsLoadingData(false);
     }
 
     const matchUser = async () => {
-        setIsMatching(true);
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/match`, {
             method: 'POST',
             headers: {
@@ -68,14 +64,19 @@ const CardsScreen = () => {
             setTab(false);
             onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={matchUserId} />);
         }
-        setIsMatching(false);
     }
 
     useEffect(() => {
-        getCardData();
-        if (matchUserId && matchUserId != userData.Id) {
-            matchUser();
-        }
+        getCardData()
+            .then(async() => {
+                if (matchUserId && matchUserId != userData.Id) {
+                    await matchUser().then(() => getCardData());
+                }
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
     }, []);
 
     const [tab, setTab] = useState(true);
@@ -83,7 +84,7 @@ const CardsScreen = () => {
         navigate(`/share/${userData.id}`);
     }
  
-    return (isLoadingData || isMatching) ? <Loading /> : (
+    return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Popup show={showNotification} setShow={setShowNotification} isNotification={true} />
             <Popup show={showCard} setShow={setShowCard} isCard={true}>

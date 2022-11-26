@@ -74,7 +74,8 @@ const Assessment = ({ assessmentGroupId }) => {
                         const nav = '/signin' + (matchUserId ? `?match=${matchUserId}` : '');
                         navigate(nav, { state: { stage: 'signup' } });
                     } else {
-                        navigate("/myCard");
+                        const nav = '/cards' + (matchUserId ? `?match=${matchUserId}` : '');
+                        navigate(nav);
                     }
                 })
                 .catch((err) => {

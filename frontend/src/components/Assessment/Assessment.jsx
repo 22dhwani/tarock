@@ -5,13 +5,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import Header from '../Header/Header';
-import btn1 from '../../assets/btn_1.svg';
-import btn2 from '../../assets/btn_2.svg';
+import btn1 from '../../assets/buttons/Button-Right.svg';
+import btn2 from '../../assets/buttons/Button-Left.svg';
 import RadarChart from "../Charts/RadarChart";
 import { GlobalContext } from '../../context';
 import { useNavigate, useLocation } from "react-router-dom";
 import Loading from "../Loading/Loading";
-
+import ProgressBar from 'react-bootstrap/ProgressBar';
 const randomRadarData = () => {
     return {
         LOGIC: Math.random(),
@@ -94,38 +94,36 @@ const Assessment = ({ assessmentGroupId }) => {
             });
         }
     }
-
     if (isLoading) {
-        return <Loading/>
+        return <Loading />
     }
+    const now = 60
     return (
-        <Container className='d-flex flex-column min-vh-100' style={{
-            backgroundColor: '#FBF2DC',
-            height: 'fit-content',
-            background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)'
-        }}>
-
-            <Header goBackFunc={goBack}/>
+        <Container className='d-flex flex-column min-vh-100'>
+            <Header goBackFunc={goBack} />
+            <ProgressBar now={assessment.index} visuallyHidden max={20}/>
             <Row className='mx-auto'>
                 <div style={{ height: '200px', width: '200px' }}>
-                    <RadarChart userData={randomRadarData()} enableLabels={false}/>
+                    <RadarChart userData={randomRadarData()} enableLabels={false} />
                 </div>
             </Row>
-            <div className="card-container w-75 mx-auto overflow-auto">
-                <div className="card">
+            <div className="card-container mx-auto text-center" style={{
+                width: '90%',
+            }}>
+                <div>
                     {
                         assessment.index < assessment.data.length && <Question data={assessment.data[assessment.index].content} />
                     }
                 </div>
+                <Row className="w-75 mx-auto">
+                    <Col className="col-6 d-flex justify-content-center">
+                        <img src={btn1} alt="btn1" onClick={(e) => { onBtnClick(0) }} />
+                    </Col>
+                    <Col className="col-6 d-flex justify-content-center">
+                        <img src={btn2} alt="btn2" onClick={(e) => { onBtnClick(1) }} />
+                    </Col>
+                </Row>
             </div>
-            <Row className="w-75 mx-auto">
-                <Col className="col-6 d-flex justify-content-center">
-                    <img src={btn1} alt="btn1" onClick={(e) => { onBtnClick(0) }} />
-                </Col>
-                <Col className="col-6 d-flex justify-content-center">
-                    <img src={btn2} alt="btn2" onClick={(e) => { onBtnClick(1) }} />
-                </Col>
-            </Row>
         </Container>
     );
 };

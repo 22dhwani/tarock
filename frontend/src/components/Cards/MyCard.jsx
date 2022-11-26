@@ -3,7 +3,7 @@ import { GlobalContext } from '../../context';
 import Loading from '../Loading/Loading';
 import CommonCard from './CommonCard';
 import { useNavigate } from "react-router-dom";
-
+import Tarock from './Tarock';
 const MyCard = () => {
     const { userData } = useContext(GlobalContext);
     const [cardData, setCardData] = useState({});
@@ -38,9 +38,10 @@ const MyCard = () => {
     }, []);
     if (user.name && cardData.description) {
         return (
-            <div className='d-flex flex-column ' style={{ backgroundColor: '#3069B3' }}>
-                <CommonCard user={user} cardData={cardData} showDescription={true} showShare={true}/>
-            </div>
+            // <div className='d-flex flex-column ' style={{ backgroundColor: '#3069B3' }}>
+            //     <CommonCard user={user} cardData={cardData} showDescription={true} showShare={true}/>
+            // </div>
+            <Tarock user={user} cardData={cardData} />
         );
     } else {
         return <Loading/>

@@ -6,7 +6,6 @@ import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
 import RadarChart from '../Charts/RadarChart';
 import { useNavigate } from "react-router-dom";
-import share from '../../assets/myCard/share.svg';
 import deck from '../../assets/footer/cards.svg';
 import Header from '../Header/Header';
 function MatchCard(props) {
@@ -138,7 +137,7 @@ function MatchCard(props) {
                         // props.showShare &&
 
                         <div className='d-flex justify-content-center gap-2'>
-                            <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${userData.id}`)}/>
+                            {/* <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${userData.id}`)}/> */}
                             <div style={{
                                 borderRadius: '8px',
                                 backgroundColor: 'black',

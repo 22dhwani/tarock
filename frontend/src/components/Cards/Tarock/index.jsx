@@ -1,0 +1,58 @@
+import Container from "react-bootstrap/Container";
+import male from '../../../assets/avatarMale.svg';
+import female from '../../../assets/avatarFemale.svg';
+import RadarView from "./RadarView";
+import Swipper from "../../Swipper/Swipper";
+import DescriptiveView from "./DescriptiveView";
+import TypeView from "./TypeView";
+function TarockCard({ user, cardData }) {
+    const userInfo = <>
+        {/* Avatar */}
+        <div className='d-flex justify-content-center'>
+            {
+                (user.avatar_index == 1) &&
+                <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
+            }
+            {
+                (user.avatar_index == 0) &&
+                <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
+            }
+        </div>
+        {/* User Name */}
+        <div
+            className="py-3"
+            style={{
+                fontWeight: '400',
+                fontSize: '14px',
+                lineHeight: '28px'
+            }}>
+            {user.name} is
+        </div>
+    </>
+
+    const cardPages = [
+        <RadarView cardData={cardData} userInfo={userInfo} />,
+        <DescriptiveView cardData={cardData} userInfo={userInfo} />,
+        <TypeView cardData={cardData} userInfo={userInfo} />
+    ]
+
+    const styledCardPages = cardPages.map((item, index) => {
+        return (
+            <Container
+                key={index}
+                className='d-flex flex-column py-4 rounded-5' style={{
+                    backgroundColor: '#2c60b0',
+                    color: 'white',
+                    textAlign: 'center',
+                }}>
+                {item}
+            </Container>
+        )
+    })
+
+    return (
+        <Swipper data={styledCardPages} />
+    )
+}
+
+export default TarockCard;

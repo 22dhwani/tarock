@@ -9,16 +9,16 @@ function Swipper(props) {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} interval={null} >
-        {
-            props.data && props.data.map((item, index) => {
-                return (
-                    <Carousel.Item key={index}>
-                        {item}
-                    </Carousel.Item>
-                )
-            })
-        }
+    <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
+      {
+        props.data && props.data.map((item, index) => {
+          return (
+            <Carousel.Item key={index} className='mx-1'>
+              {item}
+            </Carousel.Item>
+          )
+        })
+      }
     </Carousel>
   );
 }

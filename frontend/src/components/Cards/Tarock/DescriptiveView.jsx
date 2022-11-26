@@ -8,11 +8,13 @@ function DescriptiveView({ userInfo, cardData }) {
         'Blind Spot',
         'Ideal Environment'
     ]
-    console.log(cardData)
     return (
         <>
             {userInfo}
-            <div>
+            <div style={{
+                overflow: 'auto',
+                padding:'10px'
+            }}>
                 {
                     description.map((item, index) => {
                         return (

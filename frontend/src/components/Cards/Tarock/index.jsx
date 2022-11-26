@@ -5,6 +5,7 @@ import RadarView from "./RadarView";
 import Swipper from "../../Swipper/Swipper";
 import DescriptiveView from "./DescriptiveView";
 import TypeView from "./TypeView";
+
 function TarockCard({ user, cardData }) {
     const userInfo = <>
         {/* Avatar */}
@@ -42,7 +43,9 @@ function TarockCard({ user, cardData }) {
                 key={index}
                 className='d-flex flex-column py-4 rounded-5' style={{
                     backgroundColor: '#2c60b0',
+                    height: '80vh',
                     color: 'white',
+                    overflow:'hidden',
                     textAlign: 'center',
                 }}>
                 {item}

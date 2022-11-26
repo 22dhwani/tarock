@@ -13,7 +13,7 @@ async function create(req, res) {
             const data = await Match.create(match);
             res.send(data);
         } catch (error) {
-            res.status(400).send(error);
+            res.status(400).send(error.message);
         }
     }
 };

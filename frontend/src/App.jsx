@@ -15,7 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from './context';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 import { getUser, getAuthorization, getUserType } from './utils/userUtil';
-import MatchCard from './components/Cards/MatchCard';
+import MatchCard from './components/Cards/Match/MatchCard';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -36,6 +36,7 @@ const App = () => {
     const authorization = await getAuthorization();
     if (authorization.success) { // Real user with cookie
       const authorizedUserData = await getUser(authorization.user.id, 'REAL');
+
       setUserData((prevUserData) => ({
         ...prevUserData,
         name: authorizedUserData.name,
@@ -44,7 +45,8 @@ const App = () => {
         email: authorizedUserData.email,
         dob: authorizedUserData.birth_date,
         id: authorizedUserData.internal_user_id,
-        isAuthorized: true
+        isAuthorized: true,
+        type: 'REAL'
       }));
     } else if (typeData.userType === 'TMP') { // Get temp user data.
       const tmpUserData = await getUser(id, typeData.userType);
@@ -57,7 +59,6 @@ const App = () => {
     }
     setIsLoadingUser(false);
   };
-
   useEffect(() => {
     if (data) {
       setUserData((prevUserData) => ({

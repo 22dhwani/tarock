@@ -74,7 +74,8 @@ const Assessment = ({ assessmentGroupId }) => {
                         const nav = '/signin' + (matchUserId ? `?match=${matchUserId}` : '');
                         navigate(nav, { state: { stage: 'signup' } });
                     } else {
-                        navigate("/myCard");
+                        const nav = '/cards' + (matchUserId ? `?match=${matchUserId}` : '');
+                        navigate(nav);
                     }
                 })
                 .catch((err) => {
@@ -97,11 +98,11 @@ const Assessment = ({ assessmentGroupId }) => {
     if (isLoading) {
         return <Loading />
     }
-    const now = 60
+    
     return (
         <Container className='d-flex flex-column min-vh-100'>
             <Header goBackFunc={goBack} />
-            <ProgressBar now={assessment.index} visuallyHidden max={20}/>
+            <ProgressBar now={assessment.index} visuallyHidden max={assessment.data.length}/>
             <Row className='mx-auto'>
                 <div style={{ height: '200px', width: '200px' }}>
                     <RadarChart userData={randomRadarData()} enableLabels={false} />

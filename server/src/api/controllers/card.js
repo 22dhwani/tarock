@@ -15,21 +15,40 @@ function getByType(req, res) {
 
 async function getByUser(req, res) {
     const result = [];
-    let id = req.params.id;
+    const id = req.params.id;
     try {
-        const data = await Result.getByUser(req.params.id);
-        result.push({
-            type: 'Tarock',
-            data: data
-        }); 
-        const data2 = await Match.query(req.params.id);
+        const tarcokResult = await Result.getByUser(id);
+        if (tarcokResult.length > 0) {
+            const tarockData = data[tarcokResult[0].result_code];
+            result.push({
+                type: 'Tarock',
+                data: {
+                    resultCode: tarcokResult[0].result_code,
+                    quadra: tarockData.personality_socionic_quadra
+                }
+            }); 
+        }
+        const matchData = await Match.query(id);
         result.push({
             type: 'Match',
-            data: data2
+            data: await Promise.all(matchData.map(async (match) => {
+                const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
+                const matchedUserData = await User.queryReal(matchedUserId);
+                const matchedTarockResult = await Result.getByUser(matchedUserId);
+                if (matchedTarockResult.length == 0) {
+                    throw new Error('No matched user test result!');
+                }
+                return {
+                    matchedUserId: matchedUserId,
+                    matchedUserName: matchedUserData[0].name,
+                    matchedUserAvatarIndex: matchedUserData[0].avatar_index,
+                    matchedUserResultCode: matchedTarockResult[0].result_code
+                };
+            }))
         });
         res.send(result);
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
     }
 }
 

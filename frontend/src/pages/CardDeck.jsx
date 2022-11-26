@@ -12,6 +12,7 @@ import TabSwitch from '../components/TabSwitch/TabSwitch';
 import Popup from '../components/PopUp/PopUp';
 import MyCard from '../components/Cards/MyCard';
 import MatchCard from '../components/Cards/MatchCard';
+import Loading from '../components/Loading/Loading';
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
@@ -21,7 +22,9 @@ const CardsScreen = () => {
     const [showNotification, setShowNotification] = useState(false);
     const [showCard, setShowCard] = useState(false);
     const [cardType, setCardType] = useState();
-    const [personalityData, setPersonalityData] = useState([]);
+    const [quadra, setQuadra] = useState('');
+    const [isLoadingData, setIsLoadingData] = useState(false);
+    const [isMatching, setIsMatching] = useState(false);
     
     const onMyCardClick = (card) => {
         setCardType(card);
@@ -31,26 +34,25 @@ const CardsScreen = () => {
         setCardType(card);
         setShowCard(true);
     }
-    const getUserQuadra = async (id) => {
-        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/${id}`)
-        const data = await response.json();
-        return data;
-    }
     const getCardData = async () => {
+        setIsLoadingData(true);
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`);
         const data = await response.json();
-        const resultCode = data[0].data[0].result_code;
-        if(resultCode) {
-            const quadra = await getUserQuadra(resultCode);
-            setPersonalityData(quadra);
+        if (data.length == 0 || data[0].type != 'Tarock') {
+            // No Tarock card result for current user, navigate to test page.
+            navigate(matchUserId ? `/test?match=${matchUserId}` : '/test');
+            return;
         }
+        setQuadra(data[0].data.quadra);
         // Set matched cards data.
         if (data.length > 1) {
             setMatchedCardsData(data[1].data);
         }
+        setIsLoadingData(false);
     }
 
     const matchUser = async () => {
+        setIsMatching(true);
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/match`, {
             method: 'POST',
             headers: {
@@ -63,17 +65,16 @@ const CardsScreen = () => {
             })
         });
         if (response.ok) {
-            navigate(`/matchCard/${matchUserId}`);
-        } else {
-            getCardData();
+            setTab(false);
+            onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={matchUserId} />);
         }
+        setIsMatching(false);
     }
 
     useEffect(() => {
+        getCardData();
         if (matchUserId && matchUserId != userData.Id) {
             matchUser();
-        } else {
-            getCardData();
         }
     }, []);
 
@@ -82,7 +83,7 @@ const CardsScreen = () => {
         navigate(`/share/${userData.id}`);
     }
  
-    return (
+    return (isLoadingData || isMatching) ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Popup show={showNotification} setShow={setShowNotification} isNotification={true} />
             <Popup show={showCard} setShow={setShowCard} isCard={true}>
@@ -97,7 +98,7 @@ const CardsScreen = () => {
                         <>
                             <Col style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} className='justify-content-center d-flex'>
                                 <GenCard
-                                    quadra={personalityData.personality_socionic_quadra}
+                                    quadra={quadra}
                                     avatar_index={userData.avatarIndex} />
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center' onClick={() => setShowNotification(true)}>
@@ -108,11 +109,11 @@ const CardsScreen = () => {
                             {
                                 matchedCardsData.length ? <>
                                     {
-                                        matchedCardsData.map((data) => {
+                                        matchedCardsData.map((data, index) => {
                                             return <Col
-                                                key={data.id}
+                                                key={index}
                                                 style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(<MatchCard origID={data.orig_user_id} matchedUserID={data.matched_user_id} />)}
+                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />)}
                                                 className='justify-content-center d-flex'>
                                                 <GenCard cardType='match' />
                                             </Col>

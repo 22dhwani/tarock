@@ -42,7 +42,8 @@ async function getByUser(req, res) {
                     matchedUserId: matchedUserId,
                     matchedUserName: matchedUserData[0].name,
                     matchedUserAvatarIndex: matchedUserData[0].avatar_index,
-                    matchedUserResultCode: matchedTarockResult[0].result_code
+                    matchedUserResultCode: matchedTarockResult[0].result_code,
+                    matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
                 };
             }))
         });

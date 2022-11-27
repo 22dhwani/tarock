@@ -11,7 +11,7 @@ const router = express.Router();
 
 passport.serializeUser(function(user, done) {
   process.nextTick(function() {
-    return done(null, user);
+    return done(null, {id: user.internal_user_id});
   });
 });
 

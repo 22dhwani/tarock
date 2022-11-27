@@ -9,7 +9,8 @@ import Swipper from '../Swipper/Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import deck from '../../assets/footer/cards.svg';
 import { useNavigate } from 'react-router-dom';
-import styles from './Cards.module.css'
+import styles from './Cards.module.css';
+import match from '../../assets/cards/matchBtn.svg';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             </div>
             {
                 onMatchClick &&
-                <div className='d-flex justify-content-center mt-2' onClick={() => onMatchClick()}>
+                <div className='d-flex justify-content-center mt-4' onClick={() => onMatchClick()}>
                     <img src={match} alt='match' />
                 </div>
             }

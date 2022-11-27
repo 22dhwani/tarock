@@ -54,7 +54,9 @@ async function queryReal(id) {
 }
 
 async function updateReal(user) {
-    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.password, user.name, user.gender, user.avatarIndex, user.dob, user.id]);
+    const data = await sql.query("UPDATE user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id]);
+    // Support updating password in future.
+    // const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.password, user.name, user.gender, user.avatarIndex, user.dob, user.id]);
     return data[0];
 }
 

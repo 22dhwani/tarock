@@ -20,7 +20,7 @@ const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
     const navigate = useNavigate();
-    const search = useLocation().search;
+    const { state, search } = useLocation();
     const matchUserId = new URLSearchParams(search).get('match');
     const [showNotification, setShowNotification] = useState(false);
     const [showCard, setShowCard] = useState(false);
@@ -74,6 +74,10 @@ const CardsScreen = () => {
             .then(async() => {
                 if (matchUserId && matchUserId != userData.Id) {
                     await matchUser().then(() => getCardData());
+                }
+                if (state && state.card === 'tarock') {
+                    setTab(true);
+                    onMyCardClick(<MyCard />);
                 }
                 setIsLoading(false);
             })

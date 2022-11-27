@@ -153,19 +153,22 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
       const data = await User.queryReal(hash);
       if (data.length == 0) {
         // User not found in database, create one.
+        const user = new User.User({
+          id: hash,
+          email: email,
+          password: null,
+          name: req.user.name,
+          gender: 'Other',
+          avatarIndex: 2,
+        });
         const data1 = await User.query(state.id);
         if (data1.length > 0) {
           // Copy info from tmp_user.
-          const user = new User.User({
-            id: hash,
-            email: email,
-            password: null,
-            name: data1[0].name,
-            gender: data1[0].gender,
-            avatarIndex: data1[0].avatar_index
-          });
-          await User.createReal(user);
+          user.name = data1[0].name;
+          user.gender = data1[0].gender;
+          user.avatarIndex = data1[0].avatar_index;
         }
+        await User.createReal(user);
         // Copy test data.
         const data2 = await Result.getByUser(state.id);
         if (data2.length > 0) {

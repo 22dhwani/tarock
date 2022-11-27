@@ -22,7 +22,7 @@ function ButtonGroup(props) {
                             </button>
                         </a>
                         :
-                        <Link to={button.link} key={index}>
+                        <Link to={button.link} state={button.state} key={index}>
                             <button style={buttonStyle}>
                                 <img src={button.button} alt='button' />
                             </button>

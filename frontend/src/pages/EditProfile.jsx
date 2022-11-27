@@ -10,10 +10,9 @@ import { useNavigate } from "react-router-dom";
 import './styles.css'
 function EditProfile() {
     const { userData, setUserData } = useContext(GlobalContext);
-    //console.log(userData)
     const placeholders = ["First and Last Name", "mm/dd/yyyy"];
     const formItems = ['Name', 'DOB']
-   let avatarIndex = 0;
+    let avatarIndex = 0;
     const [formData, setFormData] = useState(
         {
             name: "",
@@ -31,7 +30,6 @@ function EditProfile() {
         } else if (formData.gender == "Female") {
             avatarIndex = 0;
         }
-        console.log(avatarIndex)
         try {
 
             await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
@@ -58,7 +56,7 @@ function EditProfile() {
                         name: formData.name,
                         gender: formData.gender,
                         avatarIndex: avatarIndex,
-                        //dob: formData.dob, //not saved
+                        dob: formData.dob
                     }));
                     navigate('/user');
                 })

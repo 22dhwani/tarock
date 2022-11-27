@@ -27,7 +27,7 @@ const randomRadarData = () => {
 
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
-    const [answers, setAnswers] = useState([]);
+    const answers = [];
     const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     const search = useLocation().search;
@@ -74,8 +74,11 @@ const Assessment = ({ assessmentGroupId }) => {
                         const nav = '/signin' + (matchUserId ? `?match=${matchUserId}` : '');
                         navigate(nav, { state: { stage: 'signup' } });
                     } else {
-                        const nav = '/cards' + (matchUserId ? `?match=${matchUserId}` : '');
-                        navigate(nav);
+                        if (matchUserId) {
+                            navigate(`/cards?match=${matchUserId}`);
+                        } else {
+                            navigate('/cards', { state: { card: 'tarock' } });
+                        }
                     }
                 })
                 .catch((err) => {
@@ -87,12 +90,17 @@ const Assessment = ({ assessmentGroupId }) => {
 
     const goBack = () => {
         if (assessment.index == 0) {
-            navigate(-1);
+            if (userData.type === 'TMP') {
+                navigate('/signin', { state: { stage: 'new' } });
+            } else {
+                navigate(-1);
+            }
         } else {
             setAssessment({
                 index: assessment.index - 1,
                 data: assessment.data
             });
+            answers.pop();
         }
     }
     if (isLoading) {

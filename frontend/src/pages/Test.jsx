@@ -2,12 +2,18 @@ import Header from '../components/Header/Header';
 import Prep from '../components/Assessment/Prep';
 import Assessment from '../components/Assessment/Assessment';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { GlobalContext } from '../context';
 
 function Test(props) {
+    const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     function goBack() {
-        navigate(-1);
+        if (userData.type === 'TMP') {
+            navigate('/signin', { state: { stage: 'new' } });
+        } else {
+            navigate(-1);
+        }
     }
 
     const [startTest, setStartTest] = useState(false);

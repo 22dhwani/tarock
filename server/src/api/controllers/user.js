@@ -56,7 +56,8 @@ async function update(req, res) {
     });
     if (req.body.userType === 'REAL') {
         try {
-            user.password = req.body.password;
+            // Support updating password in future.
+            // user.password = req.body.password;
             const data = await User.updateReal(user);
             res.send(data);
         } catch (error) {

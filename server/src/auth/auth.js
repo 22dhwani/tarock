@@ -112,11 +112,20 @@ router.post('/register', async function(req, res, next) {
     //Waiting parrllely
     await Promise.all(queryPromises);
 
-    req.login({id: hashEmail, email: email}, function(err) {
+    req.login({id: hashEmail}, function(err) {
       if (err) { 
         return next(err); 
       }
-      res.status(200).json({id: hashEmail});
+      res.status(200).json(
+        {
+          name: tempUsers[0].name,
+          gender: tempUsers[0].gender,
+          avatar_index: tempUsers[0].avatar_index,
+          email: email,
+          birth_date: null,
+          internal_user_id: hashEmail
+        }     
+      );
     });
   } catch (error) {
     res.status(400).send(error);

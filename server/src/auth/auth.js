@@ -11,7 +11,8 @@ const router = express.Router();
 
 passport.serializeUser(function(user, done) {
   process.nextTick(function() {
-    return done(null, {id: user.internal_user_id});
+    console.log(user);
+    return done(null, user);
   });
 });
 
@@ -118,12 +119,7 @@ router.post('/register', async function(req, res, next) {
       }
       res.status(200).json(
         {
-          name: tempUsers[0].name,
-          gender: tempUsers[0].gender,
-          avatar_index: tempUsers[0].avatar_index,
-          email: email,
-          birth_date: null,
-          internal_user_id: hashEmail
+          id: hashEmail
         }     
       );
     });

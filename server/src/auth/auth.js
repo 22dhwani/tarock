@@ -45,7 +45,7 @@ passport.use(new LocalStrategy.Strategy({usernameField: 'email', session: true},
       name: realUsers[0].name,
       id: hashEmail
     }
-    return cb(null, realUsers[0]);
+    return cb(null, user);
   } catch (error) {
     return cb(error);
   }
@@ -117,7 +117,7 @@ router.post('/register', async function(req, res, next) {
     //Waiting parrllely
     await Promise.all(queryPromises);
 
-    req.login({id: hashEmail, name: tempUsers[0], email: email}, function(err) {
+    req.login({id: hashEmail, name: tempUsers[0].name, email: email}, function(err) {
       if (err) { 
         return next(err); 
       }

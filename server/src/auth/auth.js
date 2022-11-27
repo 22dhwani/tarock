@@ -11,7 +11,6 @@ const router = express.Router();
 
 passport.serializeUser(function(user, done) {
   process.nextTick(function() {
-    console.log(user);
     return done(null, user);
   });
 });
@@ -40,6 +39,11 @@ passport.use(new LocalStrategy.Strategy({usernameField: 'email', session: true},
     }
     if (realUsers[0].password != hashPassword) {
       return cb(null, false, {error_msg: "Password incorrect."});
+    }
+    const user = {
+      email: realUsers[0].email,
+      name: realUsers[0].name,
+      id: hashEmail
     }
     return cb(null, realUsers[0]);
   } catch (error) {
@@ -113,7 +117,7 @@ router.post('/register', async function(req, res, next) {
     //Waiting parrllely
     await Promise.all(queryPromises);
 
-    req.login({id: hashEmail}, function(err) {
+    req.login({id: hashEmail, name: tempUsers[0], email: email}, function(err) {
       if (err) { 
         return next(err); 
       }

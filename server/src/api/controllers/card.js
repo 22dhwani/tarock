@@ -1,49 +1,56 @@
-const fs = require('fs');
-const path = require('path');
-const User = require('../models/user');
-const Result = require('../models/result');
-const Match = require('../models/match');
+import fs from 'fs';
+import path from 'path';
+import User from '../models/user.js';
+import Result from '../models/result.js';
+import Match from '../models/match.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../static/personality_code_definition.json')));
+const dir = dirname(fileURLToPath(import.meta.url));
+const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../static/personality_code_definition.json')));
 
-exports.getByType = (req, res) => {
+function getByType(req, res) {
     res.send(data[req.params.type]);
 }
 
-exports.getByUser = (req, res) => {
+async function getByUser(req, res) {
     const result = [];
-    let id = req.params.id;
-    // Find tmp user id if exists
-    // TODO: optimize this to avoid tmp ID query.
-    // TODO: optimize to avoid nested query.
-    User.queryTmpId(id, (err, data) => {
-        if (err) {
-            res.status(400).send(err);
-        } else  {
-            if (data.length > 0) {
-                id = data[0].tmp_user_id;
-            }
-            Result.getByUser(id, (err, data) => {
-                if (err) {
-                    res.status(400).send(err);
-                } else {
-                    result.push({
-                        type: 'Tarock',
-                        data: data
-                    });
-                    Match.query(req.params.id, (err, data) => {
-                        if (err) {
-                            res.status(400).send(err);
-                        } else {
-                            result.push({
-                                type: 'Match',
-                                data: data
-                            });
-                            res.send(result);
-                        }
-                    });
+    const id = req.params.id;
+    try {
+        const tarcokResult = await Result.getByUser(id);
+        if (tarcokResult.length > 0) {
+            const tarockData = data[tarcokResult[0].result_code];
+            result.push({
+                type: 'Tarock',
+                data: {
+                    resultCode: tarcokResult[0].result_code,
+                    quadra: tarockData.personality_socionic_quadra
                 }
-            });
+            }); 
         }
-    });
+        const matchData = await Match.query(id);
+        result.push({
+            type: 'Match',
+            data: await Promise.all(matchData.map(async (match) => {
+                const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
+                const matchedUserData = await User.queryReal(matchedUserId);
+                const matchedTarockResult = await Result.getByUser(matchedUserId);
+                if (matchedTarockResult.length == 0) {
+                    throw new Error('No matched user test result!');
+                }
+                return {
+                    matchedUserId: matchedUserId,
+                    matchedUserName: matchedUserData[0].name,
+                    matchedUserAvatarIndex: matchedUserData[0].avatar_index,
+                    matchedUserResultCode: matchedTarockResult[0].result_code,
+                    matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                };
+            }))
+        });
+        res.send(result);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
 }
+
+export default { getByType, getByUser, dir };

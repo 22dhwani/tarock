@@ -4,17 +4,10 @@ import female from '../../assets/avatarFemale.svg';
 import RadarChart from '../Charts/RadarChart';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import strengths from '../../assets/myCard/strengths.svg';
-import weakness from '../../assets/myCard/weakness.svg';
-import superpower from '../../assets/myCard/superpower.svg';
-import blindSpot from '../../assets/myCard/blindSpot.svg';
-import idealEnv from '../../assets/myCard/idealEnv.svg';
 import Header from '../Header/Header';
-import share from '../../assets/myCard/share.svg';
 import Swipper from '../Swipper/Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import deck from '../../assets/footer/cards.svg';
-import match from '../../assets/myCard/match.svg';
 import { useNavigate } from 'react-router-dom';
 import styles from './Cards.module.css'
 
@@ -71,7 +64,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     lineHeight: '24px'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={strengths} alt='strengths' />
+                        
                     </Col>
                     <Col>
                         {
@@ -97,7 +90,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     color: '#49304D',
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={weakness} alt='weakness' />
+                       
                     </Col>
                     <Col>
                         {
@@ -117,7 +110,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     backdropFilter: 'blur(10px)'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={superpower} alt='superpower' />
+                        
                     </Col>
                     <Col>
                         <div>
@@ -131,7 +124,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     backdropFilter: 'blur(10px)'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={blindSpot} alt='blind spot' />
+                        
                     </Col>
                     <Col>
                         <div>
@@ -146,7 +139,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     borderRadius: '0px 0px 8px 8px'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={idealEnv} alt='ideal environment' />
+                        
                     </Col>
                     <Col>
                         <div>
@@ -159,7 +152,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
     </>
 
     return (
-        <Container className='d-flex flex-column min-vh-100' >
+        <Container className='d-flex flex-column ' >
             <div style={{
                 backgroundImage: `url(${patternTarockBlue})`,
                 backgroundRepeat: 'no-repeat',
@@ -199,7 +192,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             {
                 showShare &&
                 <div className='d-flex justify-content-center gap-2 mt-5'>
-                    <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${user.internal_user_id}`)} />
+                    {/* <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${user.internal_user_id}`)} /> */}
                     <div style={{
                         borderRadius: '8px',
                         backgroundColor: 'rgb(48, 105, 179)',

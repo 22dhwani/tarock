@@ -84,7 +84,7 @@ const CardsScreen = () => {
 
     const [tab, setTab] = useState(true);
     function shareCard() {
-        navigate(`/share/${userData.id}`);
+        onMyCardClick(<MyCard />);
     }
     const [shareCardOption, setShareCardOption] = useState(false);
  
@@ -151,10 +151,10 @@ const CardsScreen = () => {
                         }}>
                             <img src={linkButton} alt='link' style={{
                                 cursor: 'pointer'
-                            }} />
+                            }} onClick={() => {navigate(`/share/${userData.id}`)}}/>
                             <img src={imgButton} alt='image' style={{
                                 cursor: 'pointer'
-                            }} />
+                            }} onClick={() => {navigate(`/share/${userData.id}`, { state: { qr: true } })}}/>
                         </div>
                     </Popup>
                 </>

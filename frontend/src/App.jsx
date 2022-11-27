@@ -89,7 +89,7 @@ const App = () => {
               <Route index path="/contact" element={<ProtectedRoute component={<Contact />} />} />
               <Route index path="/myCard" element={<ProtectedRoute component={<MyCardScreen />} />} />
               <Route index path="/chart" element={<ProtectedRoute component={<RadarChart />} />} />
-              <Route index path="/share/:userId" element={<ProtectedRoute component={<ShareScreen />} />} />
+              <Route index path="/share/:userId" element={<ShareScreen />} />
               <Route index path="/cards" element={<ProtectedRoute component={<CardDeck />} />} />
               {/* <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/> */}
             </Routes>

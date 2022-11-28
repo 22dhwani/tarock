@@ -104,6 +104,7 @@ function SignIn() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password,
@@ -139,6 +140,7 @@ function SignIn() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password,

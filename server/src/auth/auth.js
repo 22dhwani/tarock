@@ -40,7 +40,12 @@ passport.use(new LocalStrategy.Strategy({usernameField: 'email', session: true},
     if (realUsers[0].password != hashPassword) {
       return cb(null, false, {error_msg: "Password incorrect."});
     }
-    return cb(null, realUsers[0]);
+    const user = {
+      email: realUsers[0].email,
+      name: realUsers[0].name,
+      id: hashEmail
+    }
+    return cb(null, user);
   } catch (error) {
     return cb(error);
   }
@@ -112,11 +117,15 @@ router.post('/register', async function(req, res, next) {
     //Waiting parrllely
     await Promise.all(queryPromises);
 
-    req.login({id: hashEmail, email: email}, function(err) {
+    req.login({id: hashEmail, name: tempUsers[0].name, email: email}, function(err) {
       if (err) { 
         return next(err); 
       }
-      res.status(200).json({id: hashEmail});
+      res.status(200).json(
+        {
+          id: hashEmail
+        }     
+      );
     });
   } catch (error) {
     res.status(400).send(error);

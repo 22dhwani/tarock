@@ -27,7 +27,7 @@ const randomRadarData = () => {
 
 const Assessment = ({ assessmentGroupId }) => {
     const [assessment, setAssessment] = useState({ index: 0, data: [] });
-    const answers = [];
+    const [answers] = useState([]);
     const { userData } = useContext(GlobalContext);
     const navigate = useNavigate();
     const search = useLocation().search;

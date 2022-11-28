@@ -653,6 +653,194 @@
        "INTROVERSION": 0.8375,
        "EXECUTION": 0.9,
        "STRATEGY": 0.1
+    }, 
+     "summary": [
+       "When it comes to life, new experiences, and people, you prefer to have an open mind and approach everything with a genuine, kind attitude. As an Artist, you live in the present, doing whatever seems appropriate at the time. And you make sure to give lots of wiggle space for the unexpected, which is why many of your most treasured memories are of impromptu, spur-of-the-moment trips and adventures with friends and family.",
+       "In social interactions, you are very aware of and respectful of others' needs and attempt to maintain composure under pressure, and are capable of reading and responding to the emotional condition of others. Usually, you try to lift the spirits of others around them by using humor, games, smart remarks, or retorts.",
+       "However, those who fall under this personality category may have trouble making and keeping even short-term goals. Since this is the case, the Artist frequently doubts their abilities and fear that they are failing or disappointing others. Even without stifling their independence, intrepid souls may discover that a little bit of order in their life goes a long way toward making them feel more competent and organized.",
+       "Artists are sensitive souls who are sensitive to the approval or disapproval of others and may be easily hurt if they do not feel liked, approved of, or appreciated. It might be difficult for persons with this personality type to maintain emotional control when confronted with criticism."
+     ],
+     "matching_tips": {
+       "LII": [
+         "When developing a plan of action or process, [User_SEI] tends to see themselves as \"within the process\"; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_LII] tends to place themselves \"outside of the process\"; they dissociate from it. For them the process or situation is something external from themselves.",
+         "[User_LII] is often more interested in studying systems, structures, and functionality than [User_SEI].",
+         "When conversing, [User_SEI] is inclined to communicate in the form of monologues, where each party has \"its turn.\" Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_LII] tends to prefer more of a question and answer style format.",
+         "[User_SEI] tends to prefer using persuasion as a means of convincing others to do something, whereas [User_LII] prefers to use argumentation as a means of convincing others.",
+         "[User_SEI] places greater value on their resources than [User_LII]. For [User_SEI], resources like their money, time, sleep, etc., fall into their \"inner personal space,\" and [User_SEI] will be more likely to deprioritize an interest if it starts to drain these resources too much.",
+         "[User_LII] tends to be more idealistic with their heads-in-the-cloud. [User_SEI], on the other hand, is more realistic and down-to-earth.",
+         "[User_SEI] is often better at solving and minimizing interpersonal problems, whereas [User_LII] often struggles understanding them.",
+         "When describing reality, [User_LII] is more likely to talk about the properties and structure of reality. [User_SEI] is more likely to describe reality as movements, interactions, and changes.",
+         "[User_LII] tends to have a more authoritarian, hierarchical leadership style than [User_SEI].",
+         "[User_LII] tends to have stiffer more angular movements. [User_SEI] tends to have more relaxed fluid movements.",
+       ],
+       "ILE": [
+         "When conversing, [User_SEI] is inclined to communicate in the form of monologues, where each party has \"its turn.\" Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_ILE] tends to prefer more of a question and answer style format.",
+         "[User_ILE] tends to be more active and initiating with others whereas [User_SEI] tends to be more passive and less initiating.",
+         "When planning to complete something, [User_SEI] is more likely to focus their attention on the goal itself, overlooking and deprioritizing the individual actions needed to reach that goal. On the other hand, [User_ILE] tends to focus their attention on the each action; i.e., they're focused on how each decision and choice is being made (towards reaching the goal), in a step by step process.",
+         "[User_SEI] is more often focused on their thoughts and feelings whereas [User_ILE] is more often focused on their surroundings.",
+         "[User_SEI] is more likely (than [User_ILE]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+         "[User_SEI] is generally better at concentrating on specific tasks for longer periods of time than [User_ILE].",
+         "With regards to energy levels, [User_ILE] tends to have higher energy levels than [User_SEI].",
+         "[User_SEI] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_SEI] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "[User_ILE] often prefers to work with others in a team whereas [User_SEI] often prefers working alone.",
+         "[User_ILE] is often more interested in studying systems, structures, and functionality than [User_SEI].",
+       ],
+       "ESE": [
+         "[User_SEI] is more often focused on their thoughts and feelings whereas [User_ESE] is more often focused on their surroundings.",
+         "[User_ESE] tends to put more effort than [User_SEI] into finishing any new project they start.",
+         "[User_SEI] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_SEI] having a negative assessment of various situations and events (e.g., glass half empty). On the other hand, [User_ESE] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full).",
+         "[User_SEI] tends to start more tasks and other projects than [User_ESE], but [User_SEI] is less likely to complete all of them.",
+         "[User_SEI] is generally better at concentrating on specific tasks for longer periods of time than [User_ESE].",
+         "[User_ESE] often prefers to work with others in a team whereas [User_SEI] often prefers working alone.",
+         "[User_ESE] is able to change and make adjustments to their goals more easily than [User_SEI] (depending on how progress is being made, etc.). [User_SEI] on the other hand, prefers to stick with their original goals.",
+         "[User_ESE]'s psychic energy more often flows outwards, whereas with [User_SEI], their psychic energy more often flows inward.",
+         "[User_SEI] is comfortable making changes and adjustments to their decisions quite frequently. [User_ESE], on the other hand, prefers to not make changes to their decisions.",
+         "[User_ESE] tends to plan ahead, making decisions early. On the other hand, [User_SEI] tends to prefer a wait and see, more spontaneous approach.",
+       ],
+       "LSI": [
+         "User_SEI] is often better at solving and minimizing interpersonal problems, whereas [User_LSI] often struggles understanding them.",
+         "[User_SEI] tends to prefer using persuasion as a means of convincing others to do something, where s [User_LSI] prefers to use argumentation as a means of convincing others.",
+         "[User_SEI] is comfortable making changes and adjustments to their decisions quite frequently. [User_LSI], on the other hand, prefers to not make changes to their decisions.",
+         "[User_LSI] is more likely to make decisions based on logical reasons than [User_SEI], who is more likely to make decisions based on their own feelings.",
+         "[User_SEI] is more vulnerable to logical manipulation than [User_LSI]. However [User_LSI] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEI].",
+         "When assessing an option or available choice, [User_LSI] tends to focus more on how the choice could benefit them (what it would potentially yield) than [User_SEI] would. On the other hand, [User_SEI] would be more cognizant of the potential risks and potential losses that may accompany the decision that [User_LSI] may unconsciously minimize.",
+         "[User_LSI] places greater value on their interests than [User_SEI]. For example, [User_LSI] will maintain high levels of energy and focus on an interest they value, even deprioritizing their other resources to maintain the interest. For example, [User_LSI] may spend a large amount of energy on an interest they value, often to the detriment of their time, sleep, relationships, money, etc.",
+         "When it comes to completing a task, [User_LSI] is more likely than [User_SEI] to mobilize for longer periods of time. Specifically, [User_LSI] tends to mobilize for an action early and stay mobilized for a longer period of time after the task has been completed. For [User_LSI], this state of readiness is their natural state.",
+         "When getting ready to start a project, [User_SEI] spends more time planning and preparing for the project than [User_LSI]. In particular, [User_SEI] spends more time discussing the plan, discussing options and ways to approach the project, etc.).",
+         "[User_SEI] has a relatively higher stress tolerance than [User_LSI]. [User_LSI] often struggles with continually changing situations more than [User_SEI] does.",
+       ],
+       "SLE": [
+         "[User_SEI] places greater value on their resources than [User_SLE]. For [User_SEI], resources like their money, time, sleep, etc., fall into their \"inner personal space,\" and [User_SEI] will be more likely to deprioritize an interest if it starts to drain these resources too much.",
+         "When doing a task, [User_SLE] is inclined to work for the sake of the result (for example, a reward or bonus for completing the task). In contrast to [User_SEI], [User_SLE] can renounce their comforts and conveniences for this; [User_SLE] evaluates their place of work by looking at what returns they get for the effort they invested (e.g., monetary, prestige, etc.).",
+         "[User_SEI]'s energy levels will tend to improve when they're alone whereas [User_SLE]'s energy levels increase when they're interacting with larger groups.",
+         "[User_SEI] is more likely (than [User_SLE]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+         "When contemplating a task, it takes [User_SEI] longer time to mobilize than [User_SLE]; i.e., [User_SEI] prefers to spend some time in a more natural state of relaxedness which will then prepare them to subsequently mobilize and concentrate at the crucial moments, improving their performance.",
+         "[User_SEI] often has a smaller, closer network of friends whereas [User_SLE] often has a wider network of friends.",
+         "[User_SEI] is more often focused on their thoughts and feelings whereas [User_SLE] is more often focused on their surroundings.",
+         "[User_SEI] is more relaxed in their natural state than [User_SLE]. However [User_SEI] will mobilize and concentrate when needed to accomplish an objective. After the task has been completed, [User_SEI] demobilizes again. This state of demobilization is the natural state of [User_SEI].",
+         "[User_SLE]'s psychic energy more often flows outwards, whereas with [User_SEI], their psychic energy more often flows inward.",
+         "When describing their reasoning for their actions, [User_SEI] (more so than [User_SLE]) tends describe how and why they came to a certain decision, and focus less on the timing and initiation of the action.",
+       ],
+       "EIE": [
+         "[User_SEI] is better at noticing details than [User_EIE]. [User_EIE] on the other hand, is better at seeing the big picture than [User_SEI].",
+         "With regards to energy levels, [User_EIE] tends to have higher energy levels than [User_SEI].",
+         "[User_EIE] often prefers to work with others in a team whereas [User_SEI] often prefers working alone.",
+         "[User_EIE] is often more interested in the idea or theory of something, whereas [User_SEI] is more interested in the actual practice or implementation of it.",
+         "[User_SEI] is generally better at concentrating on specific tasks for longer periods of time than [User_EIE].",
+         "[User_SEI] tends to have a more democratic leadership style than [User_EIE].",
+         "[User_EIE] is often able to form quicker opinions of others they have just met than [User_SEI]. This is based on the ability of [User_EIE] to draw conclusions about the person based on the groups the person belongs to; [User_SEI] is more reluctant to make these inferences.",
+         "[User_EIE] is relatively more rigid and stubborn than [User_SEI].",
+         "[User_EIE] is often more cognizant of their outwards appearance and is thus better at presenting themselves than [User_SEI].",
+         "[User_SEI] often has a smaller, closer network of friends whereas [User_EIE] often has a wider network of friends.",
+       ],
+       "IEI": [
+         "[User_SEI] is more likely than [User_IEI] to perceive and distinguish themselves primarily through personal qualities. [User_SEI] focuses on individualism more than [User_IEI].",
+         "[User_SEI]'s attitude towards a specific person (more so than [User_IEI]) is based on their personal characteristics (authority, intellect, personal achievements, etc.). [User_SEI] recognizes superiority of certain individuals drawing from their personal qualities",
+         "When conversing, [User_SEI] is inclined to communicate in the form of monologues, where each party has \"its turn.\" Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_IEI] tends to prefer more of a question and answer style format.",
+         "[User_IEI] tends to be more idealistic with their heads-in-the-cloud. [User_SEI], on the other hand, is more realistic and down-to-earth.",
+         "When describing why they undertook a project, [User_IEI] is more likely than [User_SEI] to focus on the moment when a decision is made and to speak in detail about the stages of its implementation.",
+         "When doing a task, [User_IEI] is inclined to work for the sake of the result (for example, a reward or bonus for completing the task). In contrast to [User_SEI], [User_IEI] can renounce their comforts and conveniences for this; [User_IEI] evaluates their place of work by looking at what returns they get for the effort they invested (e.g., monetary, prestige, etc.).",
+         "[User_IEI] is able to change and make adjustments to their goals more easily than [User_SEI] (depending on how progress is being made, etc.). [User_SEI] on the other hand, prefers to stick with their original goals.",
+         "[User_SEI] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_SEI] reach their goals, it will be dismissed and discontinued. On the other hand, [User_IEI] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "[User_SEI] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_SEI] having a negative assessment of various situations and events (e.g., glass half empty). On the other hand, [User_IEI] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full).",
+         "When it comes to completing a task, [User_IEI] is more likely than [User_SEI] to mobilize for longer periods of time. Specifically, [User_IEI] tends to mobilize for an action early and stay mobilized for a longer period of time after the task has been completed. For [User_IEI], this state of readiness is their natural state.",
+       ],
+       "ESI": [
+         "[User_ESI] tends to perceive events in an episodic manner, i.e., they see events evolve in discrete states rather than continuous changes. On the other hand, [User_SEI] tends to perceive events in a continuous sequence; i.e., they see events evolving fluidly rather that one state to the next.",
+         "When describing the stages of an event, [User_SEI] is more likely to focus on how stage A leads to stage B, how stage B leads to stage C, etc. [User_ESI], on the other hand, focuses more on the stages themselves without necessarily seeing or emphasizing the transitions or causes and effects of the stages to the extent that [User_SEI] does.",
+         "[User_SEI] has a relatively higher stress tolerance than [User_ESI]. [User_ESI] often struggles with continually changing situations more than [User_SEI] does.",
+         "[User_SEI] is relatively better at assessing the emotional atmosphere occurring in a group or during an activity than [User_ESI].",
+         "When conversing, [User_SEI] is inclined to communicate in the form of monologues, where each party has \"its turn.\" Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_ESI] tends to prefer more of a question and answer style format.",
+         "When doing a task, [User_ESI] is inclined to work for the sake of the result (for example, a reward or bonus for completing the task). In contrast to [User_SEI], [User_ESI] can renounce their comforts and conveniences for this; [User_ESI] evaluates their place of work by looking at what returns they get for the effort they invested (e.g., monetary, prestige, etc.).",
+         "[User_SEI] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_SEI] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ESI] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
+         "When working on a project, [User_ESI] experiences more discomfort (than [User_SEI]) if the project does not have a clearly delineated end-goal or result. This happens because [User_ESI] has more difficulty monitoring and understanding how the project is developing than [User_SEI] because they are outside of the process.",
+         "[User_ESI] is more likely (than [User_SEI]) to use special rituals or other culturally accepted formalities when forming relationships with others. What that means is that the emotional proximity and relationship status for [User_ESI] is more externally predetermined. Additionally, [User_ESI] generally progresses in relationships through stages, and therefore is more familiar with these stages than [User_SEI]. [User_ESI] tends to be more linear in their relationship progression than [User_SEI], and [User_ESI] assigns importance to the formalities of recognizing the start and end to each of these stages.",
+         "[User_ESI] tends to plan ahead, making decisions early. On the other hand, [User_SEI] tends to prefer a wait and see, more spontaneous approach.",
+       ],
+       "SEE": [
+         "[User_SEE] tends to internally combine emotional exchanges with other activities rather than separating them out like [User_SEI]. E.g., [User_SEE] sees having fun occurring simultaneously with other activities, such as work or even serious affairs. [User_SEI] is more likely to internally separate out having fun with other activities, although the two can be interchanged at a high frequency.",
+         "[User_SEE] often prefers to work with others in a team whereas [User_SEI] often prefers working alone.",
+         "When meeting someone new, [User_SEI] is not as likely as [User_SEE] to perceive \"getting to know somebody\" as a special kind of activity. [User_SEI] knows very well what the purpose of the relationship is, be it business, personal, travel, etc. [User_SEI], in contrast with [User_SEE], does not divide the process of getting acquainted into consecutive stages; rather [User_SEI] immediately establishes the necessary emotional distance in contact and can regulate it if needed. ",
+         "[User_SEE] tends to perceive events in an episodic manner, i.e., they see events evolve in discrete states rather than continuous changes. On the other hand, [User_SEI] tends to perceive events in a continuous sequence; i.e., they see events evolving fluidly rather that one state to the next.",
+         "[User_SEI] is more often focused on their thoughts and feelings whereas [User_SEE] is more often focused on their surroundings.",
+         "[User_SEI]'s energy levels tends to improve when they're alone whereas [User_SEE]'s energy levels increase when they're interacting with larger groups.",
+         "[User_SEI] is generally better at concentrating on specific tasks for longer periods of time than [User_SEE].",
+         "When conversing, [User_SEI] types is inclined to communicate in the form of monologues, where each party has \"its turn.\" Because of that they subconsciously attempt to transform a dialogue into a series of monologues. Conversely, [User_SEE] tends to prefer more of a question and answer style format.",
+         "[User_SEI] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_SEI] having a negative assessment of various situations and events (e.g., glass half empty). On the other hand, [User_SEE] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (e.g. glass half full).",
+         "[User_SEE] tends to be more active and initiating with others whereas [User_SEI] tends to be more passive and less initiating.",
+       ],
+       "LIE": [
+         "[User_LIE] is more likely to make decisions based on logical reasons than [User_SEI], who is more likely to make decisions based on their own feelings.",
+         "[User_LIE]'s psychic energy more often flows outwards, whereas with [User_SEI], their psychic energy more often flows inward.",
+         "[User_LIE] is often more interested in the idea or theory of something, whereas [User_SEI] is more interested in the actual practice or implementation of it.",
+         "[User_LIE] often prefers to work with others in a team whereas [User_SEI] often prefers working alone.",
+         "[User_SEI] is generally better at concentrating on specific tasks for longer periods of time than [User_LIE].",
+         "[User_LIE] tends to have stiffer more angular movements. [User_SEI] tends to have more relaxed fluid movements.",
+         "[User_SEI] is more vulnerable to logical manipulation than [User_LIE]. However [User_LIE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEI].",
+         "When describing their reasoning for their actions, [User_SEI] (more so than [User_LIE]) tends describe how and why they came to a certain decision, and focus less on the timing and initiation of the action.",
+         "When discussing work, [User_LIE] is more likely than [User_SEI] to focus on the fruits of their labor, about what their effort will yield. [User_SEI] on the other hand is more likely to focus on the environment they work in, e.g., their work conditions, conveniences, commute time, etc.",
+         "[User_LIE] places greater value on their interests than [User_SEI]. For example, [User_LIE] will maintain high levels of energy and focus on an interest they value, even deprioritizing their other resources to maintain the interest. For example, [User_LIE] may spend a large amount of energy on an interest they value, often to the detriment of their time, sleep, relationships, money, etc.",
+       ],
+       "ILI": [
+         "[User_ILI] is more likely (than [User_SEI]) to use special rituals or other culturally accepted formalities when forming relationships with others. What that means is that the emotional proximity and relationship status for [User_ILI] is more externally predetermined. Additionally, [User_ILI] generally progresses in relationships through stages, and therefore is more familiar with these stages than [User_SEI]. [User_ILI] tends to be more linear in their relationship progression than [User_SEI], and [User_ILI] assigns importance to the formalities of recognizing the start and end to each of these stages.",
+         "When contemplating a task, it takes [User_SEI] longer time to mobilize than [User_ILI]; i.e., [User_SEI] prefers to spend some time in a more natural state of relaxedness which will then prepare them to subsequently mobilize and concentrate at the crucial moments, improving their performance.",
+         "[User_ILI] is often more interested in studying systems, structures, and functionality than [User_SEI].",
+         "When describing why they undertook a project, [User_ILI] is more likely than [User_SEI] to focus on the moment when a decision is made and to speak in detail about the stages of its implementation.",
+         "When meeting someone new, [User_SEI] is not as likely as [User_ILI] to perceive \"getting to know somebody\" as a special kind of activity. [User_SEI] knows very well what the purpose of the relationship is, be it business, personal, travel, etc. [User_SEI], in contrast with [User_ILI], does not divide the process of getting acquainted into consecutive stages; rather [User_SEI] immediately establishes the necessary emotional distance in contact and can regulate it if needed.",
+         "[User_SEI] is more likely (than [User_ILI]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+         "[User_SEI] is more vulnerable to logical manipulation than [User_ILI]. However [User_ILI] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEI].",
+         "[User_SEI] places greater value on their resources than [User_ILI]. For [User_SEI], resources like their money, time, sleep, etc., fall into their \"inner personal space,\" and [User_SEI] will be more likely to deprioritize an interest if it starts to drain these resources too much.",
+         "When planning to complete something, [User_SEI] is more likely to focus their attention on the goal itself, overlooking and deprioritizing the individual actions needed to reach that goal. On the other hand, [User_ILI] tends to focus their attention on the each action; i.e., they're focused on how each decision and choice is being made (towards reaching the goal), in a step by step process.",
+         "[User_SEI] tends to prefer using persuasion as a means of convincing others to do something, whereas [User_ILI] prefers to use argumentation as a means of convincing others.",
+       ],
+       "EII": [
+         "[User_SEI] is more likely (than [User_EII]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+         "[User_EII] tends to perceive events in an episodic manner, i.e., they see events evolve in discrete states rather than continuous changes. On the other hand, [User_SEI] tends to perceive events in a continuous sequence; i.e., they see events evolving fluidly rather that one state to the next.",
+         "[User_SEI] has a relatively higher stress tolerance than [User_EII]. [User_EII] often struggles with continually changing situations more than [User_SEI] does.",
+         "[User_EII] is often more interested in the idea or theory of something, whereas [User_SEI] is more interested in the actual practice or implementation of it.",
+         "[User_SEI] is relatively better at assessing the emotional atmosphere occurring in a group or during an activity than [User_EII].",
+         "When solving a problem, [User_EII] relies more heavily on their generalized past experiences than [User_SEI]. [User_EII] is inclined to use already prepared, preformulated methods and processes to solve a problem.",
+         "When describing the stages of an event, [User_SEI] is more likely to focus on how stage A leads to stage B, how stage B leads to stage C, etc. [User_EII], on the other hand, focuses more on the stages themselves without necessarily seeing or emphasizing the transitions or causes and effects of the stages to the extent that [User_SEI] does.",
+         "[User_SEI] is more likely than [User_EII] to perceive and distinguish themselves primarily through personal qualities. [User_SEI] focuses on individualism more than [User_EII].",
+         "[User_SEI] is relatively more flexible and tolerant to things outside their routine compared to [User_EII].",
+         "[User_EII] is more likely to believe in objective truths than [User_SEI]. That is, [User_EII] is more likely to believe there is a correct or best way of doing something than [User_SEI].",
+       ],
+       "IEE": [
+         "When [User_IEE] forms opinions of others, these opinions are formed under the influence of their attitude towards the group to which the person belongs. To [User_IEE], it is incomprehensible how it is possible to belong to two opposing groups at the same time:, i.e., \"you're either with us, or with them and against us.\"",
+         "When describing the stages of an event, [User_SEI] is more likely to focus on how stage A leads to stage B, how stage B leads to stage C, etc. [User_IEE], on the other hand, focuses more on the stages themselves without necessarily seeing or emphasizing the transitions or causes and effects of the stages to the extent that [User_SEI] does.",
+         "[User_IEE] tends to be more idealistic with their heads-in-the-cloud. [User_SEI], on the other hand, is more realistic and down-to-earth.",
+         "When describing reality, [User_IEE] is more likely to talk about the properties and structure of reality. [User_SEI] is more likely to describe reality as movements, interactions, and changes.",
+         "[User_SEI] is more likely than [User_IEE] to perceive and distinguish themselves primarily through personal qualities. [User_SEI] focuses on individualism more than [User_IEE].",
+         "[User_IEE] is able to change and make adjustments to their goals more easily than [User_SEI] (depending on how progress is being made, etc.). [User_SEI] on the other hand, prefers to stick with their original goals.",
+         "[User_IEE] tends to be more active and initiating with others whereas [User_SEI] tends to be more passive and less initiating.",
+         "When something is perceived by [User_IEE] as being incorrect, they is more likely (than [User_SEI]) to tell the person who made the error what they did wrong and how to do it the right way. [User_IEE] is focused on who made the error and helping them to correct the mistake.",
+         "[User_SEI]'s attitude towards a specific person (more so than [User_IEE]) is based on their personal characteristics (authority, intellect, personal achievements, etc.). [User_SEI] recognizes superiority of certain individuals drawing from their personal qualities.",
+         "When working on a project, [User_IEE] experiences more discomfort (than [User_SEI]) if the project does not have a clearly delineated end-goal or result. This happens because [User_IEE] has more difficulty monitoring and understanding how the project is developing than [User_SEI] because they are outside of the process.",
+       ],
+       "LSE": [
+         "[User_LSE] tends to like a leadership style that is highly structed and rigid, compared to [User_SEI] who prefers all-hands on, group decisions.",
+         "[User_LSE] is often more cognizant of their outwards appearance and is thus better at presenting themselves than [User_SEI], of whom might not have combed their hair today.",
+         "[User_LSE] tends to put more effort than [User_SEI] into finishing any new project they start.",
+         "[User_SEI] tends to prefer using persuasion as a means of convincing others to do something, whereas [User_LSE] prefers to use argumentation as a means of convincing others.",
+         "[User_SEI] is more vulnerable to logical manipulation than [User_LSE]. However [User_LSE] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEI].",
+         "[User_SEI] is often better at solving and minimizing interpersonal problems, whereas [User_LSE] often struggles understanding them.",
+         "[User_LSE] is more likely (than [User_SEI]) to use special rituals or other culturally accepted formalities when forming relationships with others. What that means is that the emotional proximity and relationship status for [User_LSE] is more externally predetermined. Additionally, [User_LSE] generally progresses in relationships through stages, and therefore is more familiar with these stages than [User_SEI]. [User_LSE] tends to be more linear in their relationship progression than [User_SEI], and [User_LSE] assigns importance to the formalities of recognizing the start and end to each of these stages.",
+         "[User_SEI]'s energy levels tend to improve when they're alone whereas [User_LSE]'s energy levels increase when they're interacting with larger groups.",
+         "[User_LSE] tends to show more outward enthusiasm than [User_SEI], who prefers to holds in their creative energy to spill out later on.",
+         "When something is perceived by [User_SEI] as being incorrect, they are more likely (than [User_LSE]) to ask why it was done that way. Instead of necessarily trying to correct the person who made the error, [User_SEI] attempts to understand the person's reason for their decision/action.",
+       ],
+       "SLI": [
+         "[User_SEI]'s attitude towards a specific person (more so than [User_SLI]) is based on their personal characteristics (authority, intellect, personal achievements, etc.). [User_SEI] recognizes superiority of certain individuals drawing from their personal qualities.",
+         "[User_SEI] is more likely (than [User_SLI]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+         "[User_SLI], more than [User_SEI], frequently perceives and defines themselves and other people through group associations. [User_SLI] focuses on collectivism over individualism.",
+         "When developing a plan of action or process, [User_SEI] tends to see themselves as \"within the process\"; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_SLI] tends to place themselves \"outside of the process\"; they dissociate from it. For them the process or situation is something external from themselves.",
+         "When [User_SLI] forms opinions of others, these opinions are formed under the influence of their attitude towards the group to which the person belongs. To [User_SLI], it is incomprehensible how it is possible to belong to two opposing groups at the same time:, i.e., \"you're either with us, or with them and against us.\"",
+         "[User_SLI] is not as inclined to compare and verify concepts as [User_SEI]. [User_SLI] assumes that these can have only one unique interpretation (the \"correct\" interpretation), and [User_SLI] often does not think about the fact that the other person may be interpreting them differently. Much more than [User_SEI], [User_SLI] applies concepts such as \"objective reality,\" \"unequivocal facts,\" and de-emphasize concepts; [User_SLI] considers that they know the \"right\" way of doing things, how something \"truly is,\" etc.",
+         "When working on a project, [User_SLI] experiences more discomfort (than [User_SEI]) if the project does not have a clearly delineated end-goal or result. This happens because [User_SLI] has more difficulty monitoring and understanding how the project is developing than [User_SEI] because they are outside of the process.",
+         "[User_SEI] is more vulnerable to logical manipulation than [User_SLI]. However [User_SLI] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_SEI].",
+         "[User_SLI] is more likely than [User_SEI] to use \"emotional anchors\" that resonate with their internal emotional condition. These emotional anchors could be a book, a movie, a place, a song, etc. [User_SLI] uses these anchors to strengthen their inner emotional state and thus will repeat the experience: e.g., re-reading a book, re-watching a movie, continually going back to a place to experience the emotions associated with it.",
+         "[User_SLI] tends to internally combine emotional exchanges with other activities rather than separating them out like [User_SEI]. E.g., [User_SLI] sees having fun occurring simultaneously with other activities, such as work or even serious affairs. [User_SEI] is more likely to internally separate out having fun with other activities, although the two can be interchanged at a high frequency.",
+     ]
      }
    },
    "SLE": {
@@ -676,6 +864,14 @@
          "INTROVERSION":0.1,
          "EXECUTION":0.9875,
          "STRATEGY":0.0125
+     }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "LSI": {
@@ -699,6 +895,14 @@
          "INTROVERSION":0.875,
          "EXECUTION":0.1875,
          "STRATEGY":0.8125
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "EIE": {
@@ -722,6 +926,14 @@
          "INTROVERSION":0.1,
          "EXECUTION":0.25,
          "STRATEGY":0.75
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "IEI": {
@@ -745,6 +957,14 @@
          "INTROVERSION":0.8375,
          "EXECUTION":0.625,
          "STRATEGY":0.375
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "LIE": {
@@ -768,6 +988,14 @@
          "INTROVERSION":0.1875,
          "EXECUTION":0.5,
          "STRATEGY":0.5
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "ILI": {
@@ -791,6 +1019,14 @@
          "INTROVERSION":0.875,
          "EXECUTION":0.1375,
          "STRATEGY":0.8625
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "SEE": {
@@ -814,6 +1050,14 @@
          "INTROVERSION":0.1,
          "EXECUTION":0.825,
          "STRATEGY":0.175
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "ESI": {
@@ -837,6 +1081,14 @@
          "INTROVERSION":0.8125,
          "EXECUTION":0.25,
          "STRATEGY":0.75
+    }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "LSE": {
@@ -860,6 +1112,14 @@
          "INTROVERSION":0.1625,
          "EXECUTION":0.25,
          "STRATEGY":0.75
+     }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "SLI": {
@@ -883,6 +1143,14 @@
          "INTROVERSION":0.875,
          "EXECUTION":0.6875,
          "STRATEGY":0.3125
+     }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "IEE": {
@@ -906,6 +1174,14 @@
          "INTROVERSION":0.225,
          "EXECUTION":0.3125,
          "STRATEGY":0.6875
+     }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    },
    "EII": {
@@ -929,6 +1205,14 @@
          "INTROVERSION":0.8125,
          "EXECUTION":0.1,
          "STRATEGY":0.9
+     }, 
+     "summary": [
+       "For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+       "Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
+       "Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
+       "Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
+     ],
+     }
       }
    }
  }

@@ -4,11 +4,13 @@ import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
 
 export default function GenCard(props) {
+  
     let userColor;
-    //let userPattern;
+    let userPattern;
+    //import and set the pattern of the card
         if (props.quadra === 'Alpha') {
             userColor = '#3069B3';
-            //userPattern = pattern1;
+            userPattern = patternTarockBlue;
         } else if(props.quadra === 'Beta') {
             userColor = '#EBBD45';
            // userPattern = pattern;
@@ -20,11 +22,10 @@ export default function GenCard(props) {
             //userPattern = pattern;
         }
     
-    //const quadraImage = [pattern, pattern1, pattern, pattern1];
     return (
         <div className='d-flex flex-column my-3 '>
             <div style={{
-                backgroundImage: `url(${props.cardType == 'match' ? patternWaves : patternTarockBlue})`,
+                backgroundImage: `url(${props.cardType == 'match' ? patternWaves : userPattern})`,
                 backgroundColor: props.cardType == 'match' ? 'black' : userColor,
                 backgroundRepeat: 'no-repeat',
                 

@@ -1,4 +1,17 @@
 .modal-content{
-    width: fit-content!important;
+    width: 55%;
     margin: auto!important;
+    background-color: transparent!important;
+    border: none!important;
+}
+
+.modal-header{
+    border: none!important;
+}
+
+/* media query */
+@media screen and (max-width: 768px) {
+    .modal-content{
+        width: 90%;
+    }
 }

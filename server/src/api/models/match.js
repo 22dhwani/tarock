@@ -15,7 +15,7 @@ async function create(match) {
     if (data[0].length > 0) {
         throw new Error("Duplicated pair.");
     }
-    const data2 = await sql.query("INSERT INTO user_match (orig_user_id, matched_user_id) VALUES (?, ?);", [match.origUserId, match.matchedUserId]);
+    const data2 = await sql.query("INSERT INTO user_match (orig_user_id, matched_user_id) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM user_match WHERE orig_user_id = ? AND matched_user_id = ? OR orig_user_id = ? AND matched_user_id = ? LIMIT 1);", [match.origUserId, match.matchedUserId, match.origUserId, match.matchedUserId, match.matchedUserId, match.origUserId]);
     return data2[0];
 }
 

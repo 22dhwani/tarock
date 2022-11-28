@@ -15,29 +15,41 @@ function getByType(req, res) {
 
 async function getByUser(req, res) {
     const result = [];
-    let id = req.params.id;
-    // Find tmp user id if exists
-    // TODO: optimize this to avoid tmp ID query.
-    // TODO: optimize to avoid nested query.
-
+    const id = req.params.id;
     try {
-        const data = await User.queryTmpId(id);
-        if (data.length > 0) {
-            id = data[0].tmp_user_id;
+        const tarcokResult = await Result.getByUser(id);
+        if (tarcokResult.length > 0) {
+            const tarockData = data[tarcokResult[0].result_code];
+            result.push({
+                type: 'Tarock',
+                data: {
+                    resultCode: tarcokResult[0].result_code,
+                    quadra: tarockData.personality_socionic_quadra
+                }
+            }); 
         }
-        const data2 = await Result.getByUser(id);
-        result.push({
-            type: 'Tarock',
-            data: data2
-        }); 
-        const data3 = await Match.query(req.params.id);
+        const matchData = await Match.query(id);
         result.push({
             type: 'Match',
-            data: data3
+            data: await Promise.all(matchData.map(async (match) => {
+                const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
+                const matchedUserData = await User.queryReal(matchedUserId);
+                const matchedTarockResult = await Result.getByUser(matchedUserId);
+                if (matchedTarockResult.length == 0) {
+                    throw new Error('No matched user test result!');
+                }
+                return {
+                    matchedUserId: matchedUserId,
+                    matchedUserName: matchedUserData[0].name,
+                    matchedUserAvatarIndex: matchedUserData[0].avatar_index,
+                    matchedUserResultCode: matchedTarockResult[0].result_code,
+                    matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                };
+            }))
         });
         res.send(result);
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
     }
 }
 

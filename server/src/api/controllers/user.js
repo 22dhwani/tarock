@@ -3,16 +3,15 @@ import crypto from 'crypto';
 
 async function create(req, res) {
     const user = new User.User({
-        id: req.body.userId,
         name: req.body.name,
         gender: req.body.gender,
         avatarIndex: req.body.avatarIndex
     });
     if (req.body.userType === 'REAL') {
-        user.email = req.body.email;
-        const hash = crypto.createHash('md5').update(user.email).digest("hex");
-        user.id = hash;
         try {
+            user.id = crypto.createHash('md5').update(user.email).digest("hex");
+            user.email = req.body.email;
+            user.password = null;
             const data = await User.createReal(user);
             res.send(data);
         } catch (error) {
@@ -20,6 +19,7 @@ async function create(req, res) {
         }
     } else {
         try {
+            user.id = req.body.userId;
             const data = await User.create(user);
             res.send(data);
         } catch (error) {
@@ -56,6 +56,8 @@ async function update(req, res) {
     });
     if (req.body.userType === 'REAL') {
         try {
+            // Support updating password in future.
+            // user.password = req.body.password;
             const data = await User.updateReal(user);
             res.send(data);
         } catch (error) {
@@ -72,22 +74,20 @@ async function update(req, res) {
 };
 
 async function getUserStatus (req, res) {
-    
     try {
         const data = await User.queryReal(req.params.id);
         if (data.length > 0) {
-            res.send({ userType: 'REAL', id: data[0].internal_user_id });
+            res.send({ userType: 'REAL' });
         } else {
-            const data2 = await User.queryRealId(req.params.id);
+            const data2 = await User.query(req.params.id);
             if (data2.length > 0) {
-                res.send({ userType: 'REAL', id: data2[0].real_user_id });
-            } else {   
-                const data3 = await User.query(req.params.id); 
-                if (data3.length > 0) {
-                    res.send({ userType: 'TMP', id: data3[0].internal_user_id });
+                if (data2[0].is_permanent_user) {
+                    res.send({ userType: 'REAL' });
                 } else {
-                    res.send({ userType: 'NEW', id: '' });
+                    res.send({ userType: 'TMP' });
                 }
+            } else {   
+                res.send({ userType: 'NEW' });
             }
         } 
     } catch (error) {
@@ -95,6 +95,7 @@ async function getUserStatus (req, res) {
     }
 };
 
+/**
 async function createTmpIdToRealId (req, res) {
     try {
         const data = await User.createTmpIdToRealId(req.body.tmpId, req.body.realId);
@@ -103,5 +104,15 @@ async function createTmpIdToRealId (req, res) {
         res.status(400).send(error);
     }
 }
+*/
 
-export default { create, query, update, getUserStatus, createTmpIdToRealId};
+async function updateIsPermanentUser(req, res) {
+    try {
+        const data = await User.updateIsPermanentUser(req.body.id, req.body.isPermanentUser);
+        res.send(data);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+}
+
+export default { create, query, update, getUserStatus, updateIsPermanentUser};

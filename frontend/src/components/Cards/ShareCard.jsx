@@ -8,10 +8,11 @@ import QRCode from 'react-qr-code';
 
 const Share = () => {
     const { userId } = useParams();
-    const location = useLocation();
+    const { state, pathname } = useLocation();
     const [cardData, setCardData] = useState({});
     const [user, setUser] = useState({});
     const navigate = useNavigate();
+    const qr = state ? state.qr : false;
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${userId}?userType=REAL`)
@@ -37,15 +38,15 @@ const Share = () => {
     }, [userId]);
     if (user.name && cardData.description) {
         return (
-            <div className='d-flex flex-column' style={{ backgroundColor: '#3069B3' }}>
+            <div className='d-flex flex-column min-vh-100' style={{ backgroundColor: '#3069B3' }}>
                 <CommonCard
                     user={user}
                     cardData={cardData}
                     showDescription={false}
                     showShare={false}
-                    onMatchClick={() => navigate(`/?match=${userId}`)}
+                    onMatchClick={qr ? undefined : () => navigate(`/?match=${userId}`)}
                     children={
-                        <Row className='m-5'>
+                        qr ? <Row className='m-5'>
                             <Col className='col-4 d-flex justify-content-center align-self-center'>
                                 <QRCode value={window.location.href} size={64} />
                             </Col>
@@ -60,10 +61,10 @@ const Share = () => {
                                     Scan QR code to start
                                 </div>
                                 <div style={{ lineHeight: '16px' }}>
-                                    Or visit:<br />tarock.servehttp.com:8080{location.pathname}
+                                    Or visit:<br />http://tarock.servehttp.com:8080{pathname}
                                 </div>
                             </Col>
-                        </Row>
+                        </Row> : undefined
                     }
                 />
             </div>

@@ -56,15 +56,9 @@ function getSocionicsResult(answers) {
 
 async function getByUser(req, res) {
     if (req.query.userId) {
-        let id = req.query.userId;
-        // Find tmp user id if exists
         try {
-            const data = await User.queryTmpId(id);
-            if (data.length > 0 ) {
-                id = data[0].tmp_user_id;
-            }
-            const data2 = await Result.getByUser(id);
-            res.send(data2);
+            const data = await Result.getByUser(req.query.userId);
+            res.send(data);
         } catch (error) {
             res.status(400).send(error);
         }

@@ -1,3 +1,5 @@
+// This file is deprecated.
+
 import buttonBack from '../../assets/buttonBack.svg';
 import buttonOk from '../../assets/buttonOk.svg';
 import logo from '../../assets/tarockLogo.svg'

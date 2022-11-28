@@ -4,22 +4,16 @@ import female from '../../assets/avatarFemale.svg';
 import RadarChart from '../Charts/RadarChart';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import strengths from '../../assets/myCard/strengths.svg';
-import weakness from '../../assets/myCard/weakness.svg';
-import superpower from '../../assets/myCard/superpower.svg';
-import blindSpot from '../../assets/myCard/blindSpot.svg';
-import idealEnv from '../../assets/myCard/idealEnv.svg';
 import Header from '../Header/Header';
-import share from '../../assets/myCard/share.svg';
 import Swipper from '../Swipper/Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
 import deck from '../../assets/footer/cards.svg';
-import match from '../../assets/myCard/match.svg';
 import { useNavigate } from 'react-router-dom';
+import styles from './Cards.module.css';
+import match from '../../assets/cards/matchBtn.svg';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
     const navigate = useNavigate();
-    
     const radarView = <div>
         <div style={{
             fontFamily: 'Montserrat',
@@ -34,23 +28,20 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             className='py-3'>
             {user.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
         </div>
-        <div style={{
-            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '8px',
-            height: onMatchClick ? '360px' : '300px',
-            margin: '0 auto',
-            width: '100%',
-        }} >
-            <div className='d-flex justify-content-center'>
-                <div className='mx-auto'>
-                    <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
+        <div>
+
+            <div className='justify-content-center'>
+                <div className='mt-3 mx-auto'>
+                    <div className={styles['radarchart']}>
+                        <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
+                    </div>
                 </div>
+
             </div>
             {
                 onMatchClick &&
-                <div className='d-flex justify-content-center' onClick={() => onMatchClick()}>
-                    <img src={match} alt='match'/>
+                <div className='d-flex justify-content-center mt-4' onClick={() => onMatchClick()}>
+                    <img src={match} alt='match' />
                 </div>
             }
         </div>
@@ -74,7 +65,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     lineHeight: '24px'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={strengths} alt='strengths' />
+                        
                     </Col>
                     <Col>
                         {
@@ -100,7 +91,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     color: '#49304D',
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={weakness} alt='weakness' />
+                       
                     </Col>
                     <Col>
                         {
@@ -120,7 +111,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     backdropFilter: 'blur(10px)'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={superpower} alt='superpower' />
+                        
                     </Col>
                     <Col>
                         <div>
@@ -134,7 +125,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     backdropFilter: 'blur(10px)'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={blindSpot} alt='blind spot' />
+                        
                     </Col>
                     <Col>
                         <div>
@@ -149,7 +140,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     borderRadius: '0px 0px 8px 8px'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        <img src={idealEnv} alt='ideal environment' />
+                        
                     </Col>
                     <Col>
                         <div>
@@ -162,7 +153,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
     </>
 
     return (
-        <Container className='d-flex flex-column min-vh-100' >
+        <Container className='d-flex flex-column ' >
             <div style={{
                 backgroundImage: `url(${patternTarockBlue})`,
                 backgroundRepeat: 'no-repeat',
@@ -189,34 +180,34 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     alignItems: 'center',
                     textAlign: 'center'
                 }}>
-                    Let's meet {user.name}
+                    {user.name} is
                 </div>
             </div>
 
-
-            {/* <Container className="overflow-auto d-flex flex-column m-auto" style={{
-
-            }}> */}
-                {showShare ? <Swipper data={ [radarView, descriptionView]} /> : radarView}
-                {
-                    showShare &&
-                    <div className='d-flex justify-content-center gap-2 mt-5'>
-                        <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${user.internal_user_id}`)} />
-                        <div style={{
-                            borderRadius: '8px',
-                            backgroundColor: 'rgb(48, 105, 179)',
-                            color: 'white',
-                            cursor:'pointer',
-                            padding: '10px',
-                        }}
+            {showShare ? <Swipper data={[radarView, descriptionView]} /> : radarView}
+            <div style={{
+                display: showShare ? 'block' : 'none'
+            }} className='mt-5'>
+                <a href='/test' style={{ display: 'flex', justifyContent: 'center', fontSize: '12px' }}>Not even close?</a>
+            </div>
+            {
+                showShare &&
+                <div className='d-flex justify-content-center gap-2 mt-5'>
+                    {/* <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${user.internal_user_id}`)} /> */}
+                    <div style={{
+                        borderRadius: '8px',
+                        backgroundColor: 'rgb(48, 105, 179)',
+                        color: 'white',
+                        cursor: 'pointer',
+                        padding: '10px',
+                    }}
                         onClick={() => navigate('/cards')}
-                        >
-                            <img src={deck} alt='deck' width='40px' />
-                        </div>
+                    >
+                        <img src={deck} alt='deck' width='40px' />
                     </div>
-                }
-            {/* </Container> */}
-                {children}
+                </div>
+            }
+            {children}
         </Container>
     );
 }

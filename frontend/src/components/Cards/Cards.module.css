@@ -1,0 +1,22 @@
+.radarchart{
+    height: 270px !important;
+}
+/* unvisited link */
+a:link {
+    color: #CAE8E2;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #CAE8E2;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: #CAE8E2;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #CAE8E2;
+  }

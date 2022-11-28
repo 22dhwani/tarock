@@ -18,7 +18,8 @@ const profileOptions = [
     },
     {
         button: modifyAvatar,
-        link: '/modifyAvatar'
+        link: '/signin',
+        state: { stage: 'avatar' }
     }],
     [
     // {

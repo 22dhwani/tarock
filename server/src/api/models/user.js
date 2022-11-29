@@ -54,7 +54,20 @@ async function queryReal(id) {
 }
 
 async function updateReal(user) {
-    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.password, user.name, user.gender, user.avatarIndex, user.dob, user.id]);
+    if (!user.id) {
+        throw new Error(`No user id provided. id:${user.id}`);
+    }
+    const queryResults = await sql.query("SELECT * FROM user WHERE internal_user_id = ?;", [user.id]);
+    const oldUsers = queryResults[0];
+    if (oldUsers.length === 0) {
+        throw new Error(`The user id does not exist. id:${user.id}`);
+    }
+    const password = user.password ? user.password : oldUsers[0].password;
+    const name = user.name ? user.name : oldUsers[0].name;
+    const gender = user.gender ? user.gender : oldUsers[0].gender;
+    const avatarIndex = user.avatarIndex ? user.avatarIndex : oldUsers[0].avatar_index;
+    const dob = user.dob ? user.dob : oldUsers[0].birth_date;
+    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [password, name, gender, avatarIndex, dob, user.id]);
     return data[0];
 }
 

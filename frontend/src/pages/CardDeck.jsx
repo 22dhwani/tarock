@@ -20,7 +20,7 @@ const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
     const [matchedCardsData, setMatchedCardsData] = useState([]);
     const navigate = useNavigate();
-    const search = useLocation().search;
+    const { state, search } = useLocation();
     const matchUserId = new URLSearchParams(search).get('match');
     const [showNotification, setShowNotification] = useState(false);
     const [showCard, setShowCard] = useState(false);
@@ -75,6 +75,10 @@ const CardsScreen = () => {
                 if (matchUserId && matchUserId != userData.Id) {
                     await matchUser().then(() => getCardData());
                 }
+                if (state && state.card === 'tarock') {
+                    setTab(true);
+                    onMyCardClick(<MyCard />);
+                }
                 setIsLoading(false);
             })
             .catch((err) => {
@@ -84,7 +88,7 @@ const CardsScreen = () => {
 
     const [tab, setTab] = useState(true);
     function shareCard() {
-        navigate(`/share/${userData.id}`);
+        onMyCardClick(<MyCard />);
     }
     const [shareCardOption, setShareCardOption] = useState(false);
  
@@ -151,10 +155,10 @@ const CardsScreen = () => {
                         }}>
                             <img src={linkButton} alt='link' style={{
                                 cursor: 'pointer'
-                            }} />
+                            }} onClick={() => {navigate(`/share/${userData.id}`)}}/>
                             <img src={imgButton} alt='image' style={{
                                 cursor: 'pointer'
-                            }} />
+                            }} onClick={() => {navigate(`/share/${userData.id}`, { state: { qr: true } })}}/>
                         </div>
                     </Popup>
                 </>

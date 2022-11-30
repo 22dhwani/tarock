@@ -36,7 +36,7 @@ function SignIn() {
     const [formData, setFormData] = useState(
         {
             name: "",
-            gender: "",
+            avatarIndex: 0,
             password: "",
             email: "",
         }
@@ -44,29 +44,42 @@ function SignIn() {
 
     async function handleSubmit() {
         try {
+            const data = {
+                name: formData.name ? formData.name : userData.name,
+                avatarIndex: formData.avatarIndex,
+                gender: formData.avatarIndex ? 'Male' : 'Female',
+                userId: userData.id,
+                userType: userData.type
+            };
             const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
                 method: userData.type === 'NEW' ? 'POST' : 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    name: formData.name,
-                    avatarIndex: formData.gender === 'Female' ? 0 : 1,
-                    gender: formData.gender,
-                    userId: userData.id,
-                })
+                body: JSON.stringify(data)
             })
-            const data = await response.json();
-            setUserData((prevUserData) => ({
-                ...prevUserData,
-                name: data.name,
-                gender: data.gender,
-                avatarIndex: data.avatar_index,
-                type: 'TMP'
-            }));
-            const nav = '/test' + (matchUserId ? `?match=${matchUserId}` : '');
-            navigate(nav);
+            if (!response.ok) {
+                throw new Error('User update failed!');
+            }
+            if (userData.type != 'REAL') {
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    name: data.name,
+                    gender: data.gender,
+                    avatarIndex: data.avatarIndex,
+                    type: 'TMP'
+                }));
+                const nav = '/test' + (matchUserId ? `?match=${matchUserId}` : '');
+                navigate(nav);
+            } else {
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    gender: data.gender,
+                    avatarIndex: data.avatarIndex,
+                }));
+                navigate(-1);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -241,12 +254,20 @@ function SignIn() {
         window.location.href = url;
     }
 
+    function goBack() {
+        if (userData.type === 'REAL') {
+            navigate(-1);
+        } else {
+            setStage('new');
+        }
+    }
+
     return (
         <Container className='d-flex flex-column vh-100 px-0 pb-4' style={{
                 backgroundImage: `url(${bg})`,
                 backgroundSize: 'cover'
             }}>
-            <Header goBackFunc={stage != 'avatar' ? undefined : () => {setStage('new')}}/>
+            <Header goBackFunc={stage != 'avatar' ? undefined : goBack}/>
             {
                 stage === 'signup' &&
                 <img src={signup} alt="signup" className='mx-auto mt-4'/>
@@ -297,7 +318,7 @@ function SignIn() {
                         <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
                             return {
                                 ...data,
-                                gender: 'Male'
+                                avatarIndex: 1
                             }
                         })}>
                             <img className='rounded-4' src={male} alt="male" style={{ backgroundColor: 'white', height: '140px'}} />
@@ -307,7 +328,7 @@ function SignIn() {
                         <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
                             return {
                                 ...data,
-                                gender: 'Female'
+                                avatarIndex: 0
                             }
                         })}>
                             <img className='rounded-4' src={female} alt="female" style={{ backgroundColor: 'white', height: '140px' }} />

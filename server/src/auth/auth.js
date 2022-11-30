@@ -6,6 +6,7 @@ import User from '../api/models/user.js' ;
 import Result from '../api/models/result.js';
 import EmailValidator from 'email-validator';
 import LocalStrategy from 'passport-local';
+import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
@@ -224,6 +225,128 @@ router.post('/logout', function(req, res, next) {
       res.json({message: "signed out"});
     });
 });
+
+
+router.get('/password/forget', async (req, res) => {
+
+  const email = req.query.email;
+  if (!email) {
+      res.status(400).json({
+          err_msg: 'Please provide a valid email address.'
+      })
+  } else {
+      const id = crypto.createHash('md5').update(email).digest("hex");
+      const realUsers = await User.queryReal(id);
+
+      const sender = {
+        email: "jingyuanz534@gmail.com",
+        password: "yxxzpzafeqzquezh"
+      }
+
+      if (realUsers.length !== 0) {
+          let transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: 'smtp.gmail.com',
+            auth: {
+                user: sender.email,
+                pass: sender.password
+            }
+          });
+
+          const credential = realUsers[0].password;
+          //const url = process.env['CLIENT_BASE_URL'] + `/password/form?id=${id}&credential=${credential}`;
+          const url = `http://localhost:3000` + `/password/form?id=${id}&credential=${credential}`;
+        
+          const mailOptions = {
+              from: sender.email,
+              to: email,
+              subject: 'Your Tarock Password',
+              html: `Hello, <b>${realUsers[0].name}</b> <div>Please follow the link to reset your password for ${email}</div> <div>${url}</div>`
+          };
+        
+          transporter.sendMail(mailOptions);
+          res.status(200).json({msg: `An email will be sent to ${email} within 5 mintues, please check your email box.`});
+        
+      } else {
+          res.status(401).json({
+              err_msg: 'The user does not exist.'
+          })
+      }        
+  }
+});
+
+router.get('/password/form', async (req, res) => {
+
+  const id = req.query.id;
+  const credential = req.query.credential;
+  if (!id || !credential) {
+      res.status(400).json({
+          err_msg: `Wrong parameters to reset password id:${id} credential:${credential}.`
+      })
+  } else {
+      res.send(`
+    <b>Please enter your new password</b>
+    <br></br>
+    <form id="f1" method="post">
+      <div>
+      <label>New Passwor</label>
+      <input id="p1" type="password" name="password">
+      </div>
+      <div>
+      <label>Retype Password</label>
+      <input id="p2" type="password">
+      </div>
+    </form>
+    <div>
+      <button type="submit" onclick="check()">Reset password</button>
+    </div>
+    <script>
+        function check() {
+          let p1 = document.getElementById("p1").value;
+          let p2 = document.getElementById("p2").value;
+          if (p1!==p2) {
+            alert("Two passwords must be identical");
+          } else if (p1.length < 6 || p1.length > 20) {
+            alert("Please enter a valid password, length within 6 to 20");
+          } else {
+            document.getElementById("f1").submit(); 
+            alert("Your password has been changed !!!");         
+          }
+        }
+    </script>
+    </div>
+      `);
+  }
+});
+
+router.post('/password/form', async (req, res) => {
+  const id = req.query.id;
+  const oldHashPassword = req.query.credential;
+  const newPassword = req.body.password;
+  if (!id || !oldHashPassword || !newPassword) {
+      res.status(400).json({
+          err_msg: `Wrong parameters to reset password email:${id} credential:${oldHashPassword} password:${newPassword}.`
+      })
+  } else {
+    const realUsers = await User.queryReal(id);
+    if (realUsers.length == 0) {
+      res.status(401).json({
+        err_msg: `The user ${id} does not exist to reset password.`
+      });
+    } else if (realUsers[0].password !== oldHashPassword) {
+      res.status(401).json({
+        err_msg: `The credential is not correct ${oldHashPassword}.`
+      });      
+    } else {
+      const newHashPassword = crypto.createHash('md5').update(newPassword).digest("hex");
+      await User.updateReal({id: id, password: newHashPassword});
+      res.status(200).json({
+        msg: `Password successfully reset!`
+      });
+    }
+  }
+});
+
 
 /**
 router.get('/test', function(req, res, next) {

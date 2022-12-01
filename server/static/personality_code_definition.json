@@ -2155,7 +2155,7 @@
          "[User_ILE] is often more interested in the idea or theory of something, whereas [User_SEE] is more interested in the actual practice or implementation of it.",
          "[User_ILE] is more likely to make decisions based on logical reasons than [User_SEE], who is more likely to make decisions based on their own feelings.",
          "[User_SEE] is better at noticing details than [User_ILE]. [User_ILE] on the other hand, is better at seeing the big picture than [User_SEE].",
-         "[User_SEE] is not as inclined to compare and verify concepts as [User_ILE]. [User_SEE] assumes that these can have only one unique interpretation (the \"correct\" interpretation), and [User_SEE] often does not think about the fact that the other person may be interpreting them differently. Much more than [User_ILE], [User_SEE] applies concepts such as \"objective reality\," \"unequivocal facts,\" and de-emphasizes concepts; [User_SEE] considers that they know the \"right\" way of doing things, how something \"truly is,\" etc.",
+         "[User_SEE] is not as inclined to compare and verify concepts as [User_ILE]. [User_SEE] assumes that these can have only one unique interpretation (the \"correct\" interpretation), and [User_SEE] often does not think about the fact that the other person may be interpreting them differently. Much more than [User_ILE], [User_SEE] applies concepts such as \"objective reality,\" \"unequivocal facts,\" and de-emphasizes concepts; [User_SEE] considers that they know the \"right\" way of doing things, how something \"truly is,\" etc.",
          "[User_SEE] tends to prefer using persuasion as a means of convincing others to do something, whereas [User_ILE] prefers to use argumentation as a means of convincing others.",
          "[User_SEE] tends to judge their available options by how likely the option will help them reach their goal. If a choice no longer helps [User_SEE] reach their goals, it will be dismissed and discontinued. On the other hand, [User_ILE] prefers to continue pursuing their current option, opting to adjust their ultimate goal in order to fit the current choice.",
          "When solving a problem, [User_ILE] is more inclined (than [User_SEE]) to solve it by relying predominantly on only the presently available information. Essentially, [User_ILE] will develop a process or method uniquely fitted towards the present problem, and this method is designed using the present conditions and information.",
@@ -2350,8 +2350,7 @@
        "True altruists, Protectors return good deeds with more good deeds and throw themselves wholeheartedly into the causes and communities they support. Loyalty is a defining characteristic of Protectors. It is unusual for you to let a connection or relationship fizzle out due to a lack of effort on your part and a hallmark of this personality type is your willingness to put aside your own concerns to help a loved one or friend in need."
      ],
      "matching_tips": {
-     ],
-     "LII": [
+       "LII": [
          "[User_LII] is relatively better at assessing the emotional atmosphere occurring in a group or during an activity than [User_ESI].",
          "[User_ESI] is more likely to believe in objective truths than [User_LII]. That is, [User_ESI] is more likely to believe there is a correct or best way of doing something than [User_LII].",
          "[User_ESI] places greater value on their resources than [User_LII]. For [User_ESI], resources like their money, time, sleep, etc., fall into their \"inner personal space,\" and [User_ESI] will be more likely to deprioritize an interest if it starts to drain these resources too much.",

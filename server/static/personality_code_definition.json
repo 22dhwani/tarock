@@ -2,7 +2,7 @@
    "ILE": {
      "personality_code": "ILE",
      "personality_category": "Challenger",
-     "personality_socionic_code": "ENTp",
+     "personality_socionic_code": "ENTP",
      "personality_socionic_quadra": "Alpha",
      "description": {
        "STRENGTHS": "Creative; Funny; Adaptable; Inventive; Brainstormer; Sharp-witted",
@@ -213,7 +213,7 @@
    "LII": {
      "personality_code": "LII",
      "personality_category": "Analyst",
-     "personality_socionic_code": "INTj",
+     "personality_socionic_code": "INTJ",
      "personality_socionic_quadra": "Alpha",
      "description": {
        "STRENGTHS": "Driven; Systematic; Cautious; Intellectual; Future-focused; Studious",

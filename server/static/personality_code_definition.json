@@ -429,10 +429,10 @@
 		"personality_socionic_quadra": "Alpha",
 		"description": {
 			"STRENGTHS": "Warm; Responsible; Attentive; Outgoing; Optimistic; Adventurous",
-			"WEAKNESS": "Struggles to improvise; Rigid; Vulnerable to criticism; Reliant on approval",
+			"WEAKNESS": "Struggles to improvise; Reliant on approval",
 			"SUPERPOWER": "Attuned to emotions",
 			"BLINDSPOT": "Logical inconsistency",
-			"IDEALENVIRONMENT": "50/50 – Collaborative, people-oriented environment but appreciates downtime"
+			"IDEALENVIRONMENT": "50/50 – Collaborative and people-oriented but appreciates downtime"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.0125,

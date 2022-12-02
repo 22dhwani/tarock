@@ -6,10 +6,10 @@
 		"personality_socionic_quadra": "Alpha",
 		"description": {
 			"STRENGTHS": "Creative; Funny; Adaptable; Inventive; Brainstormer; Sharp-witted",
-			"WEAKNESS": "Losing focus; Annoyed by illogical ideas; Intolerant of the mundane; Enjoys a bit of chaos",
+			"WEAKNESS": "Annoyed by illogical ideas; Enjoys a bit of chaos",
 			"SUPERPOWER": "Wit",
-			"BLINDSPOT": "Attention to details",
-			"IDEALENVIRONMENT": "Happy alone and with others, but not with overly emotional"
+			"BLINDSPOT": "Attention to detail",
+			"IDEALENVIRONMENT": "Happy in groups and alone, though avoids melodrama"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.85,
@@ -22,7 +22,7 @@
 			"STRATEGY": 0.7875
 		},
 		"summary": [
-			"For those with this personality, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated or, at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
+			"For you, there is no dogma too holy to be challenged, no thought too basic to be examined, and no rule too vital to be violated, or at the very least, put to the test. Hence, you try to persuade others of the validity of your beliefs by defending them logically, attracting others who share your values.",
 			"Your mind is constantly churning out new, exciting, and potentially fruitful ideas. You can grasp the big picture and foretell how things will develop. The ability to trust your gut has served you well. By sifting through a mountain of data and considering each piece of information from a bird's-eye perspective, you may arrive at a novel solution to a problem that no one else thought about.",
 			"Occasionally, Challengers may go against their own ideas by arguing the opposite side, if only to obtain a new perspective. They are often fearless and inventive, capable of dismantling and reassembling ideas with remarkable dexterity. They are unfazed by obstacles and go on relentlessly to achieve their aims. In addition, you are not scared to disagree with just about anybody or anything. Most of the time, Challengers encourage others to find their own solutions to problems and are willing to guide those in need.",
 			"Your primary issue is that you lack the capacity to recognize and comprehend interpersonal dynamics. You may find it extremely challenging to gauge people's genuine feelings about you. Besides, one of the hardest things for many Challengers is channeling their boundless curiosity and enthusiasm for ideas into tangible results and useful global contributions."
@@ -216,8 +216,8 @@
 		"personality_socionic_code": "INTP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
-			"STRENGTHS": "Driven; Systematic; Cautious; Intellectual; Future-focused; Studious",
-			"WEAKNESS": "Holds high expectations; Stubborn; Over-analyze; Accepting and readjusting",
+			"STRENGTHS": "Driven; Systematic; Cautious; Rational; Future-focused; Studious",
+			"WEAKNESS": "Holds high expectations (stubborn); Over-analyzing",
 			"SUPERPOWER": "Logical analysis",
 			"BLINDSPOT": "Overlooking the present",
 			"IDEALENVIRONMENT": "Seeks independence"
@@ -430,9 +430,9 @@
 		"description": {
 			"STRENGTHS": "Warm; Responsible; Attentive; Outgoing; Optimistic; Adventurous",
 			"WEAKNESS": "Struggles to improvise; Rigid; Vulnerable to criticism; Reliant on approval",
-			"SUPERPOWER": "Helping",
+			"SUPERPOWER": "Attuned to emotions",
 			"BLINDSPOT": "Logical inconsistency",
-			"IDEALENVIRONMENT": "Collaborative, people-oriented environment (50/50, grows bored alone but appreciates downtime)"
+			"IDEALENVIRONMENT": "50/50 – Collaborative, people-oriented environment but appreciates downtime"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.0125,
@@ -639,10 +639,10 @@
 		"personality_socionic_code": "ISFP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
-			"STRENGTHS": "Practical; Diplomatic; Charming; Attentive; Sense of measure; Coordinated",
-			"WEAKNESS": "Takes criticism to heart; Rigid structure; Can be highly sensitive; Most likely will see things as a competition; Does not like being in a hurry",
+			"STRENGTHS": "Charming; Present-focused; Practical; Attentive; Diplomatic; Coordinated",
+			"WEAKNESS": "Takes criticism to heart; Forced to rushed",
 			"SUPERPOWER": "Tuned sensory details",
-			"BLINDSPOT": "Organization/preparation",
+			"BLINDSPOT": "Organization & preparation",
 			"IDEALENVIRONMENT": "Alone or small group"
 		},
 		"dimensional_values": {
@@ -851,7 +851,7 @@
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Observant; Composed; Quick; Charming; Practical; Take-Charge",
-			"WEAKNESS": "Distrustful; Short-sighted; Cold callouts; Grasping actions behind emotions; Not having a plan",
+			"WEAKNESS": "Short-sighted with lack of plan; Grasping actions behind emotions",
 			"SUPERPOWER": "“Street smarts”",
 			"BLINDSPOT": "Impulsive",
 			"IDEALENVIRONMENT": "Energized by others company"
@@ -1062,10 +1062,10 @@
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Accurate; Methodical; Literal; Loyal; Meticulous; Patient",
-			"WEAKNESS": "Instructions must be clear; Pride suffers if another person’s capable; Prone to generalize; Stubborn with goals; Dislikes vagueness",
+			"WEAKNESS": "Confrontational; Accepting and readjusting",
 			"SUPERPOWER": "Reliable",
 			"BLINDSPOT": "Overly critical",
-			"IDEALENVIRONMENT": "Alone or small group"
+			"IDEALENVIRONMENT": "Alone or quiet group"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.875,
@@ -1273,8 +1273,8 @@
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Affectionate; Harmonious; Emotionally-aware; Curious; Charismatic; Artistic",
-			"WEAKNESS": "If buttons pushed, can be mean; Takes feedback critically; Cares deeply about others thoughts; Very self aware (capable of manipulation); Overcommitting to plans",
-			"SUPERPOWER": "Spirit & EQ",
+			"WEAKNESS": "Overcomitting to plans; Strong self-awareness (capable of manipulation),
+			"SUPERPOWER": "Emotional Intelligence",
 			"BLINDSPOT": "Overgeneralizing",
 			"IDEALENVIRONMENT": "Enjoys company, but needs own space"
 		},
@@ -1483,8 +1483,8 @@
 		"personality_socionic_code": "INFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
-			"STRENGTHS": "Visionary; Cheerful; Creative; Flexible; Caring; Humorous",
-			"WEAKNESS": "Taking initiative; Dwells on past victories and defeats; Dreaming rather than doing; Mood swings",
+			"STRENGTHS": "Visionary; Cheerful; Imaginative; Flexible; Caring; Humorous",
+			"WEAKNESS": "Dwells on past victories and defeats; Dreaming rather than doing",
 			"SUPERPOWER": "Detecting phoniness",
 			"BLINDSPOT": "Attention to detail",
 			"IDEALENVIRONMENT": "Distracted by others, needs personalized space"
@@ -1695,7 +1695,7 @@
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Rational; Persuasive; Bold; High-Energy; Calculated; Candid",
-			"WEAKNESS": "Indecisive; Impatient; Does not sugar coat; Bites off more than can chew; Comes across unemotional with directness",
+			"WEAKNESS": "Does not sugar coat; Bites off more than can chew",
 			"SUPERPOWER": "Perseverance",
 			"BLINDSPOT": "Attention to detail",
 			"IDEALENVIRONMENT": "Anything goes"
@@ -1906,10 +1906,10 @@
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Witty; Matter-of-fact; Nonchalant; Analytical; Strategic; Reminiscent of past",
-			"WEAKNESS": "Struggles with organization; Anxious risk-aversion; Staying in-the-moment; Keeping a structure; Poor time management (procrastination)",
+			"WEAKNESS": "Staying in-the-moment; Skeptical",
 			"SUPERPOWER": "Knowledge",
-			"BLINDSPOT": "lack of openness",
-			"IDEALENVIRONMENT": "Self-sufficient although needs prodding"
+			"BLINDSPOT": "Avoids all possible errors (risk-averse)",
+			"IDEALENVIRONMENT": "Self-sufficient, may need social prodding"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.9875,
@@ -1923,7 +1923,7 @@
 		},
 		"summary": [
 			"Creativity and originality are your hallmarks as you also go along untrodden routes, blending a spirit of adventure with a flair for originality. Your strength is in seeing what is to come; you can envision how a situation will develop over time and provide sound advice to help others avoid potential pitfalls. Some of history's greatest philosophers and scientists have been Foreseers because they cannot help but ponder life's ultimate riddles.",
-			"Most of the time, you can make accurate forecasts due to your keen intuition. Foreseers take great satisfaction in their ability to think creatively and rigorously. Hence, you are able to predict the behavior of others; the more you know about someone, the more boring they become since they have become so predictable.",
+			"The majority of the time, you can spot the weakest link in any chain and make accurate forecasts due to your keen intuition. Foreseers take great satisfaction in their ability to think creatively and rigorously. Hence, you are able to predict the behavior of others; the more you know about someone, the more boring they become since they have become so predictable.",
 			"One stereotype about you is that you are cold, aloof, and reticent. In fact, as a Foreseer, you have a deep desire to help those you care about, yet you may not know how to express their feelings. And since they are unsure how to show their support in the most helpful manner, they may refrain from doing so.",
 			"Furthermore, people with this trait tend to deliberate too long over even the most inconsequential choices. This leaves people feeling helpless and trapped, and they have a hard time getting anything done because they are so mentally tired from the constant stream of ideas running through their heads."
 		],
@@ -2117,10 +2117,10 @@
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Enthusiastic; Free-Spirited; Easy-Going; Charming; Present-focused; Confident",
-			"WEAKNESS": "Denies unpleasant truths; Long-term planning; Bores easily; Avoids all conflicts",
+			"WEAKNESS": "Denies unpleasant truths; Avoids all conflicts",
 			"SUPERPOWER": "Instant rapport",
-			"BLINDSPOT": "Quick judgement",
-			"IDEALENVIRONMENT": "Small gathering with chatty group"
+			"BLINDSPOT": "Quick to judge",
+			"IDEALENVIRONMENT": "Small gathering with chatty crowd"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.15,
@@ -2328,7 +2328,7 @@
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Precise; Stoic; Decisive; Observant; Dexterous; People-person",
-			"WEAKNESS": "If offended, openly expresses opinion; Not fan of surprises or “winging it”; Too kind and humble; Does not like to wait",
+			"WEAKNESS": "Surprises or “winging it”; Reliant on others' attitudes",
 			"SUPERPOWER": "Loyalty",
 			"BLINDSPOT": "Biased judgement",
 			"IDEALENVIRONMENT": "Small group or alone (with storage space!)"
@@ -2538,11 +2538,11 @@
 		"personality_socionic_code": "ESTJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
-			"STRENGTHS": "Diligent; Proactive; Courageous; Energetic; Resourceful; Rational",
-			"WEAKNESS": "Over-managing; Not comfortable with ambiguity; Tendency to be rigid and inflexible; Seeing others point of view",
+			"STRENGTHS": "Diligent; Proactive; Courageous; Energetic; Resourceful; Realistic",
+			"WEAKNESS": "Not comfortable with ambiguity; Seeing others point of view",
 			"SUPERPOWER": "Planning",
 			"BLINDSPOT": "Close-minded",
-			"IDEALENVIRONMENT": "Enjoys extra company"
+			"IDEALENVIRONMENT": "Enjoys the extra company"
 		},
 		"dimensional_values": {
 			"LOGIC": 0.9875,
@@ -2749,8 +2749,8 @@
 		"personality_socionic_code": "ISTP",
 		"personality_socionic_quadra": "Delta",
 		"description": {
-			"STRENGTHS": "Concise; Hands-on; Resourceful; Down-to-earth; Inventive; Empathetic",
-			"WEAKNESS": "Intolerant of intrusive or imposing people; Holds onto inner worries; Cannot relax (in a constant rush); Bores easily",
+			"STRENGTHS": "Observant; Hands-on; Resourceful; Down-to-earth; Inventive; Empathetic",
+			"WEAKNESS": "Holds onto inner worries; In a constant rush",
 			"SUPERPOWER": "X-ray sensing",
 			"BLINDSPOT": "Foresight",
 			"IDEALENVIRONMENT": "Alone with full independence"
@@ -2766,7 +2766,7 @@
 			"STRATEGY": 0.3125
 		},
 		"summary": [
-			"You acquire knowledge about the world through direct involvement. At all times, you want to learn as much as possible, explore the world, and participate actively in the world around you rather than be a passive spectator. Crafters that are at the top of their game are naturally inquisitive and eager to learn about the world via direct experience.",
+			"You let off an aura of absolute calmness around you and never let the little obstacles get in the way. At all times, you want to learn as much as possible, explore, and participate actively in the world around you rather than be a passive spectator. Crafters are naturally inquisitive and eager to learn about the world via direct experience.",
 			"Most likely, you like to get things done without relying on others and approach life with curiosity and a willingness to adapt your methods as they go along. Individuals with this temperament are born makers, jumping from one endeavor to another, creating both practical and frivolous objects for the sheer joy of it. Likewise, the Crafter explores ideas by making, fixing, trying, and learning. In fact, you welcome others' attention and even invite it into their personal space while they are working on a project.",
 			"However, very often, even close friends and family may have trouble predicting your temperament due to your ambivalent nature. Although Crafters may seem steadfast at first, they often store up a great deal of impulsive energy that they release all at once when their interests suddenly shift in a daring new path.",
 			"Don’t forget that the main challenge that you will encounter is that you tend to take advantage of their lax nature and assume that everyone else does as well. Crafter types have difficulty adhering to rules and regulations and would much rather be given the freedom to explore their environment in any way they see fit."
@@ -2960,8 +2960,8 @@
 		"personality_socionic_code": "ENFJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
-			"STRENGTHS": "Perceptive; People-person; Witty; Adaptable; Energetic; Observant",
-			"WEAKNESS": "Fears of letting others down; Procrastinating; Impulsive; Accepting criticism; Sensitive",
+			"STRENGTHS": "Perceptive; People-person; Witty; Adaptable; Energetic; Insightful",
+			"WEAKNESS": "Fear of lettings others down; Accepting criticism (sensitive)",
 			"SUPERPOWER": "Intuition",
 			"BLINDSPOT": "Blinded by optimism",
 			"IDEALENVIRONMENT": "Discussing ideas, drained when alone for long periods"
@@ -3171,10 +3171,10 @@
 		"personality_socionic_code": "INFJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
-			"STRENGTHS": "Persistent; Visionary; Perfectionistic; Values-Driven; Conscientious; Attentive",
-			"WEAKNESS": "Self-isolating; Self-critical; Uncomfortable if things aren't clearly defined; Quickly offended by criticism",
+			"STRENGTHS": "Persistent; Visionary; Perfectionist; Values-Driven; Conscientious; Attentive",
+			"WEAKNESS": "Self-critical; Quickly offended by criticism",
 			"SUPERPOWER": "Empathy",
-			"BLINDSPOT": "Always looking ahead",
+			"BLINDSPOT": "Dismisses surroundings; Always looking ahead",
 			"IDEALENVIRONMENT": "Alone, gets distracted by people"
 		},
 		"dimensional_values": {

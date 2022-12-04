@@ -62,12 +62,10 @@ app.use(express.urlencoded({ extended: true }));
 //    }
 // });
 
+const publicPath = path.join(dir, '../public');
+app.use(express.static(publicPath));
 app.get("/", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json({ message: 'Welcome!' });
-  } else {
-    res.redirect('/login');
-  }
+  res.sendFile(publicPath + '/index.html');
 });
 
 assessment(app);

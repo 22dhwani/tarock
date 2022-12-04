@@ -26,11 +26,11 @@ function SignIn() {
     const matchUserId = new URLSearchParams(search).get('match');
     const [stage, setStage] = useState('');
     const [validation, setValidation] = useState(false);
-    const [avatarSelection, setAvatarSelection] = useState(2);
+    const [avatarSelection, setAvatarSelection] = useState(userData.avatarIndex);
     const [formData, setFormData] = useState(
         {
             name: "",
-            avatarIndex: 0,
+            avatarIndex: userData.avatarIndex,
             password: "",
             email: "",
         }
@@ -61,7 +61,7 @@ function SignIn() {
             const data = {
                 name: formData.name ? formData.name : userData.name,
                 avatarIndex: formData.avatarIndex,
-                gender: getGender(formData.avatarIndex),
+                gender: userData.userType === 'REAL' ? undefined : getGender(formData.avatarIndex), // Don't update gender if user is updating avatar only
                 userId: userData.id,
                 userType: userData.type
             };

@@ -1,6 +1,4 @@
 import Container from 'react-bootstrap/Container';
-import maleAvatar from '../assets/avatarMale.svg'
-import femaleAvatar from '../assets/avatarFemale.svg'
 import ButtonGroup from '../components/Buttons/ButtonGroup/ButtonGroup';
 import Row from 'react-bootstrap/Row';
 import Footer from '../components/Footer/Footer';
@@ -8,6 +6,7 @@ import Header from '../components/Header/Header';
 import { GlobalContext } from '../context';
 import { useContext } from 'react';
 import { profileOptions } from '../contentData/profileOptions';
+import { getAvatar } from '../utils/userUtil';
 
 function UserProfile() {
     const { userData } = useContext(GlobalContext);
@@ -18,7 +17,7 @@ function UserProfile() {
                 <div style={{
                     width: 'fit-content'
                 }}>
-                    <img src={userData.avatarIndex ? maleAvatar : femaleAvatar} alt="avatar" height='120px' width='120px' style={{
+                    <img src={getAvatar(userData.avatarIndex)} alt="avatar" height='120px' width='120px' style={{
                         margin: '0 auto',
                         backgroundColor: '#FFFFFF',
                         borderRadius: '50%',

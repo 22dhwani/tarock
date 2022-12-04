@@ -136,7 +136,7 @@ router.post('/register', async function(req, res, next) {
 passport.use(new GoogleStrategy({
     clientID: process.env['GOOGLE_CLIENT_ID'],
     clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-    callbackURL: '/oauth2/redirect/google',
+    callbackURL: (process.env['SERVER_BASE_URL'] ? process.env['SERVER_BASE_URL'] : '') + '/oauth2/redirect/google',
     scope: [ 'email', 'profile' ],
     store: true // to store state data
   }, function verify(accessToken, refreshToken, profile, cb) {

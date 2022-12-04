@@ -239,8 +239,8 @@ router.get('/password/forget', async (req, res) => {
       const realUsers = await User.queryReal(id);
 
       const sender = {
-        email: "jingyuanz534@gmail.com",
-        password: "yxxzpzafeqzquezh"
+        email: "account@tarock.me",
+        password: "eqlhjrmaxiflsxjs"
       }
 
       if (realUsers.length !== 0) {
@@ -254,8 +254,7 @@ router.get('/password/forget', async (req, res) => {
           });
 
           const credential = realUsers[0].password;
-          //const url = process.env['CLIENT_BASE_URL'] + `/password/form?id=${id}&credential=${credential}`;
-          const url = `http://localhost:3000` + `/password/form?id=${id}&credential=${credential}`;
+          const url = process.env['SERVER_BASE_URL'] + `/password/form?id=${id}&credential=${credential}`;
         
           const mailOptions = {
               from: sender.email,
@@ -289,11 +288,11 @@ router.get('/password/form', async (req, res) => {
     <br></br>
     <form id="f1" method="post">
       <div>
-      <label>New Passwor</label>
+      <label>New Password</label>
       <input id="p1" type="password" name="password">
       </div>
       <div>
-      <label>Retype Password</label>
+      <label>Re-type Password</label>
       <input id="p2" type="password">
       </div>
     </form>

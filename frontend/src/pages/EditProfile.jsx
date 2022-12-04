@@ -7,29 +7,53 @@ import buttonBack from '../assets/buttonBack.svg';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router-dom";
-import './styles.css'
+import './styles.css';
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
+
 function EditProfile() {
     const { userData, setUserData } = useContext(GlobalContext);
     const placeholders = ["First and Last Name", "mm/dd/yyyy"];
-    const formItems = ['Name', 'DOB']
-    let avatarIndex = 0;
+    const formItems = [
+        { label: 'Name', name: 'name' },
+        { label: 'Date of birth', name: 'dob' }
+    ];
     const [formData, setFormData] = useState(
         {
-            name: "",
-            dob: "",
+            name: userData.name,
+            dob: userData.dob,
             gender: "",
         }
     )
-    // console.log(formData)
+    const [validation, setValidation] = useState(false);
     const navigate = useNavigate();
 
-    async function handleSubmit() {
 
-        if (formData.gender == "Male") {
-            avatarIndex = 1;
-        } else if (formData.gender == "Female") {
-            avatarIndex = 0;
+    function getValidation() {
+        const forms = document.getElementById('infoForm');
+        if (forms.length > 0) {
+            return forms[0].checkValidity();
         }
+        return false;
+    }
+
+    async function handleSubmit() {
+        setValidation(true);
+        const validation = getValidation();
+        if (!validation) {
+            return;
+        }
+
+        const bodyData = {
+            name: formData.name,
+            dob: formData.dob,
+            userId: userData.id,
+            userType: 'REAL'
+        };
+        if (formData.gender) {
+            bodyData.gender = formData.gender;
+        }
+
         try {
 
             await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user`, {
@@ -39,23 +63,13 @@ function EditProfile() {
                     'Content-Type': 'application/json'
                 },
 
-                body: JSON.stringify({
-                    name: formData.name,
-                    avatarIndex: avatarIndex,
-                    gender: formData.gender,
-                    dob: formData.dob,
-                    userId: userData.id,
-                    email: userData.email,
-                    userType: userData.type
-                    //Password: formData.password
-                })
+                body: JSON.stringify(bodyData)
             }).then(response => response.json())
                 .then(data => {
                     setUserData((prevUserData) => ({
                         ...prevUserData,
                         name: formData.name,
-                        gender: formData.gender,
-                        avatarIndex: avatarIndex,
+                        gender: formData.gender ? formData.gender : prevUserData.gender,
                         dob: formData.dob
                     }));
                     navigate('/user');
@@ -75,20 +89,24 @@ function EditProfile() {
         })
     }
     return (
-        <Container className='d-flex flex-column min-vh-100 p-5 ' style={{ backgroundColor: '#FBF2DC' }}>
-            <div className="d-flex align-items-center gap-5 " style={{
-                position: 'relative',
-                right: '40px',
-                display: 'flex'
-            }}>
-                {/* use conditional rendering for faster switch */}
-                <Link to='/user'>
-                    <img src={buttonBack} alt="back button" style={{ width: '50px', height: '50px' }} />
-                </Link>
-                <h5>Edit my information</h5>
-            </div>
+        <Container className='d-flex flex-column min-vh-100 pt-4' style={{ backgroundColor: '#FBF2DC' }}>
+            <Row>
+                <Col className='col-2 d-flex justify-content-center align-self-center'>
+                    <img src={buttonBack} alt="back" onClick={() => {navigate('/user')}}/>
+                </Col>
+                <Col className='col-8 d-flex justify-content-center align-self-center'>
+                    <div style={{
+                        fontFamily: 'Montserrat',
+                        fontWeight: '700',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        color: '#49304D',
+                    }}>Account settings</div>
+                </Col>
+                <Col className='col-2'></Col>
+            </Row>
 
-            <div style={{
+            <div className={'px-3'} style={{
                 position: 'relative',
                 top: '3rem',
                 zIndex: '1000',
@@ -96,28 +114,51 @@ function EditProfile() {
                 flexDirection: 'column',
                 gap: '20px',
             }}>
-                <Form >
+                <Form id='infoForm' validated={validation}>
                     {formItems.map((item, index) => {
                         return (
                             <Form.Group className="mb-3" key={index}>
-                                <Form.Label>{item}</Form.Label>
-                                <Form.Control type="text" placeholder={placeholders[index]} name={item.toLowerCase()} onChange={handleChange} />
+                                <Form.Label style={{
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: '700',
+                                    fontSize: '12px',
+                                    lineHeight: '12px',
+                                    color: '#49304D',
+                                }}>{item.label}</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    placeholder={placeholders[index]}
+                                    name={item.name}
+                                    onChange={handleChange}
+                                    value={formData[item.name]}
+                                    pattern={item.name === 'dob' ? '(?:(?:0[1-9]|1[0-2])[\/\\-. ]?(?:0[1-9]|[12][0-9])|(?:(?:0[13-9]|1[0-2])[\/\\-. ]?30)|(?:(?:0[13578]|1[02])[\/\\-. ]?31))[\/\\-. ]?(?:19|20)[0-9]{2}' : undefined}
+                                />
+                                <Form.Control.Feedback type="invalid">Please enter a valid {item.label.toLowerCase()}</Form.Control.Feedback>
                             </Form.Group>
                         )
                     })}
                     {/* dropdown for gender */}
+                    <Form.Label style={{
+                            fontFamily: 'Montserrat',
+                            fontWeight: '700',
+                            fontSize: '12px',
+                            lineHeight: '12px',
+                            color: '#49304D',
+                        }}>Gender</Form.Label>
                     <Dropdown>
                         <Dropdown.Toggle style={
                             {
-                                backgroundColor: '#49304D',
-                                color: '#FFFFFF',
+                                width: '100%',
+                                backgroundColor: 'white',
+                                color: '#999999'
                             }}>
-                            {formData.gender === "" ? "Gender" : formData.gender}
+                            {formData.gender === "" ? "Choose your gender" : formData.gender}
                         </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {['Male', 'Female'].map((item, index) => {
+                        <Dropdown.Menu style={{width: '100%'}} >
+                            {['Male', 'Female', 'Other'].map((item, index) => {
                                 return (
-                                    <Dropdown.Item key={index} onClick={() => setFormData(prevFormData => {
+                                    <Dropdown.Item style={{color: '#49304D'}} key={index} onClick={() => setFormData(prevFormData => {
                                         return {
                                             ...prevFormData,
                                             gender: item
@@ -134,7 +175,9 @@ function EditProfile() {
             <button
                 onClick={handleSubmit}
                 className='w-100 rounded-5 py-3 mt-auto mb-5' style={{
+                    fontFamily: 'Montserrat',
                     backgroundColor: '#49304D',
+                    fontWeight: '700',
                     color: '#FFFFFF',
                     fontSize: '16px',
                     lineHeight: '14px',

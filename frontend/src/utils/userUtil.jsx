@@ -1,3 +1,7 @@
+import maleAvatar from '../assets/avatarMale.svg';
+import femaleAvatar from '../assets/avatarFemale.svg';
+import biAvatar from '../assets/avatarBi.svg';
+
 const getUser = async (id, userType) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=${userType}`);
     const data = await response.json();
@@ -56,4 +60,12 @@ const logout = async () => {
     }
 };
 
-export { getUser, getAuthorization, getUserType, logout };
+const getAvatar = (avatarIndex) => {
+    const list = [femaleAvatar, maleAvatar, biAvatar];
+    if (avatarIndex >= 0 && avatarIndex < list.length) {
+        return list[avatarIndex];
+    }
+    return biAvatar;
+}
+
+export { getUser, getAuthorization, getUserType, logout, getAvatar };

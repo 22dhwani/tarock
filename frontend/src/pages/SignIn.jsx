@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import male from '../assets/avatarMale.svg';
 import female from '../assets/avatarFemale.svg';
+import bi from '../assets/avatarBi.svg';
 import line from '../assets/signin/line.svg';
 import googleSignin from '../assets/signin/googleSignin.svg';
 import googleSignup from '../assets/signin/googleSignup.svg';
@@ -24,15 +25,7 @@ function SignIn() {
     const matchUserId = new URLSearchParams(search).get('match');
     const [stage, setStage] = useState('');
     const [validation, setValidation] = useState(false);
-
-    useEffect(() => {
-        if (state) {
-            setStage(state.stage);
-        }
-        // Need setTimeout to make updateValidation work.
-        setTimeout(() => {updateValidation()}, 0);
-    }, []);
-
+    const [avatarSelection, setAvatarSelection] = useState(2);
     const [formData, setFormData] = useState(
         {
             name: "",
@@ -42,12 +35,33 @@ function SignIn() {
         }
     )
 
+    useEffect(() => {
+        if (state && state.stage) {
+            setStage(state.stage);
+        } else {
+            // No state or stage, navigate to main page.
+            navigate('/');
+        }
+        // Need setTimeout to make updateValidation work.
+        setTimeout(() => {updateValidation()}, 0);
+    }, []);
+
+    function getGender(avatarIndex) {
+        if (avatarIndex == 0) {
+            return 'Female';
+        } else if (avatarIndex == 1) {
+            return 'Male';
+        } else {
+            return 'Other';
+        }
+    }
+
     async function handleSubmit() {
         try {
             const data = {
                 name: formData.name ? formData.name : userData.name,
                 avatarIndex: formData.avatarIndex,
-                gender: formData.avatarIndex ? 'Male' : 'Female',
+                gender: getGender(formData.avatarIndex),
                 userId: userData.id,
                 userType: userData.type
             };
@@ -315,23 +329,54 @@ function SignIn() {
                         textAlign: 'center',
                     }}>Choose your avatar</div>
                     <Row className = 'my-4'>
-                        <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
-                            return {
-                                ...data,
-                                avatarIndex: 1
-                            }
-                        })}>
-                            <img className='rounded-4' src={male} alt="male" style={{ backgroundColor: 'white', height: '140px'}} />
+                        <Col className='d-flex justify-content-center' onClick={() => {
+                            setFormData(data => {
+                                return {
+                                    ...data,
+                                    avatarIndex: 1
+                                }
+                            });
+                            setAvatarSelection(1);
+                        }}>
+                            <img className='rounded-4' src={male} alt="male" style={{
+                                backgroundColor: 'white',
+                                height: '110px',
+                                border: avatarSelection == 1 ? '4px solid #EBBD45' : ''
+                            }} />
                         </Col>
                     </Row>
                     <Row className = 'my-4'>
-                        <Col className='d-flex justify-content-center' onClick={() => setFormData(data => {
-                            return {
-                                ...data,
-                                avatarIndex: 0
-                            }
-                        })}>
-                            <img className='rounded-4' src={female} alt="female" style={{ backgroundColor: 'white', height: '140px' }} />
+                        <Col className='d-flex justify-content-center' onClick={() => {
+                            setFormData(data => {
+                                return {
+                                    ...data,
+                                    avatarIndex: 0
+                                }
+                            });
+                            setAvatarSelection(0);
+                        }}>
+                            <img className='rounded-4' src={female} alt="female" style={{
+                                backgroundColor: 'white',
+                                height: '110px',
+                                border: avatarSelection == 0 ? '4px solid #EBBD45' : ''
+                            }} />
+                        </Col>
+                    </Row>
+                    <Row className = 'my-4'>
+                        <Col className='d-flex justify-content-center' onClick={() => {
+                            setFormData(data => {
+                                return {
+                                    ...data,
+                                    avatarIndex: 2
+                                }
+                            });
+                            setAvatarSelection(2);
+                        }}>
+                            <img className='rounded-4' src={bi} alt="bi" style={{
+                                backgroundColor: 'white',
+                                height: '110px',
+                                border: avatarSelection == 2 ? '4px solid #EBBD45' : ''
+                            }} />
                         </Col>
                     </Row>
                 </div>

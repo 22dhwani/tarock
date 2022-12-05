@@ -1,5 +1,5 @@
 function FeedCard(props) {
-    const { image, title, author, time } = props;
+    const { image, title, author, time, link } = props;
     return (
         <div className="d-flex flex-column mb-2 mt-3 mx-auto" style={{ width: 'fit-content', cursor: 'pointer' }}>
             <img src={image} alt="image" style={{ width: '350px', objectFit: 'cover', height: '200px' }} className='rounded-3' />

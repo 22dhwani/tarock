@@ -162,7 +162,6 @@ const CardsScreen = () => {
                         </div>
                     </Popup>
                 </>
-
             </Popup>
 
             <Header />

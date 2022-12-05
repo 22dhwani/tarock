@@ -15,7 +15,7 @@ function RadarView({ cardData, userInfo }) {
             </div>
             {/* Radar Chart */}
             <div className="my-5" style={{
-                height: '270px'
+                height: '270px',
             }}>
                 <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
             </div>

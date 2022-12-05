@@ -90,6 +90,9 @@ const App = () => {
               <Route index path="/myCard" element={<ProtectedRoute component={<MyCardScreen />} />} />
               <Route index path="/chart" element={<ProtectedRoute component={<RadarChart />} />} />
               <Route index path="/share/:userId" element={<ShareScreen />} />
+              {/* new share route for match card */}
+              {/* <Route index path="/share/match/:userId" element={<ShareMatchCard />} /> */}
+              {/* <Route index path=""/share/:userId" element={<ShareTarockCard />} /> */}
               <Route index path="/cards" element={<ProtectedRoute component={<CardDeck />} />} />
               {/* <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/> */}
             </Routes>

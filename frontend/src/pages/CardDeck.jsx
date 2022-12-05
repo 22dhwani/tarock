@@ -50,7 +50,7 @@ const CardsScreen = () => {
             setMatchedCardsData(data[1].data);
         }
     }
-
+    console.log(matchedCardsData)
     const matchUser = async () => {
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/match`, {
             method: 'POST',
@@ -189,7 +189,7 @@ const CardsScreen = () => {
                                                 style={{ cursor: 'pointer' }}
                                                 onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />)}
                                                 className='justify-content-center d-flex'>
-                                                <GenCard cardType='match' />
+                                                <GenCard cardType='match' matchedQuadra={data.matchedUserQuadra} matchedUserName={data.matchedUserName}/>
                                             </Col>
                                         })
                                     }

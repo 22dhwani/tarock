@@ -171,7 +171,7 @@ const CardsScreen = () => {
                         <>
                             <Col style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} className='justify-content-center d-flex'>
                                 <GenCard
-                                    quadra={quadra}
+                                    userQuadra={quadra}
                                     avatar_index={userData.avatarIndex} />
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center' onClick={() => setShowNotification(true)}>

@@ -23,7 +23,7 @@ export default function GenCard(props) {
     useEffect(() => {
         assignColor(props.userQuadra, setUserColor);
         assignColor(props.matchedQuadra, setMatchedColor);
-    }, [2]);
+    }, []);
 
     return (
         <div className='d-flex flex-column my-3 '>

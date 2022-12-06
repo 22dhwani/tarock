@@ -71,6 +71,7 @@ function SignIn() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify(data)
             })
             if (!response.ok) {
@@ -124,14 +125,15 @@ function SignIn() {
                 })
             });
             const data = await response.json();
+            const user = await getUser(data.id, 'REAL');
             setUserData((prevUserData) => ({
                 ...prevUserData,
-                name: data.name,
-                gender: data.gender,
-                avatarIndex: data.avatar_index,
-                email: data.email,
-                dob: data.birth_date,
-                id: data.internal_user_id,
+                name: user.name,
+                gender: user.gender,
+                avatarIndex: user.avatar_index,
+                email: user.email,
+                dob: user.birth_date,
+                id: user.internal_user_id,
                 type: 'REAL',
                 isAuthorized: true
             }));

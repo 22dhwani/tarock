@@ -39,7 +39,7 @@ const CardsScreen = () => {
         setShowCard(true);
     }
     const getCardData = async () => {
-        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`);
+        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/card/user/${userData.id}`, { credentials: 'include' });
         const data = await response.json();
         if (data.length == 0 || data[0].type != 'Tarock') {
             // No Tarock card result for current user, navigate to test page.
@@ -59,6 +59,7 @@ const CardsScreen = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify({
                 origUserId: matchUserId,
                 matchedUserId: userData.id

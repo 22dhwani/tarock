@@ -1,19 +1,15 @@
 import Container from 'react-bootstrap/Container';
-import male from '../../assets/avatarMale.svg';
-import female from '../../assets/avatarFemale.svg';
+import { getAvatar } from '../../utils/userUtil';
 import RadarChart from '../Charts/RadarChart';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import Header from '../Header/Header';
 import Swipper from '../Swipper/Swipper';
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
-import deck from '../../assets/footer/cards.svg';
-import { useNavigate } from 'react-router-dom';
 import styles from './Cards.module.css';
 import match from '../../assets/cards/matchBtn.svg';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
-    const navigate = useNavigate();
     const radarView = <div>
         <div style={{
             fontFamily: 'Montserrat',
@@ -161,14 +157,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             }}>
                 <Header />
                 <div className='d-flex justify-content-center'>
-                    {
-                        (user.avatar_index == 1) &&
-                        <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
-                    }
-                    {
-                        (user.avatar_index == 0) &&
-                        <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
-                    }
+                    <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} />
                 </div>
                 <div style={{
                     fontFamily: 'Montserrat',
@@ -190,23 +179,6 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             }} className='mt-5'>
                 <a href='/test' style={{ display: 'flex', justifyContent: 'center', fontSize: '12px' }}>Not even close?</a>
             </div>
-            {
-                showShare &&
-                <div className='d-flex justify-content-center gap-2 mt-5'>
-                    {/* <img src={share} alt='share' className='w-75' onClick={() => navigate(`/share/${user.internal_user_id}`)} /> */}
-                    <div style={{
-                        borderRadius: '8px',
-                        backgroundColor: 'rgb(48, 105, 179)',
-                        color: 'white',
-                        cursor: 'pointer',
-                        padding: '10px',
-                    }}
-                        onClick={() => navigate('/cards')}
-                    >
-                        <img src={deck} alt='deck' width='40px' />
-                    </div>
-                </div>
-            }
             {children}
         </Container>
     );

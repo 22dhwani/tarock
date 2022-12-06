@@ -12,6 +12,7 @@ function Feeds({ header }) {
                 author={item.author}
                 time={item.time}
                 style={{ width: '100%' }}
+                link={item.link}
             />
     )
     return (

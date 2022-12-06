@@ -3,6 +3,8 @@ import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { getAvatar } from '../../utils/userUtil';
+
 export default function GenCard(props) {
     const [userColor, setUserColor] = useState('#3069B3');
     const [matchedColor, setMatchedColor] = useState('#3069B3');
@@ -41,14 +43,14 @@ export default function GenCard(props) {
                 alignItems: 'center',
             }}>
                 {props.cardType !== 'match' ? <img className='rounded-circle'
-                    src={props.avatar_index ? male : female}
+                    src={getAvatar(props.avatar_index)}
                     alt="avatar"
                     style={{ backgroundColor: '#FFFFFF' }}
                 />
                     :
                     <div className='d-flex flex-column gap-5 align-items-center'>
-                        <img src={male} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
-                        <img src={female} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
+                        <img src={getAvatar(props.avatar_index)} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
+                        <img src={getAvatar(props.matchedUserAvartarIndex)} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                 }
 
@@ -62,7 +64,7 @@ export default function GenCard(props) {
             }}>
                 {props.cardType == 'match' ? <p className='text-center'>
                     Match Card<br></br>
-                    <span style={{fontWeight:'600'}}>with {props.matchedUserName.split(' ')[0]}</span>
+                    <span style={{fontWeight:'400'}}>with {props.matchedUserName.split(' ')[0]}</span>
                 </p>
                     :
                     'Tarock Card'}

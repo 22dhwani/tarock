@@ -5,6 +5,7 @@ import RadarChart from '../../Charts/RadarChart';
 import { useNavigate, useLocation } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
+import Header from '../../Header/Header';
 
 function MatchCard(props) {
 
@@ -12,8 +13,11 @@ function MatchCard(props) {
     const [cardData, setCardData] = useState({});
     const [matchedUser, setMatchedUser] = useState('');
     const [matchedCard, setMatchedCard] = useState({});
+    const [matchingTips, setMatchingTips] = useState([]);
     const [user, setUser] = useState('');
-    const navigate = useNavigate();
+    const searchParams = new URLSearchParams(useLocation().search);
+    const origUserFromUrl = searchParams.get('origUser');
+    const matchedUserFromUrl = searchParams.get('matchedUser');
 
     function fetchUserData(setUser, setCardData, id) {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=REAL`)
@@ -37,16 +41,35 @@ function MatchCard(props) {
             })
             .catch(err => console.log(err.message));
     }
+
     useEffect(() => {
-        fetchUserData(setUser, setCardData, userData.id);
-        let matchedId = props.matchedUserID;
-        if (matchedId === userData.id) {
+        fetchUserData(setUser, setCardData, origUserFromUrl ? origUserFromUrl : userData.id);
+        let matchedId = matchedUserFromUrl ? matchedUserFromUrl : props.matchedUserID;
+        if (!origUserFromUrl && !matchedUserFromUrl && matchedId === userData.id) {
             matchedId = props.origID;
         }
         if (matchedId) {
             fetchUserData(setMatchedUser, setMatchedCard, matchedId);
         }
     }, []);
+
+    useEffect(() => {
+        setMatchingTips(parseMatchingTips(matchedCard.personality_code, matchedUser.name));
+    }, [cardData, matchedCard]);
+
+    function parseMatchingTips(matchedType, matchedUserName) {
+        if (!matchedType || !matchedUserName) {
+            return [];
+        }
+        if (cardData && cardData.matching_tips) {
+            const shuffled = cardData.matching_tips[matchedType].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 2);
+            return selected.map((item) => {
+                return item.replaceAll('[User_' + cardData.personality_code + ']', user.name).replaceAll('[User_' + matchedType + ']', matchedUserName);
+            });
+        }
+        return [];
+    }
 
     function getColor(quadra) {
         if (quadra === 'Alpha') {
@@ -67,6 +90,7 @@ function MatchCard(props) {
         const matchView = <div className='py-5 rounded-4 '
             style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
             <div className='d-flex flex-column gap-4'>
+                {location === '/matchCard' && <Header/>}
                 <UserInfo cardData={cardData} user={user} />
                 <div className='px-3'>
                     <div style={{
@@ -88,6 +112,17 @@ function MatchCard(props) {
                     </div>
                 </div>
                 <UserInfo cardData={matchedCard} user={matchedUser} />
+                {
+                    location === '/matchCard' &&
+                    <div className='mt-2' style={{
+                        textAlign: 'center',
+                        fontWeight: '500',
+                        fontSize: '14px',
+                        color: 'white'
+                    }}>
+                        tarockapp.com
+                    </div>
+                }
             </div>
         </div>
 
@@ -104,10 +139,15 @@ function MatchCard(props) {
                         margin: '0 auto',
                         width: '100%',
                         padding: '20px',
+                        overflow: 'auto'
                     }}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        {matchingTips.map((item, index) => {
+                            return (
+                                <p key={index}>
+                                    {item}
+                                </p>
+                            )
+                        })}
                     </div>
                 </div>
                 <UserInfo cardData={matchedCard} user={matchedUser} />
@@ -116,7 +156,7 @@ function MatchCard(props) {
         return (
             <>
                 {
-                    location === '/match' ? matchView : <Swipper data={[matchView,tipsView]} />
+                    location === '/matchCard' || matchingTips.length == 0 ? matchView : <Swipper data={[matchView,tipsView]} />
                 }
             </>
 

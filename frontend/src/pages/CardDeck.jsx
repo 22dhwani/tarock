@@ -27,12 +27,14 @@ const CardsScreen = () => {
     const [cardType, setCardType] = useState();
     const [quadra, setQuadra] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [clickedMatchUserId, setClickedMatchUserId] = useState('');
     
     const onMyCardClick = (card) => {
         setCardType(card);
         setShowCard(true);
     }
-    const onMatchCardClick = (card) => {
+    const onMatchCardClick = (card, matchUserId) => {
+        setClickedMatchUserId(matchUserId);
         setCardType(card);
         setShowCard(true);
     }
@@ -62,9 +64,9 @@ const CardsScreen = () => {
                 matchedUserId: userData.id
             })
         });
-        if (response.ok) {
+        if (response.ok || (await response.text()).includes('Duplicated')) {
             setTab(false);
-            onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={matchUserId} />);
+            onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={matchUserId} />, matchUserId);
         }
     }
 
@@ -154,10 +156,22 @@ const CardsScreen = () => {
                         }}>
                             <img src={linkButton} alt='link' style={{
                                 cursor: 'pointer'
-                            }} onClick={() => {navigate(`/share/${userData.id}`)}}/>
+                            }} onClick={() => {
+                                if (tab) {
+                                    navigate(`/share/${userData.id}`);
+                                } else {
+                                    navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
+                                }
+                            }}/>
                             <img src={imgButton} alt='image' style={{
                                 cursor: 'pointer'
-                            }} onClick={() => {navigate(`/share/${userData.id}`, { state: { qr: true } })}}/>
+                            }} onClick={() => {
+                                if (tab) {
+                                    navigate(`/share/${userData.id}`, { state: { qr: true } })
+                                } else {
+                                    navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
+                                }
+                            }}/>
                         </div>
                     </Popup>
                 </>
@@ -186,17 +200,18 @@ const CardsScreen = () => {
                                             return <Col
                                                 key={index}
                                                 style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />)}
+                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}
                                                 className='justify-content-center d-flex'>
                                                 <GenCard cardType='match' 
                                                 userQuadra={quadra}
                                                 matchedQuadra={data.matchedUserQuadra} 
-                                                matchedUserName={data.matchedUserName}/>
+                                                matchedUserName={data.matchedUserName}
+                                                matchedUserAvartarIndex={data.matchedUserAvatarIndex}/>
                                             </Col>
                                         })
                                     }
                                     <Col className='d-flex align-items-center justify-content-center' onClick={shareCard}>
-                                        <AddCardButton />
+                                        <AddCardButton startMatching={true}/>
                                     </Col>
                                 </>
                                     :

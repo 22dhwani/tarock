@@ -55,6 +55,12 @@ async function update(req, res) {
         dob: req.body.dob
     });
     if (req.body.userType === 'REAL') {
+        if (!req.isAuthenticated()) {
+            res.status(401).json({
+                message: "Unauthorized"
+            });
+            return;
+        }
         try {
             // Support updating password in future.
             // user.password = req.body.password;

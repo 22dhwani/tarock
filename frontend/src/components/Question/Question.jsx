@@ -10,6 +10,7 @@ const Question = ({ data, selectionHandler }) => {
             marginTop: '10px',
             marginBottom: '10px',
             cursor: 'pointer',
+            textAlign: 'left'
         }} onClick={() => {selectionHandler(index);}} >
             {(index + 10).toString(36).toUpperCase()}.  {option.content}
         </li>
@@ -21,6 +22,7 @@ const Question = ({ data, selectionHandler }) => {
                     <div>{jsonObj?.question}</div>
                     <ul style={{
                         listStyle: 'none',
+                        padding: '0'
                     }}>
                         {options}
                     </ul>

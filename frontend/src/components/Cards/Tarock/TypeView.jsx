@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 function TypeView({ cardData, userInfo }) {
+    const navigate = useNavigate();
     return (
         <>
             {userInfo}
 
-            <div className='w-100 d-flex flex-column justify-content-center align-items-center'>
+            <div className='w-100 d-flex flex-column align-items-center' style={{ overflow: 'auto' }}>
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -25,7 +28,7 @@ function TypeView({ cardData, userInfo }) {
                     }}></div>
                 </div>
                 <div
-                    className="py-2 my-2"
+                    className="py-2 my-2 px-3"
                     style={{
                         background: 'rgba(66, 145, 202, 0.37)',
                         width: '90%',
@@ -44,9 +47,24 @@ function TypeView({ cardData, userInfo }) {
                     }}>
                         {cardData.personality_category}
                     </h2>
-                    {/* description here */}
+                    <h2 style={{
+                        fontWeight: '500',
+                        fontSize: '12px',
+                        lineHeight: '15px',
+                        textAlign: 'left'
+                    }}>
+                        {
+                            cardData.summary.map((item, index) => {
+                                return (
+                                    <p key={index}>
+                                        {item}
+                                    </p>
+                                );
+                            })
+                        }
+                    </h2>
                 </div>
-                <span style={{
+                <span onClick={() => {navigate('/test')}} style={{
                     textDecoration: 'underline',
                     cursor: 'pointer',
                     color: '#CAE8E2',

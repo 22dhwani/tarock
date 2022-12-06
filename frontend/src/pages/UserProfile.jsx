@@ -13,7 +13,7 @@ function UserProfile() {
     return (
         <Container className='d-flex flex-column min-vh-100 ' style={{ backgroundColor: '#FBF2DC' }}>
             <Header />
-            <Row className='m-auto'>
+            <Row className='mx-auto'>
                 <div style={{
                     width: 'fit-content'
                 }}>
@@ -39,25 +39,27 @@ function UserProfile() {
                 {userData.name}
             </div>
 
-            {profileOptions.map((buttonItem, index) => {
-                return (
-                    <div key={index} className='my-2 rounded-4 p-1' style={{
-                        width: 'fit-content',
-                        backgroundColor: '#FFFFFF',
-                        margin: '0 auto',
-                    }}>
-                        {buttonItem.map((button, index) => {
-                            return (
-                                <ButtonGroup
-                                    key={index}
-                                    buttons={[button]}
-                                />
-                            )
-                        })}
-                    </div>
-                )
-            }
-            )}
+            <div className='flex-grow-1 overflow-auto'>
+                {profileOptions.map((buttonItem, index) => {
+                    return (
+                        <div key={index} className='my-2 rounded-4 p-1' style={{
+                            width: 'fit-content',
+                            backgroundColor: '#FFFFFF',
+                            margin: '0 auto',
+                        }}>
+                            {buttonItem.map((button, index) => {
+                                return (
+                                    <ButtonGroup
+                                        key={index}
+                                        buttons={[button]}
+                                    />
+                                )
+                            })}
+                        </div>
+                    )
+                }
+                )}
+            </div>
             <Footer isMeActive={true} />
         </Container>
     );

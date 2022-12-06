@@ -1,12 +1,12 @@
-import male from '../../../assets/avatarMale.svg';
-import female from '../../../assets/avatarFemale.svg';
+import { getAvatar } from '../../../utils/userUtil';
+
 function UserInfo({ cardData, user }) {
     return (
         <>
             <div className='d-flex gap-3 justify-content-center align-items-center mx-3'>
                 <img src={
-                    user.gender === 'Male' ? male : female
-                } alt='user1' width='70px' style={{
+                    getAvatar(user.avatar_index)
+                } alt='avatar' width='70px' style={{
                     backgroundColor: 'white',
                     borderRadius: '50%',
                 }} />

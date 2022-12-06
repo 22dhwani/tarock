@@ -94,7 +94,7 @@ const App = () => {
               {/* <Route index path="/share/match/:userId" element={<ShareMatchCard />} /> */}
               {/* <Route index path=""/share/:userId" element={<ShareTarockCard />} /> */}
               <Route index path="/cards" element={<ProtectedRoute component={<CardDeck />} />} />
-              {/* <Route index path="/matchCard/:matchedUserId" element={<MatchCard/>}/> */}
+              <Route index path="/matchCard" element={<MatchCard/>}/>
             </Routes>
           </Router>
         </div>

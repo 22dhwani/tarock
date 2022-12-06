@@ -1,6 +1,6 @@
 import add from '../../../assets/add.svg';
 import './AddCardButton.css';
-function AddCardButton() {
+function AddCardButton({ startMatching }) {
     return (
         <div>
             <div className='button1' style={{
@@ -19,8 +19,9 @@ function AddCardButton() {
                 fontSize: '14px',
                 lineHeight: '14px',
                 color: '#49304D',
+                marginBottom: startMatching ? '34px': 0
             }}>
-                Add a new card
+                {startMatching ? 'Start Matching' : 'Add a new card'}
             </div>
         </div>
     )

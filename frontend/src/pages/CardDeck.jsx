@@ -50,7 +50,6 @@ const CardsScreen = () => {
             setMatchedCardsData(data[1].data);
         }
     }
-
     const matchUser = async () => {
         const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/match`, {
             method: 'POST',
@@ -162,7 +161,6 @@ const CardsScreen = () => {
                         </div>
                     </Popup>
                 </>
-
             </Popup>
 
             <Header />
@@ -173,7 +171,7 @@ const CardsScreen = () => {
                         <>
                             <Col style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} className='justify-content-center d-flex'>
                                 <GenCard
-                                    quadra={quadra}
+                                    userQuadra={quadra}
                                     avatar_index={userData.avatarIndex} />
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center' onClick={() => setShowNotification(true)}>
@@ -190,7 +188,10 @@ const CardsScreen = () => {
                                                 style={{ cursor: 'pointer' }}
                                                 onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />)}
                                                 className='justify-content-center d-flex'>
-                                                <GenCard cardType='match' />
+                                                <GenCard cardType='match' 
+                                                userQuadra={quadra}
+                                                matchedQuadra={data.matchedUserQuadra} 
+                                                matchedUserName={data.matchedUserName}/>
                                             </Col>
                                         })
                                     }

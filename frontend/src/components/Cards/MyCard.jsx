@@ -6,9 +6,9 @@ import Tarock from './Tarock';
 import Header from '../Header/Header';
 import RadarView from './Tarock/RadarView';
 import { Container } from 'react-bootstrap';
-import male from '../../assets/avatarMale.svg';
-import female from '../../assets/avatarFemale.svg';
+import { getAvatar } from '../../utils/userUtil';
 import QRCode from 'react-qr-code';
+
 const MyCard = () => {
     const { userData } = useContext(GlobalContext);
     const [cardData, setCardData] = useState({});
@@ -46,14 +46,7 @@ const MyCard = () => {
     const userInfo = <>
         {/* Avatar */}
         <div className='d-flex justify-content-center'>
-            {
-                (user.avatar_index == 1) &&
-                <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
-            }
-            {
-                (user.avatar_index == 0) &&
-                <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
-            }
+            <img className='rounded-circle mx-auto' src={getAvatar(userData.avatarIndex)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} />
         </div>
         {/* User Name */}
         <div

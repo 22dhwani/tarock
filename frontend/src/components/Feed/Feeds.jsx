@@ -1,22 +1,19 @@
 import FeedCard from './FeedCard'
 import { Link } from "react-router-dom";
-import {feeds} from './contentData'
+import { feeds } from './contentData'
 import styles from './Feed.module.css'
 function Feeds({ header }) {
-  
-    const feedCards = feeds.map(
-        (item,i) => 
-        <div  key={i} className="p-2" style={{ textAlign: 'center' }}>
-            <div style={{ width: '100%' }}>
-                <FeedCard
-                    image={item.image}
-                    title={item.title}
-                    author={item.author}
-                    time={item.time}
-                    style={{ width: '100%' }}
-                />
-            </div>
-        </div>
+
+    const feedCards = feeds.map((item, i) =>
+            <FeedCard
+                key={i}
+                image={item.image}
+                title={item.title}
+                author={item.author}
+                time={item.time}
+                style={{ width: '100%' }}
+                link={item.link}
+            />
     )
     return (
         <div className="d-flex flex-column justify-content-center mx-auto" style={{ width: 'fit-content', cursor: 'pointer' }}>
@@ -25,7 +22,6 @@ function Feeds({ header }) {
                     <img src={header} alt="image" width='100%' />
                 </div>
             </Link>
-            <hr className={styles['hr-line']}></hr>
             {feedCards}
         </div>
     )

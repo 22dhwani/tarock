@@ -1,34 +1,38 @@
 import patternTarockBlue from '../../assets/patternTarockBlue.svg';
-import patternWaves from '../../assets/patternWaves.svg';
 import male from '../../assets/avatarMale.svg';
 import female from '../../assets/avatarFemale.svg';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getAvatar } from '../../utils/userUtil';
 
 export default function GenCard(props) {
-  
-    let userColor;
+    const [userColor, setUserColor] = useState('#3069B3');
+    const [matchedColor, setMatchedColor] = useState('#3069B3');
     let userPattern;
     //import and set the pattern of the card
-        if (props.quadra === 'Alpha') {
-            userColor = '#3069B3';
-            userPattern = patternTarockBlue;
-        } else if(props.quadra === 'Beta') {
-            userColor = '#EBBD45';
-           // userPattern = pattern;
-        } else if(props.quadra === 'Gamma') {
-            userColor = '#69C7BF';
-            //userPattern = pattern1;
-        } else if(props.quadra === 'Delta') {
-            userColor = '#BB6BD9';
-            //userPattern = pattern;
+
+    function assignColor(quadra, setter) {
+        if (quadra === 'Alpha') {
+            setter('#3069B3');
+        } else if (quadra === 'Beta') {
+            setter('#EBBD45');
+        } else if (quadra === 'Gamma') {
+            setter('#69C7BF');
+        } else if (quadra === 'Delta') {
+            setter('#BB6BD9');
         }
-    
+    }
+    useEffect(() => {
+        assignColor(props.userQuadra, setUserColor);
+        assignColor(props.matchedQuadra, setMatchedColor);
+    }, []);
+
     return (
         <div className='d-flex flex-column my-3 '>
             <div style={{
-                backgroundImage: `url(${props.cardType == 'match' ? patternWaves : userPattern})`,
-                backgroundColor: props.cardType == 'match' ? 'black' : userColor,
+                backgroundImage: props.cardType == 'match' ? `linear-gradient(${userColor},${matchedColor})` : `url(${patternTarockBlue})`,
+                backgroundColor: props.cardType == 'match' ? '' : userColor,
                 backgroundRepeat: 'no-repeat',
-                
                 width: '9rem',
                 height: '14.375rem',
                 backgroundSize: 'cover',
@@ -39,27 +43,31 @@ export default function GenCard(props) {
                 alignItems: 'center',
             }}>
                 {props.cardType !== 'match' ? <img className='rounded-circle'
-                    src={props.avatar_index ? male : female}
+                    src={getAvatar(props.avatar_index)}
                     alt="avatar"
-                    style={{ backgroundColor: '#FFFFFF'}}
+                    style={{ backgroundColor: '#FFFFFF' }}
                 />
                     :
                     <div className='d-flex flex-column gap-5 align-items-center'>
-                        <img src={male} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
-                        <img src={female} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
+                        <img src={getAvatar(props.avatar_index)} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
+                        <img src={getAvatar(props.matchedUserAvartarIndex)} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                 }
 
             </div>
             <div className='col-12 d-flex justify-content-center mt-2' style={{
-                fontFamily: 'Montserrat',
                 fontStyle: 'normal',
                 fontWeight: '700',
                 fontSize: '14px',
-                lineHeight: '14px',
+                lineHeight: '20px',
                 color: '#49304D',
             }}>
-                {props.cardType == 'match' ? 'Match Card' : 'Tarock Card'}
+                {props.cardType == 'match' ? <p className='text-center'>
+                    Match Card<br></br>
+                    <span style={{fontWeight:'400'}}>with {props.matchedUserName.split(' ')[0]}</span>
+                </p>
+                    :
+                    'Tarock Card'}
             </div>
         </div>
     )

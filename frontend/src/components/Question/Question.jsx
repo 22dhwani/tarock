@@ -1,5 +1,5 @@
 import './Question.css';
-const Question = ({ data }) => {
+const Question = ({ data, selectionHandler }) => {
     const jsonObj = data;
     const options = jsonObj.answers.map((option, index) => (
         <li key={index} style={{
@@ -8,8 +8,10 @@ const Question = ({ data }) => {
             padding: '10px',
             borderRadius: '10px',
             marginTop: '10px',
-            marginTopBottom: '10px',
-        }}>
+            marginBottom: '10px',
+            cursor: 'pointer',
+            textAlign: 'left'
+        }} onClick={() => {selectionHandler(index);}} >
             {(index + 10).toString(36).toUpperCase()}.  {option.content}
         </li>
     ));
@@ -20,6 +22,7 @@ const Question = ({ data }) => {
                     <div>{jsonObj?.question}</div>
                     <ul style={{
                         listStyle: 'none',
+                        padding: '0'
                     }}>
                         {options}
                     </ul>

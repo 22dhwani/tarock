@@ -62,14 +62,6 @@ app.use(express.urlencoded({ extended: true }));
 //    }
 // });
 
-app.get("/", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json({ message: 'Welcome!' });
-  } else {
-    res.redirect('/login');
-  }
-});
-
 assessment(app);
 credential(app);
 user(app);
@@ -79,6 +71,12 @@ match(app);
 
 
 app.use('/', router);
+
+const publicPath = path.join(dir, '../public');
+app.use(express.static(publicPath));
+app.get("*", (req, res) => {
+  res.sendFile(publicPath + '/index.html');
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

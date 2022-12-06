@@ -1,6 +1,8 @@
 import RadarChart from "../../Charts/RadarChart";
+import { useNavigate } from "react-router-dom";
 
 function RadarView({ cardData, userInfo }) {
+    const navigate = useNavigate();
     return (
         <>
             {userInfo}
@@ -15,12 +17,12 @@ function RadarView({ cardData, userInfo }) {
             </div>
             {/* Radar Chart */}
             <div className="my-5" style={{
-                height: '270px'
+                height: '270px',
             }}>
                 <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
             </div>
 
-            <span style={{
+            <span onClick={() => {navigate('/test')}} style={{
                 textDecoration: 'underline',
                 cursor: 'pointer',
                 color: '#CAE8E2',

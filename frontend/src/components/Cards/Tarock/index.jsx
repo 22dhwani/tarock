@@ -1,6 +1,5 @@
 import Container from "react-bootstrap/Container";
-import male from '../../../assets/avatarMale.svg';
-import female from '../../../assets/avatarFemale.svg';
+import { getAvatar } from "../../../utils/userUtil";
 import RadarView from "./RadarView";
 import Swipper from "../../Swipper/Swipper";
 import DescriptiveView from "./DescriptiveView";
@@ -10,14 +9,7 @@ function TarockCard({ user, cardData }) {
     const userInfo = <>
         {/* Avatar */}
         <div className='d-flex justify-content-center'>
-            {
-                (user.avatar_index == 1) &&
-                <img className='rounded-circle mx-auto' src={male} alt="male" style={{ backgroundColor: '#FFFFFF' }} />
-            }
-            {
-                (user.avatar_index == 0) &&
-                <img className='rounded-circle mx-auto' src={female} alt="female" style={{ backgroundColor: '#FFFFFF' }} />
-            }
+            <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} />
         </div>
         {/* User Name */}
         <div

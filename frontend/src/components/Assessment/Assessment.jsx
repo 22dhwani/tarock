@@ -108,30 +108,28 @@ const Assessment = ({ assessmentGroupId }) => {
     }
     
     return (
-        <Container className='d-flex flex-column min-vh-100'>
+        <Container className='min-h-100' style={{
+           
+        }}>
             <Header goBackFunc={goBack} />
             <ProgressBar now={assessment.index} visuallyHidden max={assessment.data.length}/>
             <Row className='mx-auto'>
-                <div style={{ height: '200px', width: '200px' }}>
+                <div style={{ height: '200px', width: '200px' }} className='mx-auto mt-5'>
                     <RadarChart userData={randomRadarData()} enableLabels={false} />
                 </div>
             </Row>
-            <div className="card-container mx-auto text-center" style={{
+            <div className="card-container mx-auto text-center " style={{
                 width: '90%',
+                paddingBottom: '100px'
             }}>
                 <div>
                     {
-                        assessment.index < assessment.data.length && <Question data={assessment.data[assessment.index].content} />
+                        assessment.index < assessment.data.length && <Question 
+                        data={assessment.data[assessment.index].content} 
+                        selectionHandler={onBtnClick}
+                        />
                     }
                 </div>
-                <Row className="w-75 mx-auto">
-                    <Col className="col-6 d-flex justify-content-center">
-                        <img src={btn1} alt="btn1" onClick={(e) => { onBtnClick(0) }} />
-                    </Col>
-                    <Col className="col-6 d-flex justify-content-center">
-                        <img src={btn2} alt="btn2" onClick={(e) => { onBtnClick(1) }} />
-                    </Col>
-                </Row>
             </div>
         </Container>
     );

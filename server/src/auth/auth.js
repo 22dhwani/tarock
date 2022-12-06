@@ -346,7 +346,6 @@ router.post('/password/form', async (req, res) => {
   }
 });
 
-
 /**
 router.get('/test', function(req, res, next) {
   User.test();

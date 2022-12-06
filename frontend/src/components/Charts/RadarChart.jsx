@@ -64,7 +64,7 @@ function RadarChart({ userData, matchData, enableLabels, userQuadra, matchedQuad
                 },
                 pointLabels: {
                     display: enableLabels,
-                    color: '#49304D',
+                    color: matchData ? '#49304D':'white',
                     font: {
                         size: 11,
                         weight: '600',

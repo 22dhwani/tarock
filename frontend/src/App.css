@@ -4,4 +4,13 @@
     margin: 0 auto;
   }
 }
-    
+  
+.float:hover{
+  transform: scale(1.1);
+  transition: 0.1s;
+}
+
+/* no need to add font family everywhere with this */
+*{
+  font-family: 'Montserrat'; 
+}

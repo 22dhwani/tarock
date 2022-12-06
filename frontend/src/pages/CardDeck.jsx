@@ -90,6 +90,9 @@ const CardsScreen = () => {
     const [tab, setTab] = useState(true);
     function shareCard() {
         onMyCardClick(<MyCard />);
+        if (!tab) {
+            setTab(true);
+        }
     }
     const [shareCardOption, setShareCardOption] = useState(false);
  
@@ -202,7 +205,8 @@ const CardsScreen = () => {
                                                 style={{ cursor: 'pointer' }}
                                                 onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}
                                                 className='justify-content-center d-flex'>
-                                                <GenCard cardType='match' 
+                                                <GenCard cardType='match'
+                                                avatar_index={userData.avatarIndex} 
                                                 userQuadra={quadra}
                                                 matchedQuadra={data.matchedUserQuadra} 
                                                 matchedUserName={data.matchedUserName}

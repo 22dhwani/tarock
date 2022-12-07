@@ -12,7 +12,7 @@ const GlobalContextProvider = ({ children }) => {
     name: '',
     email: '',
     gender: '', // Female, Male
-    avatarIndex: 0,
+    avatarIndex: 2,
     dob: '',
     isAuthorized: false
   });

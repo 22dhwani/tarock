@@ -9,7 +9,7 @@ async function create(req, res) {
     });
     if (req.body.userType === 'REAL') {
         try {
-            user.id = crypto.createHash('md5').update(user.email).digest("hex");
+            user.id = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(user.email).digest("hex");
             user.email = req.body.email;
             user.password = null;
             const data = await User.createReal(user);

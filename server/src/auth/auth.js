@@ -32,8 +32,8 @@ router.get('/register', function(req, res, next) {
 
 passport.use(new LocalStrategy.Strategy({usernameField: 'email', session: true}, async function verify(email, password, cb) {
   try {
-    const hashEmail = crypto.createHash('md5').update(email).digest("hex");
-    const hashPassword = crypto.createHash('md5').update(password).digest('hex');
+    const hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(email).digest("hex");
+    const hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(password).digest('hex');
     const realUsers = await User.queryReal(hashEmail);
     if (realUsers.length == 0) {
       return cb(null, false, {message: 'Username not found.'});
@@ -64,8 +64,8 @@ router.post('/register', async function(req, res, next) {
     const tempId = req.body.tempId;
     const email = req.body.email;
     const password = req.body.password;
-    const hashEmail = crypto.createHash('md5').update(email).digest("hex");
-    const hashPassword = crypto.createHash('md5').update(password).digest('hex');
+    const hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(email).digest("hex");
+    const hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(password).digest('hex');
 
     if (!EmailValidator.validate(email)) {
       res.status(400).json({error_msg: "Please enter a valid email"});
@@ -143,7 +143,7 @@ passport.use(new GoogleStrategy({
       const user = {
         email: profile._json.email,
         name: profile.displayName,
-        id: crypto.createHash('md5').update(profile._json.email).digest("hex")
+        id: crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(profile._json.email).digest("hex")
       };
       cb(null, user);
     })
@@ -159,7 +159,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
     try {
       const state = req.authInfo.state;
       const email = req.user.email;
-      const hash = crypto.createHash('md5').update(email).digest("hex");
+      const hash = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(email).digest("hex");
       const data = await User.queryReal(hash);
       if (data.length == 0) {
         // User not found in database, create one.
@@ -235,7 +235,7 @@ router.get('/password/forget', async (req, res) => {
           err_msg: 'Please provide a valid email address.'
       })
   } else {
-      const id = crypto.createHash('md5').update(email).digest("hex");
+      const id = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(email).digest("hex");
       const realUsers = await User.queryReal(id);
 
       const sender = {
@@ -337,7 +337,7 @@ router.post('/password/form', async (req, res) => {
         err_msg: `The credential is not correct ${oldHashPassword}.`
       });      
     } else {
-      const newHashPassword = crypto.createHash('md5').update(newPassword).digest("hex");
+      const newHashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newPassword).digest("hex");
       await User.updateReal({id: id, password: newHashPassword});
       res.status(200).json({
         msg: `Password successfully reset!`

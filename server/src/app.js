@@ -11,6 +11,7 @@ import user from './api/routers/user.js';
 import result from './api/routers/result.js';
 import card from './api/routers/card.js';
 import match from './api/routers/match.js';
+import v1 from './api/routers/v1/index.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -66,6 +67,7 @@ user(app);
 result(app);
 card(app);
 match(app);
+v1(app);
 
 
 app.use('/', router);

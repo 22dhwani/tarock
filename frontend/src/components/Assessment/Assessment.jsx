@@ -114,7 +114,7 @@ const Assessment = ({ assessmentGroupId }) => {
             <Header goBackFunc={goBack} />
             <ProgressBar now={assessment.index} visuallyHidden max={assessment.data.length}/>
             <Row className='mx-auto'>
-                <div style={{ height: '200px', width: '200px' }} className='mx-auto my-5'>
+                <div style={{ height: '200px', width: '200px' }} className='mx-auto mt-5'>
                     <RadarChart userData={randomRadarData()} enableLabels={false} />
                 </div>
             </Row>

@@ -7,7 +7,6 @@ import session from 'express-session';
 // import csurf from 'csurf';
 import router from './auth/auth.js';
 import assessment from './api/routers/assessment.js';
-import credential from './api/routers/credential.js';
 import user from './api/routers/user.js';
 import result from './api/routers/result.js';
 import card from './api/routers/card.js';
@@ -64,7 +63,6 @@ app.use(express.urlencoded({ extended: true }));
 // });
 
 assessment(app);
-credential(app);
 user(app);
 result(app);
 card(app);

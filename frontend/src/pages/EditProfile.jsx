@@ -62,7 +62,7 @@ function EditProfile() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-
+                credentials: 'include',
                 body: JSON.stringify(bodyData)
             }).then(response => response.json())
                 .then(data => {

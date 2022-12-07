@@ -48,9 +48,11 @@ function Prep(props) {
                     className='cropped-image-clip-rectangle' />
                 <button
                     onClick={() => setShow(true)}
-                    className='py-1 px-2 mt-3 rounded-5'
+                    className='py-2 px-2 mt-3 rounded-5'
                     style={{
-                        width: '50%',
+                        width: '80%',
+                        fontWeight: '700',
+                        fontSize: '16px',
                         backgroundColor: '#49304D',
                         color: '#FFFFFF',
                     }}>

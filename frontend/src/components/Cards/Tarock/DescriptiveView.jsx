@@ -1,5 +1,7 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
+
 function DescriptiveView({ userInfo, cardData }) {
     const description = [
         'Superpower',
@@ -8,6 +10,7 @@ function DescriptiveView({ userInfo, cardData }) {
         'Blind Spot',
         'Ideal Environment'
     ]
+    const navigate = useNavigate();
     return (
         <>
             {userInfo}
@@ -62,7 +65,7 @@ function DescriptiveView({ userInfo, cardData }) {
                         )
                     })
                 }
-                <span style={{
+                <span onClick={() => {navigate('/test')}} style={{
                 textDecoration: 'underline',
                 cursor: 'pointer',
                 color: '#CAE8E2',

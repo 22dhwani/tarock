@@ -65,7 +65,7 @@ async function updateReal(user) {
     const password = user.password ? user.password : oldUsers[0].password;
     const name = user.name ? user.name : oldUsers[0].name;
     const gender = user.gender ? user.gender : oldUsers[0].gender;
-    const avatarIndex = user.avatarIndex ? user.avatarIndex : oldUsers[0].avatar_index;
+    const avatarIndex = user.avatarIndex != undefined ? user.avatarIndex : oldUsers[0].avatar_index;
     const dob = user.dob ? user.dob : oldUsers[0].birth_date;
     const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [password, name, gender, avatarIndex, dob, user.id]);
     return data[0];

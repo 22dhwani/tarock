@@ -1,7 +1,39 @@
 import crypto from 'crypto';
+import User from '../../models/user.js';
+import ApiToken from '../../models/apiToken.js';
 
-async function test(req,res){        
-    res.send(req.body)
+async function test(req,res){            
+    if(req.headers.authorization){        
+        res.json(
+            {
+                data: "test",
+            }
+        );
+    }
+    
 }
 
-export default { test };
+async function getToken(req,res){
+    let user = null;
+    let token = null;
+    if(req.query.user_id){
+        const data = await User.getById(req.query.user_id);
+        if(data.length > 0){
+            user = data[0]
+        }
+    }
+    if(user){
+        token = await ApiToken.generateToken(user.id)    
+    }
+    
+    res.json(
+        {
+            token:token,
+            data:user,
+            message:"User returned",
+            status: 1,
+        }
+    );
+}
+
+export default { test, getToken };

@@ -24,7 +24,7 @@ async function getQuestion(req,res){
     } catch (error) {
         res.status(422).json(
             {
-                message:error,
+                message:error.message,
                 status: 0,
             }
         );

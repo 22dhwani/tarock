@@ -21,6 +21,12 @@ async function query(id) {
     return data[0];
 }
 
+
+async function getById(id) {
+    const data = await sql.query("SELECT * FROM user WHERE id = ?;", [id]);
+    return data[0];
+}
+
 async function update(user) {
     const data = await sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id]);
     return data[0];
@@ -76,7 +82,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser };
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser ,getById};
 
 /**
 async function test() {

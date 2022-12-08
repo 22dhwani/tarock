@@ -2,7 +2,7 @@ import Header from '../components/Header/Header';
 import Prep from '../components/Assessment/Prep';
 import Assessment from '../components/Assessment/Assessment';
 import { useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context';
 
 function Test(props) {
@@ -17,6 +17,13 @@ function Test(props) {
     }
 
     const [startTest, setStartTest] = useState(false);
+
+    useEffect(() => {
+        if (userData.type === 'NEW' || userData.type === 'REAL' && !userData.isAuthorized) {
+            navigate('/');
+        }
+    }, []);
+
     return (
         <div className='min-vh-100'
             style={{

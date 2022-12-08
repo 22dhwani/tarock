@@ -88,7 +88,7 @@ export default { User, create, query, update, createReal, queryReal, updateReal,
 async function test() {
     await sql.query("UPDATE tmp_user SET is_permanent_user = false WHERE name = 'jingyuan';");
     //await sql.query("DELETE FROM tmp_user WHERE internal_user_id='HX0EYlfisd78qEctycVC'");
-    const hashEmail = crypto.createHash('md5').update("jingyuanz534@gmail.com").digest("hex");
+    const hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update("jingyuanz534@gmail.com").digest("hex");
     await sql.query("DELETE FROM user WHERE internal_user_id= ? ", [hashEmail]);
     //await sql.query("DELETE FROM user_assessment_result WHERE internal_user_id='HX0EYlfisd78qEctycVC' OR internal_user_id= ?", [hashEmail]);
     await sql.query("Update user_assessment_result SET internal_user_id = ? WHERE internal_user_id = ?", ['HX0EYlfisd78qEctycVC', hashEmail]);

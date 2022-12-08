@@ -10,6 +10,7 @@ async function getQuestion(req,res){
                 status: 0,
             }
         );
+        return;
     }
 
     try {
@@ -24,10 +25,11 @@ async function getQuestion(req,res){
     } catch (error) {
         res.status(422).json(
             {
-                message:error,
+                message:error.message,
                 status: 0,
             }
         );
+        return;
     }
 }
 

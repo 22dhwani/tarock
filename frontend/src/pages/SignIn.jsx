@@ -249,14 +249,14 @@ function SignIn() {
             const tmpUserData = await getUser(userData.visitorId, 'TMP');
             setUserData((prevUserData) => ({
                 ...prevUserData,
-                name: tmpUserData.name,
-                gender: tmpUserData.gender,
-                avatarIndex: tmpUserData.avatar_index,
+                name: tmpUserData ? tmpUserData.name : '',
+                gender: tmpUserData ? tmpUserData.gender : '',
+                avatarIndex: tmpUserData ? tmpUserData.avatar_index : 2,
                 id: prevUserData.visitorId,
                 email: '',
                 dob: '',
                 isAuthorized: false,
-                type: 'TMP',
+                type: tmpUserData ? 'TMP' : 'NEW',
             }));
             setValidation(false);
             setStage('new');

@@ -1,5 +1,4 @@
 import sql from "../../config/db.js";
-import crypto from 'crypto';
 
 const User = function(user) {
     this.id = user.id;
@@ -76,7 +75,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser };
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser};
 
 /**
 async function test() {

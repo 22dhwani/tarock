@@ -28,13 +28,14 @@ function EditProfile() {
     const [validation, setValidation] = useState(false);
     const navigate = useNavigate();
 
-
     function getValidation() {
         const forms = document.getElementById('infoForm');
-        if (forms.length > 0) {
-            return forms[0].checkValidity();
+        for (let i = 0; i < forms.length; i++) {
+            if (!forms[i].checkValidity()) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     async function handleSubmit() {

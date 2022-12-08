@@ -151,6 +151,7 @@ const CardsScreen = () => {
                             marginLeft: 'auto',
                             marginRight: 'auto',
                             marginTop: '33px',
+                            color: '#49304D'
                         }}>
                         Share
                     </button>

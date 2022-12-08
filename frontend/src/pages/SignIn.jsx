@@ -124,6 +124,10 @@ function SignIn() {
                     password: formData.password,
                 })
             });
+            if (response.status == 401) {
+                alert('Incorrect email and password.');
+                return;
+            }
             const data = await response.json();
             const user = await getUser(data.id, 'REAL');
             setUserData((prevUserData) => ({

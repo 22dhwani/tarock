@@ -5,7 +5,7 @@ async function test(req,res){
     if(req.headers.authorization){        
         res.json(
             {
-                data: "test",
+                data: res.user,
             }
         );
     }
@@ -16,13 +16,13 @@ async function getToken(req,res){
     let user = null;
     let token = null;
     if(req.query.user_id){
-        const data = await User.getById(req.query.user_id);
+        const data = await User.queryReal(req.query.user_id);
         if(data.length > 0){
             user = data[0]
         }
     }
     if(user){
-        token = await ApiToken.generateToken(user.id)    
+        token = await ApiToken.generateToken(user.internal_user_id)    
     }
     
     res.json(

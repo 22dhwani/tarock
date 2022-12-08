@@ -60,7 +60,7 @@ async function getUserByBearerToken(bearerToken) {
     if(apiToken.length <= 0){
         throw new Error(`Token not exists`);
     }
-    let user = await User.getById(apiToken[0].user_id);
+    let user = await User.queryReal(apiToken[0].user_id);
     if(user.length <= 0){
         throw new Error(`User not found`);
     }

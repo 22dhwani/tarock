@@ -16,6 +16,7 @@ export default function(app) {
                     status: 0,
                 }
             );
+            return;
         }
         let user = null
         try {
@@ -28,6 +29,7 @@ export default function(app) {
                     status: 0,
                 }
             );
+            return;
         }
         res.user = user
         next()

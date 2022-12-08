@@ -10,6 +10,7 @@ async function getQuestion(req,res){
                 status: 0,
             }
         );
+        return;
     }
 
     try {
@@ -28,6 +29,7 @@ async function getQuestion(req,res){
                 status: 0,
             }
         );
+        return;
     }
 }
 

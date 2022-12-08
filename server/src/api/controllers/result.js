@@ -1,5 +1,4 @@
 import Result from "../models/result.js";
-import User from "../models/user.js";
 
 function getSocionicsResult(answers) {
     const count = {

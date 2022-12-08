@@ -1,5 +1,4 @@
 import sql from "../../config/db.js";
-import crypto from 'crypto';
 import User from "./user.js";
 
 const ApiToken = function(apiToken) {

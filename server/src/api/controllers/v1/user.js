@@ -1,6 +1,3 @@
-import User from '../../models/user.js';
-import ApiToken from '../../models/apiToken.js';
-
 async function getUser(req,res){          
     let user = res.user;
     if(!user){

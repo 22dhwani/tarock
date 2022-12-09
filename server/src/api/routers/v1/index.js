@@ -36,6 +36,13 @@ export default function(app) {
     });
 
 
+    //USER LOGIN FLOW
+    router.get("/get-user-type", User.getUserType);  //to get the type of user (NEW,TMP,REAL)
+    router.post("/create-temp-user", User.createTempUser); //to create the temp user with device id
+    router.post("/create-real-user", User.createRealUser); //to create a real user with device id
+    router.post("/user/login", User.login); //login the user(return the token)
+
+
     //TEST(to quickly test some code)
     router.post("/test", test.test);
     router.post("/auth/test", test.test); //test with auth

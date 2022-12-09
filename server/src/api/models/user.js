@@ -52,6 +52,11 @@ async function queryReal(id) {
     return data[0];
 }
 
+async function findUserByEmail(email) {
+    const data = await sql.query("SELECT * FROM user WHERE email = ?;", [email]);
+    return data[0];
+}
+
 async function updateReal(user) {
     if (!user.id) {
         throw new Error(`No user id provided. id:${user.id}`);
@@ -75,7 +80,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser};
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail};
 
 /**
 async function test() {

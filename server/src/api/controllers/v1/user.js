@@ -138,7 +138,7 @@ async function createTempUser(req,res){
         avatarIndex: req.body.avatar_index
     });
     try {
-        data = await User.create(user);
+        await User.create(user);
     } catch (error) {
         res.status(422).json(
             {
@@ -222,7 +222,6 @@ async function createRealUser(req,res){
     });
     try {
         await User.createReal(realUser);
-        realUser = await User.queryReal(req.body.device_id)
         await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
     } catch (error) {
         res.status(422).json(

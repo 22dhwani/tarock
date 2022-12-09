@@ -21,6 +21,11 @@ async function getByToken(token) {
     return data[0];
 }
 
+async function deleteToken(id) {
+    const data = await sql.query("DELETE FROM api_tokens WHERE id = ?;", [id]);
+    return data[0];
+}
+
 function makeid(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -68,4 +73,4 @@ async function getUserByBearerToken(bearerToken) {
 }
 
 
-export default { ApiToken, create ,getByToken, generateToken,getUserByBearerToken };
+export default { ApiToken, create ,getByToken, generateToken,getUserByBearerToken,deleteToken };

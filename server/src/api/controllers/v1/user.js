@@ -297,4 +297,20 @@ async function login(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login };
+async function logout(req,res){
+
+    let tokenArr = req.headers.authorization.split("Bearer ")
+    let apiToken = await ApiToken.getByToken(tokenArr[1]);
+    if(apiToken.length >= 0){    
+        await ApiToken.deleteToken(apiToken[0].id);
+    }
+
+    res.json(
+        {
+            message: "User logout",
+            status: 1,
+        }
+    );
+}
+
+export default { getUser,getUserType,createTempUser,createRealUser,login,logout };

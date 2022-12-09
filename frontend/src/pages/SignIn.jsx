@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Header from '../components/Header/Header.jsx';
 import signup from '../assets/signin/signup.svg';
-import pattern from '../assets/patternTarock.svg';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { GlobalContext } from '../context';
@@ -302,7 +301,8 @@ function SignIn() {
     }
 
     function goBack() {
-        if (userData.type === 'REAL') {
+        if (userData.type === 'REAL' && stage === 'avatar') {
+            // Modify avatar navigated from setting page.
             navigate(-1);
         } else if (stage === 'avatar') {
             setValidation(false);

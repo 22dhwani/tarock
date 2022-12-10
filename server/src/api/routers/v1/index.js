@@ -50,9 +50,11 @@ export default function(app) {
 
     //QUESTIONS
     router.get("/questions", question.getQuestion);
+    router.post("/questions/add-result", question.addResult);
     
     //API INSIDE AUTH
     router.get("/auth/user", User.getUser);
+    router.post("/auth/logout", User.logout);
 
     app.use("/api/v1", router);
 }

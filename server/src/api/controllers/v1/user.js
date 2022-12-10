@@ -33,10 +33,12 @@ async function getUserType(req,res){
         );
         return
     }
+    let tempUser=null;
     let userType = "NEW";
     try {
         const data2 = await User.query(req.query.device_id);
         if (data2.length > 0) {
+            tempUser = data2[0]
             if (data2[0].is_permanent_user) {
                 userType = "REAL"
             } else {
@@ -56,6 +58,7 @@ async function getUserType(req,res){
 
     res.json(
         {
+            user:tempUser,
             data:userType,
             message: "User type returned",
             status: 1,
@@ -103,9 +106,9 @@ async function createTempUser(req,res){
         return;
     }
 
-    let existingUser = await User.query(req.body.device_id);
+    let tempUser=null;
+    let existingUser = await User.query(req.body.device_id);    
     if(existingUser.length > 0){
-
         existingUser[0].id = req.body.device_id;
         existingUser[0].name = req.body.name;
         existingUser[0].gender = req.body.gender;
@@ -123,8 +126,11 @@ async function createTempUser(req,res){
             return
         }
 
+        tempUser = await User.query(req.body.device_id);    
+        tempUser = tempUser[0]
         res.json(
             {
+                user:tempUser,
                 message: "Temp user updated",
                 status: 1,
             }
@@ -139,6 +145,9 @@ async function createTempUser(req,res){
     });
     try {
         await User.create(user);
+
+        tempUser = await User.query(req.body.device_id);
+        tempUser = tempUser[0];
     } catch (error) {
         res.status(422).json(
             {
@@ -152,6 +161,7 @@ async function createTempUser(req,res){
     
     res.json(
         {
+            user:tempUser,
             message: "Temp user created",
             status: 1,
         }
@@ -297,4 +307,33 @@ async function login(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login };
+async function logout(req,res){
+
+    let tokenArr = req.headers.authorization.split("Bearer ")
+
+    try {    
+        let apiToken = await ApiToken.getByToken(tokenArr[1]);
+        if(apiToken.length >= 0){    
+            await ApiToken.deleteToken(apiToken[0].id);
+        }
+    } catch (error) {
+        res.status(422).json(
+            {
+                error:error.message,
+                message:"something went wrong",
+                status: 0,
+            }
+        );
+        return
+    }
+
+
+    res.json(
+        {
+            message: "User logout",
+            status: 1,
+        }
+    );
+}
+
+export default { getUser,getUserType,createTempUser,createRealUser,login,logout };

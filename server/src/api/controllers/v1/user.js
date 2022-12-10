@@ -300,10 +300,23 @@ async function login(req,res){
 async function logout(req,res){
 
     let tokenArr = req.headers.authorization.split("Bearer ")
-    let apiToken = await ApiToken.getByToken(tokenArr[1]);
-    if(apiToken.length >= 0){    
-        await ApiToken.deleteToken(apiToken[0].id);
+
+    try {    
+        let apiToken = await ApiToken.getByToken(tokenArr[1]);
+        if(apiToken.length >= 0){    
+            await ApiToken.deleteToken(apiToken[0].id);
+        }
+    } catch (error) {
+        res.status(422).json(
+            {
+                error:error.message,
+                message:"something went wrong",
+                status: 0,
+            }
+        );
+        return
     }
+
 
     res.json(
         {

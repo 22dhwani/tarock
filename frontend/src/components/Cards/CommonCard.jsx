@@ -61,7 +61,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     lineHeight: '24px'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        
+
                     </Col>
                     <Col>
                         {
@@ -87,7 +87,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     color: '#49304D',
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                       
+
                     </Col>
                     <Col>
                         {
@@ -107,7 +107,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     backdropFilter: 'blur(10px)'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        
+
                     </Col>
                     <Col>
                         <div>
@@ -121,7 +121,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     backdropFilter: 'blur(10px)'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        
+
                     </Col>
                     <Col>
                         <div>
@@ -136,7 +136,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     borderRadius: '0px 0px 8px 8px'
                 }}>
                     <Col className='col-4 d-flex justify-content-center align-self-center'>
-                        
+
                     </Col>
                     <Col>
                         <div>
@@ -176,7 +176,8 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             {showShare ? <Swipper data={[radarView, descriptionView]} /> : radarView}
             <div style={{
                 display: showShare ? 'block' : 'none'
-            }} className='mt-5'>
+            }}
+                className='mt-5'>
                 <a href='/test' style={{ display: 'flex', justifyContent: 'center', fontSize: '12px' }}>Not even close?</a>
             </div>
             {children}

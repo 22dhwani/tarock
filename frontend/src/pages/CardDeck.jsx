@@ -157,7 +157,7 @@ const CardsScreen = () => {
                     </button>
                     <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
                         <div className='d-flex gap-5 mx-auto' style={{
-                            marginTop: '85%',
+                            marginTop: '60vh',
                         }}>
                             <img src={linkButton} alt='link' style={{
                                 cursor: 'pointer'

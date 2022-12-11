@@ -19,7 +19,7 @@ function ButtonGroup(props) {
                     //if the link is a tarock static page, use an anchor tag
                     //otherwise, use a react router link
                     tarockStatic.includes(button.link) ?
-                            <a href={button.link} key={index} style={buttonStyle} >
+                            <a href={button.link} key={index} style={buttonStyle} target="_blank" rel="noreferrer noopener">
                                 <button style={buttonStyle}>
                                     <img src={button.button} alt='button' />
                                 </button>

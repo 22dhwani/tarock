@@ -42,7 +42,7 @@ export default function GenCard(props) {
 
     const cardPattern = getCardPattern(props.userQuadra);
     return (
-        <div className='d-flex flex-column my-3 '>
+        <div>
             <div style={{
                 backgroundImage: props.cardType == 'match' ? 
                 `linear-gradient(180deg, ${userColor} 0%, ${centerColor}, ${matchedColor} 100%)` : `url(${cardPattern})`,

@@ -169,7 +169,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     alignItems: 'center',
                     textAlign: 'center'
                 }}>
-                    {user.name} is
+                    {user.name}
                 </div>
             </div>
 

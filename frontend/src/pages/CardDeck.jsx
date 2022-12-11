@@ -13,7 +13,8 @@ import Popup from '../components/PopUp/PopUp';
 import MyCard from '../components/Cards/MyCard';
 import Loading from '../components/Loading/Loading';
 import MatchCard from '../components/Cards/Match/MatchCard';
-import linkButton from '../assets/buttons/link.svg';
+import linkC from '../assets/buttons/linkC.svg';
+import linkNC from '../assets/buttons/linkNC.svg';
 import imgButton from '../assets/buttons/image.svg';
 
 const CardsScreen = () => {
@@ -28,7 +29,7 @@ const CardsScreen = () => {
     const [quadra, setQuadra] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [clickedMatchUserId, setClickedMatchUserId] = useState('');
-    
+   
     const onMyCardClick = (card) => {
         setCardType(card);
         setShowCard(true);
@@ -96,7 +97,7 @@ const CardsScreen = () => {
         }
     }
     const [shareCardOption, setShareCardOption] = useState(false);
- 
+    const [linkButton, setLinkButton] = useState(linkNC);
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Popup show={showNotification} setShow={setShowNotification} isNotification={true}>
@@ -162,7 +163,10 @@ const CardsScreen = () => {
                                 cursor: 'pointer'
                             }} onClick={() => {
                                 if (tab) {
-                                    navigate(`/share/${userData.id}`);
+                                    //navigate(`/share/${userData.id}`);
+                                    //append domain path here from an env variable
+                                    setLinkButton(linkC);
+                                    navigator.clipboard.writeText(`/share/${userData.id}`);
                                 } else {
                                     navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
                                 }
@@ -187,13 +191,15 @@ const CardsScreen = () => {
                 <Row lg={2} className='my-3'>
                     {tab ?
                         <>
-                            <Col style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} className='justify-content-center d-flex'>
-                                <GenCard
-                                    userQuadra={quadra}
-                                    avatar_index={userData.avatarIndex} />
+                            <Col className='justify-content-center d-flex'>
+                                <div className='d-flex flex-column my-3' style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} >
+                                    <GenCard userQuadra={quadra} avatar_index={userData.avatarIndex} />
+                                </div>
                             </Col>
-                            <Col className='d-flex align-items-center justify-content-center' onClick={() => setShowNotification(true)}>
+                            <Col className='d-flex align-items-center justify-content-center'>
+                            <div style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} >
                                 <AddCardButton />
+                            </div>
                             </Col>
                         </>
                         : <>

@@ -56,7 +56,7 @@ const MyCard = () => {
                 fontSize: '14px',
                 lineHeight: '28px'
             }}>
-            {user.name} is
+            {user.name}
         </div>
     </>
     if (user.name && cardData.description) {

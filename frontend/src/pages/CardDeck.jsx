@@ -146,12 +146,15 @@ const CardsScreen = () => {
                             borderRadius: '50px',
                             paddingTop: '10px',
                             paddingBottom: '10px',
-                            fontWeight: '900',
+                            fontWeight: '700',
                             width: '60%',
                             marginLeft: 'auto',
                             marginRight: 'auto',
                             marginTop: '33px',
-                            color: '#49304D'
+                            color: '#49304D',
+                            fontSize: '16px',
+                            lineHeight: '14px',
+                            letterSpacing: '0em',
                         }}>
                         Share
                     </button>

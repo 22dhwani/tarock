@@ -100,12 +100,11 @@ const CardsScreen = () => {
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Popup show={showNotification} setShow={setShowNotification} isNotification={true}>
-                <div className='text-center rounded-3 py-3' style={{ backgroundColor: 'white', color: '#49304D' }}>
+                <div className='rounded-3 py-3 d-flex flex-column gap-4 align-items-center text-center' style={{ backgroundColor: 'white', color: '#49304D' }}>
                     <h1 style={{
                         fontWeight: '700',
                         fontSize: '22px',
                         lineHeight: '36px',
-
                     }}>
                         Coming Soon
                     </h1>
@@ -113,7 +112,6 @@ const CardsScreen = () => {
                         fontWeight: '500',
                         fontSize: '16px',
                         lineHeight: '19.5px',
-
                     }}>
                         We are working hard to develop this feature. <br></br><b>Stay tuned!</b>
                     </p>
@@ -129,6 +127,7 @@ const CardsScreen = () => {
                             paddingTop: '0.5rem',
                             paddingBottom: '0.5rem',
                             fontWeight: '700',
+                            width:'80%'
                         }}>
                         Got it
                     </button>

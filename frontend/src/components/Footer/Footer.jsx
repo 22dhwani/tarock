@@ -22,7 +22,8 @@ const Footer = ({ isTestActive, isCardsActive, isMeActive }) => {
     }
     const styledDiv = 'd-flex flex-column align-items-center float'
     return (
-        <div style={{ backgroundColor: '#FAFAFA', borderRadius: '25px 25px 0px 0px' }} className='fixed-bottom'>
+        //reduce/increase max width to introduce/remove space between sides of footer and container
+        <div style={{ backgroundColor: '#FAFAFA', borderRadius: '25px 25px 0px 0px', maxWidth:'468px' }} className='fixed-bottom mx-auto'>
             <Row className='mt-1'>
                 <Col className='ml-4 d-flex align-items-center justify-content-center py-2' style={{ cursor: 'pointer' }} onClick={onTestClick}>
                     <div className={styledDiv}>

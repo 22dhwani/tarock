@@ -187,7 +187,7 @@ const CardsScreen = () => {
 
             <Header />
             <TabSwitch tab={tab} setTab={setTab} />
-            <Container className='flex-grow-1 overflow-auto' >
+            <Container className='flex-grow-1 overflow-auto mb-5' >
                 <Row lg={2} className='my-3'>
                     {tab ?
                         <>

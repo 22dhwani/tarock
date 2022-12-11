@@ -34,8 +34,7 @@ function Home() {
                     )
                 })}
             </Container>
-            
-
+        
         <Footer isTestActive={true}/>
         </Container>
         

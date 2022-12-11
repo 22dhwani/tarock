@@ -58,6 +58,7 @@ const initUser = async (id, setUserData) => {
 };
 
 const logout = async () => {
+    console.log('faf')
     const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/logout`, { credentials: 'include', method: 'POST' });
     if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);

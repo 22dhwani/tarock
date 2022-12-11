@@ -2,15 +2,9 @@ import patternT from '../../assets/patterns/pattern-t-cyan.svg';
 import tarockPattern from '../../assets/patterns/tarockPattern30.svg';
 import Popup from '../PopUp/PopUp';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
 function Prep(props) {
     const [show, setShow] = useState();
-    useEffect(() => {
-        if(show === false){
-            props.startTest(true);
-        }
-    }, [show]);
+
     return (
         <div className='d-flex flex-column justify-content-between'
             style={{
@@ -30,15 +24,26 @@ function Prep(props) {
                     fontSize: '16px',
                     lineHeight: '19.5px'
                 }}>
-                    A personality test like no other
+                    A personality test like no other <span style={{
+                        border: '3px solid #EC6348',
+                        borderRadius: '50%',
+                        width: '20px',
+                        height: '20px',
+                        display: 'inline-block',
+                        textAlign: 'center',
+                        lineHeight: '16px',
+                        color: '#EC6348',
+                        cursor: 'pointer',
+                    }}
+                        className='float'
+                        onClick={() => setShow(true)}
+                    >
+                        !
+                    </span>
                 </p>
             </div>
 
-            <div className='
-            d-flex flex-column
-            justify-content-center
-            align-items-center
-            pb-5'
+            <div className='d-flex flex-column justify-content-center align-items-center pb-5'
                 style={{
                     backgroundImage: `url(${patternT})`,
                 }}>
@@ -46,9 +51,8 @@ function Prep(props) {
                     alt="tarockPattern"
                     width={140}
                     className='cropped-image-clip-rectangle' />
-                <button
-                    onClick={() => setShow(true)}
-                    className='py-2 px-2 mt-3 rounded-5'
+                <button className='py-2 px-2 mt-3 rounded-5'
+                    onClick={() => {props.startTest(true)}}
                     style={{
                         width: '80%',
                         fontWeight: '700',

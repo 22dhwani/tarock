@@ -437,7 +437,7 @@ function SignIn() {
                             <img className='rounded-4' src={bi} alt="bi" style={{
                                 backgroundColor: 'white',
                                 height: '110px',
-                                border: avatarSelection == 2 ? '4px solid #EBBD45' : ''
+                                border: avatarSelection == 2 ? '4px solid #E4E4E4' : ''
                             }} />
                         </Col>
                     </Row>

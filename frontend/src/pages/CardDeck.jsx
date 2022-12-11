@@ -197,7 +197,7 @@ const CardsScreen = () => {
                                 </div>
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center'>
-                            <div style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} >
+                            <div style={{ cursor: 'pointer' }} onClick={() => setShowNotification(true)} >
                                 <AddCardButton />
                             </div>
                             </Col>
@@ -207,22 +207,23 @@ const CardsScreen = () => {
                                 matchedCardsData.length ? <>
                                     {
                                         matchedCardsData.map((data, index) => {
-                                            return <Col
-                                                key={index}
-                                                style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}
-                                                className='justify-content-center d-flex'>
+                                            return <Col key={index} className='justify-content-center d-flex'>
+                                                <div style={{ cursor: 'pointer' }}
+                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}>
                                                 <GenCard cardType='match'
                                                 avatar_index={userData.avatarIndex} 
                                                 userQuadra={quadra}
                                                 matchedQuadra={data.matchedUserQuadra} 
                                                 matchedUserName={data.matchedUserName}
                                                 matchedUserAvartarIndex={data.matchedUserAvatarIndex}/>
+                                                 </div>
                                             </Col>
                                         })
                                     }
-                                    <Col className='d-flex align-items-center justify-content-center' onClick={shareCard}>
-                                        <AddCardButton startMatching={true}/>
+                                    <Col className='d-flex align-items-center justify-content-center' >
+                                        <div style={{ cursor: 'pointer' }} onClick={shareCard} >
+                                            <AddCardButton startMatching={true}/>
+                                        </div>
                                     </Col>
                                 </>
                                     :

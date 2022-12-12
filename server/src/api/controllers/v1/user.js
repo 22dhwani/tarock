@@ -1,6 +1,7 @@
 import User from '../../models/user.js';
 import crypto from 'crypto';
 import ApiToken from '../../models/apiToken.js';
+import nodemailer from 'nodemailer';
 
 async function getUser(req,res){          
     let user = res.user;
@@ -389,4 +390,67 @@ async function editUser(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser};
+async function forgotPassword(req,res){
+
+
+    if(!req.body.email){
+        res.status(422).json(
+            {
+                message:"email is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+
+    const email = req.body.email;
+
+    const id = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(email).digest("hex");
+
+    const realUsers = await User.findUserByEmail(email);
+    const sender = {
+        email: "account@tarock.me",
+        password: "eqlhjrmaxiflsxjs"
+    }
+
+
+    if(realUsers.length <= 0){
+        res.status(422).json(
+            {
+                message:"No user with this email",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+
+
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: 'smtp.gmail.com',
+        auth: {
+            user: sender.email,
+            pass: sender.password
+        }
+    });
+    const credential = realUsers[0].password;
+    const url = process.env['SERVER_BASE_URL'] + `/password/form?id=${id}&credential=${credential}`;
+    const mailOptions = {
+        from: sender.email,
+        to: email,
+        subject: 'Your Tarock Password',
+        html: `Hello, <b>${realUsers[0].name}</b> <div>Please follow the link to reset your password for ${email}</div> <div>${url}</div>`
+    };
+    transporter.sendMail(mailOptions);
+
+    res.json(
+        {
+            message: `An email will be sent to ${email} within 5 mintues, please check your email box.`,
+            status: 1,
+        }
+    );
+}
+
+export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser,forgotPassword};

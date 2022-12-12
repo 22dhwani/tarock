@@ -41,6 +41,7 @@ export default function(app) {
     router.post("/create-temp-user", User.createTempUser); //to create the temp user with device id
     router.post("/create-real-user", User.createRealUser); //to create a real user with device id
     router.post("/user/login", User.login); //login the user(return the token)
+    router.post("/user/forgot-password", User.forgotPassword); //forgot password
 
 
     //TEST(to quickly test some code)

@@ -243,11 +243,13 @@ async function createRealUser(req,res){
         );
         return
     }
-
+    let data = await User.findUserByEmail(req.body.email);
+    let token = await ApiToken.generateToken(data[0].internal_user_id)    
 
     res.json(
         {
-            data:realUser[0],
+            token:token,
+            data:data[0],
             message: "real user created",
             status: 1,
         }

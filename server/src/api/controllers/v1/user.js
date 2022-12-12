@@ -375,6 +375,9 @@ async function editUser(req,res){
     if(req.body.gender){
         user.gender = req.body.gender
     }
+    if(req.body.avatar_index){
+        user.avatarIndex = req.body.avatar_index
+    }
 
     user.id = user.internal_user_id
     await User.updateReal(user);

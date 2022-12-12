@@ -55,6 +55,7 @@ export default function(app) {
     //API INSIDE AUTH
     router.get("/auth/user", User.getUser);
     router.post("/auth/logout", User.logout);
+    router.delete("/auth/delete-user", User.deleteUser);
 
     app.use("/api/v1", router);
 }

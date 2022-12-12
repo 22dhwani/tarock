@@ -338,4 +338,28 @@ async function logout(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login,logout };
+async function deleteUser(req,res){
+
+    if(!req.body.device_id){
+        res.status(422).json(
+            {
+                message:"device id is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+    let user = res.user
+    await ApiToken.deleteAllTokens(user.internal_user_id);
+    await User.deleteTmpUser(req.body.device_id);
+    await User.deleteRealUser(user.internal_user_id);
+    res.json(
+        {
+            message: "User Deleted",
+            status: 1,
+        }
+    );
+}
+
+export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser};

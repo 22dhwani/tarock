@@ -362,4 +362,31 @@ async function deleteUser(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser};
+async function editUser(req,res){
+
+    let user = res.user
+    if(req.body.name){
+        user.name = req.body.name
+    }
+    if(req.body.birth_date){
+        user.dob = req.body.birth_date
+    }
+    if(req.body.gender){
+        user.gender = req.body.gender
+    }
+
+    user.id = user.internal_user_id
+    await User.updateReal(user);
+
+    user = await User.findUserByEmail(user.email);
+
+    res.json(
+        {
+            data:user[0],
+            message: "User Updated",
+            status: 1,
+        }
+    );
+}
+
+export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser};

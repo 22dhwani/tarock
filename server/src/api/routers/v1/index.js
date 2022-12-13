@@ -1,5 +1,6 @@
 import test from '../../controllers/v1/test.js';
 import User from '../../controllers/v1/user.js';
+import Notification from '../../controllers/v1/notification.js';
 import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
 import express from 'express';
@@ -64,6 +65,9 @@ export default function(app) {
 
     //explore
     router.get("/auth/explore", Explore.index);
+
+    //NOTIFICATION
+    router.get("/auth/notifications", Notification.index);
 
     app.use("/api/v1", router);
 }

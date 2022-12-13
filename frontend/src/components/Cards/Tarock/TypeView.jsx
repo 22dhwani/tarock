@@ -34,19 +34,21 @@ function TypeView({ cardData, userInfo }) {
                         width: '90%',
                     }}>
                     <h1 style={{
-                        fontWeight: '800',
-                        fontSize: '37px',
-                        lineHeight: '42px',
-                    }}>
-                        {cardData.personality_code}
+                        fontWeight: '600',
+                        fontSize: '18px',
+                        lineHeight: '20px',
+                    }}
+                    className='py-2'
+                    >
+                        The {cardData.personality_category}
                     </h1>
-                    <h2 style={{
+                    {/* <h2 style={{
                         fontWeight: '600',
                         fontSize: '18px',
                         lineHeight: '20px',
                     }}>
                         {cardData.personality_category}
-                    </h2>
+                    </h2> */}
                     <h2 style={{
                         fontWeight: '500',
                         fontSize: '12px',

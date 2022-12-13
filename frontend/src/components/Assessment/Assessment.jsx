@@ -108,9 +108,7 @@ const Assessment = ({ assessmentGroupId }) => {
     }
     
     return (
-        <Container className='min-h-100' style={{
-           
-        }}>
+        <Container className='min-h-100'>
             <Header goBackFunc={goBack} />
             <ProgressBar now={assessment.index} visuallyHidden max={assessment.data.length}/>
             <Row className='mx-auto'>

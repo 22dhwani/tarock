@@ -13,7 +13,8 @@ import Popup from '../components/PopUp/PopUp';
 import MyCard from '../components/Cards/MyCard';
 import Loading from '../components/Loading/Loading';
 import MatchCard from '../components/Cards/Match/MatchCard';
-import linkButton from '../assets/buttons/link.svg';
+import linkC from '../assets/buttons/linkC.svg';
+import linkNC from '../assets/buttons/linkNC.svg';
 import imgButton from '../assets/buttons/image.svg';
 
 const CardsScreen = () => {
@@ -28,7 +29,7 @@ const CardsScreen = () => {
     const [quadra, setQuadra] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [clickedMatchUserId, setClickedMatchUserId] = useState('');
-    
+   
     const onMyCardClick = (card) => {
         setCardType(card);
         setShowCard(true);
@@ -96,16 +97,15 @@ const CardsScreen = () => {
         }
     }
     const [shareCardOption, setShareCardOption] = useState(false);
- 
+    const [linkButton, setLinkButton] = useState(linkNC);
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
             <Popup show={showNotification} setShow={setShowNotification} isNotification={true}>
-                <div className='text-center rounded-3 py-3' style={{ backgroundColor: 'white', color: '#49304D' }}>
+                <div className='rounded-3 py-3 d-flex flex-column gap-4 align-items-center text-center' style={{ backgroundColor: 'white', color: '#49304D' }}>
                     <h1 style={{
                         fontWeight: '700',
                         fontSize: '22px',
                         lineHeight: '36px',
-
                     }}>
                         Coming Soon
                     </h1>
@@ -113,7 +113,6 @@ const CardsScreen = () => {
                         fontWeight: '500',
                         fontSize: '16px',
                         lineHeight: '19.5px',
-
                     }}>
                         We are working hard to develop this feature. <br></br><b>Stay tuned!</b>
                     </p>
@@ -129,6 +128,7 @@ const CardsScreen = () => {
                             paddingTop: '0.5rem',
                             paddingBottom: '0.5rem',
                             fontWeight: '700',
+                            width:'80%'
                         }}>
                         Got it
                     </button>
@@ -146,24 +146,30 @@ const CardsScreen = () => {
                             borderRadius: '50px',
                             paddingTop: '10px',
                             paddingBottom: '10px',
-                            fontWeight: '900',
+                            fontWeight: '700',
                             width: '60%',
                             marginLeft: 'auto',
                             marginRight: 'auto',
                             marginTop: '33px',
-                            color: '#49304D'
+                            color: '#49304D',
+                            fontSize: '16px',
+                            lineHeight: '14px',
+                            letterSpacing: '0em',
                         }}>
                         Share
                     </button>
                     <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
                         <div className='d-flex gap-5 mx-auto' style={{
-                            marginTop: '85%',
+                            marginTop: '60vh',
                         }}>
                             <img src={linkButton} alt='link' style={{
                                 cursor: 'pointer'
                             }} onClick={() => {
                                 if (tab) {
-                                    navigate(`/share/${userData.id}`);
+                                    //navigate(`/share/${userData.id}`);
+                                    //append domain path here from an env variable
+                                    setLinkButton(linkC);
+                                    navigator.clipboard.writeText(`/share/${userData.id}`);
                                 } else {
                                     navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
                                 }
@@ -184,17 +190,19 @@ const CardsScreen = () => {
 
             <Header />
             <TabSwitch tab={tab} setTab={setTab} />
-            <Container className='flex-grow-1 overflow-auto' >
+            <Container className='flex-grow-1 overflow-auto mb-5' >
                 <Row lg={2} className='my-3'>
                     {tab ?
                         <>
-                            <Col style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} className='justify-content-center d-flex'>
-                                <GenCard
-                                    userQuadra={quadra}
-                                    avatar_index={userData.avatarIndex} />
+                            <Col className='justify-content-center d-flex'>
+                                <div className='d-flex flex-column my-3' style={{ cursor: 'pointer' }} onClick={() => onMyCardClick(<MyCard />)} >
+                                    <GenCard userQuadra={quadra} avatar_index={userData.avatarIndex} />
+                                </div>
                             </Col>
-                            <Col className='d-flex align-items-center justify-content-center' onClick={() => setShowNotification(true)}>
+                            <Col className='d-flex align-items-center justify-content-center'>
+                            <div style={{ cursor: 'pointer' }} onClick={() => setShowNotification(true)} >
                                 <AddCardButton />
+                            </div>
                             </Col>
                         </>
                         : <>
@@ -202,22 +210,23 @@ const CardsScreen = () => {
                                 matchedCardsData.length ? <>
                                     {
                                         matchedCardsData.map((data, index) => {
-                                            return <Col
-                                                key={index}
-                                                style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}
-                                                className='justify-content-center d-flex'>
+                                            return <Col key={index} className='justify-content-center d-flex'>
+                                                <div style={{ cursor: 'pointer' }}
+                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}>
                                                 <GenCard cardType='match'
                                                 avatar_index={userData.avatarIndex} 
                                                 userQuadra={quadra}
                                                 matchedQuadra={data.matchedUserQuadra} 
                                                 matchedUserName={data.matchedUserName}
                                                 matchedUserAvartarIndex={data.matchedUserAvatarIndex}/>
+                                                 </div>
                                             </Col>
                                         })
                                     }
-                                    <Col className='d-flex align-items-center justify-content-center' onClick={shareCard}>
-                                        <AddCardButton startMatching={true}/>
+                                    <Col className='d-flex align-items-center justify-content-center' >
+                                        <div style={{ cursor: 'pointer' }} onClick={shareCard} >
+                                            <AddCardButton startMatching={true}/>
+                                        </div>
                                     </Col>
                                 </>
                                     :

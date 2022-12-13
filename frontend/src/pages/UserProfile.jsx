@@ -11,7 +11,7 @@ import { getAvatar } from '../utils/userUtil';
 function UserProfile() {
     const { userData } = useContext(GlobalContext);
     return (
-        <Container className='d-flex flex-column min-vh-100 ' style={{ backgroundColor: '#FBF2DC' }}>
+        <Container className='d-flex flex-column min-vh-100 mb-5' style={{ backgroundColor: '#FBF2DC' }}>
             <Header />
             <Row className='mx-auto'>
                 <div style={{

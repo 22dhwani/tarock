@@ -1,5 +1,6 @@
 import test from '../../controllers/v1/test.js';
 import User from '../../controllers/v1/user.js';
+import Card from '../../controllers/v1/card.js';
 import Notification from '../../controllers/v1/notification.js';
 import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
@@ -62,6 +63,8 @@ export default function(app) {
     router.delete("/auth/delete-user", User.deleteUser);
 
     //CARDS
+    router.get("/auth/get-user-card", Card.getUserCard);
+    router.get("/auth/get-type-card", Card.getTypeCard);
 
     //explore
     router.get("/auth/explore", Explore.index);

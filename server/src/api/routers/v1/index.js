@@ -63,7 +63,7 @@ export default function(app) {
     router.delete("/auth/delete-user", User.deleteUser);
 
     //CARDS
-    router.get("/auth/get-user-card", Card.getUserCard);
+    // router.get("/auth/get-user-card", Card.getUserCard);
     router.get("/auth/get-type-card", Card.getTypeCard);
 
     //explore

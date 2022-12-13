@@ -11,6 +11,7 @@ const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/pers
 
 async function getUserCard(req,res){         
     
+    const result = [];
     try{
         let user = res.user;
         if(req.query.user_id){
@@ -20,7 +21,6 @@ async function getUserCard(req,res){
             }
         }
     
-        const result = [];
         const id = user.internal_user_id;
         try {
             const tarcokResult = await Result.getByUser(id);

@@ -1,5 +1,6 @@
 import test from '../../controllers/v1/test.js';
 import User from '../../controllers/v1/user.js';
+import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
 import express from 'express';
 import ApiToken from '../../models/apiToken.js';
@@ -58,6 +59,11 @@ export default function(app) {
     router.post("/auth/logout", User.logout);
     router.post("/auth/user-edit", User.editUser);    
     router.delete("/auth/delete-user", User.deleteUser);
+
+    //CARDS
+
+    //explore
+    router.get("/auth/explore", Explore.index);
 
     app.use("/api/v1", router);
 }

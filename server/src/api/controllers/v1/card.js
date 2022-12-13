@@ -11,48 +11,59 @@ const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/pers
 
 async function getUserCard(req,res){         
     
-    let user = res.user;
-    if(req.query.user_id){
-        user = await User.queryReal(req.query.user_id)
-        if(user.length >= 0){
-            user = user[0];
+    try{
+        let user = res.user;
+        if(req.query.user_id){
+            user = await User.queryReal(req.query.user_id)
+            if(user.length >= 0){
+                user = user[0];
+            }
         }
-    }
-
-    const result = [];
-    const id = user.internal_user_id;
-    try {
-        const tarcokResult = await Result.getByUser(id);
-        if (tarcokResult.length > 0) {
-            const tarockData = data[tarcokResult[0].result_code];
+    
+        const result = [];
+        const id = user.internal_user_id;
+        try {
+            const tarcokResult = await Result.getByUser(id);
+            if (tarcokResult.length > 0) {
+                const tarockData = data[tarcokResult[0].result_code];
+                result.push({
+                    type: 'Tarock',
+                    data: {
+                        resultCode: tarcokResult[0].result_code,
+                        quadra: tarockData.personality_socionic_quadra
+                    }
+                }); 
+            }
+            const matchData = await Match.query(id);
             result.push({
-                type: 'Tarock',
-                data: {
-                    resultCode: tarcokResult[0].result_code,
-                    quadra: tarockData.personality_socionic_quadra
+                type: 'Match',
+                data: await Promise.all(matchData.map(async (match) => {
+                    const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
+                    const matchedUserData = await User.queryReal(matchedUserId);
+                    const matchedTarockResult = await Result.getByUser(matchedUserId);
+                    if (matchedTarockResult.length == 0) {
+                        throw new Error('No matched user test result!');
+                    }
+                    return {
+                        matchedUserId: matchedUserId,
+                        matchedUserName: matchedUserData[0].name,
+                        matchedUserAvatarIndex: matchedUserData[0].avatar_index,
+                        matchedUserResultCode: matchedTarockResult[0].result_code,
+                        matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                    };
+                }))
+            });
+        } catch (error) {
+            res.status(422).json(
+                {
+                    error:error.message,
+                    message:"something went wrong",
+                    status: 0,
                 }
-            }); 
+            );
+            return
         }
-        const matchData = await Match.query(id);
-        result.push({
-            type: 'Match',
-            data: await Promise.all(matchData.map(async (match) => {
-                const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
-                const matchedUserData = await User.queryReal(matchedUserId);
-                const matchedTarockResult = await Result.getByUser(matchedUserId);
-                if (matchedTarockResult.length == 0) {
-                    throw new Error('No matched user test result!');
-                }
-                return {
-                    matchedUserId: matchedUserId,
-                    matchedUserName: matchedUserData[0].name,
-                    matchedUserAvatarIndex: matchedUserData[0].avatar_index,
-                    matchedUserResultCode: matchedTarockResult[0].result_code,
-                    matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
-                };
-            }))
-        });
-    } catch (error) {
+    }catch(error){
         res.status(422).json(
             {
                 error:error.message,
@@ -62,6 +73,9 @@ async function getUserCard(req,res){
         );
         return
     }
+
+
+    
 
 
     res.json(

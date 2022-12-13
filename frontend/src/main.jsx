@@ -9,7 +9,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <FpjsProvider
       loadOptions = {{
-        apiKey: 'RHAg1zlsSUVdZZ0zkCKo'
+        apiKey: 'RHAg1zlsSUVdZZ0zkCKo',
+        endpoint: 'https://fp.tarockapp.com'
       }}
     >
       <GlobalContextProvider>

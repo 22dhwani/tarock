@@ -378,6 +378,26 @@ async function editUser(req,res){
     if(req.body.avatar_index){
         user.avatarIndex = req.body.avatar_index
     }
+    if(req.body.is_notification_on){
+        user.is_notification_on = req.body.is_notification_on
+    }else{
+        user.is_notification_on = 0;
+    }
+    if(req.body.is_match_card_notification_on){
+        user.is_match_card_notification_on = req.body.is_match_card_notification_on
+    }else{
+        user.is_match_card_notification_on =0;
+    }
+    if(req.body.is_daily_quest_notification_on){
+        user.is_daily_quest_notification_on = req.body.is_daily_quest_notification_on
+    }else{
+        user.is_daily_quest_notification_on = 0;
+    }
+    if(req.body.is_new_blog_notification_on){
+        user.is_new_blog_notification_on = req.body.is_new_blog_notification_on
+    }else{
+        user.is_new_blog_notification_on = 0;
+    }
 
     user.id = user.internal_user_id
     await User.updateReal(user);

@@ -14,9 +14,9 @@ async function getUserCard(req,res){
     try{
         let user = res.user;
         if(req.query.user_id){
-            user = await User.queryReal(req.query.user_id)
-            if(user.length >= 0){
-                user = user[0];
+            userList = await User.queryReal(req.query.user_id)
+            if(userList.length >= 0){
+                user = userList[0];
             }
         }
     

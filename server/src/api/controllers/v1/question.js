@@ -3,8 +3,6 @@ import ResultController from "../../controllers/result.js";
 import ResultModel from "../../models/result.js";
 
 async function getQuestion(req,res){        
-
-
     if(!req.query.group_id){
         res.status(422).json(
             {

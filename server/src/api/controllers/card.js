@@ -8,9 +8,14 @@ import { fileURLToPath } from 'url';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../static/personality_code_definition.json')));
+const quadraData = JSON.parse(fs.readFileSync(path.join(dir , '../../../static/quadra_definition.json')));
 
 function getByType(req, res) {
-    res.send(data[req.params.type]);
+    const personalityData = data[req.params.type];
+    res.send({
+        ...personalityData,
+        quadra_description: quadraData[personalityData.personality_socionic_quadra]
+    });
 }
 
 async function getByUser(req, res) {

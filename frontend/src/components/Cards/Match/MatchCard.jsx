@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../../context';
 import Loading from '../../Loading/Loading/';
 import RadarChart from '../../Charts/RadarChart';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
@@ -62,7 +62,11 @@ function MatchCard(props) {
             return [];
         }
         if (cardData && cardData.matching_tips) {
-            const list = cardData.matching_tips[matchedType] ?? []
+            if (cardData.personality_code === matchedType) {
+                // Return a placeholder for the identical matched types.
+                return ['Is that a mirror?'];
+            }
+            const list = cardData.matching_tips[matchedType] ?? [];
             const shuffled = list.sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 2);
             return selected.map((item) => {

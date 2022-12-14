@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from '../../../context';
+import { useNavigate } from "react-router-dom";
+import { logout } from '../../../utils/userUtil';
+
 function ButtonGroup(props) {
+    const { userData, setUserData } = useContext(GlobalContext);
+    const navigate = useNavigate();
     const buttonStyle = {
         border: 'none',
         backgroundColor: '#FFFFFF',
@@ -9,8 +16,11 @@ function ButtonGroup(props) {
         "https://tarock.webflow.io/about-us",
         "https://tarock.webflow.io/contact-us"
     ]
-    function handleClick(func){
-        func();
+    async function handleClick(func){
+        if (func === 'logout') {
+            await logout(userData.visitorId, setUserData);
+            navigate('/');
+        }
     }
     return (
         <div>
@@ -25,11 +35,16 @@ function ButtonGroup(props) {
                                 </button>
                             </a>
                         :
-                        <Link to={button.link} state={button.state} key={index} >
-                            <button style={buttonStyle} onClick={()=>handleClick(button.link)}>
+                        button.func ? 
+                            <button style={buttonStyle} onClick={()=>handleClick(button.func)} key={index} >
                                 <img src={button.button} alt='button' />
                             </button>
-                        </Link>
+                            :
+                            <Link to={button.link} state={button.state} key={index} >
+                                <button style={buttonStyle} >
+                                    <img src={button.button} alt='button' />
+                                </button>
+                            </Link>
                 )
             })}
         </div>

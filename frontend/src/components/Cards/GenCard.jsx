@@ -61,16 +61,17 @@ export default function GenCard(props) {
                     src={getAvatar(props.avatar_index)}
                     alt="avatar"
                     style={{ backgroundColor: '#FFFFFF' }}
+                    width='60px' height='60px'
                 />
                     :
                     <div className='d-flex flex-column gap-5 align-items-center'>
                         <img src={getAvatar(props.avatar_index)} className='rounded-circle' 
                         style={{ backgroundColor: '#FFFFFF' }} 
-                        width='40px' height='40px'
+                        width='60px' height='60px'
                         />
                         <img src={getAvatar(props.matchedUserAvartarIndex)} className='rounded-circle' 
                         style={{ backgroundColor: '#FFFFFF' }}
-                        width='40px' height='40px' />
+                        width='60px' height='60px' />
                     </div>
                 }
 

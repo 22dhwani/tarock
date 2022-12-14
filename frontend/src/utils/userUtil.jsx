@@ -57,12 +57,23 @@ const initUser = async (id, setUserData) => {
     }
 };
 
-const logout = async () => {
-    console.log('faf')
+const logout = async (visitorId, setUserData) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/logout`, { credentials: 'include', method: 'POST' });
     if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
     }
+    const tmpUserData = await getUser(visitorId, 'TMP');
+    setUserData((prevUserData) => ({
+        ...prevUserData,
+        name: tmpUserData ? tmpUserData.name : '',
+        gender: tmpUserData ? tmpUserData.gender : '',
+        avatarIndex: tmpUserData ? tmpUserData.avatar_index : 2,
+        id: prevUserData.visitorId,
+        email: '',
+        dob: '',
+        isAuthorized: false,
+        type : tmpUserData ? 'REAL' : 'NEW'
+    }));
 };
 
 const getAvatar = (avatarIndex) => {

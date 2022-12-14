@@ -21,6 +21,13 @@ function TarockCard({ user, cardData }) {
             }}>
             {user.name}
         </div>
+        <p
+            style={{
+                fontWeight: '700',
+                fontSize: '18px',
+                lineHeight: '22px',
+            }}
+        >{cardData.personality_category}</p>
     </>
 
     const cardPages = [

@@ -14,5 +14,10 @@ async function getAll() {
     return data[0];
 }
 
+async function getForUser(id) {
+    const data = await sql.query("select *, CASE WHEN EXISTS(select * from user_to_explore where `user_to_explore`.`internal_user_id` = ? AND `user_to_explore`.`explore_id` = explore.id) then 1 else 0 end as is_liked from `explore`;",[id]);
+    return data[0];
+}
 
-export default { getAll };
+
+export default { getAll,getForUser };

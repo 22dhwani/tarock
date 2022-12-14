@@ -12,12 +12,10 @@ import male from '../assets/avatarMale.svg';
 import female from '../assets/avatarFemale.svg';
 import bi from '../assets/avatarBi.svg';
 import line from '../assets/signin/line.svg';
-import googleSignin from '../assets/signin/googleSignin.svg';
-import googleSignup from '../assets/signin/googleSignup.svg';
 import bg from '../assets/signin/bg.svg';
 import { getUser, logout } from '../utils/userUtil';
 import resend from '../assets/signin/resend.svg';
-
+import GoogleButton from '../components/Buttons/GoogleButton/index.jsx';
 function SignIn() {
     const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
@@ -190,7 +188,7 @@ function SignIn() {
             console.log(error);
         }
     }
-    
+
     function nextStage() {
         setValidation(true);
         const validation = getValidation();
@@ -286,7 +284,7 @@ function SignIn() {
         } else if (stage === 'resend') {
             return 'Resend Email';
         }
-        return 'Next';
+        return 'Save & Continue';
     }
 
     function handleGoogleSignin() {
@@ -318,17 +316,17 @@ function SignIn() {
 
     return (
         <Container className='d-flex flex-column vh-100 px-0 pb-4' style={{
-                backgroundImage: `url(${bg})`,
-                backgroundSize: 'cover'
-            }}>
-            <Header goBackFunc={stage != 'avatar' && stage != 'forgot' && stage != 'resend' ? undefined : goBack}/>
+            backgroundImage: `url(${bg})`,
+            backgroundSize: 'cover'
+        }}>
+            <Header goBackFunc={stage != 'avatar' && stage != 'forgot' && stage != 'resend' ? undefined : goBack} />
             {
                 stage === 'signup' &&
-                <img src={signup} alt="signup" className='mx-auto mt-4'/>
+                <img src={signup} alt="signup" className='mx-auto mt-4' />
             }
             {
                 stage === 'resend' &&
-                <img src={resend} alt="resend" className='mx-auto mt-4'/>
+                <img src={resend} alt="resend" className='mx-auto mt-4' />
             }
             {
                 stage != 'avatar' &&
@@ -340,12 +338,12 @@ function SignIn() {
                     color: '#49304D',
                 }}>
                     {
-                        (stage === 'new' || stage === 'signin') && 
+                        (stage === 'new' || stage === 'signin') &&
                         <span>Welcome to Tarock, where personality comes first.</span>
                     }
                     {
                         stage === 'welcome' &&
-                        <span>Welcome to back, {userData.name}!</span>
+                        <span>Welcome back, {userData.name}!</span>
                     }
                     {
                         stage === 'signup' &&
@@ -393,7 +391,7 @@ function SignIn() {
                         color: '#49304D',
                         textAlign: 'center',
                     }}>Choose your avatar</div>
-                    <Row className = 'my-4'>
+                    <Row className='my-4'>
                         <Col className='d-flex justify-content-center' onClick={() => {
                             setFormData(data => {
                                 return {
@@ -410,7 +408,7 @@ function SignIn() {
                             }} />
                         </Col>
                     </Row>
-                    <Row className = 'my-4'>
+                    <Row className='my-4'>
                         <Col className='d-flex justify-content-center' onClick={() => {
                             setFormData(data => {
                                 return {
@@ -427,7 +425,7 @@ function SignIn() {
                             }} />
                         </Col>
                     </Row>
-                    <Row className = 'my-4'>
+                    <Row className='my-4'>
                         <Col className='d-flex justify-content-center' onClick={() => {
                             setFormData(data => {
                                 return {
@@ -440,7 +438,7 @@ function SignIn() {
                             <img className='rounded-4' src={bi} alt="bi" style={{
                                 backgroundColor: 'white',
                                 height: '110px',
-                                border: avatarSelection == 2 ? '4px solid #EBBD45' : ''
+                                border: avatarSelection == 2 ? '4px solid #E4E4E4' : ''
                             }} />
                         </Col>
                     </Row>
@@ -497,7 +495,7 @@ function SignIn() {
                     </Form.Group>}
                     {
                         stage === 'signin' &&
-                        <div className='mt-3 mx-3' onClick={() => {setStage('forgot')}} style={{
+                        <div className='mt-3 mx-3' onClick={() => { setStage('forgot') }} style={{
                             fontFamily: 'Montserrat',
                             fontWeight: '500',
                             color: '#49304D',
@@ -524,20 +522,19 @@ function SignIn() {
                         border: 'none',
                         textAlign: 'center',
                     }}>
-                        {getButtonText()}
+                    {getButtonText()}
                 </div>
             }
             {
                 (stage === 'signup' || stage === 'signin') &&
-                <img src={line} alt="line" className='mx-3 mt-4'/>
+                <img src={line} alt="line" className='mx-3 mt-4' />
             }
             {
-                stage === 'signup' &&
-                <img onClick={handleGoogleSignin} src={googleSignup} alt="googleSignup" className='mx-3 mt-4'/>
+                stage === 'signup' && <GoogleButton handleGoogleSignin={handleGoogleSignin} text='Signup'/>
             }
             {
-                stage === 'signin' &&
-                <img onClick={handleGoogleSignin} src={googleSignin} alt="googleSignin" className='mx-3 mt-4'/>
+                stage === 'signin' && <GoogleButton handleGoogleSignin={handleGoogleSignin} text='Login'/>
+               
             }
             {
                 stage != 'signup' &&

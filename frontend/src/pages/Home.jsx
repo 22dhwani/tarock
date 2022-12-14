@@ -20,7 +20,7 @@ function Home() {
         <Container className='d-flex flex-column vh-100' style={{ backgroundColor: '#FFFFFF' }}>
             <Header/>
             
-            <Container className="flex-grow-1 overflow-auto">
+            <Container className="flex-grow-1 overflow-auto mb-5">
                 {feedData.map((item, index) => {
                     return (
                         <Row key={index} className='pb-4'>
@@ -34,8 +34,7 @@ function Home() {
                     )
                 })}
             </Container>
-            
-
+        
         <Footer isTestActive={true}/>
         </Container>
         

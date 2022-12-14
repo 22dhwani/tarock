@@ -62,7 +62,8 @@ function MatchCard(props) {
             return [];
         }
         if (cardData && cardData.matching_tips) {
-            const shuffled = cardData.matching_tips[matchedType].sort(() => 0.5 - Math.random());
+            const list = cardData.matching_tips[matchedType] ?? []
+            const shuffled = list.sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 2);
             return selected.map((item) => {
                 return item.replaceAll('[User_' + cardData.personality_code + ']', user.name).replaceAll('[User_' + matchedType + ']', matchedUserName);

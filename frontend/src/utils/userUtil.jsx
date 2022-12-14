@@ -1,6 +1,10 @@
 import maleAvatar from '../assets/avatarMale.svg';
 import femaleAvatar from '../assets/avatarFemale.svg';
 import biAvatar from '../assets/avatarBi.svg';
+import yellowPattern from '../assets/patterns/yellow.svg'
+import tealPattern from '../assets/patterns/teal.svg'
+import bluePattern from '../assets/patterns/blue.svg'
+import violetPattern from '../assets/patterns/violet.svg'
 
 const getUser = async (id, userType) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=${userType}`);
@@ -11,7 +15,7 @@ const getUser = async (id, userType) => {
 };
 
 const getAuthorization = async () => {
-    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login/success`, {credentials: 'include'});
+    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/login/success`, { credentials: 'include' });
     return await response.json();
 }
 
@@ -54,7 +58,8 @@ const initUser = async (id, setUserData) => {
 };
 
 const logout = async () => {
-    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/logout`, {credentials: 'include', method: 'POST'});
+    console.log('faf')
+    const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/logout`, { credentials: 'include', method: 'POST' });
     if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
     }
@@ -68,4 +73,19 @@ const getAvatar = (avatarIndex) => {
     return biAvatar;
 }
 
-export { getUser, getAuthorization, getUserType, logout, getAvatar };
+const getCardPattern = (quadra) => {
+    const list = [bluePattern, yellowPattern, tealPattern, violetPattern];
+    if (quadra === 'Alpha') {
+        return list[0];
+    } else if (quadra === 'Beta') {
+        return list[1];
+    } else if (quadra === 'Gamma') {
+        return list[2];
+    } else if (quadra === 'Delta') {
+        return list[3];
+    }
+    return list[0];
+}
+
+
+export { getUser, getAuthorization, getUserType, logout, getAvatar, getCardPattern };

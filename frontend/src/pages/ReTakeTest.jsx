@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
+import pattern from '../assets/patterns/patternReTake.svg'
 
 const ReTakeTestPage = () => {
 	const navigate = useNavigate();
@@ -8,15 +9,16 @@ const ReTakeTestPage = () => {
 	}
 	return (
 		<div
-			className='min-vh-100 d-flex flex-column'
+			className='min-vh-100 d-flex flex-column position-relative'
 			style={{
 				background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)',
 				overflow: 'hidden',
 				overflowY: 'auto'
 			}}
 		>
+			<img src={pattern} alt="" className="w-100 position-absolute bottom-0 " style={{zIndex: '0'}} />
 			<Header goBackFunc={goBack} />
-			<div className='px-5 d-flex flex-column align-items-stretch justify-content-between' style={{ flexGrow: '1' }}>
+			<div className='px-5 d-flex flex-column align-items-stretch justify-content-between' style={{ flexGrow: '1', zIndex: '1' }}>
 				<div className="pt-5">
 					<h1
 						className="mb-4"
@@ -38,7 +40,7 @@ const ReTakeTestPage = () => {
 						If you’ve made it to this page, there’s a good chance your peers have determined your personality type isn't exactly right. No worries, let’s give this another go!
 					</p>
 				</div>
-				<div className="pb-5 mb-5">
+				<div className="pb-5 mb-4">
 					<button
 						className='py-3 rounded-5 border-0 w-100'
 						onClick={() => navigate('/test')}

@@ -343,7 +343,7 @@ function SignIn() {
                     }
                     {
                         stage === 'welcome' &&
-                        <span>Welcome to back, {userData.name}!</span>
+                        <span>Welcome back, {userData.name}!</span>
                     }
                     {
                         stage === 'signup' &&

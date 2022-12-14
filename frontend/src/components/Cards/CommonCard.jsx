@@ -36,8 +36,14 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             </div>
             {
                 onMatchClick &&
-                <div className='d-flex justify-content-center mt-4' onClick={() => onMatchClick()}>
-                    <img src={match} alt='match' />
+                <div className="d-flex justify-content-center">
+                    <button className='d-flex border-0 rounded-pill mt-4 bg-white' style={{color: "#49304D", padding: '0.5rem 1.2rem'}} onClick={() => onMatchClick()}>
+                        <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.874999 8.52L0.875 17.48C0.875 19.4898 2.51016 21.125 4.52 21.125C6.52983 21.125 8.165 19.4898 8.165 17.48L8.165 8.52C8.165 6.51017 6.52983 4.875 4.52 4.875C2.51016 4.875 0.874999 6.51017 0.874999 8.52ZM7.275 17.48C7.275 18.9991 6.03912 20.235 4.52 20.235C3.00088 20.235 1.765 18.9991 1.765 17.48L1.765 10.9006C2.43326 11.6735 3.4194 12.165 4.52 12.165C5.6206 12.165 6.60674 11.6735 7.275 10.9006L7.275 17.48Z" fill="#49304D" stroke="#49304D" stroke-width="0.25"/>
+                            <path d="M17.7651 13.48L17.7651 4.52C17.7651 2.51016 16.13 0.875 14.1201 0.875C12.1103 0.875 10.4751 2.51016 10.4751 4.52L10.4751 13.48C10.4751 15.4898 12.1103 17.125 14.1201 17.125C16.13 17.125 17.7651 15.4898 17.7651 13.48ZM11.3651 4.52C11.3651 3.00087 12.601 1.765 14.1201 1.765C15.6393 1.765 16.8751 3.00088 16.8751 4.52L16.8751 11.0994C16.2069 10.3265 15.2207 9.835 14.1201 9.835C13.0195 9.835 12.0334 10.3265 11.3651 11.0994L11.3651 4.52Z" fill="#49304D" stroke="#49304D" stroke-width="0.25"/>
+                        </svg>
+                        <p className='mb-0' style={{fontWeight: '600', marginLeft: '10px'}}>Start Matching</p>
+                    </button>
                 </div>
             }
         </div>

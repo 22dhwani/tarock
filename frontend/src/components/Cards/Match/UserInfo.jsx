@@ -15,11 +15,21 @@ function UserInfo({ cardData, user }) {
                     <span style={{
                         fontWeight: '400',
                         fontSize: '12px',
-                        lineHeight: '22px',
+                        lineHeight: '16px',
                         color: 'white',
                     }}>
                         {user.name}
                     </span>
+                    <p
+                        className='m-0'
+                        style={{
+                            color: 'white',
+                            fontWeight: '700',
+                            fontSize: '16px',
+                        }}
+                    >
+                        {cardData.personality_category}
+                    </p>
 
                     <span style={{
                         fontWeight: '700',

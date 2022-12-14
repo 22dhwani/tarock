@@ -25,7 +25,7 @@ function Feeds({ header }) {
                 openModal={openModal}
                 setOpenModal={setOpenModal}
             />
-            <div className="d-flex flex-column justify-content-center mx-auto" style={{ width: 'fit-content', cursor: 'pointer' }}>
+            <div className="d-flex flex-column justify-content-center mx-auto mb-5" style={{ width: 'fit-content', cursor: 'pointer' }}>
                 {/* <Link to='/test' style={{ textDecoration: 'none' }}> */}
                 <div className="py-2" style={{ textAlign: 'center' }} onClick={() => setOpenModal(true)}>
                     <img src={header} alt="image" width='100%' />

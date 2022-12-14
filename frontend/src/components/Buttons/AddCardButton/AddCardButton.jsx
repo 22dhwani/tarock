@@ -2,7 +2,7 @@ import add from '../../../assets/add.svg';
 import './AddCardButton.css';
 function AddCardButton({ startMatching }) {
     return (
-        <div>
+        <>
             <div className='button1' style={{
                 borderRadius: '10px',
                 width: '9rem',
@@ -23,7 +23,7 @@ function AddCardButton({ startMatching }) {
             }}>
                 {startMatching ? 'Start Matching' : 'Add a new card'}
             </div>
-        </div>
+        </>
     )
 }
 

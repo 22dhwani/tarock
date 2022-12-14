@@ -19,7 +19,7 @@ function TarockCard({ user, cardData }) {
                 fontSize: '14px',
                 lineHeight: '28px'
             }}>
-            {user.name} is
+            {user.name}
         </div>
     </>
 

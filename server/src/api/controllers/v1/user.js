@@ -1,6 +1,7 @@
 import User from '../../models/user.js';
 import crypto from 'crypto';
 import ApiToken from '../../models/apiToken.js';
+import Result from '../../models/result.js';
 import nodemailer from 'nodemailer';
 
 async function getUser(req,res){          
@@ -232,6 +233,17 @@ async function createRealUser(req,res){
         password: hashPassword,
     });
     try {
+        const oldResults = await Result.getByUser(req.body.device_id);
+        if (oldResults.length > 0) {
+          const newResult = new Result.Result({
+            userId: hashEmail,
+            assessmentGroupId: oldResults[0].question_group_id,
+            numOfQuestions: oldResults[0].num_of_questions,
+            duration: oldResults[0].duration,
+            code: oldResults[0].result_code
+          });
+          await Result.create(newResult);
+        }
         await User.createReal(realUser);
         await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
     } catch (error) {
@@ -377,6 +389,26 @@ async function editUser(req,res){
     }
     if(req.body.avatar_index){
         user.avatarIndex = req.body.avatar_index
+    }
+    if(req.body.is_notification_on){
+        user.is_notification_on = req.body.is_notification_on
+    }else{
+        user.is_notification_on = 0;
+    }
+    if(req.body.is_match_card_notification_on){
+        user.is_match_card_notification_on = req.body.is_match_card_notification_on
+    }else{
+        user.is_match_card_notification_on =0;
+    }
+    if(req.body.is_daily_quest_notification_on){
+        user.is_daily_quest_notification_on = req.body.is_daily_quest_notification_on
+    }else{
+        user.is_daily_quest_notification_on = 0;
+    }
+    if(req.body.is_new_blog_notification_on){
+        user.is_new_blog_notification_on = req.body.is_new_blog_notification_on
+    }else{
+        user.is_new_blog_notification_on = 0;
     }
 
     user.id = user.internal_user_id

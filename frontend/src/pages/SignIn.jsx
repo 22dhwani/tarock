@@ -12,12 +12,10 @@ import male from '../assets/avatarMale.svg';
 import female from '../assets/avatarFemale.svg';
 import bi from '../assets/avatarBi.svg';
 import line from '../assets/signin/line.svg';
-import googleSignin from '../assets/signin/googleSignin.svg';
-import googleSignup from '../assets/signin/googleSignup.svg';
 import bg from '../assets/signin/bg.svg';
 import { getUser, logout } from '../utils/userUtil';
 import resend from '../assets/signin/resend.svg';
-
+import GoogleButton from '../components/Buttons/GoogleButton/index.jsx';
 function SignIn() {
     const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
@@ -286,7 +284,7 @@ function SignIn() {
         } else if (stage === 'resend') {
             return 'Resend Email';
         }
-        return 'Next';
+        return 'Save & Continue';
     }
 
     function handleGoogleSignin() {
@@ -440,7 +438,7 @@ function SignIn() {
                             <img className='rounded-4' src={bi} alt="bi" style={{
                                 backgroundColor: 'white',
                                 height: '110px',
-                                border: avatarSelection == 2 ? '4px solid #EBBD45' : ''
+                                border: avatarSelection == 2 ? '4px solid #E4E4E4' : ''
                             }} />
                         </Col>
                     </Row>
@@ -532,12 +530,11 @@ function SignIn() {
                 <img src={line} alt="line" className='mx-3 mt-4' />
             }
             {
-                stage === 'signup' &&
-                <img onClick={handleGoogleSignin} src={googleSignup} alt="googleSignup" className='mx-3 mt-4' />
+                stage === 'signup' && <GoogleButton handleGoogleSignin={handleGoogleSignin} text='Signup'/>
             }
             {
-                stage === 'signin' &&
-                <img onClick={handleGoogleSignin} src={googleSignin} alt="googleSignin" className='mx-3 mt-4' />
+                stage === 'signin' && <GoogleButton handleGoogleSignin={handleGoogleSignin} text='Login'/>
+               
             }
             {
                 stage != 'signup' &&

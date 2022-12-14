@@ -27,7 +27,9 @@ function Test(props) {
     return (
         <div className='min-vh-100'
             style={{
-                background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)'
+                background: 'linear-gradient(180deg, #BCE4E5 0%, rgba(188, 228, 229, 0.6) 100%)',
+                overflow: 'hidden',
+                overflowY: 'auto'
             }}>
             {
                 startTest ?

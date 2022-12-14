@@ -4,11 +4,26 @@ import { useNavigate } from "react-router-dom";
 
 function DescriptiveView({ userInfo, cardData }) {
     const description = [
-        'Superpower',
-        'Strengths',
-        'Weakness',
-        'Blind Spot',
-        'Ideal Environment'
+        {
+            title: 'Superpower',
+            bg: '#FFFFFF',
+        },
+        {
+            title: 'Strengths',
+            bg: '#EAF0F7',
+        },
+        {
+            title: 'Weakness',
+            bg: '#D5DFEE',
+        },
+        {
+            title: 'Blind Spot',
+            bg: '#BFCFE6',
+        },
+        {
+            title: 'Ideal Environment',
+            bg: '#ABC0DF',
+        }
     ]
     const navigate = useNavigate();
     return (
@@ -34,7 +49,14 @@ function DescriptiveView({ userInfo, cardData }) {
                                         minWidth: '30%',
                                         backgroundColor: 'rgba(255, 255, 255, 0.35)',
                                     }}></div>
-                                    {item}
+                                    <span style={{
+                                        fontSize: '12px',
+                                        fontWeight: '400',
+                                        letterSpacing: '0em',
+                                        textAlign: 'center',
+                                    }}>
+                                        {item.title}
+                                    </span>
                                     <div className='d-flex ' style={{
                                         minHeight: '1px',
                                         maxHeight: '1px',
@@ -43,7 +65,7 @@ function DescriptiveView({ userInfo, cardData }) {
                                     }}></div>
                                 </div>
                                 <Row className='w-100 py-3 my-2 d-flex justify-content-center' style={{
-                                    backgroundColor: '#FFFFFF',
+                                    backgroundColor: item.bg,
                                     borderRadius: '10px',
                                     fontWeight: '600',
                                     fontSize: '14px',
@@ -51,11 +73,18 @@ function DescriptiveView({ userInfo, cardData }) {
                                     color: '#49304D',
                                 }} lg={3}>
                                     {
-                                        cardData.description[item.toUpperCase().replaceAll(' ', '')].split(";")
+                                        cardData.description[item.title.toUpperCase().replaceAll(' ', '')].split(";")
                                             .map((strength, index) => {
                                                 return (
                                                     <Col key={index}>
+                                                        <span style={{
+                                        fontSize: '12px',
+                                        fontWeight: '600',
+                                        letterSpacing: '0em',
+                                        textAlign: 'left',
+                                    }}>
                                                         {strength.trim()}
+                                                        </span>
                                                     </Col>
                                                 );
                                             })

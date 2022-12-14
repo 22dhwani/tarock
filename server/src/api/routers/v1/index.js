@@ -68,6 +68,7 @@ export default function(app) {
 
     //explore
     router.get("/auth/explore", Explore.index);
+    router.post("/auth/explore/like-toggle", Explore.likeToggle);
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);

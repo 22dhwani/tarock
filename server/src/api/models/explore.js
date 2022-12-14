@@ -19,5 +19,13 @@ async function getForUser(id) {
     return data[0];
 }
 
+async function updateLikes(id) {
+    const count = await sql.query("SELECT COUNT(id) as likes FROM user_to_explore WHERE explore_id = ?;",[id]);
 
-export default { getAll,getForUser };
+    await sql.query("UPDATE `explore` SET `like_count` = ? WHERE `explore`.`id` = ?",[count[0][0].likes,id])
+
+    return true;
+}
+
+
+export default { getAll,getForUser,updateLikes };

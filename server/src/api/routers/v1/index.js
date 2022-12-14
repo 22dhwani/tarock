@@ -4,6 +4,7 @@ import Card from '../../controllers/v1/card.js';
 import Notification from '../../controllers/v1/notification.js';
 import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
+import personalityInsight from '../../controllers/v1/personalityInsight.js';
 import express from 'express';
 import ApiToken from '../../models/apiToken.js';
 
@@ -72,6 +73,9 @@ export default function(app) {
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);
+
+    //PERSONALITY INSIGHT
+    router.get("/auth/get-insights", personalityInsight.index);
 
     app.use("/api/v1", router);
 }

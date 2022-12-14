@@ -23,7 +23,7 @@ function RadarView({ cardData, userInfo }) {
             </div>
 
             <div
-                onClick={() => { navigate('/test') }}
+                onClick={() => { navigate('/retake-test') }}
                 style={{
                     cursor: 'pointer',
                     position: 'absolute',

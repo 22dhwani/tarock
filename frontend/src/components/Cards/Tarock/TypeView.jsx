@@ -67,7 +67,7 @@ function TypeView({ cardData, userInfo }) {
                     </h2>
                 </div>
                 <div
-                    onClick={() => { navigate('/test') }}
+                    onClick={() => { navigate('/retake-test') }}
                     style={{
                         cursor: 'pointer',
                         position: 'absolute',

@@ -5,6 +5,7 @@ import Notification from '../../controllers/v1/notification.js';
 import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
 import personalityInsight from '../../controllers/v1/personalityInsight.js';
+import exploreComment from '../../controllers/v1/exploreComment.js';
 import express from 'express';
 import ApiToken from '../../models/apiToken.js';
 
@@ -70,6 +71,10 @@ export default function(app) {
     //explore
     router.get("/auth/explore", Explore.index);
     router.post("/auth/explore/like-toggle", Explore.likeToggle);
+
+    //EXPLORE COMMENTs
+    router.get("/auth/explore/comments", exploreComment.index);
+    router.post("/auth/explore/comments/add", exploreComment.create);
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);

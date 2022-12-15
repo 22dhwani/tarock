@@ -8,8 +8,8 @@ const ExploreComment = function(exploreComment) {
     this.like_count = exploreComment.like_count;
 }
 
-async function getForExplore(exploreId) {
-    const data = await sql.query("SELECT explore_comments.* , user.name,user.avatar_index FROM explore_comments LEFT JOIN user ON explore_comments.internal_user_id = user.internal_user_id WHERE explore_id = ? ORDER BY created_at DESC;",[exploreId]);
+async function getForExplore(exploreId,internal_user_id) {
+    const data = await sql.query("SELECT explore_comments.* , user.name,user.avatar_index, CASE WHEN EXISTS(select * from user_to_comment where `user_to_comment`.`internal_user_id` = ? AND `user_to_comment`.`explore_comment_id` = explore_comments.id) then 1 else 0 end as is_liked FROM explore_comments LEFT JOIN user ON explore_comments.internal_user_id = user.internal_user_id WHERE explore_id = ? ORDER BY created_at DESC;",[internal_user_id,exploreId]);
     return data[0];
 }
 
@@ -18,4 +18,12 @@ async function addComment(exploreId,userId,content) {
     return data[0];
 }
 
-export default { ExploreComment,getForExplore,addComment };
+async function updateLikes(id) {
+    const count = await sql.query("SELECT COUNT(id) as likes FROM user_to_comment WHERE explore_comment_id = ?;",[id]);
+
+    await sql.query("UPDATE `explore_comments` SET `like_count` = ? WHERE `explore_comments`.`id` = ?",[count[0][0].likes,id])
+
+    return true;
+}
+
+export default { ExploreComment,getForExplore,addComment,updateLikes };

@@ -75,6 +75,7 @@ export default function(app) {
     //EXPLORE COMMENTs
     router.get("/auth/explore/comments", exploreComment.index);
     router.post("/auth/explore/comments/add", exploreComment.create);
+    router.post("/auth/explore/comments/like-toggle", exploreComment.likeToggle);
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);

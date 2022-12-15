@@ -21,7 +21,7 @@ function EditProfile() {
     const [formData, setFormData] = useState(
         {
             name: userData.name,
-            dob: userData.dob,
+            dob: userData.dob ? userData.dob : "",
             gender: "",
         }
     )

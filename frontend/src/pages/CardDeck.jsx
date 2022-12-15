@@ -165,13 +165,11 @@ const CardsScreen = () => {
                             <img src={linkButton} alt='link' style={{
                                 cursor: 'pointer'
                             }} onClick={() => {
+                                setLinkButton(linkC);
                                 if (tab) {
-                                    //navigate(`/share/${userData.id}`);
-                                    //append domain path here from an env variable
-                                    setLinkButton(linkC);
-                                    navigator.clipboard.writeText(`/share/${userData.id}`);
+                                    navigator.clipboard.writeText(`${window.location.origin}/share/${userData.id}`);
                                 } else {
-                                    navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
+                                    navigator.clipboard.writeText(`${window.location.origin}/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
                                 }
                             }}/>
                             <img src={imgButton} alt='image' style={{

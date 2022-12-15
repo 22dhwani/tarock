@@ -9,7 +9,7 @@ function TarockCard({ user, cardData }) {
     const userInfo = <>
         {/* Avatar */}
         <div className='d-flex justify-content-center'>
-            <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} />
+            <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} width='60px' height='60px' />
         </div>
         {/* User Name */}
         <div

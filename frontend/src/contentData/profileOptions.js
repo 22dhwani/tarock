@@ -1,19 +1,14 @@
-import editInfo from '../assets/editInfo.svg'
-import modifyAvatar from '../assets/modifyAvatar.svg'
-import articles from '../assets/articles.svg'
-import community from '../assets/community.svg'
-import privacy from '../assets/privacy.svg'
-import about from '../assets/about.svg'
-import contact from '../assets/contact.svg'
-import delAcc from '../assets/profile/delAcc.svg'
-import logoutButton from '../assets/profile/logout.svg'
-import {logout} from '../utils/userUtil'
+import editInfo from '../assets/editInfo.svg';
+import modifyAvatar from '../assets/modifyAvatar.svg';
+import about from '../assets/about.svg';
+import contact from '../assets/contact.svg';
+import logoutButton from '../assets/profile/logout.svg';
+
 //link also serves as an on click function to be performed (condition: !includes('/'))
 const profileOptions = [
     // [editInfo, modifyAvatar],
-    // [articles,contact],
-    // [articles, community],
-    // [privacy, about, contact]
+    // [about,contact],
+    // [logout]
     [{
         button: editInfo,
         link: '/editProfile'
@@ -24,10 +19,6 @@ const profileOptions = [
         state: { stage: 'avatar' }
     }],
     [
-    // {
-    //     button: articles,
-    //     link: '/articles'
-    // },
     {
         button: about,
         link: 'https://tarock.webflow.io/about-us'
@@ -38,13 +29,9 @@ const profileOptions = [
     }],
     [
     {
-        button: delAcc,
-        link: ''
-    },
-    {
         button: logoutButton,
-        link: logout
+        func: 'logout'
     }]
 ]
 
-export {profileOptions};
+export { profileOptions };

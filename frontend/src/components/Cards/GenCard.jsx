@@ -85,7 +85,7 @@ export default function GenCard(props) {
             }}>
                 {props.cardType == 'match' ? <p className='text-center'>
                     Match Card<br></br>
-                    <span style={{fontWeight:'400'}}>with {props.matchedUserName.split(' ')[0]}</span>
+                    <span style={{fontWeight:'400'}}>with {props.matchedUserName.trim().split(' ')[0]}</span>
                 </p>
                     :
                     'Tarock Card'}

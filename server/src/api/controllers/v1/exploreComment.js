@@ -1,4 +1,5 @@
 import ExploreCommentModel from "../../models/exploreComment.js";
+import UserToCommentModel from "../../models/userToComment.js";
 
 async function index(req,res){      
     
@@ -11,7 +12,8 @@ async function index(req,res){
         );
         return;
     }    
-    let data = await ExploreCommentModel.getForExplore(req.query.explore_id);    
+    let user = res.user
+    let data = await ExploreCommentModel.getForExplore(req.query.explore_id, user.internal_user_id);    
 
     res.json(
         {
@@ -65,5 +67,47 @@ async function create(req,res){
     );
 }
 
+async function likeToggle(req,res){
+    let user = res.user
+    if(!req.body.comment_id){
+        res.status(422).json(
+            {
+                message:"Comment Id is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    try {
+        let userToComment = await UserToCommentModel.getByIds(req.body.comment_id,user.internal_user_id)
 
-export default { index,create };
+        if(userToComment.length > 0){
+            await UserToCommentModel.deleteByIds(req.body.comment_id,user.internal_user_id)           
+        }else{
+            await UserToCommentModel.createByIds(req.body.comment_id,user.internal_user_id)
+        }
+    
+        await ExploreCommentModel.updateLikes(req.body.comment_id)        
+    } catch (error) {
+
+        res.status(422).json(
+            {
+                error:error.message,
+                message:"something went wrong",
+                status: 0,
+            }
+        );
+        return
+        
+    }   
+
+    res.json(
+        {
+            message: "UPDATED",
+            status: 1,
+        }
+    );
+}
+
+
+export default { index,create,likeToggle };

@@ -79,6 +79,7 @@ export default function(app) {
     router.post("/auth/explore/comments/like-toggle", exploreComment.likeToggle);
 
     router.get("/auth/daily-question", dailyQuestion.index);
+    router.post("/auth/daily-question/answer", dailyQuestion.answer);
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);

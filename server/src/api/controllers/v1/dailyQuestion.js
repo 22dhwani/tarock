@@ -4,21 +4,20 @@ import sql from "../../../config/db.js";
 async function index(req, res) {
 
 	let data = await DailyQuestionModel.index()
-	let options = [];
-	if (!data.length) {
-		res.json({
-			data: null,
-			message: "no data",
-			status: 0,
-		});
-	}
-
-	var id = data[0].id;
-	options = await sql.query("SELECT id, `option` FROM daily_questions_options WHERE question_id = ?;", [id])
 
 	res.json({
-		data: {...data[0], options: options[0]},
-		// options: options[0],
+		message: "success",
+		status: 1,
+	});
+
+}
+async function answer(req, res) {
+
+	const { user_id, question_id, answer_id } = req.body
+	let data = await DailyQuestionModel.answer(user_id, question_id, answer_id)
+
+	res.json({
+		data: data,
 		message: "success",
 		status: 1,
 	});
@@ -27,4 +26,4 @@ async function index(req, res) {
 
 
 
-export default { index };
+export default { index, answer };

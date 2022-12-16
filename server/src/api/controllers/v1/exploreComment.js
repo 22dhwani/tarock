@@ -1,5 +1,6 @@
 import ExploreCommentModel from "../../models/exploreComment.js";
 import UserToCommentModel from "../../models/userToComment.js";
+import sql from "../../../config/db.js";
 
 async function index(req,res){      
     
@@ -59,8 +60,17 @@ async function create(req,res){
         req.body.user_id,
         req.body.content
     );    
+
+    // To update count for exlore 
+    const count = await sql.query("SELECT COUNT(id) as comments FROM explore_comments WHERE explore_id = ?;",[req.body.explore_id]);
+    await sql.query("UPDATE `explore` SET `comment_count` = ? WHERE `explore`.`id` = ?",[count[0][0].comments,req.body.explore_id])
+
+    // insertId
+    const item = await sql.query("SELECT * FROM explore_comments WHERE id = ?;",[data.insertId])
+
     res.json(
         {
+            data: item[0][0],
             message: 'Comment Added',
             status: 1,
         }

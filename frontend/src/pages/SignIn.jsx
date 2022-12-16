@@ -163,10 +163,11 @@ function SignIn() {
                     tempId: userData.visitorId,
                 })
             });
-            if (!response.ok) {
-                throw new Error(`Error! status: ${response.status}`);
-            }
             const data = await response.json();
+            if (!response.ok) {
+                alert(`Sign up failed: ${data.error_msg}`);
+                return;
+            }
             const user = await getUser(data.id, 'REAL');
             setUserData((prevUserData) => ({
                 ...prevUserData,

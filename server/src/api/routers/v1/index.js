@@ -8,6 +8,7 @@ import personalityInsight from '../../controllers/v1/personalityInsight.js';
 import exploreComment from '../../controllers/v1/exploreComment.js';
 import express from 'express';
 import ApiToken from '../../models/apiToken.js';
+import dailyQuestion from '../../controllers/v1/dailyQuestion.js';
 
 export default function(app) {
     const router = express.Router();
@@ -76,6 +77,8 @@ export default function(app) {
     router.get("/auth/explore/comments", exploreComment.index);
     router.post("/auth/explore/comments/add", exploreComment.create);
     router.post("/auth/explore/comments/like-toggle", exploreComment.likeToggle);
+
+    router.get("/auth/daily-question", dailyQuestion.index);
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);

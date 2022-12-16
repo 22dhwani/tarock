@@ -9,25 +9,20 @@ function TarockCard({ user, cardData }) {
     const userInfo = <>
         {/* Avatar */}
         <div className='d-flex justify-content-center'>
-            <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} />
+            <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }}
+            height="64px"
+            width="64px"
+            />
         </div>
         {/* User Name */}
         <div
-            className="py-3"
+            className="pt-3 pb-1"
             style={{
                 fontWeight: '400',
-                fontSize: '14px',
-                lineHeight: '28px'
+                fontSize: '18px',
             }}>
             {user.name}
         </div>
-        <p
-            style={{
-                fontWeight: '700',
-                fontSize: '18px',
-                lineHeight: '22px',
-            }}
-        >{cardData.personality_category}</p>
     </>
 
     const cardPages = [

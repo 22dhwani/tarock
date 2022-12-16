@@ -6,19 +6,38 @@ function RadarView({ cardData, userInfo }) {
     return (
         <>
             {userInfo}
+            <p
+            style={{
+                fontWeight: '700',
+                fontSize: '22px',
+            }}
+        >{cardData.personality_category}</p>
             {/* Description */}
-            <div className='px-2'
-                style={{
-                    fontWeight: '700',
-                    fontSize: '18px',
-                    lineHeight: '22px',
-                }}>
-                {cardData.description.STRENGTHS.replaceAll(';', ',')}.
+            <div className='px-4 d-flex flex-wrap justify-content-center gap-2 pt-2'>
+                {cardData.description.STRENGTHS.split(';').map((value, index) => {
+                    return (
+                        <span
+                            key={index}
+                            className="rounded-pill"
+                            style={{
+                                background: 'rgba(255,255,255,0.25)',
+                                padding: "2px 10px",
+                                fontSize: '14px',
+                                fontWeight: '500'
+                            }}
+                        >
+                            {value}
+                        </span>
+                    )
+                })}
             </div>
             {/* Radar Chart */}
-            <div className="my-5" style={{
-                height: '270px',
-            }}>
+            <div
+                className="my-5"
+                style={{
+                    height: '270px',
+                }}
+            >
                 <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
             </div>
 

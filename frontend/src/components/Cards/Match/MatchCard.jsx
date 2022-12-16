@@ -62,7 +62,7 @@ function MatchCard(props) {
             return [];
         }
         if (cardData && cardData.matching_tips) {
-            if (cardData.personality_code === matchedType) {
+            if (cardData.personality_code === matchedType && !cardData.matching_tips[matchedType]) {
                 // Return a placeholder for the identical matched types.
                 return ['Is that a mirror?'];
             }

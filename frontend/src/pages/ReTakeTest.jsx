@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 import pattern from '../assets/patterns/patternReTake.svg'
 
+const contactLink = "https://tarock.webflow.io/contact-us";
 const ReTakeTestPage = () => {
 	const navigate = useNavigate();
 	function goBack() {
@@ -55,7 +56,7 @@ const ReTakeTestPage = () => {
 					</button>
 					<button
 						className='py-3 mt-4 rounded-5 border-0 w-100'
-						// onClick={() => {}}
+						onClick={() => window.open(contactLink)}
 						style={{
 							fontWeight: '700',
 							fontSize: '16px',

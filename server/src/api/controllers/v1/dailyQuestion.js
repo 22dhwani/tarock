@@ -48,7 +48,14 @@ async function answer(req, res) {
 	}
 	data = await DailyQuestionUserAnswerOptionModel.addAnswer(user.internal_user_id, question_id, answer_id)
 
+
+	let options = await DailyQuestionOptionModel.indexWithCount(question_id)
+	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id)
 	res.json({
+		data : {
+			"total_answers":totalAnswers.length,
+			"answers_count":options
+		},
 		message: "Answer Submitted",
 		status: 1,
 	});

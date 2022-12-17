@@ -1,11 +1,14 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../../context';
+import logo from '../../../assets/tarockLogo.svg';
 import Loading from '../../Loading/Loading/';
 import RadarChart from '../../Charts/RadarChart';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
+import chartImg from '../../../assets/chart/chart_bg_black_text.png';
+import { getUserChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
 
 function MatchCard(props) {
 
@@ -18,6 +21,7 @@ function MatchCard(props) {
     const searchParams = new URLSearchParams(useLocation().search);
     const origUserFromUrl = searchParams.get('origUser');
     const matchedUserFromUrl = searchParams.get('matchedUser');
+    const navigate = useNavigate()
 
     function fetchUserData(setUser, setCardData, id) {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=REAL`)
@@ -67,8 +71,8 @@ function MatchCard(props) {
                 return ['Is that a mirror?'];
             }
             const list = cardData.matching_tips[matchedType] ?? [];
-            const shuffled = list.sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, 2);
+            // const shuffled = list.sort(() => 0.5 - Math.random());
+            const selected = list.slice(0, 2);
             return selected.map((item) => {
                 return item.replaceAll('[User_' + cardData.personality_code + ']', user.name.trim().split(' ')[0]).replaceAll('[User_' + matchedType + ']', matchedUserName.trim().split(' ')[0]);
             });
@@ -89,57 +93,60 @@ function MatchCard(props) {
     }
     let userQuadra = getColor(cardData.personality_socionic_quadra);
     let matchedQuadra = getColor(matchedCard.personality_socionic_quadra);
+    const linearColor = getUserMatchLinearColorFromQuadra(cardData.personality_socionic_quadra, matchedCard.personality_socionic_quadra)
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
-        const matchView = <div className='py-5 rounded-4 text-white'
-            style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
-            <div className='d-flex flex-column gap-4'>
-                {location === '/matchCard' && <Header/>}
-                <UserInfo cardData={cardData} user={user} />
-                <div className='px-3'>
-                    <div style={{
-                        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
-                        backdropFilter: 'blur(10px)',
-                        borderRadius: '8px',
-                        height: '300px',
-                        margin: '0 auto',
-                        width: '100%',
-                        padding: '20px',
-                    }}>
-                        <RadarChart
-                            userData={cardData.dimensional_values}
-                            matchData={matchedCard.dimensional_values}
-                            enableLabels={true}
-                            userQuadra={userQuadra}
-                            matchedQuadra={matchedQuadra}
-                        />
+        const userChartDataImage = getUserChartImageData(cardData.personality_category)
+        const matchedChartDataImage = getUserChartImageData(matchedCard.personality_category)
+
+        const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
+            <div className='py-5 rounded-4 text-white' style={{ backgroundImage: linearColor }}>
+                <div className='d-flex flex-column gap-4'>
+                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={()=>navigate('/')} style={{cursor:'pointer'}}/>}
+                    <UserInfo cardData={cardData} user={user} />
+                    <div className='px-3'>
+                        <div style={{
+                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
+                            backdropFilter: 'blur(10px)',
+                            borderRadius: '8px',
+                            height: '300px',
+                            margin: '0 auto',
+                            width: '100%',
+                            padding: '20px',
+                        }}>
+                            <div className="position-relative" style={{height: "260px"}}>
+                                <img src={chartImg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
+                                <img src={userChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
+                                <img src={matchedChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
+                            </div>
+                        </div>
                     </div>
+                    <UserInfo cardData={matchedCard} user={matchedUser} />
+                    {
+                        location === '/matchCard' &&
+                        <div className='mt-2' style={{
+                            textAlign: 'center',
+                            fontWeight: '500',
+                            fontSize: '14px',
+                            color: 'white'
+                        }}>
+                            tarockapp.com
+                        </div>
+                    }
                 </div>
-                <UserInfo cardData={matchedCard} user={matchedUser} />
-                {
-                    location === '/matchCard' &&
-                    <div className='mt-2' style={{
-                        textAlign: 'center',
-                        fontWeight: '500',
-                        fontSize: '14px',
-                        color: 'white'
-                    }}>
-                        tarockapp.com
-                    </div>
-                }
             </div>
         </div>
 
-        const tipsView = <div className='py-5 rounded-4'
-            style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
-            <div className='d-flex flex-column gap-4'>
+        const tipsView = <div className='py-5 rounded-4' style={{ backgroundImage: linearColor }}>
+            <div className='d-flex flex-column gap-4 text-white'>
                 <UserInfo cardData={cardData} user={user} />
                 <div className='px-3'>
                     <div style={{
                         background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
                         backdropFilter: 'blur(10px)',
                         borderRadius: '8px',
+                        color: "#49304D",
                         height: '300px',
                         margin: '0 auto',
                         width: '100%',

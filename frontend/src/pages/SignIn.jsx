@@ -228,6 +228,9 @@ function SignIn() {
 
     async function newGuest() {
         try {
+            if (userData.isAuthorized) {
+                await logout(userData.visitorId, setUserData);
+            }
             const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/updateIsPermanentUser`, {
                 method: 'POST',
                 headers: {
@@ -242,18 +245,9 @@ function SignIn() {
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
-            await logout();
-            const tmpUserData = await getUser(userData.visitorId, 'TMP');
             setUserData((prevUserData) => ({
                 ...prevUserData,
-                name: tmpUserData ? tmpUserData.name : '',
-                gender: tmpUserData ? tmpUserData.gender : '',
-                avatarIndex: tmpUserData ? tmpUserData.avatar_index : 2,
-                id: prevUserData.visitorId,
-                email: '',
-                dob: '',
-                isAuthorized: false,
-                type: tmpUserData ? 'TMP' : 'NEW',
+                type: prevUserData.type === 'REAL' ? 'TMP' : 'NEW'
             }));
             setValidation(false);
             setStage('new');
@@ -438,7 +432,7 @@ function SignIn() {
                             <img className='rounded-4' src={bi} alt="bi" style={{
                                 backgroundColor: 'white',
                                 height: '110px',
-                                border: avatarSelection == 2 ? '4px solid #E4E4E4' : ''
+                                border: avatarSelection == 2 ? '4px solid #EBBD45' : ''
                             }} />
                         </Col>
                     </Row>

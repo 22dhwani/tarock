@@ -92,7 +92,7 @@ function MatchCard(props) {
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
-        const matchView = <div className='py-5 rounded-4 '
+        const matchView = <div className='py-5 rounded-4 text-white'
             style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
             <div className='d-flex flex-column gap-4'>
                 {location === '/matchCard' && <Header/>}

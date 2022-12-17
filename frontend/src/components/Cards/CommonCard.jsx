@@ -11,18 +11,37 @@ import match from '../../assets/cards/matchBtn.svg';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
     const radarView = <div>
-        <div style={{
-            fontFamily: 'Montserrat',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            fontSize: '18px',
-            lineHeight: '22px',
-            color: '#FFFFFF',
-            alignItems: 'center',
-            textAlign: 'center'
-        }}
-            className='py-3'>
-            {user.name} is {cardData.description.STRENGTHS.replaceAll(';', ',')}.
+        <div
+            style={{
+                fontFamily: 'Montserrat',
+                fontStyle: 'normal',
+                fontWeight: '700',
+                fontSize: '18px',
+                lineHeight: '22px',
+                color: '#FFFFFF',
+                alignItems: 'center',
+                textAlign: 'center'
+            }}
+            className='py-3'
+        >
+            <div className='w-100 d-flex flex-wrap justify-content-center px-4 gap-2 pt-2'>
+                {cardData.description.STRENGTHS.split(';').map((value, index) => {
+                    return (
+                        <span
+                            key={index}
+                            className="rounded-pill"
+                            style={{
+                                background: 'rgba(255,255,255,0.25)',
+                                padding: "2px 10px",
+                                fontSize: '12px',
+                                fontWeight: '500'
+                            }}
+                        >
+                            {value}
+                        </span>
+                    )
+                })}
+            </div>
         </div>
         <div>
 
@@ -36,7 +55,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             </div>
             {
                 onMatchClick &&
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center pb-5 mt-2">
                     <button className='d-flex border-0 rounded-pill mt-4 bg-white' style={{color: "#49304D", padding: '0.5rem 1.2rem'}} onClick={() => onMatchClick()}>
                         <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.874999 8.52L0.875 17.48C0.875 19.4898 2.51016 21.125 4.52 21.125C6.52983 21.125 8.165 19.4898 8.165 17.48L8.165 8.52C8.165 6.51017 6.52983 4.875 4.52 4.875C2.51016 4.875 0.874999 6.51017 0.874999 8.52ZM7.275 17.48C7.275 18.9991 6.03912 20.235 4.52 20.235C3.00088 20.235 1.765 18.9991 1.765 17.48L1.765 10.9006C2.43326 11.6735 3.4194 12.165 4.52 12.165C5.6206 12.165 6.60674 11.6735 7.275 10.9006L7.275 17.48Z" fill="#49304D" stroke="#49304D" strokeWidth="0.25"/>
@@ -155,7 +174,7 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
     </>
 
     return (
-        <Container className='d-flex flex-column ' >
+        <Container className='d-flex flex-column px-0' >
             <div style={{
                 backgroundImage: `url(${patternTarockBlue})`,
                 backgroundRepeat: 'no-repeat',

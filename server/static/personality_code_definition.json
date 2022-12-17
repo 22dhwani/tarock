@@ -2,6 +2,8 @@
 	"ILE": {
 		"personality_code": "ILE",
 		"personality_category": "Challenger",
+		"color":"blue",
+		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
 		"personality_socionic_code": "ENTP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
@@ -213,6 +215,8 @@
 	"LII": {
 		"personality_code": "LII",
 		"personality_category": "Analyst",
+		"color":"blue",
+		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
 		"personality_socionic_code": "INTP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
@@ -425,6 +429,8 @@
 	"ESE": {
 		"personality_code": "ESE",
 		"personality_category": "Enthusiast",
+		"color":"blue",
+		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
 		"personality_socionic_code": "ESFJ",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
@@ -636,6 +642,8 @@
 	"SEI": {
 		"personality_code": "SEI",
 		"personality_category": "Artist",
+		"color":"blue",
+		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
 		"personality_socionic_code": "ISFP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
@@ -847,6 +855,8 @@
 	"SLE": {
 		"personality_code": "SLE",
 		"personality_category": "Persuader",
+		"color":"yellow",
+		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less than the drama?!",
 		"personality_socionic_code": "ESFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
@@ -1058,6 +1068,8 @@
 	"LSI": {
 		"personality_code": "LSI",
 		"personality_category": "Inspector",
+		"color":"yellow",
+		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less than the drama?!",
 		"personality_socionic_code": "ISTJ",
 		"personality_socionic_quadra": "Beta",
 		"description": {
@@ -1269,6 +1281,8 @@
 	"EIE": {
 		"personality_code": "EIE",
 		"personality_category": "Visionary",
+		"color":"yellow",
+		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less than the drama?!",
 		"personality_socionic_code": "ENFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
@@ -1480,6 +1494,8 @@
 	"IEI": {
 		"personality_code": "IEI",
 		"personality_category": "Mediator",
+		"color":"yellow",
+		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less than the drama?!",
 		"personality_socionic_code": "INFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
@@ -1691,6 +1707,8 @@
 	"LIE": {
 		"personality_code": "LIE",
 		"personality_category": "Tenacious",
+		"color":"teal",
+		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
 		"personality_socionic_code": "ENTJ",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
@@ -1902,6 +1920,8 @@
 	"ILI": {
 		"personality_code": "ILI",
 		"personality_category": "Foreseer",
+		"color":"teal",
+		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
 		"personality_socionic_code": "INTJ",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
@@ -2113,6 +2133,8 @@
 	"SEE": {
 		"personality_code": "SEE",
 		"personality_category": "Performer",
+		"color":"teal",
+		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
 		"personality_socionic_code": "ESTP",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
@@ -2324,6 +2346,8 @@
 	"ESI": {
 		"personality_code": "ESI",
 		"personality_category": "Protector",
+		"color":"teal",
+		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
 		"personality_socionic_code": "ISFJ",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
@@ -2535,6 +2559,8 @@
 	"LSE": {
 		"personality_code": "LSE",
 		"personality_category": "Organizer",
+		"color":"purple",
+		"color_description":"The perfect mix of brave and brainy! You've got a love for exploring but are wise enough to make sensible choices. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
 		"personality_socionic_code": "ESTJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
@@ -2746,6 +2772,8 @@
 	"SLI": {
 		"personality_code": "SLI",
 		"personality_category": "Crafter",
+		"color":"purple",
+		"color_description":"The perfect mix of brave and brainy! You've got a love for exploring but are wise enough to make sensible choices. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
 		"personality_socionic_code": "ISTP",
 		"personality_socionic_quadra": "Delta",
 		"description": {
@@ -2957,6 +2985,8 @@
 	"IEE": {
 		"personality_code": "IEE",
 		"personality_category": "Journalist",
+		"color":"purple",
+		"color_description":"The perfect mix of brave and brainy! You've got a love for exploring but are wise enough to make sensible choices. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
 		"personality_socionic_code": "ENFJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
@@ -3168,6 +3198,8 @@
 	"EII": {
 		"personality_code": "EII",
 		"personality_category": "Counsel",
+		"color":"purple",
+		"color_description":"The perfect mix of brave and brainy! You've got a love for exploring but are wise enough to make sensible choices. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
 		"personality_socionic_code": "INFJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {

@@ -98,5 +98,43 @@ const getCardPattern = (quadra) => {
     return list[0];
 }
 
+function getUserMatchLinearColorFromQuadra(userQuadra, matchedQuadra) {
+    return getLinearColorFromColorNames(getUserColorNameFromQuadra(userQuadra),getUserColorNameFromQuadra(matchedQuadra))
+}
 
-export { getUser, getAuthorization, getUserType, logout, getAvatar, getCardPattern };
+function getUserColorNameFromQuadra(quadra) {
+    if (quadra === 'Alpha') {
+        return 'blue';
+    } else if (quadra === 'Beta') {
+        return 'yellow';
+    } else if (quadra === 'Gamma') {
+        return 'teal';
+    } else if (quadra === 'Delta') {
+        return 'purple';
+    }
+}
+
+function getLinearColorFromColorNames(startColor, endColor) {
+    if (startColor === "blue" && endColor === "blue") return "linear-gradient(180deg, #2C61AD 0%, #47A4B0 49.48%, #2C61AD 100%)";
+    if (startColor === "blue" && endColor === "yellow") return "linear-gradient(180deg, #3069B3 0%, #C0B17B 67.71%, #F8D045 100%)";
+    if (startColor === "blue" && endColor === "teal") return "linear-gradient(180deg, #2C61AD 0%, #59BBB2 100%)";
+    if (startColor === "blue" && endColor === "purple") return "linear-gradient(180deg, #2C61AD 0%, #5E6AA9 40.1%, #B561D6 100%)";
+
+    if (startColor === "yellow" && endColor === "blue") return "linear-gradient(180deg, #F8D045 0%, #C0B17B 23.96%, #3069B3 100%)";
+    if (startColor === "yellow" && endColor === "yellow") return "linear-gradient(180deg, #E9B53D 0%, #D68B61 49.48%, #E9B53D 100%)";
+    if (startColor === "yellow" && endColor === "teal") return "linear-gradient(180deg, #F8D045 0%, #AFBE74 23.96%, #61C3BB 100%)";
+    if (startColor === "yellow" && endColor === "purple") return "linear-gradient(180deg, #F8D045 0%, #BEA074 31.25%, #B561D6 100%)";
+
+    if (startColor === "teal" && endColor === "blue") return "linear-gradient(180deg, #59BBB2 0%, #2C61AD 100%)";
+    if (startColor === "teal" && endColor === "yellow") return "linear-gradient(180deg, #61C3BB 0%, #AFBE74 63.54%, #F8D045 100%)";
+    if (startColor === "teal" && endColor === "teal") return "linear-gradient(180deg, #59BBB2 0%, #4C98C4 52.08%, #59BBB2 100%)";
+    if (startColor === "teal" && endColor === "purple") return "linear-gradient(180deg, #61C2BA 0%, #5EA99B 32.29%, #B561D6 100%)";
+
+    if (startColor === "purple" && endColor === "blue") return "linear-gradient(180deg, #B561D6 0%, #5E6AA9 64.58%, #2C61AD 100%)";
+    if (startColor === "purple" && endColor === "yellow") return "linear-gradient(180deg, #B561D6 0%, #BEA074 63.54%, #F8D045 100%)";
+    if (startColor === "purple" && endColor === "teal") return "linear-gradient(180deg, #B561D6 0%, #5EA99B 63.54%, #61C2BA 100%)";
+    if (startColor === "purple" && endColor === "purple") return "linear-gradient(180deg, #BB6BD9 0%, #8F4CC4 52.08%, #BB6BD9 100%)";
+}
+
+
+export { getUser, getAuthorization, getUserType, logout, getAvatar, getCardPattern, getUserMatchLinearColorFromQuadra };

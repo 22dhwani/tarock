@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getAvatar, getCardPattern } from '../../utils/userUtil';
+import { getAvatar, getCardPattern, getUserMatchLinearColorFromQuadra } from '../../utils/userUtil';
 
 export default function GenCard(props) {
     const [userColor, setUserColor] = useState('#3069B3');
-    const [matchedColor, setMatchedColor] = useState('#3069B3');
-    const [centerColor, setCenterColor] = useState('#C0B17B');
+    const [linearColor, setLinearColor] = useState("linear-gradient(180deg, #BB6BD9 0%, #8F4CC4 52.08%, #BB6BD9 100%)");
 
     //move to utils
     function assignColor(quadra, setter) {
@@ -22,30 +21,24 @@ export default function GenCard(props) {
 
     useEffect(() => {
         assignColor(props.userQuadra, setUserColor);
-        assignColor(props.matchedQuadra, setMatchedColor);
         if (props.cardType == 'match') {
-            if (props.userQuadra == 'Alpha' && props.matchedQuadra == 'Beta' || props.userQuadra == 'Beta' && props.matchedQuadra == 'Alpha') {
-                setCenterColor('#C0B17B 23.96%');
-            } else if (props.userQuadra == 'Alpha' && props.matchedQuadra == 'Gamma' || props.userQuadra == 'Gamma' && props.matchedQuadra == 'Alpha') {
-                setCenterColor('#C0B17B 47.92%'); //to be updated
-            } else if (props.userQuadra == 'Alpha' && props.matchedQuadra == 'Delta' || props.userQuadra == 'Delta' && props.matchedQuadra == 'Alpha') {
-                setCenterColor('#5E6AA9 40.1%');
-            } else if (props.userQuadra == 'Beta' && props.matchedQuadra == 'Gamma' || props.userQuadra == 'Gamma' && props.matchedQuadra == 'Beta') {
-                setCenterColor('#AFBE74 23.96');
-            } else if (props.userQuadra == 'Beta' && props.matchedQuadra == 'Delta' || props.userQuadra == 'Delta' && props.matchedQuadra == 'Beta') {
-                setCenterColor('#BEA074 31.25%');
-            } else if (props.userQuadra == 'Gamma' && props.matchedQuadra == 'Delta' || props.userQuadra == 'Delta' && props.matchedQuadra == 'Gamma') {
-                setCenterColor('#5EA99B 32.29%');
-            }
+            setLinearColor(getUserMatchLinearColorFromQuadra(props.userQuadra, props.matchedQuadra))
         }
     }, []);
 
     const cardPattern = getCardPattern(props.userQuadra);
+
+    const getBg = () => {
+        if (props.cardType != 'match') {
+            return `url(${cardPattern})`;
+        }
+        return linearColor
+    }
+
     return (
         <div>
             <div style={{
-                backgroundImage: props.cardType == 'match' ?
-                    `linear-gradient(180deg, ${userColor} 0%, ${centerColor}, ${matchedColor} 100%)` : `url(${cardPattern})`,
+                backgroundImage: getBg(),
                 backgroundColor: props.cardType == 'match' ? '' : userColor,
                 backgroundRepeat: 'no-repeat',
                 width: '9rem',

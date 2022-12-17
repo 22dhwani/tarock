@@ -5,6 +5,11 @@ import styles from './Feed.module.css'
 import ComingSoonModal from '../Modal/ComingSoonModal';
 import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../context';
+import exploreCard1 from '../../assets/explore/explore_card_1.png'
+import exploreCard2 from '../../assets/explore/explore_card_2.png'
+import exploreCard3 from '../../assets/explore/explore_card_3.png'
+import exploreCard4 from '../../assets/explore/explore_card_4.png'
+
 function Feeds({ header }) {
 
     const { userData } = useContext(GlobalContext);
@@ -40,16 +45,25 @@ function Feeds({ header }) {
                 openModal={openModal}
                 setOpenModal={setOpenModal}
             />
-            <div className="d-flex flex-column justify-content-center mx-auto mb-5" style={{ width: 'fit-content', cursor: 'pointer' }}>
-                {/* <Link to='/test' style={{ textDecoration: 'none' }}> */}
-                {/* <div className="py-2" style={{ textAlign: 'center' }} onClick={() => setOpenModal(true)}>
-                    <img src={header} alt="image" width='100%' />
-                </div> */}
-                {/* </Link> */}
-                <h2 className='m-0' style={{ fontSize: '26px', fontWeight: '700' }}>Good day, {user.name}!</h2>
-                <p className='' style={{}}>Here is a to-do list to boost your day.</p>
+            <div className="d-flex flex-column justify-content-center mx-auto mb-5" style={{ width: 'fit-content', color: '#49304D' }}>
 
-                <p className='m-0 py-3' style={{fontSize: '18px', fontWeight: '600'}}>Explore</p>
+                <div className="" style={{width: '350px'}}>
+                    <h2 className='m-0' style={{ fontSize: '26px', fontWeight: '700' }}>Good day, {user.name}!</h2>
+                    <p className='mb-4' style={{ fontWeight: '500' }}>Here is a to-do list to boost your day.</p>
+
+                    <div className="d-flex w-100 overflow-hidden gap-3">
+                        <div className="d-flex flex-column gap-3 w-100">
+                            <img src={exploreCard1} width="100%" onClick={() => setOpenModal(true)} className="cursor-pointer" />
+                            <img src={exploreCard3} width="100%" />
+                        </div>
+                        <div className="d-flex flex-column gap-3 w-100">
+                            <img src={exploreCard2} width="100%" onClick={() => setOpenModal(true)} className="cursor-pointer" />
+                            <img src={exploreCard4} width="100%" />
+                        </div>
+                    </div>
+                </div>
+
+                <p className='m-0 pt-4 pb-1' style={{fontSize: '18px', fontWeight: '600'}}>Explore</p>
                 {feedCards}
             </div>
         </>

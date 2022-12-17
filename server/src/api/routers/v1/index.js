@@ -6,6 +6,7 @@ import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
 import personalityInsight from '../../controllers/v1/personalityInsight.js';
 import exploreComment from '../../controllers/v1/exploreComment.js';
+import dailyQuestionComment from '../../controllers/v1/dailyQuestionComment.js';
 import express from 'express';
 import ApiToken from '../../models/apiToken.js';
 import dailyQuestion from '../../controllers/v1/dailyQuestion.js';
@@ -78,8 +79,15 @@ export default function(app) {
     router.post("/auth/explore/comments/add", exploreComment.create);
     router.post("/auth/explore/comments/like-toggle", exploreComment.likeToggle);
 
-    router.get("/auth/daily-question", dailyQuestion.index);
-    router.post("/auth/daily-question/answer", dailyQuestion.answer);
+    //DAILY QUESTIONS
+    router.get("/auth/daily-question/get-today-question", dailyQuestion.getTodayQuestion);
+    router.post("/auth/daily-question/submit-answer", dailyQuestion.answer);
+    router.get("/auth/daily-question/get-submited-answer", dailyQuestion.getAnswer);
+    router.get("/auth/daily-question/get-question-stats", dailyQuestion.getStats);
+    //DAILY QUESTION COMMENTS
+    router.get("/auth/daily-question/comments", dailyQuestionComment.index);
+    router.post("/auth/daily-question/comments/add", dailyQuestionComment.addComment);
+    router.post("/auth/daily-question/comments/like-toggle", dailyQuestionComment.likeToggle);
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);

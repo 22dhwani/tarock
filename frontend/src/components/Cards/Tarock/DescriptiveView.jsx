@@ -64,7 +64,35 @@ function DescriptiveView({ userInfo, cardData }) {
                                         backgroundColor: 'rgba(255, 255, 255, 0.35)',
                                     }}></div>
                                 </div>
-                                <Row className='w-100 py-3 my-2 d-flex justify-content-center' style={{
+                                <div
+                                    className='w-100 py-3 px-4 my-2 d-flex flex-wrap gap-3 justify-content-center'
+                                    style={{
+                                        backgroundColor: item.bg,
+                                        borderRadius: '10px',
+                                        fontWeight: '600',
+                                        fontSize: '14px',
+                                        lineHeight: '20px',
+                                        color: '#49304D',
+                                    }}
+                                >
+                                    {
+                                        cardData.description[item.title.toUpperCase().replaceAll(' ', '')].split(";").map((strength, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    style={{
+                                                        fontSize: '12px',
+                                                        fontWeight: '600',
+                                                        letterSpacing: '0em',
+                                                    }}
+                                                >
+                                                    {strength}
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                {/* <Row className='w-100 py-3 my-2 d-flex justify-content-center' style={{
                                     backgroundColor: item.bg,
                                     borderRadius: '10px',
                                     fontWeight: '600',
@@ -89,7 +117,7 @@ function DescriptiveView({ userInfo, cardData }) {
                                                 );
                                             })
                                     }
-                                </Row>
+                                </Row> */}
                             </div>
                         )
                     })

@@ -12,9 +12,14 @@ const DailyQuestionUserAnswerOptionModel = {
 		return data[0];
 	},
 
-    async getAnswers(questionId) {
-        const data = await sql.query("SELECT * FROM daily_questions_user_answers WHERE question_id = ?", [questionId]);
-		return data[0];
+    async getAnswers(questionId,answerId=null) {
+		if(answerId == null){
+			const data = await sql.query("SELECT * FROM daily_questions_user_answers WHERE question_id = ?", [questionId]);
+			return data[0];
+		}else{
+			const data = await sql.query("SELECT * FROM daily_questions_user_answers WHERE question_id = ? AND answer_id = ?", [questionId,answerId]);
+			return data[0];
+		}
 	},
 
     async getAnswer(questionId,userId) {

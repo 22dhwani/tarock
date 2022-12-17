@@ -46,7 +46,7 @@ function TarockCard({ user, cardData }) {
                     height: '80vh',
                     overflow:'hidden',
                     textAlign: 'center',
-                    overflowY: 'scroll',
+                    overflowY: 'auto',
                 }}>
                 {item}
             </Container>

@@ -84,6 +84,7 @@ export default function(app) {
     router.post("/auth/daily-question/submit-answer", dailyQuestion.answer);
     router.get("/auth/daily-question/get-submited-answer", dailyQuestion.getAnswer);
     router.get("/auth/daily-question/get-question-stats", dailyQuestion.getStats);
+    router.get("/auth/daily-question/get-option-stats", dailyQuestion.getOptionStats);
     //DAILY QUESTION COMMENTS
     router.get("/auth/daily-question/comments", dailyQuestionComment.index);
     router.post("/auth/daily-question/comments/add", dailyQuestionComment.addComment);

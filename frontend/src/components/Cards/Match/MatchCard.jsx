@@ -105,7 +105,7 @@ function MatchCard(props) {
         const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
             <div className='py-5 rounded-4 text-white' style={{ backgroundImage: linearColor }}>
                 <div className='d-flex flex-column gap-4'>
-                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={()=>navigate('/')} style={{cursor:'pointer'}}/>}
+                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' style={{cursor:'pointer'}}/>}
                     <UserInfo cardData={cardData} user={user} />
                     <div className='px-3'>
                         <div style={{
@@ -117,13 +117,6 @@ function MatchCard(props) {
                             width: '100%',
                             padding: '20px',
                         }}>
-                            {/* <RadarChart
-                                userData={cardData.dimensional_values}
-                                matchData={matchedCard.dimensional_values}
-                                enableLabels={true}
-                                userQuadra={userQuadra}
-                                matchedQuadra={matchedQuadra}
-                            /> */}
                             <div className="position-relative" style={{height: "260px"}}>
                                 <img src={chartImg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
                                 <img src={userChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />

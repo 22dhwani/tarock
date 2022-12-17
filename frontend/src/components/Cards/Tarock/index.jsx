@@ -36,7 +36,6 @@ function TarockCard({ user, cardData }) {
     ]
 
     const styledCardPages = cardPages.map((item, index) => {
-
         const color = cardColors[cardData.color]
         return (
             <Container
@@ -47,6 +46,7 @@ function TarockCard({ user, cardData }) {
                     height: '80vh',
                     overflow:'hidden',
                     textAlign: 'center',
+                    overflowY: 'scroll',
                 }}>
                 {item}
             </Container>

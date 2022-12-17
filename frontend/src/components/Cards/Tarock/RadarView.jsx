@@ -36,9 +36,11 @@ function RadarView({ cardData, userInfo }) {
             </div>
             {/* Radar Chart */}
             <div
-                className="my-5 position-relative"
+                className="position-relative"
                 style={{
                     height: '270px',
+                    marginTop: '3rem',
+                    marginBottom: '6rem',
                 }}
             >
                 <img src={chartImg} alt="" style={{width: '100%',}} />

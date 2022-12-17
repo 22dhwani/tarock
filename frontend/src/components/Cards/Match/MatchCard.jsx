@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../../context';
+import logo from '../../../assets/tarockLogo.svg';
 import Loading from '../../Loading/Loading/';
 import RadarChart from '../../Charts/RadarChart';
 import { useLocation } from "react-router-dom";
@@ -94,42 +95,43 @@ function MatchCard(props) {
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
-        const matchView = <div className='py-5 rounded-4 text-white'
-            style={{ backgroundImage: linearColor }}>
-            <div className='d-flex flex-column gap-4'>
-                {location === '/matchCard' && <Header/>}
-                <UserInfo cardData={cardData} user={user} />
-                <div className='px-3'>
-                    <div style={{
-                        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
-                        backdropFilter: 'blur(10px)',
-                        borderRadius: '8px',
-                        height: '300px',
-                        margin: '0 auto',
-                        width: '100%',
-                        padding: '20px',
-                    }}>
-                        <RadarChart
-                            userData={cardData.dimensional_values}
-                            matchData={matchedCard.dimensional_values}
-                            enableLabels={true}
-                            userQuadra={userQuadra}
-                            matchedQuadra={matchedQuadra}
-                        />
+        const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
+            <div className='py-5 rounded-4 text-white' style={{ backgroundImage: linearColor }}>
+                <div className='d-flex flex-column gap-4'>
+                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={()=>navigate('/')} style={{cursor:'pointer'}}/>}
+                    <UserInfo cardData={cardData} user={user} />
+                    <div className='px-3'>
+                        <div style={{
+                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
+                            backdropFilter: 'blur(10px)',
+                            borderRadius: '8px',
+                            height: '300px',
+                            margin: '0 auto',
+                            width: '100%',
+                            padding: '20px',
+                        }}>
+                            <RadarChart
+                                userData={cardData.dimensional_values}
+                                matchData={matchedCard.dimensional_values}
+                                enableLabels={true}
+                                userQuadra={userQuadra}
+                                matchedQuadra={matchedQuadra}
+                            />
+                        </div>
                     </div>
+                    <UserInfo cardData={matchedCard} user={matchedUser} />
+                    {
+                        location === '/matchCard' &&
+                        <div className='mt-2' style={{
+                            textAlign: 'center',
+                            fontWeight: '500',
+                            fontSize: '14px',
+                            color: 'white'
+                        }}>
+                            tarockapp.com
+                        </div>
+                    }
                 </div>
-                <UserInfo cardData={matchedCard} user={matchedUser} />
-                {
-                    location === '/matchCard' &&
-                    <div className='mt-2' style={{
-                        textAlign: 'center',
-                        fontWeight: '500',
-                        fontSize: '14px',
-                        color: 'white'
-                    }}>
-                        tarockapp.com
-                    </div>
-                }
             </div>
         </div>
 

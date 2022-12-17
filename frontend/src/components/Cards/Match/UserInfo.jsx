@@ -3,7 +3,7 @@ import { getAvatar } from '../../../utils/userUtil';
 function UserInfo({ cardData, user }) {
     return (
         <>
-            <div className='d-flex gap-3 justify-content-center align-items-center mx-3'>
+            <div className='d-flex gap-3 justify-content-center align-items-start mx-3'>
                 <img src={
                     getAvatar(user.avatar_index)
                 } alt='avatar' width='70px' style={{

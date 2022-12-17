@@ -1,7 +1,6 @@
 import './Question.css';
 const Question = ({ data, selectionHandler }) => {
     const jsonObj = data;
-    console.log( "jsonObj?.answers",  jsonObj?.answers);
     const options = jsonObj?.answers?.map((option, index) => (
         <li key={index} style={{
             backgroundColor: 'white',

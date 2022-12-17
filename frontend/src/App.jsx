@@ -5,7 +5,6 @@ import UserProfile from './pages/UserProfile';
 import Welcome from './pages/Welcome';
 import SignInScreen from './pages/SignIn';
 import HomeScreen from './pages/Home';
-import MyCardScreen from './components/Cards/MyCard';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/Cards/ShareCard';
 import CardDeck from './pages/CardDeck';
@@ -89,12 +88,8 @@ const App = () => {
               <Route index path="/editProfile" element={<ProtectedRoute component={<EditProfile />} />} />
               <Route index path="/about" element={<ProtectedRoute component={<About />} />} />
               <Route index path="/contact" element={<ProtectedRoute component={<Contact />} />} />
-              <Route index path="/myCard" element={<ProtectedRoute component={<MyCardScreen />} />} />
               <Route index path="/chart" element={<ProtectedRoute component={<RadarChart />} />} />
               <Route index path="/share/:userId" element={<ShareScreen />} />
-              {/* new share route for match card */}
-              {/* <Route index path="/share/match/:userId" element={<ShareMatchCard />} /> */}
-              {/* <Route index path=""/share/:userId" element={<ShareTarockCard />} /> */}
               <Route index path="/cards" element={<ProtectedRoute component={<CardDeck />} />} />
               <Route index path="/matchCard" element={<MatchCard/>}/>
             </Routes>

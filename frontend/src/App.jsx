@@ -5,7 +5,6 @@ import UserProfile from './pages/UserProfile';
 import Welcome from './pages/Welcome';
 import SignInScreen from './pages/SignIn';
 import HomeScreen from './pages/Home';
-import MyCardScreen from './components/Cards/MyCard';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/Cards/ShareCard';
 import CardDeck from './pages/CardDeck';

@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
+import { getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
 
 function MatchCard(props) {
 
@@ -89,11 +90,12 @@ function MatchCard(props) {
     }
     let userQuadra = getColor(cardData.personality_socionic_quadra);
     let matchedQuadra = getColor(matchedCard.personality_socionic_quadra);
+    const linearColor = getUserMatchLinearColorFromQuadra(cardData.personality_socionic_quadra, matchedCard.personality_socionic_quadra)
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
         const matchView = <div className='py-5 rounded-4 text-white'
-            style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
+            style={{ backgroundImage: linearColor }}>
             <div className='d-flex flex-column gap-4'>
                 {location === '/matchCard' && <Header/>}
                 <UserInfo cardData={cardData} user={user} />

@@ -3,7 +3,7 @@ import { GlobalContext } from '../../../context';
 import logo from '../../../assets/tarockLogo.svg';
 import Loading from '../../Loading/Loading/';
 import RadarChart from '../../Charts/RadarChart';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
@@ -21,6 +21,7 @@ function MatchCard(props) {
     const searchParams = new URLSearchParams(useLocation().search);
     const origUserFromUrl = searchParams.get('origUser');
     const matchedUserFromUrl = searchParams.get('matchedUser');
+    const navigate = useNavigate()
 
     function fetchUserData(setUser, setCardData, id) {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=REAL`)
@@ -99,13 +100,10 @@ function MatchCard(props) {
         const userChartDataImage = getUserChartImageData(cardData.personality_category)
         const matchedChartDataImage = getUserChartImageData(matchedCard.personality_category)
 
-        console.log(userChartDataImage,matchedChartDataImage);
-
-
         const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
             <div className='py-5 rounded-4 text-white' style={{ backgroundImage: linearColor }}>
                 <div className='d-flex flex-column gap-4'>
-                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' style={{cursor:'pointer'}}/>}
+                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={()=>navigate('/')} style={{cursor:'pointer'}}/>}
                     <UserInfo cardData={cardData} user={user} />
                     <div className='px-3'>
                         <div style={{

@@ -6,6 +6,24 @@ import tealPattern from '../assets/patterns/teal.svg'
 import bluePattern from '../assets/patterns/blue.svg'
 import violetPattern from '../assets/patterns/violet.svg'
 
+// Chart Images
+import ChartDataAnalyst from "../assets/chart/data/Analyst.png"
+import ChartDataArtist from "../assets/chart/data/Artist.png"
+import ChartDataChallenger from "../assets/chart/data/Challenger.png"
+import ChartDataCounsel from "../assets/chart/data/Counsel.png"
+import ChartDataCrafter from "../assets/chart/data/Crafter.png"
+import ChartDataEnthusiast from "../assets/chart/data/Enthusiast.png"
+import ChartDataForeseer from "../assets/chart/data/Foreseer.png"
+import ChartDataInspector from "../assets/chart/data/Inspector.png"
+import ChartDataJournalist from "../assets/chart/data/Journalist.png"
+import ChartDataMediator from "../assets/chart/data/Mediator.png"
+import ChartDataOrganizer from "../assets/chart/data/Organizer.png"
+import ChartDataPerformer from "../assets/chart/data/Performer.png"
+import ChartDataPersuader from "../assets/chart/data/Persuader.png"
+import ChartDataProtector from "../assets/chart/data/Protector.png"
+import ChartDataTenacious from "../assets/chart/data/Tenacious.png"
+import ChartDataVisionary from "../assets/chart/data/Visionary.png"
+
 const getUser = async (id, userType) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=${userType}`);
     const data = await response.json();
@@ -134,6 +152,29 @@ function getLinearColorFromColorNames(startColor, endColor) {
     if (startColor === "purple" && endColor === "yellow") return "linear-gradient(180deg, #B561D6 0%, #BEA074 63.54%, #F8D045 100%)";
     if (startColor === "purple" && endColor === "teal") return "linear-gradient(180deg, #B561D6 0%, #5EA99B 63.54%, #61C2BA 100%)";
     if (startColor === "purple" && endColor === "purple") return "linear-gradient(180deg, #BB6BD9 0%, #8F4CC4 52.08%, #BB6BD9 100%)";
+}
+
+export function getUserChartImageData(personality) {
+    return userChartDataImages[personality]
+}
+
+const userChartDataImages = {
+    Analyst: ChartDataAnalyst,
+    Artist: ChartDataArtist,
+    Challenger: ChartDataChallenger,
+    Counsel: ChartDataCounsel,
+    Crafter: ChartDataCrafter,
+    Enthusiast: ChartDataEnthusiast,
+    Foreseer: ChartDataForeseer,
+    Inspector: ChartDataInspector,
+    Journalist: ChartDataJournalist,
+    Mediator: ChartDataMediator,
+    Organizer: ChartDataOrganizer,
+    Performer: ChartDataPerformer,
+    Persuader: ChartDataPersuader,
+    Protector: ChartDataProtector,
+    Tenacious: ChartDataTenacious,
+    Visionary: ChartDataVisionary,
 }
 
 

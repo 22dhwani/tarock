@@ -7,7 +7,8 @@ import { useLocation } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
-import { getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
+import chartImg from '../../../assets/chart/chart_bg_black_text.png';
+import { getUserChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
 
 function MatchCard(props) {
 
@@ -95,6 +96,12 @@ function MatchCard(props) {
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
+        const userChartDataImage = getUserChartImageData(cardData.personality_category)
+        const matchedChartDataImage = getUserChartImageData(matchedCard.personality_category)
+
+        console.log(userChartDataImage,matchedChartDataImage);
+
+
         const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
             <div className='py-5 rounded-4 text-white' style={{ backgroundImage: linearColor }}>
                 <div className='d-flex flex-column gap-4'>
@@ -110,13 +117,18 @@ function MatchCard(props) {
                             width: '100%',
                             padding: '20px',
                         }}>
-                            <RadarChart
+                            {/* <RadarChart
                                 userData={cardData.dimensional_values}
                                 matchData={matchedCard.dimensional_values}
                                 enableLabels={true}
                                 userQuadra={userQuadra}
                                 matchedQuadra={matchedQuadra}
-                            />
+                            /> */}
+                            <div className="position-relative" style={{height: "260px"}}>
+                                <img src={chartImg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
+                                <img src={userChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
+                                <img src={matchedChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
+                            </div>
                         </div>
                     </div>
                     <UserInfo cardData={matchedCard} user={matchedUser} />
@@ -135,15 +147,15 @@ function MatchCard(props) {
             </div>
         </div>
 
-        const tipsView = <div className='py-5 rounded-4'
-            style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
-            <div className='d-flex flex-column gap-4'>
+        const tipsView = <div className='py-5 rounded-4' style={{ backgroundImage: linearColor }}>
+            <div className='d-flex flex-column gap-4 text-white'>
                 <UserInfo cardData={cardData} user={user} />
                 <div className='px-3'>
                     <div style={{
                         background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
                         backdropFilter: 'blur(10px)',
                         borderRadius: '8px',
+                        color: "#49304D",
                         height: '300px',
                         margin: '0 auto',
                         width: '100%',

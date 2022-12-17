@@ -1,7 +1,10 @@
-import RadarChart from "../../Charts/RadarChart";
 import { useNavigate } from "react-router-dom";
+import chartImg from '../../../assets/chart/chart_bg_white_text.png';
+import { getUserChartImageData } from "../../../utils/userUtil";
 
 function RadarView({ cardData, userInfo }) {
+
+    const chartDataImage = getUserChartImageData(cardData.personality_category)
     const navigate = useNavigate();
     return (
         <>
@@ -33,12 +36,13 @@ function RadarView({ cardData, userInfo }) {
             </div>
             {/* Radar Chart */}
             <div
-                className="my-5"
+                className="my-5 position-relative"
                 style={{
                     height: '270px',
                 }}
             >
-                <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
+                <img src={chartImg} alt="" style={{width: '100%',}} />
+                <img src={chartDataImage} alt="" style={{width: '100%', position: 'absolute', top: 0, left: '0'}} />
             </div>
 
             <div

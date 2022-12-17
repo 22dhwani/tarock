@@ -27,7 +27,7 @@ function UserInfo({ cardData, user }) {
                             fontSize: '16px',
                         }}
                     >
-                        {cardData.personality_category}
+                       The {cardData.personality_category}
                     </p>
 
                     <div className='w-100 d-flex flex-wrap gap-2 pt-2'>

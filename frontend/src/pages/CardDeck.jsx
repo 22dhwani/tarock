@@ -166,6 +166,10 @@ const CardsScreen = () => {
                                 cursor: 'pointer'
                             }} onClick={() => {
                                 setLinkButton(linkC);
+                                setTimeout(
+                                    () => setLinkButton(linkNC),
+                                    1000
+                                );
                                 if (tab) {
                                     navigator.clipboard.writeText(`${window.location.origin}/share/${userData.id}`);
                                 } else {

@@ -640,4 +640,126 @@ async function forgotPassword(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser,forgotPassword};
+async function contactUs(req,res){
+    if(!req.body.email){
+        res.status(422).json(
+            {
+                message:"email is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    if(!req.body.content){
+        res.status(422).json(
+            {
+                message:"content is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    const idToSendMail = 'asif987patel@gmail.com';
+    const sender = {
+        email: "account@tarock.me",
+        password: "eqlhjrmaxiflsxjs"
+    }
+
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: 'smtp.gmail.com',
+        auth: {
+            user: sender.email,
+            pass: sender.password
+        }
+    });
+
+    const mailOptions = {
+        from: sender.email,
+        to: idToSendMail,
+        subject: 'User Contacted from Tarock APP',
+        html: `Hello, user with email of <b>${req.body.email}</b> has send a message: <p> ${req.body.content}</p>`
+    };
+    transporter.sendMail(mailOptions);
+
+    res.json(
+        {
+            message: `Message sent`,
+            status: 1,
+        }
+    );
+}
+
+async function requestData(req,res){
+    if(!req.body.email){
+        res.status(422).json(
+            {
+                message:"email is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    if(!req.body.password){
+        res.status(422).json(
+            {
+                message:"password is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+    let emailExistUser = await User.findUserByEmail(req.body.email);
+    if(emailExistUser.length <= 0) {
+        res.status(422).json(
+            {
+                message:"User with this email not exists",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+    let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
+    if(emailExistUser[0].password != hashPassword){
+        res.status(422).json(
+            {
+                message:"Incorrect Password",
+                status: 0,
+            }
+        );
+        return;
+    }
+    const idToSendMail = 'asif987patel@gmail.com';
+
+    const sender = {
+        email: "account@tarock.me",
+        password: "eqlhjrmaxiflsxjs"
+    }
+
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: 'smtp.gmail.com',
+        auth: {
+            user: sender.email,
+            pass: sender.password
+        }
+    });
+    const mailOptions = {
+        from: sender.email,
+        to: idToSendMail,
+        subject: 'User Requested data from Tarock APP',
+        html: `Hello, user with email of <b>${req.body.email}</b> has requested his data from Tarock app`
+    };
+    transporter.sendMail(mailOptions);
+
+    res.json(
+        {
+            message: `Request Sent`,
+            status: 1,
+        }
+    );
+}
+
+export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser,forgotPassword,requestData,contactUs};

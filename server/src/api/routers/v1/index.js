@@ -51,6 +51,10 @@ export default function(app) {
     router.post("/user/forgot-password", User.forgotPassword); //forgot password
 
 
+    //CONTACT US AND REQUEST DATA(EMAILS)
+    router.post("/user/request-data", User.requestData); 
+    router.post("/user/contact-us", User.contactUs); 
+
     //TEST(to quickly test some code)
     router.post("/test", test.test);
     router.post("/auth/test", test.test); //test with auth

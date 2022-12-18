@@ -87,12 +87,16 @@ export default function(app) {
     router.post("/auth/explore/comments/add", exploreComment.create);
     router.post("/auth/explore/comments/like-toggle", exploreComment.likeToggle);
 
+    //AUTH QUESTION
+    router.post("/auth/question/update", question.updateResult);
+
     //DAILY QUESTIONS
     router.get("/auth/daily-question/get-today-question", dailyQuestion.getTodayQuestion);
     router.post("/auth/daily-question/submit-answer", dailyQuestion.answer);
     router.get("/auth/daily-question/get-submited-answer", dailyQuestion.getAnswer);
     router.get("/auth/daily-question/get-question-stats", dailyQuestion.getStats);
     router.get("/auth/daily-question/get-option-stats", dailyQuestion.getOptionStats);
+
     //DAILY QUESTION COMMENTS
     router.get("/auth/daily-question/comments", dailyQuestionComment.index);
     router.post("/auth/daily-question/comments/add", dailyQuestionComment.addComment);

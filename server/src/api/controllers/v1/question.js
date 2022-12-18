@@ -64,4 +64,40 @@ async function addResult(req,res){
     );
 }
 
-export default { getQuestion,addResult };
+async function updateResult(req,res){
+
+    let user = res.user
+
+    let result= await ResultModel.getByUser(user.internal_user_id)
+    if(result.length <=0 ){
+        res.status(422).json(
+            {
+                message:"No result found for this user",
+                status: 0,
+            }
+        );
+        return
+    }
+                    
+    try {
+        await ResultModel.update(result[0].id,req.body.assessment_group_id,req.body.answers.length,req.body.duration,ResultController.getSocionicsResult(req.body.answers))
+    } catch (error) {
+        res.status(422).json(
+            {
+                error:error.message,
+                message:"something went wrong",
+                status: 0,
+            }
+        );
+        return
+    }
+
+    res.json(
+        {
+            message:"Result Updated",
+            status: 1,
+        }
+    );
+}
+
+export default { getQuestion,addResult,updateResult };

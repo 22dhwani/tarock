@@ -30,6 +30,11 @@ async function update(user) {
     return data[0];
 }
 
+async function getAllUser(){
+    const data = await sql.query("SELECT * FROM user WHERE is_forbidden = 0;");
+    return data[0];
+}
+
 /**
 async function queryRealId(id) {
     const data = await sql.query("SELECT * FROM tmp_user_to_real_user WHERE tmp_user_id = ? order by created_at desc limit 1;", [id]);
@@ -145,7 +150,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail,deleteRealUser,deleteTmpUser,disableRealUser};
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail,deleteRealUser,deleteTmpUser,disableRealUser,getAllUser};
 
 /**
 async function test() {

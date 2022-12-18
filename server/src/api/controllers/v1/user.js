@@ -2,6 +2,7 @@ import User from '../../models/user.js';
 import crypto from 'crypto';
 import ApiToken from '../../models/apiToken.js';
 import Result from '../../models/result.js';
+import Notification from '../../models/notification.js';
 import nodemailer from 'nodemailer';
 import UserFirebaseModel from '../../models/userFirebase.js';
 import UserAvatarModel from '../../models/userAvatar.js';
@@ -766,4 +767,103 @@ async function requestData(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser,forgotPassword,requestData,contactUs};
+async function sendForNewBlog(req,res){
+    const { link,user_email } = req.query
+    if(!link){
+        res.status(422).json(
+            {
+                message:"Link is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    let sendToAll = true
+
+    if(user_email){
+        sendToAll = false
+    }
+
+
+    if(sendToAll){
+        let allUsers = await User.getAllUser()
+        for await (const user of allUsers) {
+            if(user.is_notification_on && user.is_new_blog_notification_on ){
+                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0)
+            }
+		};
+    }else{
+        let user = await User.findUserByEmail(user_email)
+        if(user.length <= 0){
+            res.status(422).json(
+                {
+                    message:"User with this email not found",
+                    status: 0,
+                }
+            );
+            return;
+        }
+        if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
+            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0)
+        }
+    }
+    res.json(
+        {
+            message: `Notification sent`,
+            status: 1,
+        }
+    );
+}
+
+async function sendForDailyQuestion(req,res){
+    const { user_email } = req.query
+    let sendToAll = true
+
+    if(user_email){
+        sendToAll = false
+    }
+    if(sendToAll){
+        let allUsers = await User.getAllUser()
+        for await (const user of allUsers) {
+            if(user.is_notification_on && user.is_new_blog_notification_on ){
+                await Notification.sendToUserId(user.internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
+            }
+		};
+    }else{
+        let user = await User.findUserByEmail(user_email)
+        if(user.length <= 0){
+            res.status(422).json(
+                {
+                    message:"User with this email not found",
+                    status: 0,
+                }
+            );
+            return;
+        }
+        if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
+            await Notification.sendToUserId(user[0].internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
+        }
+    }
+    res.json(
+        {
+            message: `Notification sent`,
+            status: 1,
+        }
+    );
+}
+
+export default { 
+    getUser,
+    getUserType,
+    createTempUser,
+    createRealUser,
+    login,
+    logout ,
+    deleteUser,
+    editUser,
+    forgotPassword,
+    requestData,
+    contactUs,
+    sendForNewBlog,
+    sendForDailyQuestion,
+};

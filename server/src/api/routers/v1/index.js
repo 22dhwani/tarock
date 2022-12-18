@@ -43,6 +43,10 @@ export default function(app) {
     });
 
 
+    //SEND-NOTIFICATION
+    router.get("/send-for-new-blog", User.sendForNewBlog);
+    router.get("/send-for-daily-question", User.sendForDailyQuestion);
+
     //USER LOGIN FLOW
     router.get("/get-user-type", User.getUserType);  //to get the type of user (NEW,TMP,REAL)
     router.post("/create-temp-user", User.createTempUser); //to create the temp user with device id
@@ -96,6 +100,7 @@ export default function(app) {
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);
+    router.get("/auth/notifications/:id/read", Notification.readNotification);
 
     //PERSONALITY INSIGHT
     router.get("/auth/get-insights", personalityInsight.index);

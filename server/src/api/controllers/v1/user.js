@@ -2,7 +2,10 @@ import User from '../../models/user.js';
 import crypto from 'crypto';
 import ApiToken from '../../models/apiToken.js';
 import Result from '../../models/result.js';
+import Notification from '../../models/notification.js';
 import nodemailer from 'nodemailer';
+import UserFirebaseModel from '../../models/userFirebase.js';
+import UserAvatarModel from '../../models/userAvatar.js';
 
 async function getUser(req,res){          
     let user = res.user;
@@ -15,6 +18,9 @@ async function getUser(req,res){
             }
         );
     }  
+
+    let userAvatar = await UserAvatarModel.getByUserId(user.internal_user_id)
+    user.user_avatar = userAvatar[0] ?? null
     res.json(
         {
             data: user,
@@ -70,7 +76,6 @@ async function getUserType(req,res){
 }
 
 async function createTempUser(req,res){
-
     if(!req.body.name){
         res.status(422).json(
             {
@@ -130,6 +135,47 @@ async function createTempUser(req,res){
 
         tempUser = await User.query(req.body.device_id);    
         tempUser = tempUser[0]
+
+        let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+        if(userAvatar.length <= 0){
+            await UserAvatarModel.addAvatar(req.body.device_id)
+        }
+        userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+        let face_index  = userAvatar[0].face_index
+        let hair_index  = userAvatar[0].hair_index
+        let eye_index  = userAvatar[0].eye_index
+        let eyebrow_index  = userAvatar[0].eyebrow_index
+        let ear_index  = userAvatar[0].ear_index
+        let nose_index  = userAvatar[0].nose_index
+        let lips_index  = userAvatar[0].lips_index
+        if(req.body.face_index){
+            face_index= req.body.face_index
+        }
+        if(req.body.hair_index){
+            hair_index= req.body.hair_index
+        }
+        if(req.body.eye_index){
+            eye_index= req.body.eye_index
+        }
+        if(req.body.eyebrow_index){
+            eyebrow_index= req.body.eyebrow_index
+        }
+        if(req.body.ear_index){
+            ear_index= req.body.ear_index
+        }
+        if(req.body.nose_index){
+            nose_index= req.body.nose_index
+        }
+        if(req.body.lips_index){
+            lips_index= req.body.lips_index
+        }
+    
+        await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+        userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+    
+        tempUser.user_avatar = userAvatar[0] ?? null
+
+
         res.json(
             {
                 user:tempUser,
@@ -160,7 +206,45 @@ async function createTempUser(req,res){
         );
         return
     }
-    
+
+    let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+    if(userAvatar.length <= 0){
+        await UserAvatarModel.addAvatar(req.body.device_id)
+    }
+    userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+    let face_index  = userAvatar[0].face_index
+    let hair_index  = userAvatar[0].hair_index
+    let eye_index  = userAvatar[0].eye_index
+    let eyebrow_index  = userAvatar[0].eyebrow_index
+    let ear_index  = userAvatar[0].ear_index
+    let nose_index  = userAvatar[0].nose_index
+    let lips_index  = userAvatar[0].lips_index
+    if(req.body.face_index){
+        face_index= req.body.face_index
+    }
+    if(req.body.hair_index){
+        hair_index= req.body.hair_index
+    }
+    if(req.body.eye_index){
+        eye_index= req.body.eye_index
+    }
+    if(req.body.eyebrow_index){
+        eyebrow_index= req.body.eyebrow_index
+    }
+    if(req.body.ear_index){
+        ear_index= req.body.ear_index
+    }
+    if(req.body.nose_index){
+        nose_index= req.body.nose_index
+    }
+    if(req.body.lips_index){
+        lips_index= req.body.lips_index
+    }
+
+    await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+    userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+
+    tempUser.user_avatar = userAvatar[0] ?? null
     res.json(
         {
             user:tempUser,
@@ -246,6 +330,19 @@ async function createRealUser(req,res){
         }
         await User.createReal(realUser);
         await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
+
+        let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+        if(oldAvatar.length > 0){
+            let face_index  = oldAvatar[0].face_index
+            let eye_index  = oldAvatar[0].eye_index
+            let eyebrow_index  = oldAvatar[0].eyebrow_index
+            let ear_index  = oldAvatar[0].ear_index
+            let nose_index  = oldAvatar[0].nose_index
+            let lips_index  = oldAvatar[0].lips_index
+            let hair_index  = oldAvatar[0].hair_index
+            await UserAvatarModel.addAvatar(hashEmail,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+        }
+
     } catch (error) {
         res.status(422).json(
             {
@@ -258,6 +355,16 @@ async function createRealUser(req,res){
     }
     let data = await User.findUserByEmail(req.body.email);
     let token = await ApiToken.generateToken(data[0].internal_user_id)    
+
+    if(req.body.firebase_id){
+        let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,req.body.firebase_id);
+        if(userFirebase.length <= 0){
+            await UserFirebaseModel.addToken(data[0].internal_user_id,req.body.firebase_id);
+        }
+    }
+
+    let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
+    data[0].user_avatar = userAvatar[0] ?? null
 
     res.json(
         {
@@ -312,6 +419,14 @@ async function login(req,res){
     }
     let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)    
 
+    if(req.body.firebase_id){
+        let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id,req.body.firebase_id);
+        if(userFirebase.length <= 0){
+            await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id,req.body.firebase_id);
+        }
+    }
+    let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
+    emailExistUser[0].user_avatar = userAvatar[0] ?? null
     res.json(
         {
             token:token,
@@ -366,7 +481,11 @@ async function deleteUser(req,res){
     let user = res.user
     await ApiToken.deleteAllTokens(user.internal_user_id);
     await User.deleteTmpUser(req.body.device_id);
-    await User.deleteRealUser(user.internal_user_id);
+
+    // user.
+
+
+    await User.disableRealUser(user.internal_user_id);
     res.json(
         {
             message: "User Deleted",
@@ -414,8 +533,46 @@ async function editUser(req,res){
     user.id = user.internal_user_id
     await User.updateReal(user);
 
-    user = await User.findUserByEmail(user.email);
+    let userAvatar = await UserAvatarModel.getByUserId(user.id)
+    if(userAvatar.length <= 0){
+        await UserAvatarModel.addAvatar(user.id)
+    }
+    userAvatar = await UserAvatarModel.getByUserId(user.id)
+    let face_index  = userAvatar[0].face_index
+    let hair_index  = userAvatar[0].hair_index
+    let eye_index  = userAvatar[0].eye_index
+    let eyebrow_index  = userAvatar[0].eyebrow_index
+    let ear_index  = userAvatar[0].ear_index
+    let nose_index  = userAvatar[0].nose_index
+    let lips_index  = userAvatar[0].lips_index
 
+    if(req.body.face_index){
+        face_index= req.body.face_index
+    }
+    if(req.body.hair_index){
+        hair_index= req.body.hair_index
+    }
+    if(req.body.eye_index){
+        eye_index= req.body.eye_index
+    }
+    if(req.body.eyebrow_index){
+        eyebrow_index= req.body.eyebrow_index
+    }
+    if(req.body.ear_index){
+        ear_index= req.body.ear_index
+    }
+    if(req.body.nose_index){
+        nose_index= req.body.nose_index
+    }
+    if(req.body.lips_index){
+        lips_index= req.body.lips_index
+    }
+
+    await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+    userAvatar = await UserAvatarModel.getByUserId(user.id)
+
+    user = await User.findUserByEmail(user.email);
+    user[0].user_avatar = userAvatar[0] ?? null
     res.json(
         {
             data:user[0],
@@ -488,4 +645,225 @@ async function forgotPassword(req,res){
     );
 }
 
-export default { getUser,getUserType,createTempUser,createRealUser,login,logout ,deleteUser,editUser,forgotPassword};
+async function contactUs(req,res){
+    if(!req.body.email){
+        res.status(422).json(
+            {
+                message:"email is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    if(!req.body.content){
+        res.status(422).json(
+            {
+                message:"content is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    const idToSendMail = 'asif987patel@gmail.com';
+    const sender = {
+        email: "account@tarock.me",
+        password: "eqlhjrmaxiflsxjs"
+    }
+
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: 'smtp.gmail.com',
+        auth: {
+            user: sender.email,
+            pass: sender.password
+        }
+    });
+
+    const mailOptions = {
+        from: sender.email,
+        to: idToSendMail,
+        subject: 'User Contacted from Tarock APP',
+        html: `Hello, user with email of <b>${req.body.email}</b> has send a message: <p> ${req.body.content}</p>`
+    };
+    transporter.sendMail(mailOptions);
+
+    res.json(
+        {
+            message: `Message sent`,
+            status: 1,
+        }
+    );
+}
+
+async function requestData(req,res){
+    if(!req.body.email){
+        res.status(422).json(
+            {
+                message:"email is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    if(!req.body.password){
+        res.status(422).json(
+            {
+                message:"password is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+    let emailExistUser = await User.findUserByEmail(req.body.email);
+    if(emailExistUser.length <= 0) {
+        res.status(422).json(
+            {
+                message:"User with this email not exists",
+                status: 0,
+            }
+        );
+        return;
+    }
+
+    let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
+    if(emailExistUser[0].password != hashPassword){
+        res.status(422).json(
+            {
+                message:"Incorrect Password",
+                status: 0,
+            }
+        );
+        return;
+    }
+    const idToSendMail = 'asif987patel@gmail.com';
+
+    const sender = {
+        email: "account@tarock.me",
+        password: "eqlhjrmaxiflsxjs"
+    }
+
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: 'smtp.gmail.com',
+        auth: {
+            user: sender.email,
+            pass: sender.password
+        }
+    });
+    const mailOptions = {
+        from: sender.email,
+        to: idToSendMail,
+        subject: 'User Requested data from Tarock APP',
+        html: `Hello, user with email of <b>${req.body.email}</b> has requested his data from Tarock app`
+    };
+    transporter.sendMail(mailOptions);
+
+    res.json(
+        {
+            message: `Request Sent`,
+            status: 1,
+        }
+    );
+}
+
+async function sendForNewBlog(req,res){
+    const { link,user_email } = req.query
+    if(!link){
+        res.status(422).json(
+            {
+                message:"Link is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    let sendToAll = true
+
+    if(user_email){
+        sendToAll = false
+    }
+
+
+    if(sendToAll){
+        let allUsers = await User.getAllUser()
+        for await (const user of allUsers) {
+            if(user.is_notification_on && user.is_new_blog_notification_on ){
+                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0)
+            }
+		};
+    }else{
+        let user = await User.findUserByEmail(user_email)
+        if(user.length <= 0){
+            res.status(422).json(
+                {
+                    message:"User with this email not found",
+                    status: 0,
+                }
+            );
+            return;
+        }
+        if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
+            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0)
+        }
+    }
+    res.json(
+        {
+            message: `Notification sent`,
+            status: 1,
+        }
+    );
+}
+
+async function sendForDailyQuestion(req,res){
+    const { user_email } = req.query
+    let sendToAll = true
+
+    if(user_email){
+        sendToAll = false
+    }
+    if(sendToAll){
+        let allUsers = await User.getAllUser()
+        for await (const user of allUsers) {
+            if(user.is_notification_on && user.is_new_blog_notification_on ){
+                await Notification.sendToUserId(user.internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
+            }
+		};
+    }else{
+        let user = await User.findUserByEmail(user_email)
+        if(user.length <= 0){
+            res.status(422).json(
+                {
+                    message:"User with this email not found",
+                    status: 0,
+                }
+            );
+            return;
+        }
+        if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
+            await Notification.sendToUserId(user[0].internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
+        }
+    }
+    res.json(
+        {
+            message: `Notification sent`,
+            status: 1,
+        }
+    );
+}
+
+export default { 
+    getUser,
+    getUserType,
+    createTempUser,
+    createRealUser,
+    login,
+    logout ,
+    deleteUser,
+    editUser,
+    forgotPassword,
+    requestData,
+    contactUs,
+    sendForNewBlog,
+    sendForDailyQuestion,
+};

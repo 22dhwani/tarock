@@ -43,6 +43,10 @@ export default function(app) {
     });
 
 
+    //SEND-NOTIFICATION
+    router.get("/send-for-new-blog", User.sendForNewBlog);
+    router.get("/send-for-daily-question", User.sendForDailyQuestion);
+
     //USER LOGIN FLOW
     router.get("/get-user-type", User.getUserType);  //to get the type of user (NEW,TMP,REAL)
     router.post("/create-temp-user", User.createTempUser); //to create the temp user with device id
@@ -50,6 +54,10 @@ export default function(app) {
     router.post("/user/login", User.login); //login the user(return the token)
     router.post("/user/forgot-password", User.forgotPassword); //forgot password
 
+
+    //CONTACT US AND REQUEST DATA(EMAILS)
+    router.post("/user/request-data", User.requestData); 
+    router.post("/user/contact-us", User.contactUs); 
 
     //TEST(to quickly test some code)
     router.post("/test", test.test);
@@ -79,12 +87,16 @@ export default function(app) {
     router.post("/auth/explore/comments/add", exploreComment.create);
     router.post("/auth/explore/comments/like-toggle", exploreComment.likeToggle);
 
+    //AUTH QUESTION
+    router.post("/auth/question/update", question.updateResult);
+
     //DAILY QUESTIONS
     router.get("/auth/daily-question/get-today-question", dailyQuestion.getTodayQuestion);
     router.post("/auth/daily-question/submit-answer", dailyQuestion.answer);
     router.get("/auth/daily-question/get-submited-answer", dailyQuestion.getAnswer);
     router.get("/auth/daily-question/get-question-stats", dailyQuestion.getStats);
     router.get("/auth/daily-question/get-option-stats", dailyQuestion.getOptionStats);
+
     //DAILY QUESTION COMMENTS
     router.get("/auth/daily-question/comments", dailyQuestionComment.index);
     router.post("/auth/daily-question/comments/add", dailyQuestionComment.addComment);
@@ -92,6 +104,7 @@ export default function(app) {
 
     //NOTIFICATION
     router.get("/auth/notifications", Notification.index);
+    router.get("/auth/notifications/:id/read", Notification.readNotification);
 
     //PERSONALITY INSIGHT
     router.get("/auth/get-insights", personalityInsight.index);

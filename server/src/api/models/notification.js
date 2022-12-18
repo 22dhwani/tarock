@@ -13,9 +13,32 @@ const Notification = function(notification) {
 }
 
 async function getForId(id) {
-    const data = await sql.query("SELECT * FROM user_notifications LEFT JOIN user ON user_notifications.match_user_id = user.internal_user_id WHERE user_id = ?;",[id]);
+    const data = await sql.query("SELECT user_notifications.*,user.name,user.avatar_index FROM user_notifications LEFT JOIN user ON user_notifications.match_user_id = user.internal_user_id WHERE user_id = ? ORDER BY created_at DESC;",[id]);
+    return data[0];
+}
+
+async function getById(id) {
+    const data = await sql.query("SELECT * FROM user_notifications WHERE id = ?;",[id]);
+    return data[0];
+}
+
+async function sendToUserId(id,match_user_id=null,type=null,message=null,link=null,is_read=null) {
+
+    const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?, current_timestamp(), current_timestamp())",[
+        id,
+        match_user_id,
+        type,
+        message,
+        link,
+        is_read
+    ]);
+    return data[0];
+}
+
+async function readNotification(id){
+    const data = await sql.query("UPDATE user_notifications SET is_read = 1 WHERE id = ?",[id]);
     return data[0];
 }
 
 
-export default { Notification, getForId };
+export default { Notification, getForId ,sendToUserId,getById,readNotification};

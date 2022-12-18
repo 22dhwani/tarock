@@ -1,4 +1,5 @@
 import sql from "../../config/db.js";
+import crypto from 'crypto';
 
 const User = function(user) {
     this.id = user.id;
@@ -63,6 +64,16 @@ async function findUserByEmail(email) {
 
 async function deleteRealUser(id) {
     const data = await sql.query("DELETE FROM user WHERE internal_user_id = ?;", [id]);
+    return data[0];
+}
+
+async function disableRealUser(id) {
+    let user = await queryReal(id)
+    user =user [0]
+    let newEmail = user.email+'-deleted'
+    let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newEmail).digest("hex");
+
+    const data = await sql.query("UPDATE user SET internal_user_id = ?, email = ? WHERE id = ?;", [hashEmail,newEmail,user.id])
     return data[0];
 }
 
@@ -134,7 +145,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail,deleteRealUser,deleteTmpUser};
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail,deleteRealUser,deleteTmpUser,disableRealUser};
 
 /**
 async function test() {

@@ -480,7 +480,11 @@ async function deleteUser(req,res){
     let user = res.user
     await ApiToken.deleteAllTokens(user.internal_user_id);
     await User.deleteTmpUser(req.body.device_id);
-    await User.deleteRealUser(user.internal_user_id);
+
+    // user.
+
+
+    await User.disableRealUser(user.internal_user_id);
     res.json(
         {
             message: "User Deleted",

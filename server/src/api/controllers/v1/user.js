@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import ApiToken from '../../models/apiToken.js';
 import Result from '../../models/result.js';
 import nodemailer from 'nodemailer';
+import UserFirebaseModel from '../../models/userFirebase.js';
 
 async function getUser(req,res){          
     let user = res.user;
@@ -259,6 +260,13 @@ async function createRealUser(req,res){
     let data = await User.findUserByEmail(req.body.email);
     let token = await ApiToken.generateToken(data[0].internal_user_id)    
 
+    if(req.body.firebase_id){
+        let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,req.body.firebase_id);
+        if(userFirebase.length <= 0){
+            await UserFirebaseModel.addToken(data[0].internal_user_id,req.body.firebase_id);
+        }
+    }
+
     res.json(
         {
             token:token,
@@ -311,6 +319,13 @@ async function login(req,res){
         return;
     }
     let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)    
+
+    if(req.body.firebase_id){
+        let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id,req.body.firebase_id);
+        if(userFirebase.length <= 0){
+            await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id,req.body.firebase_id);
+        }
+    }
 
     res.json(
         {

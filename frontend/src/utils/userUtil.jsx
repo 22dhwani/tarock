@@ -154,7 +154,7 @@ function getLinearColorFromColorNames(startColor, endColor) {
     if (startColor === "purple" && endColor === "purple") return "linear-gradient(180deg, #BB6BD9 0%, #8F4CC4 52.08%, #BB6BD9 100%)";
 }
 
-export function getUserChartImageData(personality) {
+export function getUserMatchChartImageData(personality) {
     return userChartDataImages[personality]
 }
 

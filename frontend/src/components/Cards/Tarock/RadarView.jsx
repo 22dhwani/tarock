@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import chartImg from '../../../assets/chart/chart_bg_white_text.png';
-import { getUserChartImageData } from "../../../utils/userUtil";
+import { getUserChartImageData } from "../../../utils/chartAssets";
 
 function RadarView({ cardData, userInfo }) {
 
@@ -43,8 +42,8 @@ function RadarView({ cardData, userInfo }) {
                     marginBottom: '6rem',
                 }}
             >
-                <img src={chartImg} alt="" style={{width: '100%',}} />
-                <img src={chartDataImage} alt="" style={{width: '100%', position: 'absolute', top: 0, left: '0'}} />
+                <img src={chartDataImage.bg} alt="" style={{width: '100%',}} />
+                <img src={chartDataImage.chart} alt="" style={{width: '100%', position: 'absolute', top: 0, left: '0'}} />
             </div>
 
             <div

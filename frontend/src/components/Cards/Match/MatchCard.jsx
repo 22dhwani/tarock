@@ -8,7 +8,7 @@ import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
 import chartImg from '../../../assets/chart/chart_bg_black_text.png';
-import { getUserChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
+import { getUserMatchChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
 
 function MatchCard(props) {
 
@@ -98,8 +98,8 @@ function MatchCard(props) {
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
-        const userChartDataImage = getUserChartImageData(cardData.personality_category)
-        const matchedChartDataImage = getUserChartImageData(matchedCard.personality_category)
+        const userChartDataImage = getUserMatchChartImageData(cardData.personality_category)
+        const matchedChartDataImage = getUserMatchChartImageData(matchedCard.personality_category)
 
         const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
             <div className='py-5 rounded-4 text-white card-noise' style={{ backgroundImage: linearColorWithNoise }}>

@@ -1,14 +1,10 @@
-import Container from 'react-bootstrap/Container';
-import { getAvatar, getUserChartImageData } from '../../utils/userUtil';
-import RadarChart from '../Charts/RadarChart';
-import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from "react-bootstrap/Row";
+import { getUserChartImageData } from '../../utils/chartAssets';
+import { getAvatar } from '../../utils/userUtil';
 import Header from '../Header/Header';
 import Swipper from '../Swipper/Swipper';
-import patternTarockBlue from '../../assets/patternTarockBlue.svg';
-import styles from './Cards.module.css';
-import match from '../../assets/cards/matchBtn.svg';
-import chartImg from '../../assets/chart/chart_bg_white_text.png';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
 
@@ -55,8 +51,8 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                     marginBottom: '3rem',
                 }}
             >
-                <img src={chartImg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
-                <img src={chartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
+                <img src={chartDataImage.bg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
+                <img src={chartDataImage.chart} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
             </div>
             {
                 onMatchClick &&

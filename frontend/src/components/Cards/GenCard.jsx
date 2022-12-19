@@ -32,7 +32,7 @@ export default function GenCard(props) {
         if (props.cardType != 'match') {
             return `url(${cardPattern})`;
         }
-        return linearColor
+        return `url("../assets/cards/noise.png"), ${linearColor}`
     }
 
     return (

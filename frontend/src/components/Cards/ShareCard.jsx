@@ -5,6 +5,7 @@ import CommonCard from './CommonCard';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import QRCode from 'react-qr-code';
+import { cardColors } from './Tarock';
 
 const Share = () => {
     const { userId } = useParams();
@@ -37,9 +38,14 @@ const Share = () => {
             .catch(err => console.log(err.message));
     }, [userId]);
     if (user.name && cardData.description) {
+        const color = cardColors[cardData.color]
         return (
             <div className='d-flex align-items-center min-vh-100'>
-                <div className="" style={{ backgroundColor: '#3069B3', borderRadius: '20px' }}>
+                <div className="card-noise" style={{
+                    backgroundColor: color.bg,
+                    color: color.textColor,
+                    borderRadius: '20px'
+                }}>
                     <CommonCard
                         user={user}
                         cardData={cardData}
@@ -47,22 +53,22 @@ const Share = () => {
                         showShare={false}
                         onMatchClick={qr ? undefined : () => navigate(`/?match=${userId}`)}
                         children={
-                            qr ? <Row className='m-5'>
+                            qr ? <Row className='m-5 mt-0'>
                                 <Col className='col-4 d-flex justify-content-center align-self-center'>
-                                    <QRCode value={window.location.href} size={64} />
+                                    <div className="bg-white p-2 rounded-2">
+                                        <QRCode value={window.location.href} size={64} />
+                                    </div>
                                 </Col>
                                 <Col className='col-8' style={{
                                     wordBreak: 'break-all',
                                     fontFamily: 'Montserrat',
-                                    fontWeight: '700',
-                                    fontSize: '14px',
                                     color: '#FFFFFF',
                                 }}>
-                                    <div style={{ lineHeight: '24px' }}>
-                                        Scan QR code to start
+                                    <div style={{ lineHeight: '24px', fontWeight: '700', }}>
+                                        Unwrap your Tarock Card
                                     </div>
-                                    <div style={{ lineHeight: '16px' }}>
-                                        Or visit:<br />tarockapp.com{pathname}
+                                    <div style={{ fontSize: '14px' }}>
+                                        tarockapp.com{pathname}
                                     </div>
                                 </Col>
                             </Row> : undefined

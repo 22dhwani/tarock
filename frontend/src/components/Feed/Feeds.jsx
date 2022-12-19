@@ -54,7 +54,7 @@ function Feeds({ header }) {
             <div className="d-flex flex-column justify-content-center mx-auto mb-5" style={{ width: 'fit-content', color: '#49304D' }}>
 
                 <div className="" style={{ width: '350px' }}>
-                    <h2 className='m-0' style={{ fontSize: '26px', fontWeight: '700' }}>Good day, {user.name}!</h2>
+                    <h2 className='m-0' style={{ fontSize: '26px', fontWeight: '700' }}>Good day, {user?.name?.trim().split(' ')[0]}!</h2>
                     <p className='mb-4' style={{ fontWeight: '500' }}>Here is a to-do list to boost your day.</p>
 
                     <div className="d-flex w-100 overflow-hidden gap-3">

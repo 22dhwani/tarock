@@ -12,6 +12,8 @@ import { GlobalContext } from '../../context';
 import { useNavigate, useLocation } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import CustomProgressBar from "./CustomProgressBar";
+
 const randomRadarData = () => {
     return {
         LOGIC: Math.random(),
@@ -106,11 +108,16 @@ const Assessment = ({ assessmentGroupId }) => {
     if (isLoading) {
         return <Loading />
     }
+    console.log(assessment.index, assessment.data.length);
     
     return (
         <Container className='min-h-100'>
             <Header goBackFunc={goBack} />
-            <ProgressBar now={assessment.index} visuallyHidden max={assessment.data.length}/>
+            {/* <ProgressBar now={assessment.index} visuallyHidden max={assessment.data.length} /> */}
+            <CustomProgressBar
+                index={assessment.index}
+                totalItems={assessment.data.length}
+            />
             <Row className='mx-auto'>
                 <div style={{ height: '200px', width: '200px' }} className='mx-auto mt-5'>
                     <RadarChart userData={randomRadarData()} enableLabels={false} />

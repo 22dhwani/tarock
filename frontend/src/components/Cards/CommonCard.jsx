@@ -1,15 +1,15 @@
-import Container from 'react-bootstrap/Container';
-import { getAvatar } from '../../utils/userUtil';
-import RadarChart from '../Charts/RadarChart';
-import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from "react-bootstrap/Row";
+import { getUserChartImageData } from '../../utils/chartAssets';
+import { getAvatar } from '../../utils/userUtil';
 import Header from '../Header/Header';
 import Swipper from '../Swipper/Swipper';
-import patternTarockBlue from '../../assets/patternTarockBlue.svg';
-import styles from './Cards.module.css';
-import match from '../../assets/cards/matchBtn.svg';
 
 const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, children }) => {
+
+    const chartDataImage = getUserChartImageData(cardData.personality_category)
+
     const radarView = <div>
         <div
             style={{
@@ -18,7 +18,6 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
                 fontWeight: '700',
                 fontSize: '18px',
                 lineHeight: '22px',
-                color: '#FFFFFF',
                 alignItems: 'center',
                 textAlign: 'center'
             }}
@@ -44,14 +43,16 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
             </div>
         </div>
         <div>
-
-            <div className='justify-content-center'>
-                <div className='mt-3 mx-auto'>
-                    <div className={styles['radarchart']}>
-                        <RadarChart userData={cardData.dimensional_values} enableLabels={true} />
-                    </div>
-                </div>
-
+            <div
+                className="position-relative"
+                style={{
+                    height: '300px',
+                    marginTop: '3rem',
+                    marginBottom: '3rem',
+                }}
+            >
+                <img src={chartDataImage.bg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
+                <img src={chartDataImage.chart} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
             </div>
             {
                 onMatchClick &&
@@ -176,26 +177,31 @@ const CommonCard = ({ user, cardData, showDescription, showShare, onMatchClick, 
     return (
         <Container className='d-flex flex-column px-0' >
             <div style={{
-                backgroundImage: `url(${patternTarockBlue})`,
+                // backgroundImage: `url(${patternTarockBlue})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
-            }}>
+            }} className="text-center">
                 <Header />
                 <div className='d-flex justify-content-center'>
                     <img className='rounded-circle mx-auto' src={getAvatar(user.avatar_index)} alt="avatar" style={{ backgroundColor: '#FFFFFF' }} width='60px' height='60px' />
                 </div>
-                <div style={{
-                    fontFamily: 'Montserrat',
-                    fontStyle: 'normal',
-                    fontWeight: '400',
-                    fontSize: '14px',
-                    lineHeight: '28px',
-                    color: '#FFFFFF',
-                    alignItems: 'center',
-                    textAlign: 'center'
-                }}>
+                {/* User Name */}
+                <div
+                    className="pt-3 pb-1"
+                    style={{
+                        fontWeight: '400',
+                        fontSize: '18px',
+                    }}>
                     {user.name}
                 </div>
+                <p
+                    style={{
+                        fontWeight: '700',
+                        fontSize: '22px',
+                    }}
+                >
+                    The {cardData.personality_category}
+                </p>
             </div>
 
             {showShare ? <Swipper data={[radarView, descriptionView]} /> : radarView}

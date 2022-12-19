@@ -5,7 +5,7 @@ import Swipper from "../../Swipper/Swipper";
 import DescriptiveView from "./DescriptiveView";
 import TypeView from "./TypeView";
 
-const cardColors = {
+export const cardColors = {
     blue: {bg: "#3069B3", textColor: "white"},
     yellow: {bg: "#EBBD45", textColor: "#49304D"},
     teal: {bg: "#5FC2B9", textColor: "#49304D"},
@@ -40,7 +40,8 @@ function TarockCard({ user, cardData }) {
         return (
             <Container
                 key={index}
-                className='d-flex flex-column py-4 rounded-5' style={{
+                className='d-flex flex-column py-4 rounded-5 card-noise'
+                style={{
                     backgroundColor: color.bg,
                     color: color.textColor,
                     height: '80vh',

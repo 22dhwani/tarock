@@ -8,7 +8,7 @@ import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
 import chartImg from '../../../assets/chart/chart_bg_black_text.png';
-import { getUserChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
+import { getUserMatchChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
 
 function MatchCard(props) {
 
@@ -74,7 +74,7 @@ function MatchCard(props) {
             // const shuffled = list.sort(() => 0.5 - Math.random());
             const selected = list.slice(0, 2);
             return selected.map((item) => {
-                return item.replaceAll('[User_' + cardData.personality_code + ']', user.name.trim().split(' ')[0]).replaceAll('[User_' + matchedType + ']', matchedUserName.trim().split(' ')[0]);
+                return item.replaceAll('[User_' + cardData.personality_code + ']', user?.name?.trim().split(' ')[0]).replaceAll('[User_' + matchedType + ']', matchedUserName?.trim().split(' ')[0]);
             });
         }
         return [];
@@ -94,14 +94,15 @@ function MatchCard(props) {
     let userQuadra = getColor(cardData.personality_socionic_quadra);
     let matchedQuadra = getColor(matchedCard.personality_socionic_quadra);
     const linearColor = getUserMatchLinearColorFromQuadra(cardData.personality_socionic_quadra, matchedCard.personality_socionic_quadra)
+    const linearColorWithNoise = `url("../assets/cards/noise.png"), ${linearColor}`
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
-        const userChartDataImage = getUserChartImageData(cardData.personality_category)
-        const matchedChartDataImage = getUserChartImageData(matchedCard.personality_category)
+        const userChartDataImage = getUserMatchChartImageData(cardData.personality_category)
+        const matchedChartDataImage = getUserMatchChartImageData(matchedCard.personality_category)
 
         const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
-            <div className='py-5 rounded-4 text-white' style={{ backgroundImage: linearColor }}>
+            <div className='py-5 rounded-4 text-white card-noise' style={{ backgroundImage: linearColorWithNoise }}>
                 <div className='d-flex flex-column gap-4'>
                     {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={()=>navigate('/')} style={{cursor:'pointer'}}/>}
                     <UserInfo cardData={cardData} user={user} />
@@ -138,7 +139,7 @@ function MatchCard(props) {
             </div>
         </div>
 
-        const tipsView = <div className='py-5 rounded-4' style={{ backgroundImage: linearColor }}>
+        const tipsView = <div className='py-5 rounded-4' style={{ backgroundImage: linearColorWithNoise }}>
             <div className='d-flex flex-column gap-4 text-white'>
                 <UserInfo cardData={cardData} user={user} />
                 <div className='px-3'>

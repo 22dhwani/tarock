@@ -348,7 +348,7 @@ function SignIn() {
                                 fontWeight: '500',
                                 fontSize: '16px',
                                 lineHeight: '19.5px',
-                            }}>Sign up to view your test results</div>
+                            }}>Your very own card is waiting to be unwrapped!</div>
                         </div>
                     }
                     {

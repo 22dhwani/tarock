@@ -74,7 +74,7 @@ function MatchCard(props) {
             // const shuffled = list.sort(() => 0.5 - Math.random());
             const selected = list.slice(0, 2);
             return selected.map((item) => {
-                return item.replaceAll('[User_' + cardData.personality_code + ']', user.name.trim().split(' ')[0]).replaceAll('[User_' + matchedType + ']', matchedUserName.trim().split(' ')[0]);
+                return item.replaceAll('[User_' + cardData.personality_code + ']', user?.name?.trim().split(' ')[0]).replaceAll('[User_' + matchedType + ']', matchedUserName?.trim().split(' ')[0]);
             });
         }
         return [];

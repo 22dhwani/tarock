@@ -37,7 +37,7 @@ async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickActi
     },
     {
         headers: {
-          Authorization: 'key=AAAAfi5EafA:APA91bG2Fmglk6Ss7KISd2jiSheRVDqhiMInvGthAFfpTG4hXEdA5FsEFzgtOrV-cYbD-8oWpd4AQKynLVHHzmodRsVSYSrWhkg-WhOS5QeDKOMvUuY05jM5lHA7ki1OKQbDl1KANq5F'
+          Authorization: 'key=AAAAWa_L9Tw:APA91bHKphzqIegwALkPYWaiuQIG-pXXh1OS7bMw7j92oiXxGkPfCqKcAegU-VwrMI98Tu6_-ZaVtP25ADOiri1OFXKPbLbh9O0cRIiHDNHPdGiddfd-AZen4x3W90fprYp79ru1KKwM'
         }
     })
 

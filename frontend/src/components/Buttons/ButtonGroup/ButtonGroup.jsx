@@ -14,7 +14,8 @@ function ButtonGroup(props) {
 
     const tarockStatic = [
         "https://tarock.webflow.io/about-us",
-        "https://tarock.webflow.io/contact-us"
+        "https://tarock.webflow.io/contact-us",
+        "https://discord.com/invite/QzQQMgnPaf"
     ]
     async function handleClick(func){
         if (func === 'logout') {

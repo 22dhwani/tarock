@@ -27,3 +27,7 @@
 .card-noise {
     background-image: url("../assets/cards/noise.png");
 }
+
+.text-darkPurple {
+  color: #49304D;
+}

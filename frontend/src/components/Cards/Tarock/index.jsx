@@ -40,7 +40,8 @@ function TarockCard({ user, cardData }) {
         return (
             <Container
                 key={index}
-                className='d-flex flex-column py-4 rounded-5' style={{
+                className='d-flex flex-column py-4 rounded-5 card-noise'
+                style={{
                     backgroundColor: color.bg,
                     color: color.textColor,
                     height: '80vh',

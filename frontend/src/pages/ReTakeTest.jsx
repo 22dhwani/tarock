@@ -29,7 +29,7 @@ const ReTakeTestPage = () => {
 							lineHeight: '30px',
 						}}
 					>
-						No problem, let's see how we can improve it
+						Hmmm, I'm pretty skeptical about Tarock's results about me
 					</h1>
 					<p
 						style={{
@@ -38,7 +38,7 @@ const ReTakeTestPage = () => {
 							lineHeight: '19.5px'
 						}}
 					>
-						If you’ve made it to this page, there’s a good chance your peers have determined your personality type isn't exactly right. No worries, let’s give this another go!
+						If you don't feel like we accurately capture your unique traits, don't worry! You've come to the right place. Click here to take the test again and get a more accurate result.
 					</p>
 				</div>
 				<div className="pb-5 mb-4">

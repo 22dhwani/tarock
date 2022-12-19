@@ -6,6 +6,7 @@ import Notification from '../../models/notification.js';
 import nodemailer from 'nodemailer';
 import UserFirebaseModel from '../../models/userFirebase.js';
 import UserAvatarModel from '../../models/userAvatar.js';
+import https from 'https'
 
 async function getUser(req,res){          
     let user = res.user;
@@ -431,7 +432,7 @@ async function login(req,res){
         {
             token:token,
             data:emailExistUser[0],
-            message: "Temp user created",
+            message: "User logged in",
             status: 1,
         }
     );
@@ -852,6 +853,183 @@ async function sendForDailyQuestion(req,res){
     );
 }
 
+async function socialLogin(req,res){
+    let metaData = []
+    let finalData = null
+    if(!req.body.device_id){
+        res.status(422).json(
+            {
+                message:"device id is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    if(!req.body.provider){
+        res.status(422).json(
+            {
+                message:"provider is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    if(!req.body.token){
+        res.status(422).json(
+            {
+                message:"token is required",
+                status: 0,
+            }
+        );
+        return;
+    }
+    let device_id = req.body.device_id
+    let provider = req.body.provider
+    let token = req.body.token
+    let firebase_id = req.body.firebase_id
+
+    // https.get(`https://www.googleapis.com/plus/v1/people/me?access_token=${token}`,httpsRes => () =>{
+    https.get(`https://www.googleapis.com/plus/v1/people/me?access_token=${token}`,(httpsRes) =>{        
+        httpsRes.on('data',chunk => {
+            metaData.push(chunk)
+        })
+        httpsRes.on('end', async () => {
+            finalData = JSON.parse(Buffer.concat(metaData).toString());
+            let userName = 'User';
+            if(finalData.displayName){
+                userName = finalData.displayName
+            }
+            let userEmail = null
+            if(Array.isArray(finalData.emails)){
+                if(finalData.emails.length > 0){
+                    if(finalData.emails[0].value){
+                        userEmail = finalData.emails[0].value
+                    }
+                }
+            }
+            if(!userName || !userEmail){
+                res.status(422).json(
+                    {
+                        message:"Invalid Token",
+                        status: 0,
+                    }
+                );
+                return;
+            }
+            let emailExistUser = await User.findUserByEmail(userEmail);
+            if(emailExistUser.length > 0){
+
+                let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)    
+
+                if(firebase_id){
+                    let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id,firebase_id);
+                    if(userFirebase.length <= 0){
+                        await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id,firebase_id);
+                    }
+                }
+                let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
+                emailExistUser[0].user_avatar = userAvatar[0] ?? null
+
+
+                res.json(
+                    {
+                        token:token,
+                        data:emailExistUser[0],
+                        message: "User logged in",
+                        status: 1,
+                    }
+                );
+                return;
+            }
+            let existingUser = await User.query(device_id);
+            if(existingUser.length <= 0) {
+                res.status(422).json(
+                    {
+                        message:"Temp User not found",
+                        status: 0,
+                    }
+                );
+                return;
+            }
+            let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(userEmail).digest("hex");
+            let realUser = new User.User({
+                id: hashEmail,
+                name: existingUser[0].name,
+                gender: existingUser[0].gender,
+                avatarIndex: existingUser[0].avatar_index,
+                email:userEmail,
+            });
+            try {
+                const oldResults = await Result.getByUser(device_id);
+                if (oldResults.length > 0) {
+                  const newResult = new Result.Result({
+                    userId: hashEmail,
+                    assessmentGroupId: oldResults[0].question_group_id,
+                    numOfQuestions: oldResults[0].num_of_questions,
+                    duration: oldResults[0].duration,
+                    code: oldResults[0].result_code
+                  });
+                  await Result.create(newResult);
+                }
+                await User.createReal(realUser);
+                await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
+        
+                let oldAvatar = await UserAvatarModel.getByUserId(device_id)
+                if(oldAvatar.length > 0){
+                    let face_index  = oldAvatar[0].face_index
+                    let eye_index  = oldAvatar[0].eye_index
+                    let eyebrow_index  = oldAvatar[0].eyebrow_index
+                    let ear_index  = oldAvatar[0].ear_index
+                    let nose_index  = oldAvatar[0].nose_index
+                    let lips_index  = oldAvatar[0].lips_index
+                    let hair_index  = oldAvatar[0].hair_index
+                    await UserAvatarModel.addAvatar(hashEmail,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+                }
+        
+            } catch (error) {
+                res.status(422).json(
+                    {
+                        error:error.message,
+                        message:"something went wrong",
+                        status: 0,
+                    }
+                );
+                return
+            }
+            let data = await User.findUserByEmail(userEmail);
+            let token = await ApiToken.generateToken(data[0].internal_user_id)   
+            if(firebase_id){
+                let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,firebase_id);
+                if(userFirebase.length <= 0){
+                    await UserFirebaseModel.addToken(data[0].internal_user_id,firebase_id);
+                }
+            } 
+            let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
+            data[0].user_avatar = userAvatar[0] ?? null
+            
+            res.json(
+                {
+                    token:token,
+                    data:data[0],
+                    message: "User Logged in",
+                    status: 1,
+                }
+            );
+        });
+    }).on("error", (err) => {
+        res.status(422).json(
+            {
+                error: err.message,
+                message:"Something went wrong",
+                status: 0,
+            }
+        );
+        return;
+    });
+
+    
+}
+
 export default { 
     getUser,
     getUserType,
@@ -866,4 +1044,5 @@ export default {
     contactUs,
     sendForNewBlog,
     sendForDailyQuestion,
+    socialLogin,
 };

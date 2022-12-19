@@ -28,10 +28,12 @@ async function getUserCard(req,res){
                 const tarockData = data[tarcokResult[0].result_code];
                 result.push({
                     type: 'Tarock',
-                    data: {
-                        resultCode: tarcokResult[0].result_code,
-                        quadra: tarockData.personality_socionic_quadra
-                    }
+                    data: [
+                        {
+                            resultCode: tarcokResult[0].result_code,
+                            quadra: tarockData.personality_socionic_quadra
+                        }                        
+                    ]
                 }); 
             }
             const matchData = await Match.query(id);

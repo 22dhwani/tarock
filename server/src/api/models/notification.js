@@ -1,4 +1,6 @@
 import sql from "../../config/db.js";
+import UserFirebaseModel from "./userFirebase.js";
+import axios from 'axios';
 
 const Notification = function(notification) {
     this.id = notification.id;
@@ -22,8 +24,34 @@ async function getById(id) {
     return data[0];
 }
 
+async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickAction=null,type=null,data=null){
+    await axios.post('https://fcm.googleapis.com/fcm/send',
+    {
+        "registration_ids":firebaseIds,
+        "notification":{
+            "title":message,
+            "body":message,
+            "clickAction":"FLUTTER_NOTIFICATION_CLICK",
+            "channelId":"high_importance_channel"
+        }
+    },
+    {
+        headers: {
+          Authorization: 'key=AAAAfi5EafA:APA91bG2Fmglk6Ss7KISd2jiSheRVDqhiMInvGthAFfpTG4hXEdA5FsEFzgtOrV-cYbD-8oWpd4AQKynLVHHzmodRsVSYSrWhkg-WhOS5QeDKOMvUuY05jM5lHA7ki1OKQbDl1KANq5F'
+        }
+    })
+
+}
+
 async function sendToUserId(id,match_user_id=null,type=null,message=null,link=null,is_read=null) {
 
+    let tokens = await UserFirebaseModel.getByUserId(id)
+    tokens = tokens.map((token)=>{
+        return token.firebase_token
+    })
+    if(tokens.length > 0){
+        await sendNotificationToFirebaseIds(tokens,message,message)
+    }
     const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?, current_timestamp(), current_timestamp())",[
         id,
         match_user_id,

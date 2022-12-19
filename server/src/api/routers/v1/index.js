@@ -53,6 +53,8 @@ export default function(app) {
     router.post("/create-real-user", User.createRealUser); //to create a real user with device id
     router.post("/user/login", User.login); //login the user(return the token)
     router.post("/user/forgot-password", User.forgotPassword); //forgot password
+    //SOCIAL LOGIN
+    router.post("/user/social-login", User.socialLogin);
 
 
     //CONTACT US AND REQUEST DATA(EMAILS)

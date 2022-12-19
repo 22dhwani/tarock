@@ -21,7 +21,7 @@ ChartJS.register(
 
 function RadarChart({ userData, matchData, enableLabels, userQuadra, matchedQuadra }) {
     const data = {
-        labels: ['Logic', 'Structure', ['Extra-', 'version'], 'Execution', 'Emotion', 'Openness', ['Intro-', 'Version'], 'Strategy'],
+        labels: ['Logic', 'Structure', ['Extra-', 'version'], 'Execution', 'Emotion', 'Openness', ['Intro-', 'version'], 'Strategy'],
         datasets: [
             {
                 label: 'EII',

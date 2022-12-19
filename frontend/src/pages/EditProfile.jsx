@@ -21,20 +21,21 @@ function EditProfile() {
     const [formData, setFormData] = useState(
         {
             name: userData.name,
-            dob: userData.dob,
-            gender: "",
+            dob: userData.dob ? userData.dob : "",
+            gender: userData.gender ? userData.gender : "",
         }
     )
     const [validation, setValidation] = useState(false);
     const navigate = useNavigate();
 
-
     function getValidation() {
         const forms = document.getElementById('infoForm');
-        if (forms.length > 0) {
-            return forms[0].checkValidity();
+        for (let i = 0; i < forms.length; i++) {
+            if (!forms[i].checkValidity()) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     async function handleSubmit() {
@@ -146,16 +147,19 @@ function EditProfile() {
                             lineHeight: '12px',
                             color: '#49304D',
                         }}>Gender</Form.Label>
-                    <Dropdown>
+                    <Dropdown className="w-100 d-flex">
                         <Dropdown.Toggle style={
                             {
-                                width: '100%',
+                                // width: '100%',
                                 backgroundColor: 'white',
-                                color: '#999999'
-                            }}>
-                            {formData.gender === "" ? "Choose your gender" : formData.gender}
+                                color: '#999999', 
+                                border: '1px solid #ced4da',
+                            }}
+                            className="text-start flex-grow-1"
+                        >
+                            <span className="me-auto">{formData.gender === "" ? "Choose your gender" : formData.gender}</span>
                         </Dropdown.Toggle>
-                        <Dropdown.Menu style={{width: '100%'}} >
+                        <Dropdown.Menu style={{width: '100%'}}>
                             {['Male', 'Female', 'Other'].map((item, index) => {
                                 return (
                                     <Dropdown.Item style={{color: '#49304D'}} key={index} onClick={() => setFormData(prevFormData => {

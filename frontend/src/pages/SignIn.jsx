@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Header from '../components/Header/Header.jsx';
 import signup from '../assets/signin/signup.svg';
-import pattern from '../assets/patternTarock.svg';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { GlobalContext } from '../context';
@@ -13,12 +12,10 @@ import male from '../assets/avatarMale.svg';
 import female from '../assets/avatarFemale.svg';
 import bi from '../assets/avatarBi.svg';
 import line from '../assets/signin/line.svg';
-import googleSignin from '../assets/signin/googleSignin.svg';
-import googleSignup from '../assets/signin/googleSignup.svg';
 import bg from '../assets/signin/bg.svg';
 import { getUser, logout } from '../utils/userUtil';
 import resend from '../assets/signin/resend.svg';
-
+import GoogleButton from '../components/Buttons/GoogleButton/index.jsx';
 function SignIn() {
     const { userData, setUserData } = useContext(GlobalContext);
     const navigate = useNavigate();
@@ -166,10 +163,11 @@ function SignIn() {
                     tempId: userData.visitorId,
                 })
             });
-            if (!response.ok) {
-                throw new Error(`Error! status: ${response.status}`);
-            }
             const data = await response.json();
+            if (!response.ok) {
+                alert(`Sign up failed: ${data.error_msg}`);
+                return;
+            }
             const user = await getUser(data.id, 'REAL');
             setUserData((prevUserData) => ({
                 ...prevUserData,
@@ -191,7 +189,7 @@ function SignIn() {
             console.log(error);
         }
     }
-    
+
     function nextStage() {
         setValidation(true);
         const validation = getValidation();
@@ -231,6 +229,9 @@ function SignIn() {
 
     async function newGuest() {
         try {
+            if (userData.isAuthorized) {
+                await logout(userData.visitorId, setUserData);
+            }
             const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/updateIsPermanentUser`, {
                 method: 'POST',
                 headers: {
@@ -245,18 +246,9 @@ function SignIn() {
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
-            await logout();
-            const tmpUserData = await getUser(userData.visitorId, 'TMP');
             setUserData((prevUserData) => ({
                 ...prevUserData,
-                name: tmpUserData ? tmpUserData.name : '',
-                gender: tmpUserData ? tmpUserData.gender : '',
-                avatarIndex: tmpUserData ? tmpUserData.avatar_index : 2,
-                id: prevUserData.visitorId,
-                email: '',
-                dob: '',
-                isAuthorized: false,
-                type: tmpUserData ? 'TMP' : 'NEW',
+                type: prevUserData.type === 'REAL' ? 'TMP' : 'NEW'
             }));
             setValidation(false);
             setStage('new');
@@ -287,7 +279,7 @@ function SignIn() {
         } else if (stage === 'resend') {
             return 'Resend Email';
         }
-        return 'Next';
+        return 'Save & Continue';
     }
 
     function handleGoogleSignin() {
@@ -302,7 +294,8 @@ function SignIn() {
     }
 
     function goBack() {
-        if (userData.type === 'REAL') {
+        if (userData.type === 'REAL' && stage === 'avatar') {
+            // Modify avatar navigated from setting page.
             navigate(-1);
         } else if (stage === 'avatar') {
             setValidation(false);
@@ -318,17 +311,17 @@ function SignIn() {
 
     return (
         <Container className='d-flex flex-column vh-100 px-0 pb-4' style={{
-                backgroundImage: `url(${bg})`,
-                backgroundSize: 'cover'
-            }}>
-            <Header goBackFunc={stage != 'avatar' && stage != 'forgot' && stage != 'resend' ? undefined : goBack}/>
+            backgroundImage: `url(${bg})`,
+            backgroundSize: 'cover'
+        }}>
+            <Header goBackFunc={stage != 'avatar' && stage != 'forgot' && stage != 'resend' ? undefined : goBack} />
             {
                 stage === 'signup' &&
-                <img src={signup} alt="signup" className='mx-auto mt-4'/>
+                <img src={signup} alt="signup" className='mx-auto mt-4' />
             }
             {
                 stage === 'resend' &&
-                <img src={resend} alt="resend" className='mx-auto mt-4'/>
+                <img src={resend} alt="resend" className='mx-auto mt-4' />
             }
             {
                 stage != 'avatar' &&
@@ -340,12 +333,12 @@ function SignIn() {
                     color: '#49304D',
                 }}>
                     {
-                        (stage === 'new' || stage === 'signin') && 
+                        (stage === 'new' || stage === 'signin') &&
                         <span>Welcome to Tarock, where personality comes first.</span>
                     }
                     {
                         stage === 'welcome' &&
-                        <span>Welcome to back, {userData.name}!</span>
+                        <span>Welcome back, {userData.name}!</span>
                     }
                     {
                         stage === 'signup' &&
@@ -355,7 +348,7 @@ function SignIn() {
                                 fontWeight: '500',
                                 fontSize: '16px',
                                 lineHeight: '19.5px',
-                            }}>Sign up to view your test results</div>
+                            }}>Your very own card is waiting to be unwrapped!</div>
                         </div>
                     }
                     {
@@ -393,7 +386,7 @@ function SignIn() {
                         color: '#49304D',
                         textAlign: 'center',
                     }}>Choose your avatar</div>
-                    <Row className = 'my-4'>
+                    <Row className='my-4'>
                         <Col className='d-flex justify-content-center' onClick={() => {
                             setFormData(data => {
                                 return {
@@ -410,7 +403,7 @@ function SignIn() {
                             }} />
                         </Col>
                     </Row>
-                    <Row className = 'my-4'>
+                    <Row className='my-4'>
                         <Col className='d-flex justify-content-center' onClick={() => {
                             setFormData(data => {
                                 return {
@@ -427,7 +420,7 @@ function SignIn() {
                             }} />
                         </Col>
                     </Row>
-                    <Row className = 'my-4'>
+                    <Row className='my-4'>
                         <Col className='d-flex justify-content-center' onClick={() => {
                             setFormData(data => {
                                 return {
@@ -497,7 +490,7 @@ function SignIn() {
                     </Form.Group>}
                     {
                         stage === 'signin' &&
-                        <div className='mt-3 mx-3' onClick={() => {setStage('forgot')}} style={{
+                        <div className='mt-3 mx-3' onClick={() => { setStage('forgot') }} style={{
                             fontFamily: 'Montserrat',
                             fontWeight: '500',
                             color: '#49304D',
@@ -524,20 +517,19 @@ function SignIn() {
                         border: 'none',
                         textAlign: 'center',
                     }}>
-                        {getButtonText()}
+                    {getButtonText()}
                 </div>
             }
             {
                 (stage === 'signup' || stage === 'signin') &&
-                <img src={line} alt="line" className='mx-3 mt-4'/>
+                <img src={line} alt="line" className='mx-3 mt-4' />
             }
             {
-                stage === 'signup' &&
-                <img onClick={handleGoogleSignin} src={googleSignup} alt="googleSignup" className='mx-3 mt-4'/>
+                stage === 'signup' && <GoogleButton handleGoogleSignin={handleGoogleSignin} text='Signup'/>
             }
             {
-                stage === 'signin' &&
-                <img onClick={handleGoogleSignin} src={googleSignin} alt="googleSignin" className='mx-3 mt-4'/>
+                stage === 'signin' && <GoogleButton handleGoogleSignin={handleGoogleSignin} text='Login'/>
+               
             }
             {
                 stage != 'signup' &&
@@ -586,13 +578,13 @@ function SignIn() {
                         stage === 'avatar' && userData.type != 'REAL' &&
                         <div>
                             <span>By clicking Next, I agree to </span>
-                            <a href={'https://www.tarock.me/terms-of-service'} style={{
+                            <a href={'https://www.tarock.me/terms-of-service'} target="_blank" rel="noreferrer noopener" style={{
                                 fontWeight: '700',
                                 textDecoration: 'underline',
                                 color: '#49304D',
                             }}>Terms of Service</a>
                             <span> and </span>
-                            <a href={'https://www.tarock.me/privacy-policy'} style={{
+                            <a href={'https://www.tarock.me/privacy-policy'} target="_blank" rel="noreferrer noopener" style={{
                                 fontWeight: '700',
                                 textDecoration: 'underline',
                                 color: '#49304D',

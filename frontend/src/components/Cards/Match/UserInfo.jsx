@@ -3,7 +3,7 @@ import { getAvatar } from '../../../utils/userUtil';
 function UserInfo({ cardData, user }) {
     return (
         <>
-            <div className='d-flex gap-3 justify-content-center align-items-center mx-3'>
+            <div className='d-flex gap-3 justify-content-center align-items-start mx-3'>
                 <img src={
                     getAvatar(user.avatar_index)
                 } alt='avatar' width='70px' style={{
@@ -11,24 +11,43 @@ function UserInfo({ cardData, user }) {
                     borderRadius: '50%',
                 }} />
 
-                <div className='d-flex flex-column gap-2'>
-                    <span style={{
-                        fontWeight: '400',
-                        fontSize: '12px',
-                        lineHeight: '22px',
-                        color: 'white',
-                    }}>
+                <div className=''>
+                    <span
+                        style={{
+                            fontWeight: '400',
+                            fontSize: '12px',
+                        }}
+                    >
                         {user.name}
                     </span>
+                    <p
+                        className='m-0 pb-1'
+                        style={{
+                            fontWeight: '700',
+                            fontSize: '16px',
+                        }}
+                    >
+                       The {cardData.personality_category}
+                    </p>
 
-                    <span style={{
-                        fontWeight: '700',
-                        fontSize: '14px',
-                        color: 'white',
-                        lineHeight: '17px',
-                    }}>
-                        {cardData.description.STRENGTHS.replaceAll(';', ',')}.
-                    </span>
+                    <div className='w-100 d-flex flex-wrap gap-2 pt-2'>
+                        {cardData.description.STRENGTHS.split(';').map((value, index) => {
+                            return (
+                                <span
+                                    key={index}
+                                    className="rounded-pill"
+                                    style={{
+                                        background: 'rgba(255,255,255,0.25)',
+                                        padding: "2px 10px",
+                                        fontSize: '12px',
+                                        fontWeight: '500'
+                                    }}
+                                >
+                                    {value}
+                                </span>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </>

@@ -1,4 +1,5 @@
 import sql from "../../config/db.js";
+import crypto from 'crypto';
 
 const User = function(user) {
     this.id = user.id;
@@ -8,6 +9,10 @@ const User = function(user) {
     this.gender = user.gender;
     this.avatarIndex = user.avatarIndex;
     this.dob = user.dob;
+    this.is_notification_on = user.is_notification_on;
+    this.is_match_card_notification_on = user.is_match_card_notification_on;
+    this.is_daily_quest_notification_on = user.is_daily_quest_notification_on;
+    this.is_new_blog_notification_on = user.is_new_blog_notification_on;
 }
 
 async function create(user) {
@@ -22,6 +27,11 @@ async function query(id) {
 
 async function update(user) {
     const data = await sql.query("UPDATE tmp_user SET name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [user.name, user.gender, user.avatarIndex, user.dob, user.id]);
+    return data[0];
+}
+
+async function getAllUser(){
+    const data = await sql.query("SELECT * FROM user WHERE is_forbidden = 0;");
     return data[0];
 }
 
@@ -52,6 +62,32 @@ async function queryReal(id) {
     return data[0];
 }
 
+async function findUserByEmail(email) {
+    const data = await sql.query("SELECT * FROM user WHERE email = ?;", [email]);
+    return data[0];
+}
+
+async function deleteRealUser(id) {
+    const data = await sql.query("DELETE FROM user WHERE internal_user_id = ?;", [id]);
+    return data[0];
+}
+
+async function disableRealUser(id) {
+    let user = await queryReal(id)
+    user =user [0]
+    let newEmail = user.email+'-deleted'
+    let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newEmail).digest("hex");
+
+    const data = await sql.query("UPDATE user SET internal_user_id = ?, email = ? WHERE id = ?;", [hashEmail,newEmail,user.id])
+    return data[0];
+}
+
+async function deleteTmpUser(id) {
+    const data = await sql.query("DELETE FROM tmp_user WHERE internal_user_id = ?;", [id]);
+    return data[0];
+}
+
+
 async function updateReal(user) {
     if (!user.id) {
         throw new Error(`No user id provided. id:${user.id}`);
@@ -66,7 +102,46 @@ async function updateReal(user) {
     const gender = user.gender ? user.gender : oldUsers[0].gender;
     const avatarIndex = user.avatarIndex != undefined ? user.avatarIndex : oldUsers[0].avatar_index;
     const dob = user.dob ? user.dob : oldUsers[0].birth_date;
-    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? WHERE internal_user_id = ?;", [password, name, gender, avatarIndex, dob, user.id]);
+
+    let is_notification_on = oldUsers[0].is_notification_on;
+    if(user.is_notification_on){
+        is_notification_on = user.is_notification_on;
+    }else{
+        is_notification_on = 0;
+    }
+    let is_match_card_notification_on = oldUsers[0].is_match_card_notification_on;
+    if(user.is_match_card_notification_on){
+        is_match_card_notification_on = user.is_match_card_notification_on;
+    }else{
+        is_match_card_notification_on = 0;
+    }
+
+    let is_daily_quest_notification_on = oldUsers[0].is_daily_quest_notification_on;
+    if(user.is_daily_quest_notification_on){
+        is_daily_quest_notification_on = user.is_daily_quest_notification_on;
+    }else{
+        is_daily_quest_notification_on = 0;
+    }
+
+    let is_new_blog_notification_on = oldUsers[0].is_new_blog_notification_on;
+    if(user.is_new_blog_notification_on){
+        is_new_blog_notification_on = user.is_new_blog_notification_on;
+    }else{
+        is_new_blog_notification_on = 0;
+    }
+
+    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? , is_notification_on = ?,is_match_card_notification_on = ?,is_daily_quest_notification_on = ?, is_new_blog_notification_on = ? WHERE internal_user_id = ?;", [
+        password,
+        name,
+        gender,
+        avatarIndex,
+        dob,
+        is_notification_on,
+        is_match_card_notification_on,
+        is_daily_quest_notification_on,
+        is_new_blog_notification_on,
+        user.id
+    ]);
     return data[0];
 }
 
@@ -75,7 +150,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser};
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail,deleteRealUser,deleteTmpUser,disableRealUser,getAllUser};
 
 /**
 async function test() {

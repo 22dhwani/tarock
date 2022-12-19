@@ -1,36 +1,44 @@
-import patternTarockBlue from '../../assets/patternTarockBlue.svg';
-import male from '../../assets/avatarMale.svg';
-import female from '../../assets/avatarFemale.svg';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getAvatar } from '../../utils/userUtil';
+import { getAvatar, getCardPattern, getUserMatchLinearColorFromQuadra } from '../../utils/userUtil';
 
 export default function GenCard(props) {
     const [userColor, setUserColor] = useState('#3069B3');
-    const [matchedColor, setMatchedColor] = useState('#3069B3');
-    let userPattern;
-    //import and set the pattern of the card
+    const [linearColor, setLinearColor] = useState("linear-gradient(180deg, #BB6BD9 0%, #8F4CC4 52.08%, #BB6BD9 100%)");
 
+    //move to utils
     function assignColor(quadra, setter) {
         if (quadra === 'Alpha') {
             setter('#3069B3');
         } else if (quadra === 'Beta') {
-            setter('#EBBD45');
+            setter('#F8D045');
         } else if (quadra === 'Gamma') {
-            setter('#69C7BF');
+            setter('#61C3BB');
         } else if (quadra === 'Delta') {
-            setter('#BB6BD9');
+            setter('#B561D6');
         }
     }
+
     useEffect(() => {
         assignColor(props.userQuadra, setUserColor);
-        assignColor(props.matchedQuadra, setMatchedColor);
+        if (props.cardType == 'match') {
+            setLinearColor(getUserMatchLinearColorFromQuadra(props.userQuadra, props.matchedQuadra))
+        }
     }, []);
 
+    const cardPattern = getCardPattern(props.userQuadra);
+
+    const getBg = () => {
+        if (props.cardType != 'match') {
+            return `url(${cardPattern})`;
+        }
+        return `url("../assets/cards/noise.png"), ${linearColor}`
+    }
+
     return (
-        <div className='d-flex flex-column my-3 '>
+        <div>
             <div style={{
-                backgroundImage: props.cardType == 'match' ? `linear-gradient(${userColor},${matchedColor})` : `url(${patternTarockBlue})`,
+                backgroundImage: getBg(),
                 backgroundColor: props.cardType == 'match' ? '' : userColor,
                 backgroundRepeat: 'no-repeat',
                 width: '9rem',
@@ -46,11 +54,17 @@ export default function GenCard(props) {
                     src={getAvatar(props.avatar_index)}
                     alt="avatar"
                     style={{ backgroundColor: '#FFFFFF' }}
+                    width='60px' height='60px'
                 />
                     :
                     <div className='d-flex flex-column gap-5 align-items-center'>
-                        <img src={getAvatar(props.avatar_index)} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
-                        <img src={getAvatar(props.matchedUserAvartarIndex)} className='rounded-circle w-75' style={{ backgroundColor: '#FFFFFF' }} />
+                        <img src={getAvatar(props.avatar_index)} className='rounded-circle' 
+                        style={{ backgroundColor: '#FFFFFF' }} 
+                        width='60px' height='60px'
+                        />
+                        <img src={getAvatar(props.matchedUserAvartarIndex)} className='rounded-circle' 
+                        style={{ backgroundColor: '#FFFFFF' }}
+                        width='60px' height='60px' />
                     </div>
                 }
 
@@ -64,7 +78,7 @@ export default function GenCard(props) {
             }}>
                 {props.cardType == 'match' ? <p className='text-center'>
                     Match Card<br></br>
-                    <span style={{fontWeight:'400'}}>with {props.matchedUserName.split(' ')[0]}</span>
+                    <span style={{fontWeight:'400'}}>with {props.matchedUserName.trim().split(' ')[0]}</span>
                 </p>
                     :
                     'Tarock Card'}

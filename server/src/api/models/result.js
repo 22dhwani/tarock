@@ -1,8 +1,5 @@
 import sql from "../../config/db.js";
 
-
-
-
 const Result = function(result) {
     this.userId = result.userId;
     this.assessmentGroupId = result.assessmentGroupId;
@@ -23,4 +20,9 @@ async function create(result) {
     return data[0];
 }
 
-export default { Result, getByUser, create };
+async function update(id,question_group_id,num_of_questions,duration,result_code) {
+    const data =  await sql.query("UPDATE user_assessment_result SET question_group_id = ? ,num_of_questions =?,duration = ?,result_code=?  WHERE id = ?;", [question_group_id, num_of_questions, duration, result_code,id]);
+    return data[0];
+}
+
+export default { Result, getByUser, create ,update};

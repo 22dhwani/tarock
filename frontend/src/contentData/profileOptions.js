@@ -1,17 +1,15 @@
+import editInfo from '../assets/profile/editInfo.svg';
+import modifyAvatar from '../assets/profile/modifyAvatar.svg';
+import about from '../assets/profile/about.svg';
+import contact from '../assets/profile/contact.svg';
+import community from '../assets/profile/community.svg';
+import logoutButton from '../assets/profile/logout.svg';
 
-import editInfo from '../assets/editInfo.svg'
-import modifyAvatar from '../assets/modifyAvatar.svg'
-import articles from '../assets/articles.svg'
-import community from '../assets/community.svg'
-import privacy from '../assets/privacy.svg'
-import about from '../assets/about.svg'
-import contact from '../assets/contact.svg'
-
+//link also serves as an on click function to be performed (condition: !includes('/'))
 const profileOptions = [
     // [editInfo, modifyAvatar],
-    // [articles,contact],
-    // [articles, community],
-    // [privacy, about, contact]
+    // [about, contact, community],
+    // [logout]
     [{
         button: editInfo,
         link: '/editProfile'
@@ -22,10 +20,6 @@ const profileOptions = [
         state: { stage: 'avatar' }
     }],
     [
-    // {
-    //     button: articles,
-    //     link: '/articles'
-    // },
     {
         button: about,
         link: 'https://tarock.webflow.io/about-us'
@@ -33,7 +27,16 @@ const profileOptions = [
     {
         button: contact,
         link: 'https://tarock.webflow.io/contact-us'
+    },
+    {
+        button: community,
+        link: 'https://discord.com/invite/QzQQMgnPaf'
     }],
+    [
+    {
+        button: logoutButton,
+        func: 'logout'
+    }]
 ]
 
-export {profileOptions};
+export { profileOptions };

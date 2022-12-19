@@ -108,7 +108,6 @@ const Assessment = ({ assessmentGroupId }) => {
     if (isLoading) {
         return <Loading />
     }
-    console.log(assessment.index, assessment.data.length);
     
     return (
         <Container className='min-h-100'>

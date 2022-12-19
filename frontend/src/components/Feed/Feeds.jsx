@@ -64,7 +64,7 @@ function Feeds({ header }) {
                         </div>
                         <div className="d-flex flex-column gap-3 w-100">
                             <img src={exploreCard2} width="100%" onClick={() => setOpenModal(true)} className="cursor-pointer" />
-                            <img src={exploreCard4} width="100%" />
+                            <img src={exploreCard4} width="100%" onClick={() => setOpenModal(true)} className="cursor-pointer" />
                         </div>
                     </div>
                 </div>

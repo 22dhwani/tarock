@@ -220,25 +220,25 @@ async function createTempUser(req,res){
     let ear_index  = userAvatar[0].ear_index
     let nose_index  = userAvatar[0].nose_index
     let lips_index  = userAvatar[0].lips_index
-    if(req.body.face_index){
+    if(req.body.face_index || req.body.face_index == 0){
         face_index= req.body.face_index
     }
-    if(req.body.hair_index){
+    if(req.body.hair_index || req.body.hair_index == 0){
         hair_index= req.body.hair_index
     }
-    if(req.body.eye_index){
+    if(req.body.eye_index || req.body.eye_index == 0){
         eye_index= req.body.eye_index
     }
-    if(req.body.eyebrow_index){
+    if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
         eyebrow_index= req.body.eyebrow_index
     }
-    if(req.body.ear_index){
+    if(req.body.ear_index || req.body.ear_index == 0){
         ear_index= req.body.ear_index
     }
-    if(req.body.nose_index){
+    if(req.body.nose_index || req.body.nose_index == 0){
         nose_index= req.body.nose_index
     }
-    if(req.body.lips_index){
+    if(req.body.lips_index || req.body.lips_index == 0){
         lips_index= req.body.lips_index
     }
 
@@ -547,25 +547,25 @@ async function editUser(req,res){
     let nose_index  = userAvatar[0].nose_index
     let lips_index  = userAvatar[0].lips_index
 
-    if(req.body.face_index){
+    if(req.body.face_index || req.body.face_index == 0){
         face_index= req.body.face_index
     }
-    if(req.body.hair_index){
+    if(req.body.hair_index || req.body.hair_index == 0){
         hair_index= req.body.hair_index
     }
-    if(req.body.eye_index){
+    if(req.body.eye_index || req.body.eye_index == 0){
         eye_index= req.body.eye_index
     }
-    if(req.body.eyebrow_index){
+    if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
         eyebrow_index= req.body.eyebrow_index
     }
-    if(req.body.ear_index){
+    if(req.body.ear_index || req.body.ear_index == 0){
         ear_index= req.body.ear_index
     }
-    if(req.body.nose_index){
+    if(req.body.nose_index || req.body.nose_index == 0){
         nose_index= req.body.nose_index
     }
-    if(req.body.lips_index){
+    if(req.body.lips_index || req.body.lips_index == 0){
         lips_index= req.body.lips_index
     }
 
@@ -665,7 +665,7 @@ async function contactUs(req,res){
         );
         return;
     }
-    const idToSendMail = 'asif987patel@gmail.com';
+    const idToSendMail = 'contact@tarock.me';
     const sender = {
         email: "account@tarock.me",
         password: "eqlhjrmaxiflsxjs"
@@ -737,7 +737,7 @@ async function requestData(req,res){
         );
         return;
     }
-    const idToSendMail = 'asif987patel@gmail.com';
+    const idToSendMail = 'contact@tarock.me';
 
     const sender = {
         email: "account@tarock.me",

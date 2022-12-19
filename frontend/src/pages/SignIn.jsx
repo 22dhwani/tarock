@@ -578,13 +578,13 @@ function SignIn() {
                         stage === 'avatar' && userData.type != 'REAL' &&
                         <div>
                             <span>By clicking Next, I agree to </span>
-                            <a href={'https://www.tarock.me/terms-of-service'} style={{
+                            <a href={'https://www.tarock.me/terms-of-service'} target="_blank" rel="noreferrer noopener" style={{
                                 fontWeight: '700',
                                 textDecoration: 'underline',
                                 color: '#49304D',
                             }}>Terms of Service</a>
                             <span> and </span>
-                            <a href={'https://www.tarock.me/privacy-policy'} style={{
+                            <a href={'https://www.tarock.me/privacy-policy'} target="_blank" rel="noreferrer noopener" style={{
                                 fontWeight: '700',
                                 textDecoration: 'underline',
                                 color: '#49304D',

@@ -5,6 +5,7 @@ import CommonCard from './CommonCard';
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import QRCode from 'react-qr-code';
+import { cardColors } from './Tarock';
 
 const Share = () => {
     const { userId } = useParams();
@@ -37,9 +38,14 @@ const Share = () => {
             .catch(err => console.log(err.message));
     }, [userId]);
     if (user.name && cardData.description) {
+        const color = cardColors[cardData.color]
         return (
             <div className='d-flex align-items-center min-vh-100'>
-                <div className="" style={{ backgroundColor: '#3069B3', borderRadius: '20px' }}>
+                <div className="card-noise" style={{
+                    backgroundColor: color.bg,
+                    color: color.textColor,
+                    borderRadius: '20px'
+                }}>
                     <CommonCard
                         user={user}
                         cardData={cardData}

@@ -1,20 +1,20 @@
-import FeedCard from './FeedCard'
-import { Link } from "react-router-dom";
-import { feeds } from './contentData'
-import styles from './Feed.module.css'
-import ComingSoonModal from '../Modal/ComingSoonModal';
 import { useContext, useEffect, useState } from 'react';
+import exploreCard1 from '../../assets/explore/explore_card_1.png';
+import exploreCard2 from '../../assets/explore/explore_card_2.png';
+import exploreCard3 from '../../assets/explore/explore_card_3.png';
+import exploreCard4 from '../../assets/explore/explore_card_4.png';
 import { GlobalContext } from '../../context';
-import exploreCard1 from '../../assets/explore/explore_card_1.png'
-import exploreCard2 from '../../assets/explore/explore_card_2.png'
-import exploreCard3 from '../../assets/explore/explore_card_3.png'
-import exploreCard4 from '../../assets/explore/explore_card_4.png'
+import ComingSoonModal from '../Modal/ComingSoonModal';
+import InviteModal from '../Modal/InviteModal';
 import MyCardModal from '../Modal/MyCardModal';
+import { feeds } from './contentData';
+import FeedCard from './FeedCard';
 
 function Feeds({ header }) {
 
     const { userData } = useContext(GlobalContext);
     const [openModal, setOpenModal] = useState(false)
+    const [openInviteModal, setOpenInviteModal] = useState(false)
     const [openMyModal, setOpenMyModal] = useState(false)
     const [user, setUser] = useState('');
 
@@ -46,6 +46,10 @@ function Feeds({ header }) {
                 openModal={openModal}
                 setOpenModal={setOpenModal}
             />
+            <InviteModal
+                openModal={openInviteModal}
+                setOpenModal={setOpenInviteModal}
+            />
 
             <MyCardModal
                 openModal={openMyModal}
@@ -64,7 +68,7 @@ function Feeds({ header }) {
                         </div>
                         <div className="d-flex flex-column gap-3 w-100">
                             <img src={exploreCard2} width="100%" onClick={() => setOpenModal(true)} className="cursor-pointer" />
-                            <img src={exploreCard4} width="100%" onClick={() => setOpenModal(true)} className="cursor-pointer" />
+                            <img src={exploreCard4} width="100%" onClick={() => setOpenInviteModal(true)} className="cursor-pointer" />
                         </div>
                     </div>
                 </div>

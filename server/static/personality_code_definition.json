@@ -1168,7 +1168,7 @@
 				"[User_LSI], more than [User_ILE], frequently perceives and defines themselves and other people through group associations. [User_LSI] focuses on collectivism over individualism.",
 				"[User_ILE] often prefers to work with others in a team whereas [User_LSI] often prefers working alone.",
 				"When it comes to tasks, [User_ILE] is sleek like an eel - able to relax and move with the flow and then swiftly strike when the time is right. But once the job is done, [User_ILE] quickly glides back into their natural state of chillin' out. Meanwhile, [User_LSI] is more like a laser-guided missile - ready to take off and hit the target at any given moment.",
-				"W[User_LSI] should strive to be more understanding and open-minded when listening to [User_ILE]'s ideas, while [User_ILE] should make an effort to be more concise and organized when presenting their thoughts.",
+				"[User_LSI] should strive to be more understanding and open-minded when listening to [User_ILE]'s ideas, while [User_ILE] should make an effort to be more concise and organized when presenting their thoughts.",
 				"[User_LSI] is like the calm and collected yoga teacher, while [User_ILE] is like the pep-talk giving gym coach.",
 				"[User_ILE] likes to take their time to get in the right headspace before getting started with a task, while [User_LSI] likes to dive right in and swim towards the finish line! For [User_ILE], it's all about getting in the zone before they are ready to shine, while for [User_LSI], this stage of readiness is their natural state.",
 				"[User_ILE] tends to be more idealistic with their heads-in-the-cloud. [User_LSI], on the other hand, is more realistic and down-to-earth.",
@@ -2575,15 +2575,16 @@
 			],
 			"LSI": [
 				"[User_ESI]'s attitude towards a specific person (more so than [User_LSI]) is based on their personal characteristics (authority, intellect, personal achievements, etc.). [User_ESI] recognizes superiority of certain individuals drawing from their personal qualities.",
-				"[User_LSI] is more likely (than [User_ESI]) to seek new and novel experiences rather than returning to something already lived through. They will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
+				"[User_LSI] is more likely (than [User_ESI]) to seek new and novel experiences rather than returning to something already lived through. [User_LSI] will generally only re-read a book, re-watch a movie, or revisit the same place if they have forgotten it or are hoping to learn something new from it.",
 				"[User_LSI], more than [User_ESI], frequently perceives and defines themselves and other people through group associations. [User_LSI] focuses on collectivism over individualism.",
-				"[User_LSI] is often more interested in studying systems, structures, and functionality than [User_ESI].",
-				"[User_LSI] is more inclined to believe there is relative truths than [User_ESI]. That is, this relativity is perceived by [User_LSI] as an extenuation of the differing beliefs, opinions, intentions, etc. of each person.",
+				"[User_LSI] tends to be more interested in studying systems, structures, and functionality than [User_ESI].",
+				"[User_ESI] is always seeking out new emotional destinations. While [User_LSI] may take a more analytical approach to find their way, [User_ESI] uses their heart and the memories of familiar emotional anchors to make sure they stay on the path of discovery. With their personal library of emotional anchors, [User_ESI] may re-watch, re-read, and re-listen to experiences to stay connected to the feelings that make them feel their best."
+				"[User_LSI] is like a detective, always searching for the relative truths that exist between differing beliefs, opinions, intentions, etc. While [User_ESI] may take a more linear or straightforward approach to finding the answer, [User_LSI] uses their heart to uncover the hidden nuances of each person's perspective, recognizing that there is no single, absolute truth. [User_LSI] can piece together the clues to discover the unique relative truths between different points of view.",
 				"[User_ESI] tends to mix it up - work, play, and serious stuff all in one! It's an exciting and unpredictable journey, while [User_LSI] prefers to keep things separate - work and play have their designated time slots.",
 				"[User_ESI] is more likely than [User_LSI] to perceive and distinguish themselves primarily through personal qualities. [User_ESI] focuses on individualism more than [User_LSI].",
 				"[User_ESI] is often better at solving and minimizing interpersonal problems, whereas [User_LSI] often struggles understanding them.",
 				"[User_ESI] is more vulnerable to logical manipulation than [User_LSI]. However [User_LSI] in contrast, is often more vulnerable to emotional or ethical manipulations than [User_ESI].",
-				"[User_ESI] is not as inclined to compare and verify concepts as [User_LSI]. [User_ESI] assumes that these can have only one unique interpretation (the \"correct\" interpretation), and [User_ESI] often does not think about the fact that the other person may be interpreting them differently. Much more than [User_LSI], [User_ESI] applies concepts such as \"objective reality,\" \"unequivocal facts,\" and de-emphasize concepts; [User_ESI] considers that they know the \"right\" way of doing things, how something \"truly is,\" etc."
+				"[User_ESI] is like an explorer, always searching for the one and only true interpretation of concepts. While [User_LSI] may take a more analytical approach to find the answer, [User_ESI] uses their heart and their unwavering belief that they know the “right” way of doing things, how something “truly is,” etc."
 			],
 			"SLE": [
 				"[User_ESI] is able to change and make adjustments to their goals more easily than [User_SLE] (depending on how progress is being made, etc.). [User_SLE] on the other hand, prefers to stick with their original goals.",
@@ -2611,7 +2612,7 @@
 			],
 			"IEI": [
 				"[User_ESI] is more likely than [User_IEI] to perceive and distinguish themselves primarily through personal qualities. [User_ESI] focuses on individualism more than [User_IEI].",
-				"[User_ESI]'s fondness for leveraging emotional anchors to reinforce their inner emotional state clashes with [User_IEI]'s more internalized approach. This often leads to [User_ESI] re-visiting places, books, movies, and songs with an emotional resonance, creating a funny dynamic between the two.",
+				"[User_ESI]'s fondness for emotional anchors to reinforce their inner emotional state clashes with [User_IEI]'s more internalized approach. This often leads to [User_ESI] re-visiting places, books, movies, and songs with an emotional resonance, creating a funny dynamic between the two.",
 				"[User_IEI] is relatively better at assessing the emotional atmosphere occurring in a group or during an activity than [User_ESI].",
 				"[User_ESI] is more likely (than [User_IEI]) to use special rituals or other culturally accepted formalities when forming relationships with others. What that means is that the emotional proximity and relationship status for [User_ESI] is more externally predetermined. Additionally, [User_ESI] generally progresses in relationships through stages, and therefore is more familiar with these stages than [User_IEI]. [User_ESI] tends to be more linear in their relationship progression than [User_IEI], and [User_ESI] assigns importance to the formalities of recognizing the start and end to each of these stages.",
 				"When solving a problem, [User_IEI] relies more heavily on their generalized past experiences than [User_ESI]. [User_IEI] is inclined to use already prepared, preformulated methods and processes to solve a problem.",
@@ -2631,7 +2632,7 @@
 				"[User_ESI] is adept at adapting to any social situation and loves being surrounded by people, while the [User_SEE] is content to stay in their comfort zone and prefers a more solitary lifestyle.",
 				"[User_SEE] is like a firefly, illuminating the night sky and spreading their joy to those around them, whereas [User_ESI] is more often like an owl, happy to observe and reflect on the world and within, without having to be at the center of any attention.",
 				"[User_ESI] is relatively more rigid and stubborn than [User_SEE].",
-				"[User_SLI]'s fondness for leveraging emotional anchors to bolster their inner emotional state stands in slight contrast to [User_LII]'s more analytical attitude. This often leads to [User_SLI] revisiting places, books, movies, and songs that have an emotional attachment to, creating an amusing dynamic between the two."
+				"[User_SLI]'s fondness for emotional anchors to bolster their inner emotional state stands in slight contrast to [User_LII]'s more analytical attitude. This often leads to [User_SLI] revisiting places, books, movies, and songs that have an emotional attachment to, creating an amusing dynamic between the two."
 			],
 			"LIE": [
 				"[User_ESI] is often better at solving and minimizing interpersonal problems, whereas [User_LIE] often struggles understanding them.",
@@ -3301,7 +3302,7 @@
 				"[User_IEE] tends to perceive events in an episodic manner, i.e., they see events evolve in discrete states rather than continuous changes. On the other hand, [User_EIE] tends to perceive events in a continuous sequence; i.e., they see events evolving fluidly rather that one state to the next.",
 				"When laying out the progression of an event, [User_EIE] has a tendency to emphasize the flow from point to point, while [User_IEE] tend to focus more on the individual components and how they link together.",
 				"When something is perceived by [User_IEE] as being incorrect, they are more likely (than [User_EIE]) to tell the person who made the error what they did wrong and how to do it the right way. [User_IEE] is focused on who made the error and helping them to correct the mistake.",
-				"W[User_IEE] may feel overwhelmed by the more direct and assertive approach of [User_EIE]. To ensure a positive interaction, it's important for [User_EIE] to give [User_IEE] the space and time to process their thoughts and feelings."
+				"[User_IEE] may feel overwhelmed by the more direct and assertive approach of [User_EIE]. To ensure a positive interaction, it's important for [User_EIE] to give [User_IEE] the space and time to process their thoughts and feelings."
 			],
 			"IEI": [
 				"[User_IEE]'s energy levels tend to decrease when they're alone whereas [User_IEI]'s energy levels will decrease when they're interacting with larger groups of people.",

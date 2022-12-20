@@ -20,6 +20,7 @@ import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
 import Test from './pages/Test';
 import ReTakeTestPage from './pages/ReTakeTest';
+import InvitePage from './pages/InvitePage';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
@@ -83,6 +84,7 @@ const App = () => {
               <Route index path="/signin" element={<SignInScreen />} />
               <Route index path="/test" element={<Test assessmentGroupId={1} />} />
               <Route index path="/retake-test" element={<ReTakeTestPage />} />
+              <Route index path="/invite" element={<InvitePage />} />
               <Route index path="/home" element={<ProtectedRoute component={<HomeScreen />} />} />
               <Route index path="/user" element={<ProtectedRoute component={<UserProfile />} />} />
               <Route index path="/editProfile" element={<ProtectedRoute component={<EditProfile />} />} />

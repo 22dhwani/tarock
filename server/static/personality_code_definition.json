@@ -124,7 +124,7 @@
 				"[User_ESI] is generally better at concentrating on specific tasks for longer periods of time than [User_ILE].",
 				"It's like comparing a turtle to a hummingbird. [User_ESI] is content to slowly ponder ideas and concepts, while [User_ILE] can be seen as more focused on darting around and taking in all of the sights and sounds of their environment.",
 				"[User_ILE] is like a firefly, illuminating the night sky and spreading their joy to those around them, whereas [User_ESI] is like a wise owl, content to observe and reflect on the world and within, happy without having to be at the center of any attention.",
-				"[User_ILE] is relatively better at assessing the emotional atmosphere occurring in a group or during an activity than [User_ESI]."
+				"[User_ILE] is generally better at assessing the emotional atmosphere occurring in a group or during an activity than [User_ESI]."
 			],
 			"SEE": [
 				"[User_SEE] tends to combine emotional exchanges with other activities rather than separating them out like [User_ILE]. [User_SEE] sees having fun occurring simultaneously with other activities, such as work or even serious affairs. [User_ILE] is more likely to separate out having fun with other activities, although the two can be interchanged at a high frequency.",
@@ -2826,13 +2826,14 @@
 			],
 			"SLE": [
 				"[User_SLE] is more likely than [User_LSE] to tackle a task in its entirety, rather than breaking it up into smaller separate stages.",
+				"[User_SLE] is more likely to find comfort through external sources that they connect with emotionally, while [User_LSE] is less likely to do so. [User_SLE] will often revisit these sources to reinforce the emotional bond, like re-reading a favorite book, watching a favorite movie, or going back to a special place.",
+				"[User_LSE] is generally more unmoving and set in their ways than [User_SLE] – who is generally more accepting to unexpected changes in a plan.",
 				"[User_SLE] is like an emotional navigator, always finding their way back to familiar emotional destinations. While [User_LSE] might use a map, compass, and a calculator to find their way, [User_SLE] uses their heart and the memories of familiar emotional anchors to make sure they stay on course. With their personal library of emotional anchors, [User_SLE] may re-watch, re-read, and re-listen to experiences to stay connected to the feelings that make them feel their best.",
-				"[User_LSE] is usually more set in their ways and less willing to compromise than [User_SLE] when it comes to making decisions.",
 				"[User_SLE] may have a harder time understanding the imaginative and interpretive approach of [User_LSE], and [User_LSE] may need to be patient while [User_SLE] processes their thoughts.",
 				"[User_SLE] may be better at quickly making decisions and taking charge of the situation, while [User_LSE] may prefer to work things out through dialogue.",
 				"[User_SLE] may be more likely to rely on established methods and existing knowledge, and [User_LSE] may focus more on exploring new ideas and creative solutions.",
 				"[User_SLE] may be better at estimating outcomes and taking into account potential risks, while [User_LSE] may be more interested in exploring the different perspectives and understanding the context of the situation.",
-				"When meeting someone new, [User_SLE] may jump right into matter-of-factly describing the purpose of the relationship, while [User_LSE] may be keen to explore the nuances and intricacies of the connection.",
+				"When meeting someone new, [User_SLE] may jump right into matter-of-factly describing the purpose of the interaction, while [User_LSE] may be keen to explore the nuances and intricacies of the connection.",
 				"When describing reality, [User_SLE] is more likely to talk about the properties and structure of reality. [User_LSE] is more likely to describe reality as movements, interactions, and changes.",
 				"[User_SLE] is more likely to be the one to tell you the story behind the project, going into detail about the decision-making and implementation processes, while [User_LSE] might prefer to set the scene of the project in the broader context.",
 				"[User_LSE] is not as inclined to compile and verify concepts as [User_SLE]. [User_LSE] assumes that these can have only one unique interpretation (the \"correct\" interpretation), and [User_LSE] often does not think about the fact that the other person may be interpreting them differently. Much more than [User_SLE], [User_LSE] applies concepts such as \"objective reality,\" \"unequivocal facts,\" and de-emphasize concepts; [User_LSE] considers that they know the \"right\" way of doing things, how something \"truly is,\" etc.",

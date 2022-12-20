@@ -28,6 +28,12 @@
     background-image: url("../assets/cards/noise.png");
 }
 
+.card-noise-invite {
+    background-image: url("../assets/cards/noise.png"), url("../assets/cards/invite_card_bg.png");
+    background-position: top left, bottom right;
+    background-size: 100%, 100%;
+}
+
 .text-darkPurple {
   color: #49304D;
 }

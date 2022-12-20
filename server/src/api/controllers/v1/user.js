@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import User from '../../models/user.js';
 import crypto from 'crypto';
 import ApiToken from '../../models/apiToken.js';
@@ -8,6 +10,11 @@ import UserFirebaseModel from '../../models/userFirebase.js';
 import UserAvatarModel from '../../models/userAvatar.js';
 import https from 'https'
 import axios from 'axios';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const dir = dirname(fileURLToPath(import.meta.url));
+const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 
 async function getUser(req,res){          
     let user = res.user;
@@ -21,8 +28,26 @@ async function getUser(req,res){
         );
     }  
 
+    if(req.query.internal_user_id){
+        let userData = await User.queryReal(req.query.internal_user_id)
+        if(userData.length > 0){
+            user = userData[0]
+        }
+    }
+
     let userAvatar = await UserAvatarModel.getByUserId(user.internal_user_id)
     user.user_avatar = userAvatar[0] ?? null
+    user.question_data = null
+
+    const tarcokResult = await Result.getByUser(user.internal_user_id);
+    if (tarcokResult.length > 0) {
+        const tarockData = data[tarcokResult[0].result_code];
+        user.question_data = {
+            resultCode: tarcokResult[0].result_code,
+            quadra: tarockData.personality_socionic_quadra
+        };
+    }
+
     res.json(
         {
             data: user,
@@ -143,36 +168,60 @@ async function createTempUser(req,res){
             await UserAvatarModel.addAvatar(req.body.device_id)
         }
         userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-        let face_index  = userAvatar[0].face_index
-        let hair_index  = userAvatar[0].hair_index
-        let eye_index  = userAvatar[0].eye_index
-        let eyebrow_index  = userAvatar[0].eyebrow_index
-        let ear_index  = userAvatar[0].ear_index
-        let nose_index  = userAvatar[0].nose_index
-        let lips_index  = userAvatar[0].lips_index
-        if(req.body.face_index){
-            face_index= req.body.face_index
+        let face_index = userAvatar[0].face_index
+		let hair_index = userAvatar[0].hair_index
+		let eyebrow_index = userAvatar[0].eyebrow_index
+		let eye_index = userAvatar[0].eye_index
+		let nose_index = userAvatar[0].nose_index
+		let whiskers_index = userAvatar[0].whiskers_index
+		let beard_index = userAvatar[0].beard_index
+		let lips_index = userAvatar[0].lips_index
+		let ear_index = userAvatar[0].ear_index
+		let glasses_index = userAvatar[0].glasses_indexx
+
+        if(req.body.face_index || req.body.face_index == 0){
+            face_index = req.body.face_index
         }
-        if(req.body.hair_index){
-            hair_index= req.body.hair_index
+        if(req.body.hair_index || req.body.hair_index == 0){
+            hair_index = req.body.hair_index
         }
-        if(req.body.eye_index){
-            eye_index= req.body.eye_index
+        if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
+            eyebrow_index = req.body.eyebrow_index
         }
-        if(req.body.eyebrow_index){
-            eyebrow_index= req.body.eyebrow_index
+        if(req.body.eye_index || req.body.eye_index == 0){
+            eye_index = req.body.eye_index
         }
-        if(req.body.ear_index){
-            ear_index= req.body.ear_index
+        if(req.body.nose_index || req.body.nose_index == 0){
+            nose_index = req.body.nose_index
         }
-        if(req.body.nose_index){
-            nose_index= req.body.nose_index
+        if(req.body.whiskers_index || req.body.whiskers_index == 0){
+            whiskers_index = req.body.whiskers_index
         }
-        if(req.body.lips_index){
-            lips_index= req.body.lips_index
+        if(req.body.beard_index || req.body.beard_index == 0){
+            beard_index = req.body.beard_index
+        }
+        if(req.body.lips_index || req.body.lips_index == 0){
+            lips_index = req.body.lips_index
+        }
+        if(req.body.ear_index || req.body.ear_index == 0){
+            ear_index = req.body.ear_index
+        }
+        if(req.body.glasses_index || req.body.glasses_index == 0){
+            glasses_index = req.body.glasses_index
         }
     
-        await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+        await UserAvatarModel.updateAvatar(userAvatar[0].id,
+            face_index,
+			hair_index,
+			eyebrow_index,
+			eye_index,
+			nose_index,
+			whiskers_index,
+			beard_index,
+			lips_index,
+			ear_index,
+			glasses_index
+        )
         userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
     
         tempUser.user_avatar = userAvatar[0] ?? null
@@ -214,33 +263,47 @@ async function createTempUser(req,res){
         await UserAvatarModel.addAvatar(req.body.device_id)
     }
     userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-    let face_index  = userAvatar[0].face_index
-    let hair_index  = userAvatar[0].hair_index
-    let eye_index  = userAvatar[0].eye_index
-    let eyebrow_index  = userAvatar[0].eyebrow_index
-    let ear_index  = userAvatar[0].ear_index
-    let nose_index  = userAvatar[0].nose_index
-    let lips_index  = userAvatar[0].lips_index
+    let face_index = userAvatar[0].face_index
+	let hair_index = userAvatar[0].hair_index
+	let eyebrow_index = userAvatar[0].eyebrow_index
+	let eye_index = userAvatar[0].eye_index
+	let nose_index = userAvatar[0].nose_index
+	let whiskers_index = userAvatar[0].whiskers_index
+	let beard_index = userAvatar[0].beard_index
+	let lips_index = userAvatar[0].lips_index
+	let ear_index = userAvatar[0].ear_index
+	let glasses_index = userAvatar[0].glasses_index
+
+
     if(req.body.face_index || req.body.face_index == 0){
-        face_index= req.body.face_index
+        face_index = req.body.face_index
     }
     if(req.body.hair_index || req.body.hair_index == 0){
-        hair_index= req.body.hair_index
-    }
-    if(req.body.eye_index || req.body.eye_index == 0){
-        eye_index= req.body.eye_index
+        hair_index = req.body.hair_index
     }
     if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
-        eyebrow_index= req.body.eyebrow_index
+        eyebrow_index = req.body.eyebrow_index
     }
-    if(req.body.ear_index || req.body.ear_index == 0){
-        ear_index= req.body.ear_index
+    if(req.body.eye_index || req.body.eye_index == 0){
+        eye_index = req.body.eye_index
     }
     if(req.body.nose_index || req.body.nose_index == 0){
-        nose_index= req.body.nose_index
+        nose_index = req.body.nose_index
+    }
+    if(req.body.whiskers_index || req.body.whiskers_index == 0){
+        whiskers_index = req.body.whiskers_index
+    }
+    if(req.body.beard_index || req.body.beard_index == 0){
+        beard_index = req.body.beard_index
     }
     if(req.body.lips_index || req.body.lips_index == 0){
-        lips_index= req.body.lips_index
+        lips_index = req.body.lips_index
+    }
+    if(req.body.ear_index || req.body.ear_index == 0){
+        ear_index = req.body.ear_index
+    }
+    if(req.body.glasses_index || req.body.glasses_index == 0){
+        glasses_index = req.body.glasses_index
     }
 
     await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
@@ -336,13 +399,28 @@ async function createRealUser(req,res){
         let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
         if(oldAvatar.length > 0){
             let face_index  = oldAvatar[0].face_index
-            let eye_index  = oldAvatar[0].eye_index
-            let eyebrow_index  = oldAvatar[0].eyebrow_index
-            let ear_index  = oldAvatar[0].ear_index
-            let nose_index  = oldAvatar[0].nose_index
-            let lips_index  = oldAvatar[0].lips_index
             let hair_index  = oldAvatar[0].hair_index
-            await UserAvatarModel.addAvatar(hashEmail,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+            let eyebrow_index  = oldAvatar[0].eyebrow_index
+            let eye_index  = oldAvatar[0].eye_index
+            let nose_index  = oldAvatar[0].nose_index
+            let whiskers_index  = oldAvatar[0].whiskers_index
+            let beard_index  = oldAvatar[0].beard_index
+            let lips_index  = oldAvatar[0].lips_index
+            let ear_index  = oldAvatar[0].ear_index
+            let glasses_index  = oldAvatar[0].glasses_index
+            await UserAvatarModel.addAvatar(
+                hashEmail,
+                face_index,
+                hair_index,
+                eyebrow_index,
+                eye_index,
+                nose_index,
+                whiskers_index,
+                beard_index,
+                lips_index,
+                ear_index,
+                glasses_index
+            )
         }
 
     } catch (error) {
@@ -367,6 +445,16 @@ async function createRealUser(req,res){
 
     let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
     data[0].user_avatar = userAvatar[0] ?? null
+    data[0].question_data = null
+
+    const tarcokResult = await Result.getByUser(data[0].internal_user_id);
+    if (tarcokResult.length > 0) {
+        const tarockData = data[tarcokResult[0].result_code];
+        data[0].question_data = {
+            resultCode: tarcokResult[0].result_code,
+            quadra: tarockData.personality_socionic_quadra
+        };
+    }
 
     res.json(
         {
@@ -429,6 +517,18 @@ async function login(req,res){
     }
     let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
     emailExistUser[0].user_avatar = userAvatar[0] ?? null
+
+    emailExistUser[0].question_data = null
+
+    const tarcokResult = await Result.getByUser(emailExistUser[0].internal_user_id);
+    if (tarcokResult.length > 0) {
+        const tarockData = data[tarcokResult[0].result_code];
+        emailExistUser[0].question_data = {
+            resultCode: tarcokResult[0].result_code,
+            quadra: tarockData.personality_socionic_quadra
+        };
+    }
+
     res.json(
         {
             token:token,
@@ -540,37 +640,60 @@ async function editUser(req,res){
         await UserAvatarModel.addAvatar(user.id)
     }
     userAvatar = await UserAvatarModel.getByUserId(user.id)
-    let face_index  = userAvatar[0].face_index
-    let hair_index  = userAvatar[0].hair_index
-    let eye_index  = userAvatar[0].eye_index
-    let eyebrow_index  = userAvatar[0].eyebrow_index
-    let ear_index  = userAvatar[0].ear_index
-    let nose_index  = userAvatar[0].nose_index
-    let lips_index  = userAvatar[0].lips_index
+    let face_index = userAvatar[0].face_index
+	let hair_index = userAvatar[0].hair_index
+	let eyebrow_index = userAvatar[0].eyebrow_index
+	let eye_index = userAvatar[0].eye_index
+	let nose_index = userAvatar[0].nose_index
+	let whiskers_index = userAvatar[0].whiskers_index
+	let beard_index = userAvatar[0].beard_index
+	let lips_index = userAvatar[0].lips_index
+	let ear_index = userAvatar[0].ear_index
+	let glasses_index = userAvatar[0].glasses_index
 
     if(req.body.face_index || req.body.face_index == 0){
-        face_index= req.body.face_index
+        face_index = req.body.face_index
     }
     if(req.body.hair_index || req.body.hair_index == 0){
-        hair_index= req.body.hair_index
-    }
-    if(req.body.eye_index || req.body.eye_index == 0){
-        eye_index= req.body.eye_index
+        hair_index = req.body.hair_index
     }
     if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
-        eyebrow_index= req.body.eyebrow_index
+        eyebrow_index = req.body.eyebrow_index
     }
-    if(req.body.ear_index || req.body.ear_index == 0){
-        ear_index= req.body.ear_index
+    if(req.body.eye_index || req.body.eye_index == 0){
+        eye_index = req.body.eye_index
     }
     if(req.body.nose_index || req.body.nose_index == 0){
-        nose_index= req.body.nose_index
+        nose_index = req.body.nose_index
+    }
+    if(req.body.whiskers_index || req.body.whiskers_index == 0){
+        whiskers_index = req.body.whiskers_index
+    }
+    if(req.body.beard_index || req.body.beard_index == 0){
+        beard_index = req.body.beard_index
     }
     if(req.body.lips_index || req.body.lips_index == 0){
-        lips_index= req.body.lips_index
+        lips_index = req.body.lips_index
+    }
+    if(req.body.ear_index || req.body.ear_index == 0){
+        ear_index = req.body.ear_index
+    }
+    if(req.body.glasses_index || req.body.glasses_index == 0){
+        glasses_index = req.body.glasses_index
     }
 
-    await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+    await UserAvatarModel.updateAvatar(userAvatar[0].id,
+        face_index,
+		hair_index,
+		eyebrow_index,
+		eye_index,
+		nose_index,
+		whiskers_index,
+		beard_index,
+		lips_index,
+		ear_index,
+		glasses_index
+    )
     userAvatar = await UserAvatarModel.getByUserId(user.id)
 
     user = await User.findUserByEmail(user.email);

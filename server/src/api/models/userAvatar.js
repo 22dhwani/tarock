@@ -12,13 +12,37 @@ const UserAvatarModel = {
 		return data[0];
     },
 
-    async addAvatar(userId,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index){
-        const data = await sql.query("INSERT INTO `user_avatars` (`id`, `internal_user_id`, `face_index`, `hair_index`, `eye_index`, `eyebrow_index`, `ear_index`, `nose_index`, `lips_index`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);",[userId,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index])
+    async addAvatar(userId,face_index,hair_index,eyebrow_index,eye_index,nose_index,whiskers_index,beard_index,lips_index,ear_index,glasses_index){
+        const data = await sql.query("INSERT INTO `user_avatars` (`id`, `internal_user_id`, `face_index`, `hair_index`, `eyebrow_index`, `eye_index`, `nose_index`,`whiskers_index`,`beard_index`, `lips_index`, `ear_index`, `glasses_index`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);",[
+			userId,
+			face_index,
+			hair_index,
+			eyebrow_index,
+			eye_index,
+			nose_index,
+			whiskers_index,
+			beard_index,
+			lips_index,
+			ear_index,
+			glasses_index
+		])
 		return data[0];
     },
 
-	async updateAvatar(avatarId,face_index = null,hair_index= null,eye_index= null,eyebrow_index= null,ear_index= null,nose_index= null,lips_index= null) {
-        const data = await sql.query("UPDATE user_avatars SET face_index = ?, hair_index = ?,eye_index = ?,eyebrow_index = ?,ear_index = ?,nose_index = ?,lips_index = ? WHERE id = ?",[face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index,avatarId])
+	async updateAvatar(avatarId,face_index = null,hair_index = null,eyebrow_index = null,eye_index = null,nose_index = null,whiskers_index = null,beard_index = null,lips_index = null,ear_index = null,glasses_index = null) {
+        const data = await sql.query("UPDATE user_avatars SET face_index = ?, hair_index = ?,eyebrow_index = ?,eye_index = ?,nose_index = ?,whiskers_index = ?,beard_index = ?,lips_index = ?,ear_index = ?,glasses_index = ? WHERE id = ?",[
+			face_index,
+			hair_index,
+			eyebrow_index,
+			eye_index,
+			nose_index,
+			whiskers_index,
+			beard_index,
+			lips_index,
+			ear_index,
+			glasses_index,
+			avatarId
+		])
 		return data[0];
 	}
 

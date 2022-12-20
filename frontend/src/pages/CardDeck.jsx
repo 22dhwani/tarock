@@ -16,6 +16,8 @@ import MatchCard from '../components/Cards/Match/MatchCard';
 import linkC from '../assets/buttons/linkC.svg';
 import linkNC from '../assets/buttons/linkNC.svg';
 import imgButton from '../assets/buttons/image.svg';
+import ComingSoonModal from '../components/Modal/ComingSoonModal';
+import Notification from '../components/Modal/Notification';
 
 const CardsScreen = () => {
     const { userData } = useContext(GlobalContext);
@@ -29,7 +31,7 @@ const CardsScreen = () => {
     const [quadra, setQuadra] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [clickedMatchUserId, setClickedMatchUserId] = useState('');
-   
+
     const onMyCardClick = (card) => {
         setCardType(card);
         setShowCard(true);
@@ -74,7 +76,7 @@ const CardsScreen = () => {
 
     useEffect(() => {
         getCardData()
-            .then(async() => {
+            .then(async () => {
                 if (matchUserId && matchUserId != userData.Id) {
                     await matchUser().then(() => getCardData());
                 }
@@ -98,42 +100,31 @@ const CardsScreen = () => {
     }
     const [shareCardOption, setShareCardOption] = useState(false);
     const [linkButton, setLinkButton] = useState(linkNC);
+    const [showTip, setShowTip] = useState(false);
+    const [tipDetails, setTipDetails] = useState({
+        title: '',
+        content: ''
+    });
+    useEffect(() => {
+        if (shareCardOption) {
+            //opens when share button clicked
+            setTipDetails(
+                prev => ({
+                    ...prev,
+                    title: 'Share your card',
+                    content: 'Share your Tarock card and Match with your friends!'
+                })
+            )
+            setShowTip(true);
+            setTimeout(() => {
+               setShowTip(false);
+            }, 3000);
+        }
+    }, [shareCardOption]);
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
-            <Popup show={showNotification} setShow={setShowNotification} isNotification={true}>
-                <div className='rounded-3 py-3 d-flex flex-column gap-4 align-items-center text-center' style={{ backgroundColor: 'white', color: '#49304D' }}>
-                    <h1 style={{
-                        fontWeight: '700',
-                        fontSize: '22px',
-                        lineHeight: '36px',
-                    }}>
-                        Coming Soon
-                    </h1>
-                    <p style={{
-                        fontWeight: '500',
-                        fontSize: '16px',
-                        lineHeight: '19.5px',
-                    }}>
-                        We are working hard to develop this feature. <br></br><b>Stay tuned!</b>
-                    </p>
-                    <button
-                        onClick={() => setShowNotification(false)}
-                        style={{
-                            border: 'none',
-                            backgroundColor: '#49304D',
-                            color: '#FFFFFF',
-                            borderRadius: '50px',
-                            paddingLeft: '1.5rem',
-                            paddingRight: '1.5rem',
-                            paddingTop: '0.5rem',
-                            paddingBottom: '0.5rem',
-                            fontWeight: '700',
-                            width:'80%'
-                        }}>
-                        Got it
-                    </button>
-                </div>
-            </Popup>
+             <ComingSoonModal openModal={showNotification} setOpenModal={setShowNotification} />
+            <Notification openModal={showTip} setOpenModal={setShowTip} title={tipDetails.title} desc={tipDetails.content} />
             <Popup show={showCard} setShow={setShowCard} isCard={true}>
                 <>
                     {cardType}
@@ -144,8 +135,8 @@ const CardsScreen = () => {
                             border: 'none',
                             backgroundColor: '#FFD874',
                             borderRadius: '50px',
-                            paddingTop: '10px',
-                            paddingBottom: '10px',
+                            paddingTop: '13px',
+                            paddingBottom: '13px',
                             fontWeight: '700',
                             width: '60%',
                             marginLeft: 'auto',
@@ -156,7 +147,7 @@ const CardsScreen = () => {
                             lineHeight: '14px',
                             letterSpacing: '0em',
                         }}>
-                        Share
+                        Share & Match
                     </button>
                     <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
                         <div className='d-flex gap-5 mx-auto' style={{
@@ -166,25 +157,34 @@ const CardsScreen = () => {
                                 cursor: 'pointer'
                             }} onClick={() => {
                                 setLinkButton(linkC);
-                                setTimeout(
-                                    () => setLinkButton(linkNC),
-                                    1000
-                                );
+                                setTipDetails(
+                                    prev => ({
+                                        ...prev,
+                                        title: 'Link Copied!',
+                                        content: 'Easily share and compare your Match Card with your friends.'
+                                    })
+                                )
+                                setShowTip(true);
+                                setTimeout(() => {
+                                    setLinkButton(linkNC);
+                                    setShowTip(false)
+                                }, 1500);
                                 if (tab) {
                                     navigator.clipboard.writeText(`${window.location.origin}/share/${userData.id}`);
                                 } else {
                                     navigator.clipboard.writeText(`${window.location.origin}/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
                                 }
-                            }}/>
+                            }} />
                             <img src={imgButton} alt='image' style={{
                                 cursor: 'pointer'
                             }} onClick={() => {
+                                //open in new tab
                                 if (tab) {
-                                    navigate(`/share/${userData.id}`, { state: { qr: true } })
+                                    window.open(`/share/${userData.id}`, '_blank');
                                 } else {
-                                    navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
+                                    window.open(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`, '_blank');
                                 }
-                            }}/>
+                            }} />
                         </div>
                     </Popup>
                 </>
@@ -202,9 +202,9 @@ const CardsScreen = () => {
                                 </div>
                             </Col>
                             <Col className='d-flex align-items-center justify-content-center'>
-                            <div style={{ cursor: 'pointer' }} onClick={() => setShowNotification(true)} >
-                                <AddCardButton />
-                            </div>
+                                <div style={{ cursor: 'pointer' }} onClick={() => setShowNotification(true)} >
+                                    <AddCardButton />
+                                </div>
                             </Col>
                         </>
                         : <>
@@ -214,20 +214,20 @@ const CardsScreen = () => {
                                         matchedCardsData.map((data, index) => {
                                             return <Col key={index} className='justify-content-center d-flex'>
                                                 <div style={{ cursor: 'pointer' }}
-                                                onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}>
-                                                <GenCard cardType='match'
-                                                avatar_index={userData.avatarIndex} 
-                                                userQuadra={quadra}
-                                                matchedQuadra={data.matchedUserQuadra} 
-                                                matchedUserName={data.matchedUserName}
-                                                matchedUserAvartarIndex={data.matchedUserAvatarIndex}/>
-                                                 </div>
+                                                    onClick={() => onMatchCardClick(<MatchCard origID={userData.id} matchedUserID={data.matchedUserId} />, data.matchedUserId)}>
+                                                    <GenCard cardType='match'
+                                                        avatar_index={userData.avatarIndex}
+                                                        userQuadra={quadra}
+                                                        matchedQuadra={data.matchedUserQuadra}
+                                                        matchedUserName={data.matchedUserName}
+                                                        matchedUserAvartarIndex={data.matchedUserAvatarIndex} />
+                                                </div>
                                             </Col>
                                         })
                                     }
                                     <Col className='d-flex align-items-center justify-content-center' >
                                         <div style={{ cursor: 'pointer' }} onClick={shareCard} >
-                                            <AddCardButton startMatching={true}/>
+                                            <AddCardButton startMatching={true} />
                                         </div>
                                     </Col>
                                 </>

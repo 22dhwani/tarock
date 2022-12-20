@@ -58,7 +58,9 @@ function MatchCard(props) {
     }, []);
 
     useEffect(() => {
-        setMatchingTips(parseMatchingTips(matchedCard.personality_code, matchedUser.name));
+        const parsedTips = parseMatchingTips(matchedCard.personality_code, matchedUser.name);
+        setMatchingTips(parsedTips);
+
     }, [cardData, matchedCard]);
 
     function parseMatchingTips(matchedType, matchedUserName) {
@@ -91,6 +93,8 @@ function MatchCard(props) {
             return '#BB6BD9';
         }
     }
+    const userFirstName = user.name ? user.name.trim().split(' ')[0] : '';
+    const matchedFirstName = matchedUser.name ? matchedUser.name.trim().split(' ')[0] : '';
     let userQuadra = getColor(cardData.personality_socionic_quadra);
     let matchedQuadra = getColor(matchedCard.personality_socionic_quadra);
     const linearColor = getUserMatchLinearColorFromQuadra(cardData.personality_socionic_quadra, matchedCard.personality_socionic_quadra)
@@ -104,7 +108,7 @@ function MatchCard(props) {
         const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
             <div className='py-5 rounded-4 text-white card-noise' style={{ backgroundImage: linearColorWithNoise }}>
                 <div className='d-flex flex-column gap-4'>
-                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={()=>navigate('/')} style={{cursor:'pointer'}}/>}
+                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />}
                     <UserInfo cardData={cardData} user={user} />
                     <div className='px-3'>
                         <div style={{
@@ -116,10 +120,10 @@ function MatchCard(props) {
                             width: '100%',
                             padding: '20px',
                         }}>
-                            <div className="position-relative" style={{height: "260px"}}>
-                                <img src={chartImg} alt="" style={{width: '100%',height: "100%", objectFit: 'contain',}} />
-                                <img src={userChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
-                                <img src={matchedChartDataImage} alt="" style={{width: '100%',height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0'}} />
+                            <div className="position-relative" style={{ height: "260px" }}>
+                                <img src={chartImg} alt="" style={{ width: '100%', height: "100%", objectFit: 'contain', }} />
+                                <img src={userChartDataImage} alt="" style={{ width: '100%', height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0' }} />
+                                <img src={matchedChartDataImage} alt="" style={{ width: '100%', height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0' }} />
                             </div>
                         </div>
                     </div>
@@ -154,13 +158,26 @@ function MatchCard(props) {
                         padding: '20px',
                         overflow: 'auto'
                     }}>
-                        {matchingTips.map((item, index) => {
-                            return (
-                                <p key={index}>
-                                    {item}
-                                </p>
-                            )
-                        })}
+                        {
+                            matchingTips.map((item, index) => {
+                                return (
+                                    <p key={index} className='mb-2' style={{ fontSize: '14px' }}>
+                                       {
+                                        item.split(' ').map((word, index) => {
+                                            let removedSpecialChar = word.replace(/[^a-zA-Z ]/g, "");
+                                            if (removedSpecialChar === userFirstName) {
+                                                return <span key={index} style={{ fontWeight: 'bold' }}>{word} </span>
+                                            } else if (removedSpecialChar === matchedFirstName) {
+                                                return <span key={index} style={{ fontWeight: 'bold' }}>{word} </span>
+                                            } else {
+                                                return <span key={index}> {word} </span>
+                                            }
+                                        })
+                                       }
+                                    </p>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <UserInfo cardData={matchedCard} user={matchedUser} />
@@ -169,7 +186,7 @@ function MatchCard(props) {
         return (
             <>
                 {
-                    location === '/matchCard' || matchingTips.length == 0 ? matchView : <Swipper data={[matchView,tipsView]} />
+                    location === '/matchCard' || matchingTips.length == 0 ? matchView : <Swipper data={[matchView, tipsView]} />
                 }
             </>
 

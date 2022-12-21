@@ -9,6 +9,7 @@ import userZodiac from '../../models/userZodiac.js';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
+const zodiacData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/zodiac_card_data.json')));
 
 async function getUserCard(req,res){         
     
@@ -101,8 +102,15 @@ async function getUserCard(req,res){
 
 
 async function getTypeCard(req,res){          
-    let type = req.query.type;
-    let finalData = data[type];
+    let {type,zodiac,animal} = req.query
+    let finalData = null
+    if(type){
+        finalData = data[type];
+    }
+    if(zodiac){
+        finalData = zodiacData[zodiac];
+    }
+    
     res.json(
         {
             data: finalData,

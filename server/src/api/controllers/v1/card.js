@@ -10,6 +10,7 @@ import userZodiac from '../../models/userZodiac.js';
 const dir = dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 const zodiacData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/zodiac_card_data.json')));
+const animalData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/chinese_zodiac_card_data.json')));
 
 async function getUserCard(req,res){         
     
@@ -83,8 +84,15 @@ async function getUserCard(req,res){
             let zodiac = await userZodiac.getUserZodiac(user.internal_user_id,'ZODIAC')
             if(zodiac.length > 0){
                 result[0].data.push({
-                    card_type:zodiac[0].card_type,
-                    data:zodiac[0].zodiac
+                    resultCode:zodiac[0].card_type,
+                    quadra:zodiac[0].zodiac
+                })
+            }
+            let animal = await userZodiac.getUserZodiac(user.internal_user_id,'CHINESE_ZODIAC')
+            if(animal.length > 0){
+                result[0].data.push({
+                    resultCode:animal[0].card_type,
+                    quadra:animal[0].animal
                 })
             }
             
@@ -110,10 +118,13 @@ async function getTypeCard(req,res){
     if(zodiac){
         finalData = zodiacData[zodiac];
     }
+    if(animal){
+        finalData = animalData[animal];
+    }
     
     res.json(
         {
-            data: finalData,
+            data:finalData,
             message: "Explore returned",
             status: 1,
         }
@@ -122,16 +133,9 @@ async function getTypeCard(req,res){
 }
 
 async function addCard(req,res) {
-    const { birth_date, gender,card_type } = req.body
+    const { birth_date, gender,card_type,birth_year } = req.body
     let user = res.user
-    if(!birth_date){
-        res.status(422).json(
-            {
-                message:"birthdate is required",
-                status: 0,
-            }
-        );
-    }
+    
     if(!gender){
         res.status(422).json(
             {
@@ -151,6 +155,14 @@ async function addCard(req,res) {
     }
 
     if(card_type == "ZODIAC"){
+        if(!birth_date){
+            res.status(422).json(
+                {
+                    message:"birthdate is required",
+                    status: 0,
+                }
+            );
+        }
         let date_map = [
             {
                 'start_date':'01-20',
@@ -243,10 +255,9 @@ async function addCard(req,res) {
                     return true
                 }
                 return false
-            }
-    
-            
+            }            
         })
+
         if(small_map.length <= 0){
             res.status(422).json(
                 {
@@ -261,6 +272,104 @@ async function addCard(req,res) {
         await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
     }else{
 
+        if(!birth_year){
+            res.status(422).json(
+                {
+                    message:"Birth Year is required",
+                    status: 0,
+                }
+            );
+        }
+
+        let year_map = [
+            {
+                'years':[
+                    1924, 1936, 1948, 1960, 1972, 1984, 1996, 2008, 2020
+                ],
+                'animal':'Rat',
+            },
+            {
+                'years':[
+                    1925, 1937, 1949, 1961, 1973, 1985, 1997, 2009, 2021
+                ],
+                'animal':'Ox',
+            },
+            {
+                'years':[
+                    1926, 1938, 1950, 1962, 1974, 1986, 1998, 2010, 2022
+                ],
+                'animal':'Tiger',
+            },
+            {
+                'years':[
+                    1927, 1939, 1951, 1963, 1975, 1987, 1999, 2011, 2023
+                ],
+                'animal':'Rabbit',
+            },
+            {
+                'years':[
+                    1928, 1940, 1952, 1964, 1976, 1988, 2000, 2012, 2024
+                ],
+                'animal':'Dragon',
+            },
+            {
+                'years':[
+                    1929, 1941, 1953, 1965, 1977, 1989, 2001, 2013, 2025
+                ],
+                'animal':'Snake',
+            },
+            {
+                'years':[
+                    1930, 1942, 1954, 1966, 1978, 1990, 2002, 2014, 2026
+                ],
+                'animal':'Horse',
+            },
+            {
+                'years':[
+                    1931, 1943, 1955, 1967, 1979, 1991, 2003, 2015, 2027
+                ],
+                'animal':'Goat',
+            },
+            {
+                'years':[
+                    1932, 1944, 1956, 1968, 1980, 1992, 2004, 2016, 2028
+                ],
+                'animal':'Monkey',
+            },
+            {
+                'years':[
+                    1933, 1945, 1957, 1969, 1981, 1993, 2005, 2017, 2029
+                ],
+                'animal':'Rooster',
+            },
+            {
+                'years':[
+                    1935, 1947, 1959, 1971, 1983, 1995, 2007, 2019, 2031
+                ],
+                'animal':'Pig',
+            },
+        ]
+
+
+        let final_map = year_map.filter((data)=>{
+            if(data.years.includes(parseInt(birth_year))){
+                return true
+            }
+            return false
+        })
+
+        if(final_map.length <= 0){
+            res.status(422).json(
+                {
+                    message:"animal Not found for selected year",
+                    status: 0,
+                }
+            );
+            return
+        }
+
+        let selected_animal = final_map[0].animal
+        await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_year,null,selected_animal)
     }
 
     

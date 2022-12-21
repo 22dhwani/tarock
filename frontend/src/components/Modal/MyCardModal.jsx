@@ -2,11 +2,11 @@ import MyCard from "../Cards/MyCard";
 import Popup from "../PopUp/PopUp"
 import linkC from '../../assets/buttons/linkC.svg';
 import linkNC from '../../assets/buttons/linkNC.svg';
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import imgButton from '../../assets/buttons/image.svg';
 import { GlobalContext } from "../../context";
 import { useNavigate } from "react-router-dom";
-
+import Notification from "./Notification";
 const MyCardModal = ({
 	openModal,
 	setOpenModal,
@@ -16,9 +16,30 @@ const MyCardModal = ({
 
 	const [shareCardOption, setShareCardOption] = useState(false);
 	const [linkButton, setLinkButton] = useState(linkNC);
-
+	const [showTip, setShowTip] = useState(false);
+    const [tipDetails, setTipDetails] = useState({
+        title: '',
+        content: ''
+    });
+    useEffect(() => {
+        if (shareCardOption) {
+            //opens when share button clicked
+            setTipDetails(
+                prev => ({
+                    ...prev,
+                    title: 'Share your card',
+                    content: 'Share your Tarock card and Match with your friends!'
+                })
+            )
+            setShowTip(true);
+            setTimeout(() => {
+               setShowTip(false);
+            }, 3000);
+        }
+    }, [shareCardOption]);
 	return (
 		<>
+		 <Notification openModal={showTip} setOpenModal={setShowTip} title={tipDetails.title} desc={tipDetails.content} />
 			<Popup show={openModal} setShow={setOpenModal} isCard={true}>
 				<MyCard />
 				{shareCardOption && <div className='share'></div>}
@@ -51,7 +72,19 @@ const MyCardModal = ({
 						cursor: 'pointer'
 					}} onClick={() => {
 						setLinkButton(linkC);
-						setTimeout(() => setLinkButton(linkNC), 1000);
+						setTipDetails(
+							prev => ({
+								...prev,
+								title: 'Link Copied!',
+								content: 'Easily share and compare your Match Card with your friends.'
+							})
+						)
+						setShowTip(true);
+						setTimeout(() => {
+							setLinkButton(linkNC);
+							setShowTip(false)
+						}, 1500);
+						
 						navigator.clipboard.writeText(`${window.location.origin}/share/${userData.id}`);
 					}} />
 					<img src={imgButton} alt='image' style={{

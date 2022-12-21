@@ -83,7 +83,7 @@ const App = () => {
               <Route index path="/" element={<Welcome />} />
               <Route index path="/signin" element={<SignInScreen />} />
               <Route index path="/test" element={<Test assessmentGroupId={1} />} />
-              <Route index path="/retake-test" element={<ReTakeTestPage />} />
+              <Route index path="/retake-test" element={<ProtectedRoute component={<ReTakeTestPage />} />} />
               <Route index path="/invite" element={<InvitePage />} />
               <Route index path="/home" element={<ProtectedRoute component={<HomeScreen />} />} />
               <Route index path="/user" element={<ProtectedRoute component={<UserProfile />} />} />

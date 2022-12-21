@@ -79,6 +79,7 @@ export default function(app) {
     //CARDS
     router.get("/auth/get-user-card", Card.getUserCard);
     router.get("/auth/get-type-card", Card.getTypeCard);
+    router.post("/auth/add-card", Card.addCard);
 
     //explore
     router.get("/auth/explore", Explore.index);

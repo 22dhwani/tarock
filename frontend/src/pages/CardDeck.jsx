@@ -121,6 +121,7 @@ const CardsScreen = () => {
             }, 3000);
         }
     }, [shareCardOption]);
+    
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
              <ComingSoonModal openModal={showNotification} setOpenModal={setShowNotification} />
@@ -147,7 +148,8 @@ const CardsScreen = () => {
                             lineHeight: '14px',
                             letterSpacing: '0em',
                         }}>
-                        Share & Match
+                        {/* text based on card type */}
+                        {cardType?.type?.name == 'MyCard' ? 'Share & Match' : 'Share'}
                     </button>
                     <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
                         <div className='d-flex gap-5 mx-auto' style={{

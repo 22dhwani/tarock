@@ -111,20 +111,23 @@ const CardsScreen = () => {
             setTipDetails(
                 prev => ({
                     ...prev,
-                    title: 'Share your card',
+                    title: 'Share to Match',
                     content: 'Share your Tarock card and Match with your friends!'
                 })
             )
-            setShowTip(true);
-            setTimeout(() => {
-               setShowTip(false);
-            }, 3000);
+            if (cardType?.type?.name == 'MyCard') {
+                setShowTip(true);
+                setTimeout(() => {
+                    setShowTip(false);
+                }, 3000);
+            }
+
         }
     }, [shareCardOption]);
-    
+
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
-             <ComingSoonModal openModal={showNotification} setOpenModal={setShowNotification} />
+            <ComingSoonModal openModal={showNotification} setOpenModal={setShowNotification} />
             <Notification openModal={showTip} setOpenModal={setShowTip} title={tipDetails.title} desc={tipDetails.content} />
             <Popup show={showCard} setShow={setShowCard} isCard={true}>
                 <>
@@ -149,7 +152,7 @@ const CardsScreen = () => {
                             letterSpacing: '0em',
                         }}>
                         {/* text based on card type */}
-                        {cardType.type.name == 'MyCard' ? 'Share & Match' : 'Share'}
+                        {cardType?.type?.name == 'MyCard' ? 'Share & Match' : 'Share'}
                     </button>
                     <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
                         <div className='d-flex gap-5 mx-auto' style={{
@@ -169,7 +172,7 @@ const CardsScreen = () => {
                                 setShowTip(true);
                                 setTimeout(() => {
                                     setLinkButton(linkNC);
-                                    setShowTip(false)
+                                    setShowTip(false);
                                 }, 1500);
                                 if (tab) {
                                     navigator.clipboard.writeText(`${window.location.origin}/share/${userData.id}`);

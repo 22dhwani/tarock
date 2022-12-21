@@ -27,7 +27,7 @@ const MyCardModal = ({
             setTipDetails(
                 prev => ({
                     ...prev,
-                    title: 'Share your card',
+                    title: 'Share to Match',
                     content: 'Share your Tarock card and Match with your friends!'
                 })
             )
@@ -61,7 +61,7 @@ const MyCardModal = ({
 							lineHeight: '14px',
 							letterSpacing: '0em',
 						}}>
-						Share
+						Share & Match
 					</button>
 			</Popup>
 			<Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >

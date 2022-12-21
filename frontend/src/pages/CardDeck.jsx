@@ -166,7 +166,7 @@ const CardsScreen = () => {
                                     prev => ({
                                         ...prev,
                                         title: 'Link Copied!',
-                                        content: 'Easily share and compare your Match Card with your friends.'
+                                        content: 'Easily share and compare your card with your friends.'
                                     })
                                 )
                                 setShowTip(true);

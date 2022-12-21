@@ -34,7 +34,7 @@ const InviteCard = () => {
         <Row className='m-sm-5 m-3 my-4 mt-0'>
           <Col className='col-4 d-flex justify-content-center align-self-center'>
             <div className="bg-white p-1 rounded-2">
-              <QRCode value={window.location.href} size={64} />
+              <QRCode value="tarockapp.com" size={64} />
             </div>
           </Col>
           <Col className='col-8' style={{

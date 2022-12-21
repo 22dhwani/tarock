@@ -149,7 +149,7 @@ const CardsScreen = () => {
                             letterSpacing: '0em',
                         }}>
                         {/* text based on card type */}
-                        {cardType.type.name == 'MyCard' ? 'Share & Match' : 'Share'}
+                        {cardType?.type?.name == 'MyCard' ? 'Share & Match' : 'Share'}
                     </button>
                     <Popup show={shareCardOption} setShow={setShareCardOption} isNotification={true} >
                         <div className='d-flex gap-5 mx-auto' style={{

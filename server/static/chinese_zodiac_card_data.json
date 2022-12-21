@@ -1,0 +1,33 @@
+{
+	"Rat": {
+		"chinese_character": "鼠 (shǔ)",
+		"one_line_summary": "symbol of wealth and cultural intelligence",
+		"born_year":"1924, 1936, 1948, 1960, 1972, 1984, 1996, 2008, 2020",
+		"lucky_numbers":"2, 3",
+		"best_season": "Winter",
+		"thrives": "11pm-1am",
+		"flowers": "Lilies and African violets ",
+		"personality_traits": "Quick-wit, Smart, Charm, Persuasion",
+		"personality_and_characteristics": "Clever and energetic, quick thinkers who tire quickly Optimistic but can't stand hot weather Successful, but content with living a quiet and peaceful life Sensitive to others emotions",
+		"most_compatible_with": "Ox, Dragon, Monkey",
+		"most_compatible_with_description": "[rat/ox] Rat and Ox are connections quickly formed by their complement to one another in both work and life. They share their straight-forwardness, loyalty, and respect for personal space.  [rat/dragon] Connections formed by an expressive Rat and passionate Dragon will be able to quickly understand each other (and well) while enjoying an optmistic-looking future. [rat/monkey] Similar to Dragons, Monkeys are able to get along great with Rats and can appear picture-perfect since both like some healthy competition while giving each other the support they need to thrive.",
+		"best_to_learn_from": "Horse, Goat and Rabbit",
+		"best_to_learn_from_description": "[rat/horse]It seems no matter what a Rat does, it won't be enough for the Horse. It can be difficult for the Rat to shake off this effect. It's just the nature of the personalities interacting.   [rat/goat]While both loyal and admire the others artistic eye, the Rat and Goat share a mutual understanding of the need for financial security, although the Goat can grow tired of the Rat's doubtful view of the world. That being said, the Rat may grow annoyed by the Goats' daydreaming. [rat/rabbit] The Rabbit may purposely or seemingly unintentionally go against the Rat’s wishes, while the Rat only keeps silent."
+	},
+	"Ox": {
+		"chinese_character":"牛 (niú)",
+		"one_line_summary":"symbol of diligence and honesty",
+		"born_year":"1925, 1937, 1949, 1961, 1973, 1985, 1997, 2009, 2021",
+		"lucky_numbers":"1, 4",
+		"best_season":"Winter",
+		"thrives":"1am-3am",
+		"flowers":"Lily of the Valley and Lucky Bamboo",
+		"personality_traits":"Patient, Kind, Stubborn, Conservative",
+		"personality_and_characteristics": "Honest and earnest Diligent; persistence that is a unique ability that allows them to overcome many obstacles Sensible; lives life within the guard rails Reliable; hard working without asking for much praise",
+		"most_compatible_with": "Rat, Snake, Rooster",
+		"most_compatible_with_description": "[rat/ox] Rats and Ox are drawn like a magnet with complementing personalities and are both running towards the same goal in life – they're stronger together![ox/snake] Not only will Snakes give warmth, but they offer endless help and support in work too. [ox/rooster] Honest and loyal, Ox can also be drawn to the Rooster’s soft and open-hearted nature.",
+		"best_to_learn_from": "Goat, Horse, Dog",
+		"best_to_learn_from_description": "[goat/ox] While the Goat feels more powerful and shielded by the Ox, the demands set by the Ox sometimes weighs heavy on the Goat. The Goat often feels they don't enjoy the day-to-day of life, while the Ox sees this as a little reckless. They can tolerate each other’s differences, but there will always be tension. [horse/dog]Horses, in their free and untamed spirit, can take the matters of life less seriously than others and seemingly runs unshackled from any structure. This is the opposite of an Ox’s personality. [Ox/dog]With Dogs, there can be an initial battle to find any common ground."
+	}
+	
+}

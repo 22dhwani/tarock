@@ -452,6 +452,7 @@ function SignIn() {
                         <Form.Control className='py-3' type='text' placeholder='First and Last name'
                             onChange={handleChange}
                             name='name'
+                            pattern='^\S.*\S$'
                             required
                             value={formData.name} />
                         <Form.Control.Feedback type="invalid">Please enter a name</Form.Control.Feedback>

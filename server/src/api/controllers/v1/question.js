@@ -1,6 +1,7 @@
 import Assessment from "../../models/assessment.js";
 import ResultController from "../../controllers/result.js";
 import ResultModel from "../../models/result.js";
+import Result from '../../models/result.js';
 
 async function getQuestion(req,res){        
     if(!req.query.group_id){
@@ -70,17 +71,25 @@ async function updateResult(req,res){
 
     let result= await ResultModel.getByUser(user.internal_user_id)
     if(result.length <=0 ){
-        res.status(422).json(
-            {
-                message:"No result found for this user",
-                status: 0,
-            }
-        );
-        return
+        const newResult = new Result.Result({
+            userId: user.internal_user_id,
+            assessmentGroupId: req.body.assessment_group_id,
+            numOfQuestions: req.body.answers.length,
+            duration: req.body.duration,
+            code: ResultController.getSocionicsResult(req.body.answers)
+          });
+        await Result.create(newResult);
+        result = await ResultModel.getByUser(user.internal_user_id)
     }
                     
     try {
-        await ResultModel.update(result[0].id,req.body.assessment_group_id,req.body.answers.length,req.body.duration,ResultController.getSocionicsResult(req.body.answers))
+        await ResultModel.update(
+            result[0].id,
+            req.body.assessment_group_id,
+            req.body.answers.length,
+            req.body.duration,
+            ResultController.getSocionicsResult(req.body.answers)
+        )
     } catch (error) {
         res.status(422).json(
             {

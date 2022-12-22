@@ -381,6 +381,7 @@ async function addCard(req,res) {
                 status: 0,
             }
         );
+        return
     }
 
     

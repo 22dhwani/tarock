@@ -154,224 +154,236 @@ async function addCard(req,res) {
         );
     }
 
-    if(card_type == "ZODIAC"){
-        if(!birth_date){
-            res.status(422).json(
+    try {
+        if(card_type == "ZODIAC"){
+            if(!birth_date){
+                res.status(422).json(
+                    {
+                        message:"birthdate is required",
+                        status: 0,
+                    }
+                );
+            }
+            let date_map = [
                 {
-                    message:"birthdate is required",
-                    status: 0,
-                }
-            );
-        }
-        let date_map = [
-            {
-                'start_date':'01-20',
-                'end_date':'02-18',
-                'zodiac':'Aquarius'
-            },
-            {
-                'start_date':'02-19',
-                'end_date':'03-20',
-                'zodiac':'PISCES'
-            },
-            {
-                'start_date':'03-21',
-                'end_date':'04-19',
-                'zodiac':'ARIES'
-            },
-            {
-                'start_date':'04-20',
-                'end_date':'05-20',
-                'zodiac':'TAURUS'
-            },
-            {
-                'start_date':'05-21',
-                'end_date':'06-20',
-                'zodiac':'GEMINI'
-            },
-            {
-                'start_date':'06-21',
-                'end_date':'07-22',
-                'zodiac':'CANCER'
-            },
-            {
-                'start_date':'07-23',
-                'end_date':'08-22',
-                'zodiac':'LEO'
-            },
-            {
-                'start_date':'08-23',
-                'end_date':'09-22',
-                'zodiac':'VIRGO'
-            },
-            {
-                'start_date':'09-23',
-                'end_date':'10-22',
-                'zodiac':'LIBRA'
-            },
-            {
-                'start_date':'10-23',
-                'end_date':'11-21',
-                'zodiac':'SCORPIO'
-            },
-            {
-                'start_date':'11-22',
-                'end_date':'12-21',
-                'zodiac':'SAGITTARIUS'
-            },
-            {
-                'start_date':'12-22',
-                'end_date':'01-19',
-                'zodiac':'CAPRICORN'
-            },
+                    'start_date':'01-20',
+                    'end_date':'02-18',
+                    'zodiac':'Aquarius'
+                },
+                {
+                    'start_date':'02-19',
+                    'end_date':'03-20',
+                    'zodiac':'PISCES'
+                },
+                {
+                    'start_date':'03-21',
+                    'end_date':'04-19',
+                    'zodiac':'ARIES'
+                },
+                {
+                    'start_date':'04-20',
+                    'end_date':'05-20',
+                    'zodiac':'TAURUS'
+                },
+                {
+                    'start_date':'05-21',
+                    'end_date':'06-20',
+                    'zodiac':'GEMINI'
+                },
+                {
+                    'start_date':'06-21',
+                    'end_date':'07-22',
+                    'zodiac':'CANCER'
+                },
+                {
+                    'start_date':'07-23',
+                    'end_date':'08-22',
+                    'zodiac':'LEO'
+                },
+                {
+                    'start_date':'08-23',
+                    'end_date':'09-22',
+                    'zodiac':'VIRGO'
+                },
+                {
+                    'start_date':'09-23',
+                    'end_date':'10-22',
+                    'zodiac':'LIBRA'
+                },
+                {
+                    'start_date':'10-23',
+                    'end_date':'11-21',
+                    'zodiac':'SCORPIO'
+                },
+                {
+                    'start_date':'11-22',
+                    'end_date':'12-21',
+                    'zodiac':'SAGITTARIUS'
+                },
+                {
+                    'start_date':'12-22',
+                    'end_date':'01-19',
+                    'zodiac':'CAPRICORN'
+                },
+                
+            ]    
             
-        ]    
+            let check_month = birth_date.split("-")[1]
+            let check_date = birth_date.split("-")[2]
         
-        let check_month = birth_date.split("-")[1]
-        let check_date = birth_date.split("-")[2]
-    
-        let small_map = date_map.filter(date => date.start_date.split("-")[0] == check_month || date.end_date.split("-")[0] == check_month)
-    
-    
-        let zodiac_birth_date = new Date(birth_date)
-        let zodiac_birth_year = zodiac_birth_date.getFullYear()
-        small_map = small_map.filter((date)=>{
-            if(check_month == 1 && check_date >= 1 && check_date <= 19){
-                let start_date = null
-                if(date.start_date.split('-')[0] == 12){
-                    start_date = new Date((zodiac_birth_year-1)+'-'+date.start_date)    
+            let small_map = date_map.filter(date => date.start_date.split("-")[0] == check_month || date.end_date.split("-")[0] == check_month)
+        
+        
+            let zodiac_birth_date = new Date(birth_date)
+            let zodiac_birth_year = zodiac_birth_date.getFullYear()
+            small_map = small_map.filter((date)=>{
+                if(check_month == 1 && check_date >= 1 && check_date <= 19){
+                    let start_date = null
+                    if(date.start_date.split('-')[0] == 12){
+                        start_date = new Date((zodiac_birth_year-1)+'-'+date.start_date)    
+                    }else{
+                        start_date = new Date((zodiac_birth_year)+'-'+date.start_date)    
+                    }
+                    let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
+                    if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
+                        return true
+                    }
+                    return false    
                 }else{
-                    start_date = new Date((zodiac_birth_year)+'-'+date.start_date)    
-                }
-                let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
-                if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
-                    return true
-                }
-                return false    
-            }else{
-                let start_date = new Date(zodiac_birth_year+'-'+date.start_date)
-                let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
-                if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
+                    let start_date = new Date(zodiac_birth_year+'-'+date.start_date)
+                    let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
+                    if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
+                        return true
+                    }
+                    return false
+                }            
+            })
+    
+            if(small_map.length <= 0){
+                res.status(422).json(
+                    {
+                        message:"zodiac Not found for selected date",
+                        status: 0,
+                    }
+                );
+                return
+            }
+        
+            let selected_zodiac = small_map[0].zodiac
+            await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
+        }else{
+    
+            if(!birth_year){
+                res.status(422).json(
+                    {
+                        message:"Birth Year is required",
+                        status: 0,
+                    }
+                );
+            }
+    
+            let year_map = [
+                {
+                    'years':[
+                        1924, 1936, 1948, 1960, 1972, 1984, 1996, 2008, 2020
+                    ],
+                    'animal':'Rat',
+                },
+                {
+                    'years':[
+                        1925, 1937, 1949, 1961, 1973, 1985, 1997, 2009, 2021
+                    ],
+                    'animal':'Ox',
+                },
+                {
+                    'years':[
+                        1926, 1938, 1950, 1962, 1974, 1986, 1998, 2010, 2022
+                    ],
+                    'animal':'Tiger',
+                },
+                {
+                    'years':[
+                        1927, 1939, 1951, 1963, 1975, 1987, 1999, 2011, 2023
+                    ],
+                    'animal':'Rabbit',
+                },
+                {
+                    'years':[
+                        1928, 1940, 1952, 1964, 1976, 1988, 2000, 2012, 2024
+                    ],
+                    'animal':'Dragon',
+                },
+                {
+                    'years':[
+                        1929, 1941, 1953, 1965, 1977, 1989, 2001, 2013, 2025
+                    ],
+                    'animal':'Snake',
+                },
+                {
+                    'years':[
+                        1930, 1942, 1954, 1966, 1978, 1990, 2002, 2014, 2026
+                    ],
+                    'animal':'Horse',
+                },
+                {
+                    'years':[
+                        1931, 1943, 1955, 1967, 1979, 1991, 2003, 2015, 2027
+                    ],
+                    'animal':'Goat',
+                },
+                {
+                    'years':[
+                        1932, 1944, 1956, 1968, 1980, 1992, 2004, 2016, 2028
+                    ],
+                    'animal':'Monkey',
+                },
+                {
+                    'years':[
+                        1933, 1945, 1957, 1969, 1981, 1993, 2005, 2017, 2029
+                    ],
+                    'animal':'Rooster',
+                },
+                {
+                    'years':[
+                        1935, 1947, 1959, 1971, 1983, 1995, 2007, 2019, 2031
+                    ],
+                    'animal':'Pig',
+                },
+            ]
+    
+    
+            let final_map = year_map.filter((data)=>{
+                if(data.years.includes(parseInt(birth_year))){
                     return true
                 }
                 return false
-            }            
-        })
-
-        if(small_map.length <= 0){
-            res.status(422).json(
-                {
-                    message:"zodiac Not found for selected date",
-                    status: 0,
-                }
-            );
-            return
+            })
+    
+            if(final_map.length <= 0){
+                res.status(422).json(
+                    {
+                        message:"animal Not found for selected year",
+                        status: 0,
+                    }
+                );
+                return
+            }
+    
+            let selected_animal = final_map[0].animal
+            await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_year,null,selected_animal)
         }
     
-        let selected_zodiac = small_map[0].zodiac
-        await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
-    }else{
-
-        if(!birth_year){
-            res.status(422).json(
-                {
-                    message:"Birth Year is required",
-                    status: 0,
-                }
-            );
-        }
-
-        let year_map = [
+    } catch (error) {
+        res.status(422).json(
             {
-                'years':[
-                    1924, 1936, 1948, 1960, 1972, 1984, 1996, 2008, 2020
-                ],
-                'animal':'Rat',
-            },
-            {
-                'years':[
-                    1925, 1937, 1949, 1961, 1973, 1985, 1997, 2009, 2021
-                ],
-                'animal':'Ox',
-            },
-            {
-                'years':[
-                    1926, 1938, 1950, 1962, 1974, 1986, 1998, 2010, 2022
-                ],
-                'animal':'Tiger',
-            },
-            {
-                'years':[
-                    1927, 1939, 1951, 1963, 1975, 1987, 1999, 2011, 2023
-                ],
-                'animal':'Rabbit',
-            },
-            {
-                'years':[
-                    1928, 1940, 1952, 1964, 1976, 1988, 2000, 2012, 2024
-                ],
-                'animal':'Dragon',
-            },
-            {
-                'years':[
-                    1929, 1941, 1953, 1965, 1977, 1989, 2001, 2013, 2025
-                ],
-                'animal':'Snake',
-            },
-            {
-                'years':[
-                    1930, 1942, 1954, 1966, 1978, 1990, 2002, 2014, 2026
-                ],
-                'animal':'Horse',
-            },
-            {
-                'years':[
-                    1931, 1943, 1955, 1967, 1979, 1991, 2003, 2015, 2027
-                ],
-                'animal':'Goat',
-            },
-            {
-                'years':[
-                    1932, 1944, 1956, 1968, 1980, 1992, 2004, 2016, 2028
-                ],
-                'animal':'Monkey',
-            },
-            {
-                'years':[
-                    1933, 1945, 1957, 1969, 1981, 1993, 2005, 2017, 2029
-                ],
-                'animal':'Rooster',
-            },
-            {
-                'years':[
-                    1935, 1947, 1959, 1971, 1983, 1995, 2007, 2019, 2031
-                ],
-                'animal':'Pig',
-            },
-        ]
-
-
-        let final_map = year_map.filter((data)=>{
-            if(data.years.includes(parseInt(birth_year))){
-                return true
+                error:error.message,
+                message:"Something went wrong",
+                status: 0,
             }
-            return false
-        })
-
-        if(final_map.length <= 0){
-            res.status(422).json(
-                {
-                    message:"animal Not found for selected year",
-                    status: 0,
-                }
-            );
-            return
-        }
-
-        let selected_animal = final_map[0].animal
-        await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_year,null,selected_animal)
+        );
     }
 
+    
     
     res.json(
         {

@@ -15,7 +15,7 @@ const Notification = function(notification) {
 }
 
 async function getForId(id) {
-    const data = await sql.query("SELECT user_notifications.*,user.name,user.avatar_index FROM user_notifications LEFT JOIN user ON user_notifications.match_user_id = user.internal_user_id WHERE user_id = ? ORDER BY created_at DESC;",[id]);
+    const data = await sql.query("SELECT user_notifications.*,user.name,user.avatar_index,user_avatars.face_index,user_avatars.hair_index,user_avatars.eyebrow_index,user_avatars.eye_index,user_avatars.nose_index,user_avatars.whiskers_index,user_avatars.beard_index,user_avatars.lips_index,user_avatars.ear_index,user_avatars.glasses_index FROM user_notifications LEFT JOIN user ON user_notifications.match_user_id = user.internal_user_id LEFT JOIN user_avatars ON user.internal_user_id = user_avatars.internal_user_id WHERE user_id = ? ORDER BY created_at DESC;",[id]);
     return data[0];
 }
 

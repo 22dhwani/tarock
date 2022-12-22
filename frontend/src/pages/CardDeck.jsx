@@ -183,11 +183,10 @@ const CardsScreen = () => {
                             <img src={imgButton} alt='image' style={{
                                 cursor: 'pointer'
                             }} onClick={() => {
-                                //open in new tab
                                 if (tab) {
-                                    window.open(`/share/${userData.id}`, '_blank');
+                                    navigate(`/share/${userData.id}`, { state: { qr: true } })
                                 } else {
-                                    window.open(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`, '_blank');
+                                    navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
                                 }
                             }} />
                         </div>

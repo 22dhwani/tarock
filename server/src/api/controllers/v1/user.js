@@ -950,7 +950,7 @@ async function sendForDailyQuestion(req,res){
     if(sendToAll){
         let allUsers = await User.getAllUser()
         for await (const user of allUsers) {
-            if(user.is_notification_on && user.is_new_blog_notification_on ){
+            if(user.is_notification_on && user.is_daily_quest_notification_on ){
                 await Notification.sendToUserId(user.internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
             }
 		};
@@ -965,7 +965,7 @@ async function sendForDailyQuestion(req,res){
             );
             return;
         }
-        if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
+        if(user[0].is_notification_on && user[0].is_daily_quest_notification_on ){
             await Notification.sendToUserId(user[0].internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
         }
     }

@@ -2,6 +2,7 @@ import Assessment from "../../models/assessment.js";
 import ResultController from "../../controllers/result.js";
 import ResultModel from "../../models/result.js";
 import Result from '../../models/result.js';
+import UserRateModel from "../../models/userRates.js";
 
 async function getQuestion(req,res){        
     if(!req.query.group_id){
@@ -65,6 +66,51 @@ async function addResult(req,res){
     );
 }
 
+async function rateResult(req,res){
+    let user = res.user
+    const {owner_id,data} = req.body
+    if(!owner_id){
+        res.status(422).json(
+            {
+                message:"owner id is required",
+                status: 0,
+            }
+        );
+        return
+    }
+    if(!data){
+        res.status(422).json(
+            {
+                message:"data is required",
+                status: 0,
+            }
+        );
+        return
+    }
+    try {
+        await UserRateModel.removeByIds(owner_id,res.user.internal_user_id)    
+        for await (const d of data) {
+			await UserRateModel.addRating(owner_id,res.user.internal_user_id,d['question'],d['answer'])    
+		};
+    } catch (error) {
+        res.status(422).json(
+            {
+                error:error.message,
+                message:"something went Wrong",
+                status: 0,
+            }
+        );
+        return
+    }
+    
+    res.json(
+        {
+            message:"User rated",
+            status: 1,
+        }
+    );
+}
+
 async function updateResult(req,res){
 
     let user = res.user
@@ -109,4 +155,4 @@ async function updateResult(req,res){
     );
 }
 
-export default { getQuestion,addResult,updateResult };
+export default { getQuestion,addResult,updateResult,rateResult };

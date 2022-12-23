@@ -143,6 +143,7 @@ async function addCard(req,res) {
                 status: 0,
             }
         );
+        return
     }
 
     if(!card_type){
@@ -152,6 +153,7 @@ async function addCard(req,res) {
                 status: 0,
             }
         );
+        return
     }
 
     try {
@@ -163,6 +165,7 @@ async function addCard(req,res) {
                         status: 0,
                     }
                 );
+                return
             }
             let date_map = [
                 {
@@ -280,6 +283,7 @@ async function addCard(req,res) {
                         status: 0,
                     }
                 );
+                return
             }
     
             let year_map = [

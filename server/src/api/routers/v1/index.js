@@ -92,6 +92,7 @@ export default function(app) {
 
     //AUTH QUESTION
     router.post("/auth/question/update", question.updateResult);
+    router.post("/auth/question/rate", question.rateResult);
 
     //DAILY QUESTIONS
     router.get("/auth/daily-question/get-today-question", dailyQuestion.getTodayQuestion);

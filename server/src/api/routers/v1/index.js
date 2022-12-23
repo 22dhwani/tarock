@@ -48,6 +48,7 @@ export default function(app) {
     router.get("/send-for-daily-question", User.sendForDailyQuestion);
 
     //USER LOGIN FLOW
+    // sdsssdsd
     router.get("/get-user-type", User.getUserType);  //to get the type of user (NEW,TMP,REAL)
     router.post("/create-temp-user", User.createTempUser); //to create the temp user with device id
     router.post("/create-real-user", User.createRealUser); //to create a real user with device id

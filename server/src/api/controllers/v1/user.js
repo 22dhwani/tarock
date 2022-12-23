@@ -1095,13 +1095,14 @@ async function socialLogin(req,res){
         }
         let existingUser = await User.query(device_id);
         if(existingUser.length <= 0) {
-            res.status(422).json(
-                {
-                    message:"Temp User not found",
-                    status: 0,
-                }
-            );
-            return;
+            const tempuser = new User.User({
+                id: req.body.device_id,
+                name: userName,
+                gender: 'Male',
+                avatarIndex: 3
+            });
+            await User.create(tempuser);
+            existingUser = await User.query(device_id);
         }
         let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(userEmail).digest("hex");
         let realUser = new User.User({

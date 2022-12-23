@@ -544,6 +544,9 @@ async function logout(req,res){
     let tokenArr = req.headers.authorization.split("Bearer ")
 
     try {    
+        if(req.body.firebase_id){
+            await UserFirebaseModel.removeToken(res.user.internal_user_id,req.body.firebase_id)
+        }
         let apiToken = await ApiToken.getByToken(tokenArr[1]);
         if(apiToken.length >= 0){    
             await ApiToken.deleteToken(apiToken[0].id);

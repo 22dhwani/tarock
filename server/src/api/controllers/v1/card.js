@@ -6,6 +6,7 @@ import Match from '../../models/match.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import userZodiac from '../../models/userZodiac.js';
+import UserAvatarModel from '../../models/userAvatar.js';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
@@ -49,13 +50,49 @@ async function getUserCard(req,res){
                     if (matchedTarockResult.length == 0) {
                         throw new Error('No matched user test result!');
                     }
-                    return {
-                        matchedUserId: matchedUserId,
-                        matchedUserName: matchedUserData[0].name,
-                        matchedUserAvatarIndex: matchedUserData[0].avatar_index,
-                        matchedUserResultCode: matchedTarockResult[0].result_code,
-                        matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
-                    };
+                    const macthUserAvatar = await UserAvatarModel.getByUserId(matchedUserId)
+                    if(macthUserAvatar.length > 0){
+                        return {
+                            matchedUserId: matchedUserId,
+                            matchedUserName: matchedUserData[0].name,
+                            matchedUserAvatarIndex: matchedUserData[0].avatar_index,
+    
+                            matched_user_face_index: macthUserAvatar[0].face_index,
+                            matched_user_hair_index: macthUserAvatar[0].hair_index,
+                            matched_user_eyebrow_index: macthUserAvatar[0].eyebrow_index,
+                            matched_user_eye_index: macthUserAvatar[0].eye_index,
+                            matched_user_nose_index: macthUserAvatar[0].nose_index,
+                            matched_user_whiskers_index: macthUserAvatar[0].whiskers_index,
+                            matched_user_beard_index: macthUserAvatar[0].beard_index,
+                            matched_user_lips_index: macthUserAvatar[0].lips_index,
+                            matched_user_ear_index: macthUserAvatar[0].ear_index,
+                            matched_user_glasses_index: macthUserAvatar[0].glasses_index,
+    
+                            matchedUserResultCode: matchedTarockResult[0].result_code,
+                            matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                        };    
+                    }else{
+                        return {
+                            matchedUserId: matchedUserId,
+                            matchedUserName: matchedUserData[0].name,
+                            matchedUserAvatarIndex: matchedUserData[0].avatar_index,
+    
+                            matched_user_face_index: null,
+                            matched_user_hair_index: null,
+                            matched_user_eyebrow_index: null,
+                            matched_user_eye_index: null,
+                            matched_user_nose_index: null,
+                            matched_user_whiskers_index: null,
+                            matched_user_beard_index: null,
+                            matched_user_lips_index: null,
+                            matched_user_ear_index: null,
+                            matched_user_glasses_index: null,
+    
+                            matchedUserResultCode: matchedTarockResult[0].result_code,
+                            matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                        };
+                    }
+                   
                 }))
             });
         } catch (error) {

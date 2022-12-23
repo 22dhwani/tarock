@@ -19,4 +19,12 @@ async function create(match) {
     return data2[0];
 }
 
-export default { Match, query, create} ;
+async function deleteId(id){
+    const data = await sql.query("DELETE FROM user_match WHERE id = ?",[
+        id,
+    ])
+    return data[0];
+}
+
+
+export default { Match, query, create,deleteId} ;

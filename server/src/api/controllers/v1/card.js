@@ -34,6 +34,7 @@ async function getUserCard(req,res){
                     type: 'Tarock',
                     data: [
                         {
+                            id:null,
                             resultCode: tarcokResult[0].result_code,
                             quadra: tarockData.personality_socionic_quadra
                         }                        
@@ -53,6 +54,7 @@ async function getUserCard(req,res){
                     const macthUserAvatar = await UserAvatarModel.getByUserId(matchedUserId)
                     if(macthUserAvatar.length > 0){
                         return {
+                            id:match.id,
                             matchedUserId: matchedUserId,
                             matchedUserName: matchedUserData[0].name,
                             matchedUserAvatarIndex: matchedUserData[0].avatar_index,
@@ -73,6 +75,7 @@ async function getUserCard(req,res){
                         };    
                     }else{
                         return {
+                            id:match.id,
                             matchedUserId: matchedUserId,
                             matchedUserName: matchedUserData[0].name,
                             matchedUserAvatarIndex: matchedUserData[0].avatar_index,
@@ -121,6 +124,7 @@ async function getUserCard(req,res){
             let zodiac = await userZodiac.getUserZodiac(user.internal_user_id,'ZODIAC')
             if(zodiac.length > 0){
                 result[0].data.push({
+                    id:zodiac[0].id,
                     resultCode:zodiac[0].card_type,
                     quadra:zodiac[0].zodiac
                 })
@@ -128,6 +132,7 @@ async function getUserCard(req,res){
             let animal = await userZodiac.getUserZodiac(user.internal_user_id,'CHINESE_ZODIAC')
             if(animal.length > 0){
                 result[0].data.push({
+                    id:animal[0].id,
                     resultCode:animal[0].card_type,
                     quadra:animal[0].animal
                 })
@@ -167,6 +172,39 @@ async function getTypeCard(req,res){
         }
     );
     
+}
+async function deleteCard(req,res){
+    const { card_id ,type} = req.body
+    if(!card_id){
+        res.status(422).json(
+            {
+                message:"card id is required",
+                status: 0,
+            }
+        );
+        return
+    }
+    if(!type){
+        res.status(422).json(
+            {
+                message:"type is required",
+                status: 0,
+            }
+        );
+        return
+    }
+    if(type=='TAROCK'){
+        await userZodiac.deleteCard(card_id)
+    }else{
+        await Match.deleteId(card_id)
+    }
+    
+    res.json(
+        {
+            message: "Card deleted",
+            status: 1,
+        }
+    );
 }
 
 async function addCard(req,res) {
@@ -435,4 +473,4 @@ async function addCard(req,res) {
     );
 }
 
-export default { getUserCard , getTypeCard, addCard};
+export default { getUserCard , getTypeCard, addCard,deleteCard};

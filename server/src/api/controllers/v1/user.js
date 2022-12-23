@@ -139,16 +139,114 @@ async function createTempUser(req,res){
         );
         return;
     }
-
-    let tempUser=null;
-    let existingUser = await User.query(req.body.device_id);    
-    if(existingUser.length > 0){
-        existingUser[0].id = req.body.device_id;
-        existingUser[0].name = req.body.name;
-        existingUser[0].gender = req.body.gender;
-        existingUser[0].avatarIndex = req.body.avatar_index;
+    try {
+        let tempUser=null;
+        let existingUser = await User.query(req.body.device_id);    
+        if(existingUser.length > 0){
+            existingUser[0].id = req.body.device_id;
+            existingUser[0].name = req.body.name;
+            existingUser[0].gender = req.body.gender;
+            existingUser[0].avatarIndex = req.body.avatar_index;
+            try {
+                await User.update(existingUser[0])
+            } catch (error) {
+                res.status(422).json(
+                    {
+                        error:error.message,
+                        message:"something went wrong",
+                        status: 0,
+                    }
+                );
+                return
+            }
+    
+            tempUser = await User.query(req.body.device_id);    
+            tempUser = tempUser[0]
+    
+            let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+            if(userAvatar.length <= 0){
+                await UserAvatarModel.addAvatar(req.body.device_id)
+            }
+            userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+            let face_index = userAvatar[0].face_index
+            let hair_index = userAvatar[0].hair_index
+            let eyebrow_index = userAvatar[0].eyebrow_index
+            let eye_index = userAvatar[0].eye_index
+            let nose_index = userAvatar[0].nose_index
+            let whiskers_index = userAvatar[0].whiskers_index
+            let beard_index = userAvatar[0].beard_index
+            let lips_index = userAvatar[0].lips_index
+            let ear_index = userAvatar[0].ear_index
+            let glasses_index = userAvatar[0].glasses_indexx
+    
+            if(req.body.face_index || req.body.face_index == 0){
+                face_index = req.body.face_index
+            }
+            if(req.body.hair_index || req.body.hair_index == 0){
+                hair_index = req.body.hair_index
+            }
+            if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
+                eyebrow_index = req.body.eyebrow_index
+            }
+            if(req.body.eye_index || req.body.eye_index == 0){
+                eye_index = req.body.eye_index
+            }
+            if(req.body.nose_index || req.body.nose_index == 0){
+                nose_index = req.body.nose_index
+            }
+            if(req.body.whiskers_index || req.body.whiskers_index == 0){
+                whiskers_index = req.body.whiskers_index
+            }
+            if(req.body.beard_index || req.body.beard_index == 0){
+                beard_index = req.body.beard_index
+            }
+            if(req.body.lips_index || req.body.lips_index == 0){
+                lips_index = req.body.lips_index
+            }
+            if(req.body.ear_index || req.body.ear_index == 0){
+                ear_index = req.body.ear_index
+            }
+            if(req.body.glasses_index || req.body.glasses_index == 0){
+                glasses_index = req.body.glasses_index
+            }
+        
+            await UserAvatarModel.updateAvatar(userAvatar[0].id,
+                face_index,
+                hair_index,
+                eyebrow_index,
+                eye_index,
+                nose_index,
+                whiskers_index,
+                beard_index,
+                lips_index,
+                ear_index,
+                glasses_index
+            )
+            userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+        
+            tempUser.user_avatar = userAvatar[0] ?? null
+    
+    
+            res.json(
+                {
+                    user:tempUser,
+                    message: "Temp user updated",
+                    status: 1,
+                }
+            );
+            return;
+        }
+        const user = new User.User({
+            id: req.body.device_id,
+            name: req.body.name,
+            gender: req.body.gender,
+            avatarIndex: req.body.avatar_index
+        });
         try {
-            await User.update(existingUser[0])
+            await User.create(user);
+    
+            tempUser = await User.query(req.body.device_id);
+            tempUser = tempUser[0];
         } catch (error) {
             res.status(422).json(
                 {
@@ -159,26 +257,24 @@ async function createTempUser(req,res){
             );
             return
         }
-
-        tempUser = await User.query(req.body.device_id);    
-        tempUser = tempUser[0]
-
+    
         let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
         if(userAvatar.length <= 0){
             await UserAvatarModel.addAvatar(req.body.device_id)
         }
         userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
         let face_index = userAvatar[0].face_index
-		let hair_index = userAvatar[0].hair_index
-		let eyebrow_index = userAvatar[0].eyebrow_index
-		let eye_index = userAvatar[0].eye_index
-		let nose_index = userAvatar[0].nose_index
-		let whiskers_index = userAvatar[0].whiskers_index
-		let beard_index = userAvatar[0].beard_index
-		let lips_index = userAvatar[0].lips_index
-		let ear_index = userAvatar[0].ear_index
-		let glasses_index = userAvatar[0].glasses_indexx
-
+        let hair_index = userAvatar[0].hair_index
+        let eyebrow_index = userAvatar[0].eyebrow_index
+        let eye_index = userAvatar[0].eye_index
+        let nose_index = userAvatar[0].nose_index
+        let whiskers_index = userAvatar[0].whiskers_index
+        let beard_index = userAvatar[0].beard_index
+        let lips_index = userAvatar[0].lips_index
+        let ear_index = userAvatar[0].ear_index
+        let glasses_index = userAvatar[0].glasses_index
+    
+    
         if(req.body.face_index || req.body.face_index == 0){
             face_index = req.body.face_index
         }
@@ -210,43 +306,19 @@ async function createTempUser(req,res){
             glasses_index = req.body.glasses_index
         }
     
-        await UserAvatarModel.updateAvatar(userAvatar[0].id,
-            face_index,
-			hair_index,
-			eyebrow_index,
-			eye_index,
-			nose_index,
-			whiskers_index,
-			beard_index,
-			lips_index,
-			ear_index,
-			glasses_index
-        )
+        await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
         userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
     
         tempUser.user_avatar = userAvatar[0] ?? null
-
-
         res.json(
             {
                 user:tempUser,
-                message: "Temp user updated",
+                message: "Temp user created",
                 status: 1,
             }
         );
-        return;
-    }
-    const user = new User.User({
-        id: req.body.device_id,
-        name: req.body.name,
-        gender: req.body.gender,
-        avatarIndex: req.body.avatar_index
-    });
-    try {
-        await User.create(user);
-
-        tempUser = await User.query(req.body.device_id);
-        tempUser = tempUser[0];
+        return
+        
     } catch (error) {
         res.status(422).json(
             {
@@ -255,68 +327,10 @@ async function createTempUser(req,res){
                 status: 0,
             }
         );
-        return
+        return;
     }
 
-    let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-    if(userAvatar.length <= 0){
-        await UserAvatarModel.addAvatar(req.body.device_id)
-    }
-    userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-    let face_index = userAvatar[0].face_index
-	let hair_index = userAvatar[0].hair_index
-	let eyebrow_index = userAvatar[0].eyebrow_index
-	let eye_index = userAvatar[0].eye_index
-	let nose_index = userAvatar[0].nose_index
-	let whiskers_index = userAvatar[0].whiskers_index
-	let beard_index = userAvatar[0].beard_index
-	let lips_index = userAvatar[0].lips_index
-	let ear_index = userAvatar[0].ear_index
-	let glasses_index = userAvatar[0].glasses_index
-
-
-    if(req.body.face_index || req.body.face_index == 0){
-        face_index = req.body.face_index
-    }
-    if(req.body.hair_index || req.body.hair_index == 0){
-        hair_index = req.body.hair_index
-    }
-    if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
-        eyebrow_index = req.body.eyebrow_index
-    }
-    if(req.body.eye_index || req.body.eye_index == 0){
-        eye_index = req.body.eye_index
-    }
-    if(req.body.nose_index || req.body.nose_index == 0){
-        nose_index = req.body.nose_index
-    }
-    if(req.body.whiskers_index || req.body.whiskers_index == 0){
-        whiskers_index = req.body.whiskers_index
-    }
-    if(req.body.beard_index || req.body.beard_index == 0){
-        beard_index = req.body.beard_index
-    }
-    if(req.body.lips_index || req.body.lips_index == 0){
-        lips_index = req.body.lips_index
-    }
-    if(req.body.ear_index || req.body.ear_index == 0){
-        ear_index = req.body.ear_index
-    }
-    if(req.body.glasses_index || req.body.glasses_index == 0){
-        glasses_index = req.body.glasses_index
-    }
-
-    await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
-    userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-
-    tempUser.user_avatar = userAvatar[0] ?? null
-    res.json(
-        {
-            user:tempUser,
-            message: "Temp user created",
-            status: 1,
-        }
-    );
+   
 }
 
 async function createRealUser(req,res){
@@ -347,82 +361,124 @@ async function createRealUser(req,res){
         );
         return;
     }
-
-    let emailExistUser = await User.findUserByEmail(req.body.email);
-    if(emailExistUser.length > 0){
-        res.status(422).json(
-            {
-                message:"User with this Email Already exists, please try another email",
-                status: 0,
-            }
-        );
-        return;
-    }
-
-    let existingUser = await User.query(req.body.device_id);
-    if(existingUser.length <= 0) {
-        res.status(422).json(
-            {
-                message:"Temp User not found",
-                status: 0,
-            }
-        );
-        return;
-    }
-
-    let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.email).digest("hex");
-    let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
-
-    let realUser = new User.User({
-        id: hashEmail,
-        name: existingUser[0].name,
-        gender: existingUser[0].gender,
-        avatarIndex: existingUser[0].avatar_index,
-        email:req.body.email,
-        password: hashPassword,
-    });
     try {
-        const oldResults = await Result.getByUser(req.body.device_id);
-        if (oldResults.length > 0) {
-          const newResult = new Result.Result({
-            userId: hashEmail,
-            assessmentGroupId: oldResults[0].question_group_id,
-            numOfQuestions: oldResults[0].num_of_questions,
-            duration: oldResults[0].duration,
-            code: oldResults[0].result_code
-          });
-          await Result.create(newResult);
+        let emailExistUser = await User.findUserByEmail(req.body.email);
+        if(emailExistUser.length > 0){
+            res.status(422).json(
+                {
+                    message:"User with this Email Already exists, please try another email",
+                    status: 0,
+                }
+            );
+            return;
         }
-        await User.createReal(realUser);
-        await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
-
-        let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-        if(oldAvatar.length > 0){
-            let face_index  = oldAvatar[0].face_index
-            let hair_index  = oldAvatar[0].hair_index
-            let eyebrow_index  = oldAvatar[0].eyebrow_index
-            let eye_index  = oldAvatar[0].eye_index
-            let nose_index  = oldAvatar[0].nose_index
-            let whiskers_index  = oldAvatar[0].whiskers_index
-            let beard_index  = oldAvatar[0].beard_index
-            let lips_index  = oldAvatar[0].lips_index
-            let ear_index  = oldAvatar[0].ear_index
-            let glasses_index  = oldAvatar[0].glasses_index
-            await UserAvatarModel.addAvatar(
-                hashEmail,
-                face_index,
-                hair_index,
-                eyebrow_index,
-                eye_index,
-                nose_index,
-                whiskers_index,
-                beard_index,
-                lips_index,
-                ear_index,
-                glasses_index
-            )
+    
+        let existingUser = await User.query(req.body.device_id);
+        if(existingUser.length <= 0) {
+            res.status(422).json(
+                {
+                    message:"Temp User not found",
+                    status: 0,
+                }
+            );
+            return;
         }
-
+    
+        let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.email).digest("hex");
+        let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
+    
+        let realUser = new User.User({
+            id: hashEmail,
+            name: existingUser[0].name,
+            gender: existingUser[0].gender,
+            avatarIndex: existingUser[0].avatar_index,
+            email:req.body.email,
+            password: hashPassword,
+        });
+        try {
+            const oldResults = await Result.getByUser(req.body.device_id);
+            if (oldResults.length > 0) {
+              const newResult = new Result.Result({
+                userId: hashEmail,
+                assessmentGroupId: oldResults[0].question_group_id,
+                numOfQuestions: oldResults[0].num_of_questions,
+                duration: oldResults[0].duration,
+                code: oldResults[0].result_code
+              });
+              await Result.create(newResult);
+            }
+            await User.createReal(realUser);
+            await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
+    
+            let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+            if(oldAvatar.length > 0){
+                let face_index  = oldAvatar[0].face_index
+                let hair_index  = oldAvatar[0].hair_index
+                let eyebrow_index  = oldAvatar[0].eyebrow_index
+                let eye_index  = oldAvatar[0].eye_index
+                let nose_index  = oldAvatar[0].nose_index
+                let whiskers_index  = oldAvatar[0].whiskers_index
+                let beard_index  = oldAvatar[0].beard_index
+                let lips_index  = oldAvatar[0].lips_index
+                let ear_index  = oldAvatar[0].ear_index
+                let glasses_index  = oldAvatar[0].glasses_index
+                await UserAvatarModel.addAvatar(
+                    hashEmail,
+                    face_index,
+                    hair_index,
+                    eyebrow_index,
+                    eye_index,
+                    nose_index,
+                    whiskers_index,
+                    beard_index,
+                    lips_index,
+                    ear_index,
+                    glasses_index
+                )
+            }
+    
+        } catch (error) {
+            res.status(422).json(
+                {
+                    error:error.message,
+                    message:"something went wrong",
+                    status: 0,
+                }
+            );
+            return
+        }
+        let data = await User.findUserByEmail(req.body.email);
+        let token = await ApiToken.generateToken(data[0].internal_user_id)    
+    
+        if(req.body.firebase_id){
+            let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,req.body.firebase_id);
+            if(userFirebase.length <= 0){
+                await UserFirebaseModel.addToken(data[0].internal_user_id,req.body.firebase_id);
+            }
+        }
+    
+        let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
+        data[0].user_avatar = userAvatar[0] ?? null
+        data[0].question_data = null
+    
+        const tarcokResult = await Result.getByUser(data[0].internal_user_id);
+        if (tarcokResult.length > 0) {
+            const tarockData = data[tarcokResult[0].result_code];
+            data[0].question_data = {
+                resultCode: tarcokResult[0].result_code,
+                quadra: tarockData.personality_socionic_quadra
+            };
+        }
+    
+        res.json(
+            {
+                token:token,
+                data:data[0],
+                message: "real user created",
+                status: 1,
+            }            
+        );   
+        return     
     } catch (error) {
         res.status(422).json(
             {
@@ -431,39 +487,10 @@ async function createRealUser(req,res){
                 status: 0,
             }
         );
-        return
-    }
-    let data = await User.findUserByEmail(req.body.email);
-    let token = await ApiToken.generateToken(data[0].internal_user_id)    
-
-    if(req.body.firebase_id){
-        let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,req.body.firebase_id);
-        if(userFirebase.length <= 0){
-            await UserFirebaseModel.addToken(data[0].internal_user_id,req.body.firebase_id);
-        }
+        return        
     }
 
-    let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
-    data[0].user_avatar = userAvatar[0] ?? null
-    data[0].question_data = null
-
-    const tarcokResult = await Result.getByUser(data[0].internal_user_id);
-    if (tarcokResult.length > 0) {
-        const tarockData = data[tarcokResult[0].result_code];
-        data[0].question_data = {
-            resultCode: tarcokResult[0].result_code,
-            quadra: tarockData.personality_socionic_quadra
-        };
-    }
-
-    res.json(
-        {
-            token:token,
-            data:data[0],
-            message: "real user created",
-            status: 1,
-        }
-    );
+    
 }
 
 async function login(req,res){

@@ -14,7 +14,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const dir = dirname(fileURLToPath(import.meta.url));
-const data = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
+const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 
 async function getUser(req,res){          
     let user = res.user;
@@ -41,7 +41,7 @@ async function getUser(req,res){
 
     const tarcokResult = await Result.getByUser(user.internal_user_id);
     if (tarcokResult.length > 0) {
-        const tarockData = data[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].result_code];
         user.question_data = {
             resultCode: tarcokResult[0].result_code,
             quadra: tarockData.personality_socionic_quadra
@@ -463,7 +463,7 @@ async function createRealUser(req,res){
     
         const tarcokResult = await Result.getByUser(data[0].internal_user_id);
         if (tarcokResult.length > 0) {
-            const tarockData = data[tarcokResult[0].result_code];
+            const tarockData = tarockJsonData[tarcokResult[0].result_code];
             data[0].question_data = {
                 resultCode: tarcokResult[0].result_code,
                 quadra: tarockData.personality_socionic_quadra
@@ -549,7 +549,7 @@ async function login(req,res){
 
     const tarcokResult = await Result.getByUser(emailExistUser[0].internal_user_id);
     if (tarcokResult.length > 0) {
-        const tarockData = data[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].result_code];
         emailExistUser[0].question_data = {
             resultCode: tarcokResult[0].result_code,
             quadra: tarockData.personality_socionic_quadra

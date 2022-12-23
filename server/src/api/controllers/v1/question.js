@@ -1,9 +1,16 @@
+import fs from 'fs';
+import path from 'path';
 import Assessment from "../../models/assessment.js";
 import ResultController from "../../controllers/result.js";
 import ResultModel from "../../models/result.js";
 import Result from '../../models/result.js';
 import UserRateModel from "../../models/userRates.js";
+import UserAvatarModel from "../../models/userAvatar.js";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const dir = dirname(fileURLToPath(import.meta.url));
+const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 async function getQuestion(req,res){        
     if(!req.query.group_id){
         res.status(422).json(
@@ -146,9 +153,21 @@ async function updateResult(req,res){
         );
         return
     }
+    let userAvatar = await UserAvatarModel.getByUserId(user.internal_user_id)
+    user.user_avatar = userAvatar[0] ?? null
+    user.question_data = null
 
+    const tarcokResult = await Result.getByUser(user.internal_user_id);
+    if (tarcokResult.length > 0) {
+        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        user.question_data = {
+            resultCode: tarcokResult[0].result_code,
+            quadra: tarockData.personality_socionic_quadra
+        };
+    }
     res.json(
         {
+            data: user,
             message:"Result Updated",
             status: 1,
         }

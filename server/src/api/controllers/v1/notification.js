@@ -2,6 +2,24 @@ import NotificationModel from "../../models/notification.js";
 
 async function index(req,res){          
     let data = await NotificationModel.getForId(res.user.internal_user_id);    
+    let dataToRead = await NotificationModel.getOnlyUnreadForUser(res.user.internal_user_id)
+
+    const {show_only_unread_count} = req.query
+    if(show_only_unread_count){
+        res.json(
+            {
+                data: dataToRead.length,
+                message: "Notification returned",
+                status: 1,
+            }
+        );
+        return;
+    }    
+
+    for await (const notification of dataToRead) {
+        await NotificationModel.readNotification(notification.id)
+    };
+
     res.json(
         {
             data: data,

@@ -33,6 +33,27 @@ async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickActi
             "body":message,
             "clickAction":"FLUTTER_NOTIFICATION_CLICK",
             "channelId":"high_importance_channel"
+        },
+        "android":{
+            "ttl":"86400s",
+            "notification":{
+              "click_action":clickAction
+            }
+        },
+        "apns": {
+            "headers": {
+              "apns-priority": "5",
+            },
+            "payload": {
+              "aps": {
+                "category": clickAction
+              }
+            }
+        },
+        "webpush":{
+            "headers":{
+              "TTL":"86400"
+            }
         }
     },
     {

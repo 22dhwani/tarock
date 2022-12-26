@@ -934,7 +934,7 @@ async function requestData(req,res){
 }
 
 async function sendForNewBlog(req,res){
-    const { link,user_email } = req.query
+    const { link,user_email ,blog_id} = req.query
     if(!link){
         res.status(422).json(
             {
@@ -950,12 +950,11 @@ async function sendForNewBlog(req,res){
         sendToAll = false
     }
 
-
     if(sendToAll){
         let allUsers = await User.getAllUser()
         for await (const user of allUsers) {
             if(user.is_notification_on && user.is_new_blog_notification_on ){
-                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0)
+                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0,blog_id)
             }
 		};
     }else{
@@ -970,7 +969,7 @@ async function sendForNewBlog(req,res){
             return;
         }
         if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
-            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0)
+            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0,blog_id)
         }
     }
     res.json(

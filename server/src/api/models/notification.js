@@ -69,7 +69,7 @@ async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickActi
 
 }
 
-async function sendToUserId(id,match_user_id=null,type=null,message=null,link=null,is_read=null) {
+async function sendToUserId(id,match_user_id=null,type=null,message=null,link=null,is_read=null,blog_id = null) {
 
     let tokens = await UserFirebaseModel.getByUserId(id)
     tokens = tokens.map((token)=>{
@@ -78,13 +78,19 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
     if(tokens.length > 0){
         await sendNotificationToFirebaseIds(tokens,message,message)
     }
-    const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?, current_timestamp(), current_timestamp())",[
+    let notiData =null
+    if(blog_id){}
+    notiData = {
+        blog_id:blog_id
+    }
+    const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`,`data`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?,?, current_timestamp(), current_timestamp())",[
         id,
         match_user_id,
         type,
         message,
         link,
-        is_read
+        is_read,
+        JSON.stringify(notiData) 
     ]);
     return data[0];
 }
@@ -95,4 +101,4 @@ async function readNotification(id){
 }
 
 
-export default { Notification, getForId ,sendToUserId,getById,readNotification};
+export default { Notification, getForId ,sendToUserId,getById,readNotification,getOnlyUnreadForUser};

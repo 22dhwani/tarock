@@ -728,6 +728,17 @@ async function editUser(req,res){
 
     user = await User.findUserByEmail(user.email);
     user[0].user_avatar = userAvatar[0] ?? null
+
+    user[0].question_data = null
+
+    const tarcokResult = await Result.getByUser(user[0].internal_user_id);
+    if (tarcokResult.length > 0) {
+        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        user[0].question_data = {
+            resultCode: tarcokResult[0].result_code,
+            quadra: tarockData.personality_socionic_quadra
+        };
+    }
     res.json(
         {
             data:user[0],

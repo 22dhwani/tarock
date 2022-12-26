@@ -231,6 +231,7 @@ async function addCard(req,res) {
         return
     }
 
+    let data = null
     try {
         if(card_type == "ZODIAC"){
             if(!birth_date){
@@ -348,7 +349,8 @@ async function addCard(req,res) {
             }
         
             let selected_zodiac = small_map[0].zodiac
-            await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
+            data = await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
+            data = await userZodiac.getById(data.insertId)
         }else{
     
             if(!birth_year){
@@ -449,7 +451,8 @@ async function addCard(req,res) {
             }
     
             let selected_animal = final_map[0].animal
-            await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_year,null,selected_animal)
+            data = await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_year,null,selected_animal)
+            data = await userZodiac.getById(data.insertId)
         }
     
     } catch (error) {
@@ -463,10 +466,13 @@ async function addCard(req,res) {
         return
     }
 
-    
-    
     res.json(
         {
+            data:{
+                id:data[0].id,
+                resultCode:data[0].card_type,
+                quadra:data[0].card_type == 'ZODIAC' ? data[0].zodiac : data[0].animal
+            },
             message: "Card added",
             status: 1,
         }

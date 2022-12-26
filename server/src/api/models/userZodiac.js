@@ -21,6 +21,14 @@ const userZodiac = {
         return data[0];
     },
 
+
+    async getById(id){
+        const data = await sql.query("SELECT * FROM user_zodiac WHERE id = ?",[
+            id,
+        ])
+        return data[0];
+    },
+
     async getUserZodiac(internal_user_id,card_type){
         const data = await sql.query("SELECT * FROM user_zodiac WHERE `internal_user_id` = ? AND `card_type` = ?;",[internal_user_id,card_type]);
         return data[0];

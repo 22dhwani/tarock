@@ -24,6 +24,11 @@ async function getById(id) {
     return data[0];
 }
 
+async function getOnlyUnreadForUser(id) {
+    const data = await sql.query("SELECT * FROM user_notifications WHERE is_read = 0 AND user_id = ?;",[id]);
+    return data[0];
+}
+
 async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickAction=null,type=null,data=null){
     await axios.post('https://fcm.googleapis.com/fcm/send',
     {

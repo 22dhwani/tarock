@@ -1,5 +1,5 @@
 {
-	"Aquarius": {
+	"AQUARIUS": {
 		"name": "The Water Bearer",
 		"star_map": "Aquarius",
 		"date":"Jan 20 - Feb 18",
@@ -15,7 +15,9 @@
 		"the_motto_for_life": "Live Life To Its Fullest",
 		"weakness": "Overly idealistic and reserved",
 		"best_work_with":"Gemini",
-		"learn_best_from":"Scorpio"
+		"best_work_with_description": "Aquarius loves the liveliness of a Libra or Gemini - with their mutual love of socializing and intellectual stimulation, the sparks are sure to fly!",
+		"learn_best_from":"Scorpio",
+		"learn_best_from_description":"Aquarius, Taurus and Scorpio may have different approaches to life, but that just means they can teach each other new things! Aquarius adds creativity, Taurus and Scorpio bring practicality and reliability, and with a little compromise, these signs can find harmony and an even stronger connection."
 	},
 	"PISCES": {
 		"name": "The Fishes",
@@ -33,7 +35,9 @@
 		"the_motto_for_life":"Dream Big Or Go Home!",
 		"weakness":"Undisciplined and irrational",
 		"best_work_with":"Cancer",
-		"learn_best_from":"Sagittarius"
+		"best_work_with_description": "Pisces and Cancer/Scorpio make for a great interaction, forming a strong and secure bond due to their shared emotional depth and understanding.",
+		"learn_best_from":"Sagittarius",
+		"learn_best_from_description":"Pisces together with a Libra or Sagittarius can provide the perfect balance: dreamy and cheerful, sensitive and carefree. Together they create a dynamic that'll teach each sign new ways to view the world!"
 	},
 	"ARIES": {
 		"name": "The White Ram",
@@ -51,7 +55,9 @@
 		"the_motto_for_life":"Work hard, play hard",
 		"weakness":"Rigid and serious",
 		"best_work_with":"Virgo",
-		"learn_best_from":"Leo"
+		"best_work_with_description": "Aries, Leo, and Sagittarius make a dream team of fiery adventure-seekers, destined for a passionate and thrilling relationship!",
+		"learn_best_from":"Leo",
+		"learn_best_from_description":"Aries and Cancer/Capricorn make a great team - Aries can bring out their wild side and Cancer/Capricorn can help them stay grounded. It won't be easy, but with some give and take, both signs can benefit from each other's wisdom."
 	},
 	"TAURUS": {
 		"name": "The Twins",
@@ -69,7 +75,9 @@
 		"the_motto_for_life":"Work hard, play hard",
 		"weakness":"Rigid and serious",
 		"best_work_with":"Virgo",
-		"learn_best_from":"Leo"
+		"best_work_with_description": "Taurus and Virgo/Capricorn make a great team! They share a common ground of loyalty, dedication, and dependability, creating a solid and secure bond.",
+		"learn_best_from":"Leo",
+		"learn_best_from_description":"Taurus and Aries/Aquarius can bring a mix of fun, stability and exploration that can be an adventure for both. They can help Taurus expand their horizons, while Taurus can teach them the importance of routine."
 	},
 	"GEMINI": {
 		"name": "The Twins",
@@ -87,7 +95,9 @@
 		"the_motto_for_life":"Be fun or go home",
 		"weakness":"Nosy and superficial",
 		"best_work_with":"Libra",
-		"learn_best_from":"Virgo"
+		"best_work_with_description": "Gemini and Libra/Aquarius make a great combo - they both love to connect and spark ideas, creating a fun and lively relationship.",
+		"learn_best_from":"Virgo",
+		"learn_best_from_description":"Gemini and Taurus/Scorpio might seem like an unlikely pair, but their differing views create a beautiful harmony. Gemini adds a playful spark, while Taurus/Scorpio bring a solid foundation."
 	},
 	"CANCER": {
 		"name": "The Giant Crab",
@@ -105,7 +115,9 @@
 		"the_motto_for_life":"I Feel, therefore I Am",
 		"weakness":"Jealousy and self-protection",
 		"best_work_with":"Cancer",
-		"learn_best_from":"Aries"
+		"best_work_with_description": "Cancer loves the emotional connection and understanding that Pisces and Scorpio bring, creating a secure and lasting bond.",
+		"learn_best_from":"Aries",
+		"learn_best_from_description":"Cancer and Aries/Gemini make a great team—Cancer brings the emotional support, Aries/Gemini bring the fun! Together they can learn and grow in a balanced relationship."
 	},
 	"LEO": {
 		"name": "The Lion",
@@ -123,7 +135,9 @@
 		"the_motto_for_life":"I am, I want",
 		"weakness":"Inflexible, stubborn",
 		"best_work_with":"Aries",
-		"learn_best_from":"Taurus"
+		"best_work_with_description": "Leo loves Aries and Sagittarius for their sense of adventure and enthusiasm! Together, these fire signs make for a dynamic and rewarding connection.",
+		"learn_best_from":"Taurus",
+		"learn_best_from_description":"Leo's fiery enthusiasm and confidence meets the practicality and stability of Taurus and Cancer to create a strong and balanced bond. With mutual effort, these relationships can be an enlightening experience!"
 	},
 	"VIRGO": {
 		"name": "The Maiden",
@@ -141,7 +155,9 @@
 		"the_motto_for_life":"Anything worth doing, is worth it",
 		"weakness":"Nitpicking and hard to please",
 		"best_work_with":"Taurus",
-		"learn_best_from":"Gemini"
+		"best_work_with_description": "Virgo and Taurus/Capricorn make a great match - with their shared work ethic and understanding, they're set for a secure and stable relationship!",
+		"learn_best_from":"Gemini",
+		"learn_best_from_description":"Virgo's detail-oriented nature pairs perfectly with Gemini and Sagittarius' creative and carefree vibes - they might not agree on everything but their differences can open up a whole new world of possibilities!"
 	},
 	"LIBRA": {
 		"name": "The Scale",
@@ -159,7 +175,9 @@
 		"the_motto_for_life":"I balance",
 		"weakness":"Afraid of offending, indecisive",
 		"best_work_with":"Gemini",
-		"learn_best_from":"Cancer"
+		"best_work_with_description": "Gemini and Aquarius are perfect partners for Libra - they bring out the best in each other, creating a dynamic and fun relationship.",
+		"learn_best_from":"Cancer",
+		"learn_best_from_description":"Libra brings out the party in Virgo and Pisces, while Virgo and Pisces can bring out Libra's sensitive side. Even though they might seem like opposites, they can teach each other a thing or two!"
 	},
 	"SCORPIO": {
 		"name": "The Sky Scorpion",
@@ -177,7 +195,9 @@
 		"the_motto_for_life":"I desire",
 		"weakness":"Impulsive, narrow-minded",
 		"best_work_with":"Pisces",
-		"learn_best_from":"Aquarius"
+		"best_work_with_description": "Scorpio vibes with Cancers and Pisces, forming an emotional connection that creates a secure bond.",
+		"learn_best_from":"Aquarius",
+		"learn_best_from_description":"Despite their differences, Scorpio and Gemini/Libra can still sync up! Scorpio can bring the heat, while Gemini/Libra can bring the fun. With a bit of cooperation, these signs can achieve a harmonious balance and create a rock-solid connection."
 	},
 	"SAGITTARIUS": {
 		"name": "The Centaur",
@@ -195,7 +215,9 @@
 		"the_motto_for_life":"Don't just exist, live!",
 		"weakness":"Impatient and deaf to advice",
 		"best_work_with":"Aries",
-		"learn_best_from":"Virgo"
+		"best_work_with_description": "Sagittarius and Aries or Leo make a great match, since they share a love of adventure and fun! Their enthusiasm for life and each other can make for amazing, long-lasting connetions.",
+		"learn_best_from":"Virgo",
+		"learn_best_from_description":"Sagittarius and Virgo/Scorpio bring different energy to the table, but they can learn a lot from each other. Sagittarius enjoys their analytical side, and Virgo/Scorpio can benefit from the Sagittarius' friendly attitude. With an open spirit, this can be a special connection!"
 	},
 	"CAPRICORN": {
 		"name": "The Mystical Goat",
@@ -213,6 +235,8 @@
 		"the_motto_for_life":"Be the best and nothing less!",
 		"weakness":"Pessimistic, cynical",
 		"best_work_with":"Taurus",
-		"learn_best_from":"Aries"
+		"best_work_with_description": "Capricorns and Taureans/Virgos make the perfect team - they are both hardworking earth signs with mutual understanding and respect, ensuring a strong and secure bond!",
+		"learn_best_from":"Aries",
+		"learn_best_from_description":"Capricorn and Aries/Sagittarius may have different outlooks, but they can make for dynamic pairs! Capricorn can bring structure and stability, while Aries and Sagittarius adds enthusiasm and optimism. With the right balance, they'll have both fun and full of learning!"
 	}
 }

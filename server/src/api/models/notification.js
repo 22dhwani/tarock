@@ -15,12 +15,17 @@ const Notification = function(notification) {
 }
 
 async function getForId(id) {
-    const data = await sql.query("SELECT user_notifications.*,user.name,user.avatar_index FROM user_notifications LEFT JOIN user ON user_notifications.match_user_id = user.internal_user_id WHERE user_id = ? ORDER BY created_at DESC;",[id]);
+    const data = await sql.query("SELECT user_notifications.*,user.name,user.avatar_index,user_avatars.face_index,user_avatars.hair_index,user_avatars.eyebrow_index,user_avatars.eye_index,user_avatars.nose_index,user_avatars.whiskers_index,user_avatars.beard_index,user_avatars.lips_index,user_avatars.ear_index,user_avatars.glasses_index FROM user_notifications LEFT JOIN user ON user_notifications.match_user_id = user.internal_user_id LEFT JOIN user_avatars ON user.internal_user_id = user_avatars.internal_user_id WHERE user_id = ? ORDER BY created_at DESC;",[id]);
     return data[0];
 }
 
 async function getById(id) {
     const data = await sql.query("SELECT * FROM user_notifications WHERE id = ?;",[id]);
+    return data[0];
+}
+
+async function getOnlyUnreadForUser(id) {
+    const data = await sql.query("SELECT * FROM user_notifications WHERE is_read = 0 AND user_id = ?;",[id]);
     return data[0];
 }
 
@@ -33,6 +38,27 @@ async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickActi
             "body":message,
             "clickAction":"FLUTTER_NOTIFICATION_CLICK",
             "channelId":"high_importance_channel"
+        },
+        "android":{
+            "ttl":"86400s",
+            "notification":{
+              "click_action":clickAction
+            }
+        },
+        "apns": {
+            "headers": {
+              "apns-priority": "5",
+            },
+            "payload": {
+              "aps": {
+                "category": clickAction
+              }
+            }
+        },
+        "webpush":{
+            "headers":{
+              "TTL":"86400"
+            }
         }
     },
     {
@@ -43,7 +69,7 @@ async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickActi
 
 }
 
-async function sendToUserId(id,match_user_id=null,type=null,message=null,link=null,is_read=null) {
+async function sendToUserId(id,match_user_id=null,type=null,message=null,link=null,is_read=null,blog_id = null) {
 
     let tokens = await UserFirebaseModel.getByUserId(id)
     tokens = tokens.map((token)=>{
@@ -52,13 +78,19 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
     if(tokens.length > 0){
         await sendNotificationToFirebaseIds(tokens,message,message)
     }
-    const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?, current_timestamp(), current_timestamp())",[
+    let notiData =null
+    if(blog_id){}
+    notiData = {
+        blog_id:blog_id
+    }
+    const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`,`data`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?,?, current_timestamp(), current_timestamp())",[
         id,
         match_user_id,
         type,
         message,
         link,
-        is_read
+        is_read,
+        JSON.stringify(notiData) 
     ]);
     return data[0];
 }
@@ -69,4 +101,4 @@ async function readNotification(id){
 }
 
 
-export default { Notification, getForId ,sendToUserId,getById,readNotification};
+export default { Notification, getForId ,sendToUserId,getById,readNotification,getOnlyUnreadForUser};

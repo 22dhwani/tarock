@@ -1,7 +1,16 @@
+import fs from 'fs';
+import path from 'path';
 import Assessment from "../../models/assessment.js";
 import ResultController from "../../controllers/result.js";
 import ResultModel from "../../models/result.js";
+import Result from '../../models/result.js';
+import UserRateModel from "../../models/userRates.js";
+import UserAvatarModel from "../../models/userAvatar.js";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const dir = dirname(fileURLToPath(import.meta.url));
+const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 async function getQuestion(req,res){        
     if(!req.query.group_id){
         res.status(422).json(
@@ -64,23 +73,76 @@ async function addResult(req,res){
     );
 }
 
+async function rateResult(req,res){
+    let user = res.user
+    const {owner_id,data} = req.body
+    if(!owner_id){
+        res.status(422).json(
+            {
+                message:"owner id is required",
+                status: 0,
+            }
+        );
+        return
+    }
+    if(!data){
+        res.status(422).json(
+            {
+                message:"data is required",
+                status: 0,
+            }
+        );
+        return
+    }
+    try {
+        await UserRateModel.removeByIds(owner_id,res.user.internal_user_id)    
+        for await (const d of data) {
+			await UserRateModel.addRating(owner_id,res.user.internal_user_id,d['question'],d['answer'])    
+		};
+    } catch (error) {
+        res.status(422).json(
+            {
+                error:error.message,
+                message:"something went Wrong",
+                status: 0,
+            }
+        );
+        return
+    }
+    
+    res.json(
+        {
+            message:"User rated",
+            status: 1,
+        }
+    );
+}
+
 async function updateResult(req,res){
 
     let user = res.user
 
     let result= await ResultModel.getByUser(user.internal_user_id)
     if(result.length <=0 ){
-        res.status(422).json(
-            {
-                message:"No result found for this user",
-                status: 0,
-            }
-        );
-        return
+        const newResult = new Result.Result({
+            userId: user.internal_user_id,
+            assessmentGroupId: req.body.assessment_group_id,
+            numOfQuestions: req.body.answers.length,
+            duration: req.body.duration,
+            code: ResultController.getSocionicsResult(req.body.answers)
+          });
+        await Result.create(newResult);
+        result = await ResultModel.getByUser(user.internal_user_id)
     }
                     
     try {
-        await ResultModel.update(result[0].id,req.body.assessment_group_id,req.body.answers.length,req.body.duration,ResultController.getSocionicsResult(req.body.answers))
+        await ResultModel.update(
+            result[0].id,
+            req.body.assessment_group_id,
+            req.body.answers.length,
+            req.body.duration,
+            ResultController.getSocionicsResult(req.body.answers)
+        )
     } catch (error) {
         res.status(422).json(
             {
@@ -91,13 +153,25 @@ async function updateResult(req,res){
         );
         return
     }
+    let userAvatar = await UserAvatarModel.getByUserId(user.internal_user_id)
+    user.user_avatar = userAvatar[0] ?? null
+    user.question_data = null
 
+    const tarcokResult = await Result.getByUser(user.internal_user_id);
+    if (tarcokResult.length > 0) {
+        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        user.question_data = {
+            resultCode: tarcokResult[0].result_code,
+            quadra: tarockData.personality_socionic_quadra
+        };
+    }
     res.json(
         {
+            data: user,
             message:"Result Updated",
             status: 1,
         }
     );
 }
 
-export default { getQuestion,addResult,updateResult };
+export default { getQuestion,addResult,updateResult,rateResult };

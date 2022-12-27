@@ -111,20 +111,23 @@ const CardsScreen = () => {
             setTipDetails(
                 prev => ({
                     ...prev,
-                    title: 'Share your card',
+                    title: 'Share to Match',
                     content: 'Share your Tarock card and Match with your friends!'
                 })
             )
-            setShowTip(true);
-            setTimeout(() => {
-               setShowTip(false);
-            }, 3000);
+            if (cardType?.type?.name == 'MyCard') {
+                setShowTip(true);
+                setTimeout(() => {
+                    setShowTip(false);
+                }, 3000);
+            }
+
         }
     }, [shareCardOption]);
-    
+
     return isLoading ? <Loading /> : (
         <Container className='d-flex flex-column vh-100 ' style={{ backgroundColor: '#FAE8E7' }}>
-             <ComingSoonModal openModal={showNotification} setOpenModal={setShowNotification} />
+            <ComingSoonModal openModal={showNotification} setOpenModal={setShowNotification} />
             <Notification openModal={showTip} setOpenModal={setShowTip} title={tipDetails.title} desc={tipDetails.content} />
             <Popup show={showCard} setShow={setShowCard} isCard={true}>
                 <>
@@ -163,13 +166,13 @@ const CardsScreen = () => {
                                     prev => ({
                                         ...prev,
                                         title: 'Link Copied!',
-                                        content: 'Easily share and compare your Match Card with your friends.'
+                                        content: 'Easily share and compare your card with your friends.'
                                     })
                                 )
                                 setShowTip(true);
                                 setTimeout(() => {
                                     setLinkButton(linkNC);
-                                    setShowTip(false)
+                                    setShowTip(false);
                                 }, 1500);
                                 if (tab) {
                                     navigator.clipboard.writeText(`${window.location.origin}/share/${userData.id}`);
@@ -180,11 +183,10 @@ const CardsScreen = () => {
                             <img src={imgButton} alt='image' style={{
                                 cursor: 'pointer'
                             }} onClick={() => {
-                                //open in new tab
                                 if (tab) {
-                                    window.open(`/share/${userData.id}`, '_blank');
+                                    navigate(`/share/${userData.id}`, { state: { qr: true } })
                                 } else {
-                                    window.open(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`, '_blank');
+                                    navigate(`/matchCard?origUser=${userData.id}&matchedUser=${clickedMatchUserId}`);
                                 }
                             }} />
                         </div>

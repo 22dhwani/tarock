@@ -1169,7 +1169,15 @@ async function socialLogin(req,res){
         } 
         let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
         data[0].user_avatar = userAvatar[0] ?? null
-        
+
+        const tarcokResult = await Result.getByUser(data[0].internal_user_id);
+        if (tarcokResult.length > 0) {
+            const tarockData = tarockJsonData[tarcokResult[0].result_code];
+            user.question_data = {
+                resultCode: tarcokResult[0].result_code,
+                quadra: tarockData.personality_socionic_quadra
+            };
+        }
         res.json(
             {
                 token:token,

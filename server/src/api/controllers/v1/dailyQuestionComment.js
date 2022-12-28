@@ -1,10 +1,16 @@
+import fs from 'fs';
+import path from 'path';
 import DailyQuestionModel from "../../models/dailyQuestion.js";
 import DailyQuestionOptionModel from "../../models/dailyQuestionOptions.js";
 import DailyQuestionUserAnswerOptionModel from "../../models/dailyQuestionUserAnswer.js";
 import sql from "../../../config/db.js";
 import DailyQuestionCommentModel from "../../models/dailyQuestionComment.js";
 import UserToDailyQuestionComment from "../../models/userToDailyQuestionComment.js";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const dir = dirname(fileURLToPath(import.meta.url));
+const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 async function index(req, res) {
     let user = res.user
 	const { question_id } = req.query
@@ -18,7 +24,14 @@ async function index(req, res) {
         return;
     } 
 	let data = await DailyQuestionCommentModel.index(question_id,user.internal_user_id)
-
+    data.map((d)=>{
+        if(d.result_code){
+            d.personality_category = tarockJsonData[d.result_code]?.personality_category
+        }else{
+            d.personality_category = null
+        }
+        return d
+    })
 	res.json({
         data: data,
 		message: "success",

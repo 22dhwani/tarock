@@ -3,6 +3,7 @@ import path from 'path';
 import User from '../../models/user.js';
 import Result from '../../models/result.js';
 import Match from '../../models/match.js';
+import UserRateModel from '../../models/userRates.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import userZodiac from '../../models/userZodiac.js';
@@ -152,7 +153,7 @@ async function getUserCard(req,res){
 
 
 async function getTypeCard(req,res){          
-    let {type,zodiac,animal} = req.query
+    let {type,zodiac,animal,owner_id} = req.query
     let finalData = null
     if(type){
         finalData = data[type];
@@ -163,9 +164,18 @@ async function getTypeCard(req,res){
     if(animal){
         finalData = animalData[animal];
     }
+    let isRated = false;
+    if(owner_id){
+        let userRate = await UserRateModel.findByIds(owner_id,res.user.internal_user_id)
+        if(userRate.length > 0){
+            isRated = true
+        }
+        
+    }
     
     res.json(
         {
+            is_rated:isRated,
             data:finalData,
             message: "Explore returned",
             status: 1,

@@ -1092,6 +1092,14 @@ async function socialLogin(req,res){
             let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
             emailExistUser[0].user_avatar = userAvatar[0] ?? null
 
+            const tarcokResult = await Result.getByUser(emailExistUser[0].internal_user_id);
+            if (tarcokResult.length > 0) {
+                const tarockData = tarockJsonData[tarcokResult[0].result_code];
+                emailExistUser[0].question_data = {
+                    resultCode: tarcokResult[0].result_code,
+                    quadra: tarockData.personality_socionic_quadra
+                };
+            }
 
             res.json(
                 {
@@ -1173,7 +1181,7 @@ async function socialLogin(req,res){
         const tarcokResult = await Result.getByUser(data[0].internal_user_id);
         if (tarcokResult.length > 0) {
             const tarockData = tarockJsonData[tarcokResult[0].result_code];
-            user.question_data = {
+            data[0].question_data = {
                 resultCode: tarcokResult[0].result_code,
                 quadra: tarockData.personality_socionic_quadra
             };

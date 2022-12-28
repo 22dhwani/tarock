@@ -60,6 +60,33 @@ async function answer(req, res) {
 
 	let options = await DailyQuestionOptionModel.indexWithCount(question_id)
 	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id)
+
+	await Promise.all(options.map(async (option) => {
+		let personalies = []
+		let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id,option.id)
+		let tarcokResult = null
+
+		for await (const answer of totalAnswers) {
+			tarcokResult = await Result.getByUser(answer.user_id)
+			if (tarcokResult.length > 0) {
+				let personality_name = cardData[tarcokResult[0].result_code].personality_category
+				if(!personalies.some((element)=>{return element.personality_name == personality_name})){
+					personalies.push(
+						{
+							personality_name:personality_name,
+							count:1
+						}
+					)
+				}else{
+					let personality_index = personalies.findIndex((obj => obj.personality_name == personality_name));
+					personalies[personality_index].count = personalies[personality_index].count + 1
+				}				
+			}
+		};
+
+		option.total_personality_answers= totalAnswers.length
+		option.personalies= personalies
+	}))
 	res.json({
 		data : {
 			"total_answers":totalAnswers.length,

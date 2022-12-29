@@ -81,7 +81,8 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
     let notiData =null
     if(blog_id){}
     notiData = {
-        blog_id:blog_id
+        blog_id:blog_id,
+        match_user_id:match_user_id
     }
     const data = await sql.query("INSERT INTO user_notifications (`id`, `user_id`, `match_user_id`, `type`, `message`, `link`, `is_read`,`data`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?, ?, ?, ?,?, current_timestamp(), current_timestamp())",[
         id,

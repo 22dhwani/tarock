@@ -1,6 +1,13 @@
+import fs from 'fs';
+import path from 'path';
 import ExploreCommentModel from "../../models/exploreComment.js";
 import UserToCommentModel from "../../models/userToComment.js";
 import sql from "../../../config/db.js";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const dir = dirname(fileURLToPath(import.meta.url));
+const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 
 async function index(req,res){      
     
@@ -14,7 +21,16 @@ async function index(req,res){
         return;
     }    
     let user = res.user
-    let data = await ExploreCommentModel.getForExplore(req.query.explore_id, user.internal_user_id);    
+    let data = await ExploreCommentModel.getForExplore(req.query.explore_id, user.internal_user_id);
+
+    data.map((d)=>{
+        if(d.result_code){
+            d.personality_category = tarockJsonData[d.result_code]?.personality_category
+        }else{
+            d.personality_category = null
+        }
+        return d
+    })
 
     res.json(
         {
@@ -66,7 +82,7 @@ async function create(req,res){
     await sql.query("UPDATE `explore` SET `comment_count` = ? WHERE `explore`.`id` = ?",[count[0][0].comments,req.body.explore_id])
 
     // insertId
-    const item = await sql.query("SELECT * FROM explore_comments WHERE id = ?;",[data.insertId])
+    const item = await sql.query("SELECT explore_comments.* , user.name,user.avatar_index,user_avatars.face_index,user_avatars.hair_index,user_avatars.eyebrow_index,user_avatars.eye_index,user_avatars.nose_index,user_avatars.whiskers_index,user_avatars.beard_index,user_avatars.lips_index,user_avatars.ear_index,user_avatars.glasses_index,user_assessment_result.result_code, CASE WHEN EXISTS(select * from user_to_comment where `user_to_comment`.`internal_user_id` = ? AND `user_to_comment`.`explore_comment_id` = explore_comments.id) then 1 else 0 end as is_liked FROM explore_comments LEFT JOIN user ON explore_comments.internal_user_id = user.internal_user_id LEFT JOIN user_avatars ON user.internal_user_id = user_avatars.internal_user_id LEFT JOIN user_assessment_result ON user.internal_user_id = user_assessment_result.internal_user_id WHERE explore_comments.id = ? ORDER BY created_at DESC;",[req.body.user_id,data.insertId])    
 
     res.json(
         {

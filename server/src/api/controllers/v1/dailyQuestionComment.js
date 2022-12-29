@@ -62,7 +62,12 @@ async function addComment(req,res){
         return;
     } 
     let data = await DailyQuestionCommentModel.addComment(user.internal_user_id,question_id,content)
+
+
+    // insertId
+    const item = await sql.query("SELECT * FROM explore_comments WHERE id = ?;",[data.insertId])
     res.json({
+        data: item[0][0],
 		message: "Comment Added",
 		status: 1,
 	});

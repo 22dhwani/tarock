@@ -698,8 +698,8 @@
 		},
 		"summary": [
 			"When it comes to new experiences, opportunities, and people, you like to keep the doors of your mind wide open and greet each new opportunity with a warm smile. As an Artist, you live in the present, doing whatever seems appropriate at the time. And you make sure to give lots of wiggle space for the unexpected, which is why many of your most treasured memories are of impromptu, spur-of-the-moment trips and adventures with friends and family.",
-			"In social interactions, you are very aware of and respectful of others' needs and attempt to maintain composure under pressure, and are capable of reading and responding to the emotional condition of others. Usually, you try to lift the spirits of those around you by using humor, games, smart remarks, or retorts.",
-			"However, you Artists may have trouble making and keeping even short-term goals. Since this is the case, the Artist frequently doubts their abilities and fear that they are failing or disappointing others. Don't be afraid to give yourself structure and guidance - it will help you make the most of your intrepid spirit.",
+			"In social interactions, you are very aware of and respectful of others' needs and attempt to maintain composure under pressure. You are highly capable of reading and responding to the emotional condition of others. Usually, you try to lift the spirits of those around you by using humor, games, smart remarks, or retorts.",
+			"However, you Artists may have trouble making and keeping short-term goals. Since this is the case, the Artist frequently doubts their abilities and fear that they are failing or disappointing others.",
 			"Artists are sensitive souls, attuned to the approval or disapproval of others. By embracing this part of oneself, you can begin to understand that your worth as a creative is not dependent on the approval or disapproval of others, but exists within yourself."
 		],
 		"matching_tips": {
@@ -905,7 +905,7 @@
 		"personality_socionic_code": "ESFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
-			"STRENGTHS": "Observant; Composed; Quick; Charming; Practical; Take-Charge",
+			"STRENGTHS": "Attentive; Composed; Quick; Charming; Perseverance; Take-Charge",
 			"WEAKNESS": "Short-sighted with lack of plan; Grasping actions behind emotions",
 			"SUPERPOWER": "“Street smarts”",
 			"BLINDSPOT": "Impulsive",
@@ -1129,7 +1129,7 @@
 		"personality_socionic_code": "ISTJ",
 		"personality_socionic_quadra": "Beta",
 		"description": {
-			"STRENGTHS": "Accurate; Methodical; Literal; Loyal; Meticulous; Patient",
+			"STRENGTHS": "Accurate; Methodical; Observant; Loyal; Meticulous; Patient",
 			"WEAKNESS": "Confrontational; Accepting and readjusting",
 			"SUPERPOWER": "Reliable",
 			"BLINDSPOT": "Overly critical",
@@ -1159,7 +1159,7 @@
 				"When getting ready to start a project, [User_LII] spends more time planning and preparing for the project than [User_LSI]. In particular, [User_LII] spends more time discussing the plan, discussing options and ways to approach the project, etc.).",
 				"[User_LSI] is able to change and make adjustments to their goals more easily than [User_LII] (depending on how progress is being made, etc.). [User_LII] on the other hand, prefers to stick with their original goals.",
 				"When developing a plan of action or process, [User_LSI] tends to see themselves as \"within the process\"; they are immersed in it. Often because of this, they have more difficulty managing several plans at once. On the other hand, [User_LII] tends to place themselves \"outside of the process\"; they dissociate from it. For them the process or situation is something external from themselves.",
-				"[User_LSI] is better at noticing details than [User_LII]. [User_LII] on the other hand, is better at seeing the big picture than [User_LSI].",
+				"[User_LSI] can be better at noticing details than [User_LII]. [User_LII] on the other hand, is better at seeing the big picture than [User_LSI].",
 				"[User_LII] pays more particular attention to aspects of a situation or plan that is insufficient or lacking. This can be interpreted by others as [User_LII] having a negative assessment of various situations and events (glass half empty). On the other hand, [User_LSI] pays more attention to what is actually present in a situation, and this can be interpreted as an affirmative or positive manifestation of the surrounding world, situations, possibilities, and prospects (glass half full).",
 				"[User_LSI], more than [User_LII], frequently perceives and defines themselves and other people through group associations. [User_LSI] focuses on collectivism over individualism.",
 				"[User_LII] likes to take their time to get in the right headspace before getting started with a task, while [User_LSI] likes to dive right in and swim towards the finish line! For [User_LII], it's all about getting in the zone before they are ready to shine, while for [User_LSI], this stage of readiness is their natural state."
@@ -1209,7 +1209,7 @@
 				"[User_LSI] tends to plan ahead, making decisions early. On the other hand, [User_SLE] tends to prefer a wait and see, more spontaneous approach.",
 				"[User_SLE]'s energy levels tend to decrease when they're alone whereas [User_LSI]'s energy levels will decrease when they're interacting with larger groups of people.",
 				"[User_SLE] is more likely than [User_LSI] to use \"emotional anchors\" that resonate with their internal emotional condition. These emotional anchors could be a book, a movie, a place, a song, etc. [User_SLE] uses these anchors to strengthen their inner emotional state and thus will repeat the experience: e.g., re-reading a book, re-watching a movie, continually going back to a place to experience the emotions associated with it.",
-				"[User_SLE] is relatively more flexible and tolerant than [User_LSI].",
+				"[User_SLE] is more likely to go with the flow and less likely to stick to a set plan than [User_LSI].",
 				"[User_LSI] is able to change and make adjustments to their goals more easily than [User_SLE] (depending on how progress is being made, etc.). [User_SLE] on the other hand, prefers to stick with their original goals."
 			],
 			"EIE": [
@@ -1232,7 +1232,7 @@
 				"[User_LSI] is better at noticing details than [User_IEI]. [User_IEI] on the other hand, is better at seeing the big picture than [User_LSI].",
 				"[User_LSI] tends to prefer a clear chain of command for quick decisions, compared to [User_IEI] who tends to like an all-hands on deck approach for group decisions.",
 				"When solving a problem, [User_LSI] is more inclined (than [User_IEI]) to solve it by relying predominantly on only the presently available information. Essentially, [User_LSI] will develop a process or method uniquely fitted towards the present problem, and this method is designed using the present conditions and information.",
-				"[User_IEI] is relatively more flexible and tolerant than [User_LSI].",
+				"Compared to [User_LSI], [User_IEI] is a lot more likely to be open to going with the flow and trying new things.",
 				"[User_IEI] tends to be more idealistic with their heads-in-the-cloud. [User_LSI], on the other hand, is more realistic and down-to-earth.",
 				"[User_IEI] is comfortable making changes and adjustments to their decisions quite frequently. [User_LSI], on the other hand, prefers to not make changes to their decisions."
 			],
@@ -1356,7 +1356,7 @@
 		"personality_socionic_code": "ENFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
-			"STRENGTHS": "Affectionate; Harmonious; Emotionally-aware; Curious; Charismatic; Artistic",
+			"STRENGTHS": "Affectionate; Harmonious; Emotionally-aware; Curious; Charismatic; Artsy",
 			"WEAKNESS": "Overcomitting to plans; Strong self-awareness (capable of manipulation)",
 			"SUPERPOWER": "Emotional Intelligence",
 			"BLINDSPOT": "Overgeneralizing",

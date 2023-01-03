@@ -955,7 +955,7 @@ async function sendForNewBlog(req,res){
         let allUsers = await User.getAllUser()
         for await (const user of allUsers) {
             if(user.is_notification_on && user.is_new_blog_notification_on ){
-                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0,blog_id)
+                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','New Blog Addded, check it out',link,0,blog_id)
             }
 		};
     }else{
@@ -970,7 +970,7 @@ async function sendForNewBlog(req,res){
             return;
         }
         if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
-            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','new Blog Addded, check it out',link,0,blog_id)
+            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','New Blog Addded, check it out',link,0,blog_id)
         }
     }
     res.json(

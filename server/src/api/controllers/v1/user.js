@@ -12,6 +12,7 @@ import https from 'https'
 import axios from 'axios';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import jwt from 'jsonwebtoken';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
@@ -1055,20 +1056,36 @@ async function socialLogin(req,res){
 
 
     try {
-        finalData = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?id_token=${bearerToken}`,
-        {
-            headers: {
-                Authorization: `Bearer ${bearerToken}`,
-                Accept:'*/*'
-            }
-        })
-    
         let userName = 'User';
         let userEmail = null
-        if(finalData.data){
-            userName = finalData.data?.name
-            userEmail = finalData.data?.email
+
+        if(provider == 'apple'){
+            const json = jwt.decode(
+                bearerToken,
+                {complete: true})
+
+            if(json.payload){
+                if(json.payload.email){
+                    userEmail = json.payload.email
+                }
+            }
+        }else{
+            finalData = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?id_token=${bearerToken}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${bearerToken}`,
+                    Accept:'*/*'
+                }
+            })        
+            
+            if(finalData.data){
+                userName = finalData.data?.name
+                userEmail = finalData.data?.email
+            }
+           
         }
+
+
         if(!userName || !userEmail){
             res.status(422).json(
                 {
@@ -1078,6 +1095,7 @@ async function socialLogin(req,res){
             );
             return;
         }
+        
         let emailExistUser = await User.findUserByEmail(userEmail);
         if(emailExistUser.length > 0){
 

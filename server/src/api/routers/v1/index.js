@@ -5,6 +5,7 @@ import Notification from '../../controllers/v1/notification.js';
 import Explore from '../../controllers/v1/explore.js';
 import question from '../../controllers/v1/question.js';
 import personalityInsight from '../../controllers/v1/personalityInsight.js';
+import match from '../../controllers/v1/match.js';
 import exploreComment from '../../controllers/v1/exploreComment.js';
 import dailyQuestionComment from '../../controllers/v1/dailyQuestionComment.js';
 import express from 'express';
@@ -114,6 +115,9 @@ export default function(app) {
 
         //PERSONALITY INSIGHT
         router.get("/auth/get-insights", personalityInsight.index);
+
+        //match
+        router.post("/match", match.create);
 
         app.use("/api/v1", router);
     } catch (error) {

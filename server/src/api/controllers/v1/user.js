@@ -1056,7 +1056,7 @@ async function socialLogin(req,res){
 
 
     try {
-        let userName = 'User';
+        let userName = 'Guest';
         let userEmail = null
 
         if(provider == 'apple'){

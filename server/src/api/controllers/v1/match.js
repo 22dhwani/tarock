@@ -35,7 +35,7 @@ async function create(req, res) {
             res.status(422).json(
                 {
                     error:error.message,
-                    message:"Something went wrong",
+                    message:"Already Matched",
                     status: 0,
                 }
             );

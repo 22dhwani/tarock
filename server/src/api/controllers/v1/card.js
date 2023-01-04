@@ -322,7 +322,6 @@ async function addCard(req,res) {
         
             let small_map = date_map.filter(date => date.start_date.split("-")[0] == check_month || date.end_date.split("-")[0] == check_month)
         
-        
             let zodiac_birth_date = new Date(birth_date)
             let zodiac_birth_year = zodiac_birth_date.getFullYear()
             small_map = small_map.filter((date)=>{
@@ -339,12 +338,30 @@ async function addCard(req,res) {
                     }
                     return false    
                 }else{
-                    let start_date = new Date(zodiac_birth_year+'-'+date.start_date)
-                    let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
-                    if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
-                        return true
+                    if(check_month == 12 && check_date >= 22 && check_date <= 31){
+                        let start_date = null
+                        let end_date = null
+                        if(date.start_date.split('-')[0] == 12){
+                            start_date = new Date((zodiac_birth_year)+'-'+date.start_date)    
+                            end_date = new Date((zodiac_birth_year+1)+'-'+date.end_date)
+                        }else{
+                            start_date = new Date((zodiac_birth_year)+'-'+date.start_date)    
+                            end_date = new Date((zodiac_birth_year)+'-'+date.end_date)
+                        }                    
+                        if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
+                            return true
+                        }
+                        return false
+                    }else{
+                        let start_date = new Date(zodiac_birth_year+'-'+date.start_date)
+                        let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
+                        console.log(start_date,end_date,zodiac_birth_date);
+                        if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
+                            return true
+                        }
+                        return false
+    
                     }
-                    return false
                 }            
             })
     

@@ -34,7 +34,7 @@ async function sendNotificationToFirebaseIds(firebaseIds,title,message,clickActi
     {
         "registration_ids":firebaseIds,
         "notification":{
-            "title":message,
+            "title":title,
             "body":message,
             "clickAction":"FLUTTER_NOTIFICATION_CLICK",
             "channelId":"high_importance_channel"
@@ -75,8 +75,14 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
     tokens = tokens.map((token)=>{
         return token.firebase_token
     })
+    let title = message
+    if (type === 'DAILY_QUESTION') {
+        title = 'Daily Tarock Discovery'
+    } else if (type === 'NEW_BLOG') {
+        title = 'Tarock posted a new blog!'
+    }
     if(tokens.length > 0){
-        await sendNotificationToFirebaseIds(tokens,message,message)
+        await sendNotificationToFirebaseIds(tokens,title,message)
     }
     let notiData =null
     if(blog_id){}

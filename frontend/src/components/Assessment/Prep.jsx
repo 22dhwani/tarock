@@ -77,7 +77,7 @@ function Prep(props) {
                             borderRadius: '10px',
                         }}>
                             <p>
-                                Stop. Think of yourself in your truest form. Now, answer the questions as honestly and as generally as you can.
+                                Take a minute and think of yourself in your truest form. Now, answer the questions as honestly and as generally as you can.
 
                             </p>
                             <p>

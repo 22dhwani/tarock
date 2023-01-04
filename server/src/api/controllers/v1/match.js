@@ -13,8 +13,8 @@ async function create(req, res) {
         return;
     } else {
         const match = new Match.Match({
-            origUserId: req.body.origUserId,
-            matchedUserId: req.body.matchedUserId,
+            origUserId: req.body.matchedUserId,
+            matchedUserId: req.body.origUserId,
         });       
 
         try {
@@ -23,7 +23,7 @@ async function create(req, res) {
             user = user[0]
             anotherUser = anotherUser[0]
             if(user.is_notification_on && user.is_match_card_notification_on ){
-                await notification.sendToUserId(user.internal_user_id,req.body.matchedUserId,'MATCH_CARD','You have a new matched card with '+anotherUser.name,null,0,null)
+                await notification.sendToUserId(user.internal_user_id,req.body.matchedUserId,'MATCH_CARD','You have a new matched card with',null,0,null)
             }
             const data = await Match.create(match);
             res.json(

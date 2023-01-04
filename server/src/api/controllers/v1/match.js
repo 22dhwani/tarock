@@ -18,15 +18,15 @@ async function create(req, res) {
         });       
 
         try {
-            let user = await User.queryReal(req.body.origUserId)
-            let anotherUser = await User.queryReal(req.body.matchedUserId)
+            let user = await User.queryReal(req.body.matchedUserId)
+            let anotherUser = await User.queryReal(req.body.origUserId)
             user = user[0]
             anotherUser = anotherUser[0]
             if(user.is_notification_on && user.is_match_card_notification_on ){
                 await notification.sendToUserId(user.internal_user_id,req.body.matchedUserId,'MATCH_CARD','You have a new matched card with '+anotherUser.name,null,0,null)
             }
             const data = await Match.create(match);
-            res.status(422).json(
+            res.json(
                 {
                     message:"User matched",
                     status: 1,

@@ -85,6 +85,7 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
     }else if(type === 'MATCH_CARD'){
         if(match_user_id){
             let anotherUser = await User.queryReal(match_user_id)
+            anotherUser=anotherUser[0]
             message = message+' '+anotherUser.name
         }
     }

@@ -257,7 +257,7 @@ async function addCard(req,res) {
                 {
                     'start_date':'01-20',
                     'end_date':'02-18',
-                    'zodiac':'Aquarius'
+                    'zodiac':'AQUARIUS'
                 },
                 {
                     'start_date':'02-19',

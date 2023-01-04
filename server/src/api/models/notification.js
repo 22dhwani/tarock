@@ -1,5 +1,6 @@
 import sql from "../../config/db.js";
 import UserFirebaseModel from "./userFirebase.js";
+import User from "./user.js";
 import axios from 'axios';
 
 const Notification = function(notification) {
@@ -76,10 +77,17 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
         return token.firebase_token
     })
     let title = message
+    let dbMessage = message
     if (type === 'DAILY_QUESTION') {
         title = 'Daily Tarock Discovery'
     } else if (type === 'NEW_BLOG') {
         title = 'Tarock posted a new blog!'
+    }else if(type === 'MATCH_CARD'){
+        if(match_user_id){
+            let anotherUser = await User.queryReal(match_user_id)
+            anotherUser=anotherUser[0]
+            message = message+' '+anotherUser.name
+        }
     }
     if(tokens.length > 0){
         await sendNotificationToFirebaseIds(tokens,title,message)
@@ -94,7 +102,7 @@ async function sendToUserId(id,match_user_id=null,type=null,message=null,link=nu
         id,
         match_user_id,
         type,
-        message,
+        dbMessage,
         link,
         is_read,
         JSON.stringify(notiData) 

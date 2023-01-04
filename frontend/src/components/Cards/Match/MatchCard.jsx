@@ -1,11 +1,14 @@
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../../context';
+import logo from '../../../assets/tarockLogo.svg';
 import Loading from '../../Loading/Loading/';
 import RadarChart from '../../Charts/RadarChart';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UserInfo from './UserInfo';
 import Swipper from '../../Swipper/Swipper';
 import Header from '../../Header/Header';
+import chartImg from '../../../assets/chart/chart_bg_black_text.png';
+import { getUserMatchChartImageData, getUserMatchLinearColorFromQuadra } from '../../../utils/userUtil';
 
 function MatchCard(props) {
 
@@ -18,6 +21,7 @@ function MatchCard(props) {
     const searchParams = new URLSearchParams(useLocation().search);
     const origUserFromUrl = searchParams.get('origUser');
     const matchedUserFromUrl = searchParams.get('matchedUser');
+    const navigate = useNavigate()
 
     function fetchUserData(setUser, setCardData, id) {
         fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/${id}?userType=REAL`)
@@ -54,7 +58,9 @@ function MatchCard(props) {
     }, []);
 
     useEffect(() => {
-        setMatchingTips(parseMatchingTips(matchedCard.personality_code, matchedUser.name));
+        const parsedTips = parseMatchingTips(matchedCard.personality_code, matchedUser.name);
+        setMatchingTips(parsedTips);
+
     }, [cardData, matchedCard]);
 
     function parseMatchingTips(matchedType, matchedUserName) {
@@ -62,10 +68,15 @@ function MatchCard(props) {
             return [];
         }
         if (cardData && cardData.matching_tips) {
-            const shuffled = cardData.matching_tips[matchedType].sort(() => 0.5 - Math.random());
+            if (cardData.personality_code === matchedType && !cardData.matching_tips[matchedType]) {
+                // Return a placeholder for the identical matched types.
+                return ['Is that a mirror?'];
+            }
+            const list = cardData.matching_tips[matchedType] ?? [];
+            const shuffled = list.sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 2);
             return selected.map((item) => {
-                return item.replaceAll('[User_' + cardData.personality_code + ']', user.name).replaceAll('[User_' + matchedType + ']', matchedUserName);
+                return item.replaceAll('[User_' + cardData.personality_code + ']', user?.name?.trim().split(' ')[0]).replaceAll('[User_' + matchedType + ']', matchedUserName?.trim().split(' ')[0]);
             });
         }
         return [];
@@ -82,72 +93,91 @@ function MatchCard(props) {
             return '#BB6BD9';
         }
     }
+    const userFirstName = user.name ? user.name.trim().split(' ')[0] : '';
+    const matchedFirstName = matchedUser.name ? matchedUser.name.trim().split(' ')[0] : '';
     let userQuadra = getColor(cardData.personality_socionic_quadra);
     let matchedQuadra = getColor(matchedCard.personality_socionic_quadra);
+    const linearColor = getUserMatchLinearColorFromQuadra(cardData.personality_socionic_quadra, matchedCard.personality_socionic_quadra)
+    const linearColorWithNoise = `url("../assets/cards/noise.png"), ${linearColor}`
     const location = useLocation().pathname;
     if (user.name && matchedUser.name && cardData.description && matchedCard.description) {
 
-        const matchView = <div className='py-5 rounded-4 '
-            style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
-            <div className='d-flex flex-column gap-4'>
-                {location === '/matchCard' && <Header/>}
-                <UserInfo cardData={cardData} user={user} />
-                <div className='px-3'>
-                    <div style={{
-                        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
-                        backdropFilter: 'blur(10px)',
-                        borderRadius: '8px',
-                        height: '300px',
-                        margin: '0 auto',
-                        width: '100%',
-                        padding: '20px',
-                    }}>
-                        <RadarChart
-                            userData={cardData.dimensional_values}
-                            matchData={matchedCard.dimensional_values}
-                            enableLabels={true}
-                            userQuadra={userQuadra}
-                            matchedQuadra={matchedQuadra}
-                        />
+        const userChartDataImage = getUserMatchChartImageData(cardData.personality_category)
+        const matchedChartDataImage = getUserMatchChartImageData(matchedCard.personality_category)
+
+        const matchView = <div className={`${location === '/matchCard' && "d-flex flex-column justify-content-center min-vh-100"}`}>
+            <div className='py-5 rounded-4 text-white card-noise' style={{ backgroundImage: linearColorWithNoise }}>
+                <div className='d-flex flex-column gap-4'>
+                    {location === '/matchCard' && <img src={logo} alt="logo" height='23.83px' width='120px' className='mb-3 mx-auto' onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />}
+                    <UserInfo cardData={cardData} user={user} />
+                    <div className='px-3'>
+                        <div style={{
+                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
+                            backdropFilter: 'blur(10px)',
+                            borderRadius: '8px',
+                            height: '300px',
+                            margin: '0 auto',
+                            width: '100%',
+                            padding: '20px',
+                        }}>
+                            <div className="position-relative" style={{ height: "260px" }}>
+                                <img src={chartImg} alt="" style={{ width: '100%', height: "100%", objectFit: 'contain', }} />
+                                <img src={userChartDataImage} alt="" style={{ width: '100%', height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0' }} />
+                                <img src={matchedChartDataImage} alt="" style={{ width: '100%', height: "100%", objectFit: 'contain', position: 'absolute', top: 0, left: '0' }} />
+                            </div>
+                        </div>
                     </div>
+                    <UserInfo cardData={matchedCard} user={matchedUser} />
+                    {
+                        location === '/matchCard' &&
+                        <div className='mt-2' style={{
+                            textAlign: 'center',
+                            fontWeight: '500',
+                            fontSize: '14px',
+                            color: 'white'
+                        }}>
+                            tarockapp.com
+                        </div>
+                    }
                 </div>
-                <UserInfo cardData={matchedCard} user={matchedUser} />
-                {
-                    location === '/matchCard' &&
-                    <div className='mt-2' style={{
-                        textAlign: 'center',
-                        fontWeight: '500',
-                        fontSize: '14px',
-                        color: 'white'
-                    }}>
-                        tarockapp.com
-                    </div>
-                }
             </div>
         </div>
 
-        const tipsView = <div className='py-5 rounded-4'
-            style={{ backgroundImage: `linear-gradient(${userQuadra},${matchedQuadra})` }}>
-            <div className='d-flex flex-column gap-4'>
+        const tipsView = <div className='py-5 rounded-4' style={{ backgroundImage: linearColorWithNoise }}>
+            <div className='d-flex flex-column gap-4 text-white'>
                 <UserInfo cardData={cardData} user={user} />
                 <div className='px-3'>
                     <div style={{
                         background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.6) 100%)',
                         backdropFilter: 'blur(10px)',
                         borderRadius: '8px',
+                        color: "#49304D",
                         height: '300px',
                         margin: '0 auto',
                         width: '100%',
                         padding: '20px',
                         overflow: 'auto'
                     }}>
-                        {matchingTips.map((item, index) => {
-                            return (
-                                <p key={index}>
-                                    {item}
-                                </p>
-                            )
-                        })}
+                        {
+                            matchingTips.map((item, index) => {
+                                return (
+                                    <p key={index} className='mb-2' style={{ fontSize: '14px' }}>
+                                       {
+                                        item.split(' ').map((word, index) => {
+                                            let removedSpecialChar = word.replace(/[^a-zA-Z ]/g, "");
+                                            if (removedSpecialChar === userFirstName) {
+                                                return <span key={index} style={{ fontWeight: 'bold' }}>{word} </span>
+                                            } else if (removedSpecialChar === matchedFirstName) {
+                                                return <span key={index} style={{ fontWeight: 'bold' }}>{word} </span>
+                                            } else {
+                                                return <span key={index}> {word} </span>
+                                            }
+                                        })
+                                       }
+                                    </p>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <UserInfo cardData={matchedCard} user={matchedUser} />
@@ -156,7 +186,7 @@ function MatchCard(props) {
         return (
             <>
                 {
-                    location === '/matchCard' || matchingTips.length == 0 ? matchView : <Swipper data={[matchView,tipsView]} />
+                    location === '/matchCard' || matchingTips.length == 0 ? matchView : <Swipper data={[matchView, tipsView]} />
                 }
             </>
 

@@ -5,7 +5,6 @@ import UserProfile from './pages/UserProfile';
 import Welcome from './pages/Welcome';
 import SignInScreen from './pages/SignIn';
 import HomeScreen from './pages/Home';
-import MyCardScreen from './components/Cards/MyCard';
 import RadarChart from './components/Charts/RadarChart';
 import ShareScreen from './components/Cards/ShareCard';
 import CardDeck from './pages/CardDeck';
@@ -20,6 +19,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
 import Test from './pages/Test';
+import ReTakeTestPage from './pages/ReTakeTest';
+import InvitePage from './pages/InvitePage';
 const App = () => {
   const { setUserData } = useContext(GlobalContext);
   const { isLoadingFingerprint, data } = useVisitorData();
@@ -82,17 +83,15 @@ const App = () => {
               <Route index path="/" element={<Welcome />} />
               <Route index path="/signin" element={<SignInScreen />} />
               <Route index path="/test" element={<Test assessmentGroupId={1} />} />
+              <Route index path="/retake-test" element={<ProtectedRoute component={<ReTakeTestPage />} />} />
+              <Route index path="/invite" element={<InvitePage />} />
               <Route index path="/home" element={<ProtectedRoute component={<HomeScreen />} />} />
               <Route index path="/user" element={<ProtectedRoute component={<UserProfile />} />} />
               <Route index path="/editProfile" element={<ProtectedRoute component={<EditProfile />} />} />
               <Route index path="/about" element={<ProtectedRoute component={<About />} />} />
               <Route index path="/contact" element={<ProtectedRoute component={<Contact />} />} />
-              <Route index path="/myCard" element={<ProtectedRoute component={<MyCardScreen />} />} />
               <Route index path="/chart" element={<ProtectedRoute component={<RadarChart />} />} />
               <Route index path="/share/:userId" element={<ShareScreen />} />
-              {/* new share route for match card */}
-              {/* <Route index path="/share/match/:userId" element={<ShareMatchCard />} /> */}
-              {/* <Route index path=""/share/:userId" element={<ShareTarockCard />} /> */}
               <Route index path="/cards" element={<ProtectedRoute component={<CardDeck />} />} />
               <Route index path="/matchCard" element={<MatchCard/>}/>
             </Routes>

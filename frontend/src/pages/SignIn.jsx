@@ -163,10 +163,11 @@ function SignIn() {
                     tempId: userData.visitorId,
                 })
             });
-            if (!response.ok) {
-                throw new Error(`Error! status: ${response.status}`);
-            }
             const data = await response.json();
+            if (!response.ok) {
+                alert(`Sign up failed: ${data.error_msg}`);
+                return;
+            }
             const user = await getUser(data.id, 'REAL');
             setUserData((prevUserData) => ({
                 ...prevUserData,
@@ -228,6 +229,9 @@ function SignIn() {
 
     async function newGuest() {
         try {
+            if (userData.isAuthorized) {
+                await logout(userData.visitorId, setUserData);
+            }
             const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/user/updateIsPermanentUser`, {
                 method: 'POST',
                 headers: {
@@ -242,18 +246,9 @@ function SignIn() {
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
-            await logout();
-            const tmpUserData = await getUser(userData.visitorId, 'TMP');
             setUserData((prevUserData) => ({
                 ...prevUserData,
-                name: tmpUserData ? tmpUserData.name : '',
-                gender: tmpUserData ? tmpUserData.gender : '',
-                avatarIndex: tmpUserData ? tmpUserData.avatar_index : 2,
-                id: prevUserData.visitorId,
-                email: '',
-                dob: '',
-                isAuthorized: false,
-                type: tmpUserData ? 'TMP' : 'NEW',
+                type: prevUserData.type === 'REAL' ? 'TMP' : 'NEW'
             }));
             setValidation(false);
             setStage('new');
@@ -343,7 +338,7 @@ function SignIn() {
                     }
                     {
                         stage === 'welcome' &&
-                        <span>Welcome to back, {userData.name}!</span>
+                        <span>Welcome back, {userData.name}!</span>
                     }
                     {
                         stage === 'signup' &&
@@ -353,7 +348,7 @@ function SignIn() {
                                 fontWeight: '500',
                                 fontSize: '16px',
                                 lineHeight: '19.5px',
-                            }}>Sign up to view your test results</div>
+                            }}>Your very own card is waiting to be unwrapped!</div>
                         </div>
                     }
                     {
@@ -438,7 +433,7 @@ function SignIn() {
                             <img className='rounded-4' src={bi} alt="bi" style={{
                                 backgroundColor: 'white',
                                 height: '110px',
-                                border: avatarSelection == 2 ? '4px solid #E4E4E4' : ''
+                                border: avatarSelection == 2 ? '4px solid #EBBD45' : ''
                             }} />
                         </Col>
                     </Row>
@@ -457,6 +452,7 @@ function SignIn() {
                         <Form.Control className='py-3' type='text' placeholder='First and Last name'
                             onChange={handleChange}
                             name='name'
+                            pattern='^\S.*\S$'
                             required
                             value={formData.name} />
                         <Form.Control.Feedback type="invalid">Please enter a name</Form.Control.Feedback>
@@ -583,13 +579,13 @@ function SignIn() {
                         stage === 'avatar' && userData.type != 'REAL' &&
                         <div>
                             <span>By clicking Next, I agree to </span>
-                            <a href={'https://www.tarock.me/terms-of-service'} style={{
+                            <a href={'https://www.tarock.me/terms-of-service'} target="_blank" rel="noreferrer noopener" style={{
                                 fontWeight: '700',
                                 textDecoration: 'underline',
                                 color: '#49304D',
                             }}>Terms of Service</a>
                             <span> and </span>
-                            <a href={'https://www.tarock.me/privacy-policy'} style={{
+                            <a href={'https://www.tarock.me/privacy-policy'} target="_blank" rel="noreferrer noopener" style={{
                                 fontWeight: '700',
                                 textDecoration: 'underline',
                                 color: '#49304D',

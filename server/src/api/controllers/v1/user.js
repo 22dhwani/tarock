@@ -17,6 +17,15 @@ import jwt from 'jsonwebtoken';
 const dir = dirname(fileURLToPath(import.meta.url));
 const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
 
+
+function getFormattedDate(date) {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+  
+    return year + '-' + month + '-' + day;
+}
+
 async function getUser(req,res){          
     let user = res.user;
     if(!user){
@@ -48,6 +57,9 @@ async function getUser(req,res){
             quadra: tarockData.personality_socionic_quadra
         };
     }
+    user.birth_date = getFormattedDate(new Date(user.birth_date))
+    user.gender = user.gender.toLowerCase()
+    user.gender =  user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
 
     res.json(
         {
@@ -740,6 +752,11 @@ async function editUser(req,res){
             quadra: tarockData.personality_socionic_quadra
         };
     }
+
+
+    user[0].birth_date = getFormattedDate(new Date(user[0].birth_date))
+    user[0].gender = user[0].gender.toLowerCase()
+    user[0].gender =  user[0].gender.charAt(0).toUpperCase() + user[0].gender.slice(1);
     res.json(
         {
             data:user[0],

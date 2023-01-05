@@ -1,8 +1,19 @@
 import sql from "../../config/db.js";
 
+function getFormattedDate(date) {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+  
+    return month + '/' + day + '/' + year;
+}
+
 const userZodiac = {
 
     async createCard(internal_user_id,card_type,gender,birth_date,zodiac,animal) {
+        birth_date = getFormattedDate(new Date(birth_date))
+        gender = gender.toLowerCase()
+        gender =  gender.charAt(0).toUpperCase() + gender.slice(1);
         const data = await sql.query("INSERT INTO user_zodiac (`id`, `internal_user_id`, `card_type`,`gender`,`birthdate`,`zodiac`,`animal`, `created_at`, `updated_at`) VALUES (NULL, ?, ?, ?,?, ?, ?, current_timestamp(), current_timestamp());",[
             internal_user_id,
             card_type,

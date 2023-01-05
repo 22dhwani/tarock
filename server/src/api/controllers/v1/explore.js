@@ -3,6 +3,9 @@ import UserToExploreModel from "../../models/userToExplore.js";
 
 async function index(req,res){          
     let data = await ExploreModel.getForUser(res.user.internal_user_id);    
+    data.map((d)=>{
+        d.like_count = parseInt((parseInt(d.like_count) + 300))
+    })
     res.json(
         {
             data: data,

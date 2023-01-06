@@ -156,7 +156,7 @@ async function getStats(req,res){
 				}				
 			}
 		};
-
+		personalies = personalies.sort((a,b)=>b.count-a.count);
 		option.total_personality_answers= totalAnswers.length
 		option.personalies= personalies
 	}))

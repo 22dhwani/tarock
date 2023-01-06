@@ -355,7 +355,6 @@ async function addCard(req,res) {
                     }else{
                         let start_date = new Date(zodiac_birth_year+'-'+date.start_date)
                         let end_date = new Date(zodiac_birth_year+'-'+date.end_date)
-                        console.log(start_date,end_date,zodiac_birth_date);
                         if(zodiac_birth_date >= start_date && zodiac_birth_date <= end_date){
                             return true
                         }

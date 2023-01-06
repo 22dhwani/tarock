@@ -98,6 +98,13 @@ async function disableRealUser(id) {
     let newEmail = user.email+'-deleted'
     let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newEmail).digest("hex");
 
+    let existingUser = await queryReal(hashEmail)
+    while (existingUser.length > 0) {
+        newEmail = newEmail+'-deleted'
+        hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newEmail).digest("hex");
+        existingUser = await queryReal(hashEmail)
+    }
+
     const data = await sql.query("UPDATE user SET internal_user_id = ?, email = ? WHERE id = ?;", [hashEmail,newEmail,user.id])
     return data[0];
 }

@@ -4,7 +4,7 @@
 		"personality_category": "Challenger",
 		"color":"blue",
 		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
-		"personality_socionic_code": "ENTP",
+		"personality_mbti_code": "ENTP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
 			"STRENGTHS": "Creative; Funny; Adaptable; Inventive; Brainstormer; Sharp-witted",
@@ -227,7 +227,7 @@
 		"personality_category": "Analyst",
 		"color":"blue",
 		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
-		"personality_socionic_code": "INTP",
+		"personality_mbti_code": "INTP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
 			"STRENGTHS": "Driven; Systematic; Cautious; Rational; Future-focused; Studious",
@@ -453,7 +453,7 @@
 		"personality_category": "Enthusiast",
 		"color":"blue",
 		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
-		"personality_socionic_code": "ESFJ",
+		"personality_mbti_code": "ESFJ",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
 			"STRENGTHS": "Warm; Responsible; Attentive; Outgoing; Optimistic; Adventurous",
@@ -677,7 +677,7 @@
 		"personality_category": "Artist",
 		"color":"blue",
 		"color_description":"The brainy bunch! You can talk about the most complex topics, from science to philosophy, in detail and precision. But when you're done discussing, you know how to have a great time, cracking jokes and even trying out new projects. And when an awesome idea comes up, you can always count on each other to make it happen!",
-		"personality_socionic_code": "ISFP",
+		"personality_mbti_code": "ISFP",
 		"personality_socionic_quadra": "Alpha",
 		"description": {
 			"STRENGTHS": "Charming; Present-focused; Practical; Attentive; Diplomatic; Coordinated",
@@ -902,7 +902,7 @@
 		"personality_category": "Persuader",
 		"color":"yellow",
 		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less?!",
-		"personality_socionic_code": "ESFP",
+		"personality_mbti_code": "ESFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Attentive; Composed; Quick; Charming; Perseverance; Take-Charge",
@@ -1126,7 +1126,7 @@
 		"personality_category": "Inspector",
 		"color":"yellow",
 		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less?!",
-		"personality_socionic_code": "ISTJ",
+		"personality_mbti_code": "ISTJ",
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Accurate; Methodical; Observant; Loyal; Meticulous; Patient",
@@ -1355,7 +1355,7 @@
 		"personality_category": "Visionary",
 		"color":"yellow",
 		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less?!",
-		"personality_socionic_code": "ENFP",
+		"personality_mbti_code": "ENFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Affectionate; Harmonious; Emotionally-aware; Curious; Charismatic; Artsy",
@@ -1589,7 +1589,7 @@
 		"personality_category": "Mediator",
 		"color":"yellow",
 		"color_description":"Y'all are a wild bunch that know how to get the party started! With your eye for detail and appreciation for all the ins and outs of a situation, you thrive leaving no stone unturned in your analysis of people and situations. You never settle for a dull moment, exploring the vibrancy of life, looking for the most vibrant colors and liveliest sounds - because why settle for anything less?!",
-		"personality_socionic_code": "INFP",
+		"personality_mbti_code": "INFP",
 		"personality_socionic_quadra": "Beta",
 		"description": {
 			"STRENGTHS": "Visionary; Cheerful; Imaginative; Flexible; Caring; Humorous",
@@ -1826,7 +1826,7 @@
 		"personality_category": "Tenacious",
 		"color":"teal",
 		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
-		"personality_socionic_code": "ENTJ",
+		"personality_mbti_code": "ENTJ",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Rational; Persuasive; Bold; High-Energy; Calculated; Candid",
@@ -2053,7 +2053,7 @@
 		"personality_category": "Foreseer",
 		"color":"teal",
 		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
-		"personality_socionic_code": "INTJ",
+		"personality_mbti_code": "INTJ",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Witty; Matter-of-fact; Composed; Analytical; Strategic; Memory",
@@ -2285,7 +2285,7 @@
 		"personality_category": "Performer",
 		"color":"teal",
 		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
-		"personality_socionic_code": "ESTP",
+		"personality_mbti_code": "ESTP",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Enthusiastic; Free-Spirited; Easy-Going; Charming; Present-focused; Confident",
@@ -2524,7 +2524,7 @@
 		"personality_category": "Protector",
 		"color":"teal",
 		"color_description":"You're all a no-nonsense, get-things-done kind of person who loves to learn from a tight-knit group of reliable people. When it comes to making decisions, you take your time to make sure you have all the facts before you commit to anything. No idea gets past you without a thorough examination first!",
-		"personality_socionic_code": "ISFJ",
+		"personality_mbti_code": "ISFJ",
 		"personality_socionic_quadra": "Gamma",
 		"description": {
 			"STRENGTHS": "Caring; Reliable; Decisive; Attentive; Dexterous; People-person",
@@ -2751,7 +2751,7 @@
 		"personality_category": "Organizer",
 		"color":"purple",
 		"color_description":"You are the perfect mix of daring and savvy. You share a love for wild adventures, but are also witty enough to make sensible decisions. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
-		"personality_socionic_code": "ESTJ",
+		"personality_mbti_code": "ESTJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
 			"STRENGTHS": "Diligent; Proactive; Courageous; Energetic; Resourceful; Realistic",
@@ -2998,7 +2998,7 @@
 		"personality_category": "Crafter",
 		"color":"purple",
 		"color_description":"You are the perfect mix of daring and savvy. You share a love for wild adventures, but are also witty enough to make sensible decisions. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
-		"personality_socionic_code": "ISTP",
+		"personality_mbti_code": "ISTP",
 		"personality_socionic_quadra": "Delta",
 		"description": {
 			"STRENGTHS": "Observant; Hands-on; Resourceful; Down-to-earth; Inventive; Empathetic",
@@ -3226,7 +3226,7 @@
 		"personality_category": "Journalist",
 		"color":"purple",
 		"color_description":"You are the perfect mix of daring and savvy. You share a love for wild adventures, but are also witty enough to make sensible decisions. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
-		"personality_socionic_code": "ENFJ",
+		"personality_mbti_code": "ENFJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
 			"STRENGTHS": "Perceptive; People-person; Witty; Adaptable; Energetic; Insightful",
@@ -3450,7 +3450,7 @@
 		"personality_category": "Counsel",
 		"color":"purple",
 		"color_description":"You are the perfect mix of daring and savvy. You share a love for wild adventures, but are also witty enough to make sensible decisions. You manage to keep the peace and always come to a mutual agreement. You can always rely on yourself, but also know how to join forces with others and work together in harmony!",
-		"personality_socionic_code": "INFJ",
+		"personality_mbti_code": "INFJ",
 		"personality_socionic_quadra": "Delta",
 		"description": {
 			"STRENGTHS": "Persistent; Visionary; Perfectionist; Values-Driven; Conscientious; Attentive",

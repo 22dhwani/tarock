@@ -54,7 +54,8 @@ async function getUser(req,res){
         const tarockData = tarockJsonData[tarcokResult[0].result_code];
         user.question_data = {
             resultCode: tarcokResult[0].result_code,
-            quadra: tarockData.personality_socionic_quadra
+            quadra: tarockData.personality_socionic_quadra,
+            personality_mbti_code: tarockData.personality_mbti_code
         };
     }
     user.birth_date = getFormattedDate(new Date(user.birth_date))
@@ -479,7 +480,8 @@ async function createRealUser(req,res){
             const tarockData = tarockJsonData[tarcokResult[0].result_code];
             data[0].question_data = {
                 resultCode: tarcokResult[0].result_code,
-                quadra: tarockData.personality_socionic_quadra
+                quadra: tarockData.personality_socionic_quadra,
+                personality_mbti_code: tarockData.personality_mbti_code
             };
         }
     
@@ -565,7 +567,8 @@ async function login(req,res){
         const tarockData = tarockJsonData[tarcokResult[0].result_code];
         emailExistUser[0].question_data = {
             resultCode: tarcokResult[0].result_code,
-            quadra: tarockData.personality_socionic_quadra
+            quadra: tarockData.personality_socionic_quadra,
+            personality_mbti_code: tarockData.personality_mbti_code
         };
     }
 
@@ -749,7 +752,8 @@ async function editUser(req,res){
         const tarockData = tarockJsonData[tarcokResult[0].result_code];
         user[0].question_data = {
             resultCode: tarcokResult[0].result_code,
-            quadra: tarockData.personality_socionic_quadra
+            quadra: tarockData.personality_socionic_quadra,
+            personality_mbti_code: tarockData.personality_mbti_code
         };
     }
 
@@ -1132,7 +1136,8 @@ async function socialLogin(req,res){
                 const tarockData = tarockJsonData[tarcokResult[0].result_code];
                 emailExistUser[0].question_data = {
                     resultCode: tarcokResult[0].result_code,
-                    quadra: tarockData.personality_socionic_quadra
+                    quadra: tarockData.personality_socionic_quadra,
+                    personality_mbti_code: tarockData.personality_mbti_code
                 };
             }
 
@@ -1218,7 +1223,8 @@ async function socialLogin(req,res){
             const tarockData = tarockJsonData[tarcokResult[0].result_code];
             data[0].question_data = {
                 resultCode: tarcokResult[0].result_code,
-                quadra: tarockData.personality_socionic_quadra
+                quadra: tarockData.personality_socionic_quadra,
+                personality_mbti_code: tarockData.personality_mbti_code
             };
         }
         res.json(

@@ -1,6 +1,14 @@
 
 export const feeds = [
     {
+        key: 6,
+        image: 'https://uploads-ssl.webflow.com/635810a41547a102b877eb69/63c6203046467c32db00afe3_amanda-jones-j-TJFGZj3ns-unsplash-p-800.jpg',
+        title: 'Tarock Reference Guide',
+        author: 'Tarock',
+        time: 1673984330000,
+        link: 'https://www.tarock.me/blog-tarock-reference-guide'
+    },
+    {
         key: 5,
         image: 'https://uploads-ssl.webflow.com/635810a41547a102b877eb69/63bed7205b432e8120bdeac6_Screen%20Shot%202023-01-11%20at%2010.34.28%20AM-p-2000.png',
         title: 'Match with friends for a Chance to Win $100',

@@ -1,7 +1,7 @@
 import sql from "../../config/db.js";
 import crypto from 'crypto';
 
-const User = function(user) {
+const User = function (user) {
     this.id = user.id;
     this.email = user.email;
     this.password = user.password;
@@ -20,14 +20,14 @@ function getFormattedDate(date) {
     let year = date.getFullYear();
     let month = (1 + date.getMonth()).toString().padStart(2, '0');
     let day = date.getDate().toString().padStart(2, '0');
-  
+
     return month + '/' + day + '/' + year;
 }
 
 
 async function create(user) {
     user.gender = user.gender.toLowerCase()
-    user.gender =  user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
+    user.gender = user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
     const data = await sql.query("INSERT INTO tmp_user (name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?);", [user.name, user.gender, user.avatarIndex, user.id]);
     return data[0];
 }
@@ -39,7 +39,7 @@ async function query(id) {
 
 async function update(user) {
     user.gender = user.gender.toLowerCase()
-    user.gender =  user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
+    user.gender = user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
 
     user.dob = getFormattedDate(new Date(user.dob))
 
@@ -48,7 +48,7 @@ async function update(user) {
     return data[0];
 }
 
-async function getAllUser(){
+async function getAllUser() {
     const data = await sql.query("SELECT * FROM user WHERE is_forbidden = 0;");
     return data[0];
 }
@@ -70,9 +70,9 @@ async function createTmpIdToRealId(tmpId, realId) {
 }
 */
 
-async function createReal (user) {
+async function createReal(user) {
     user.gender = user.gender.toLowerCase()
-    user.gender =  user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
+    user.gender = user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
     const data = await sql.query("INSERT INTO user (email, password, name, gender, avatar_index, internal_user_id) VALUES (?, ?, ?, ?, ?, ?);", [user.email, user.password, user.name, user.gender, user.avatarIndex, user.id]);
     return data[0];
 }
@@ -94,18 +94,18 @@ async function deleteRealUser(id) {
 
 async function disableRealUser(id) {
     let user = await queryReal(id)
-    user =user [0]
-    let newEmail = user.email+'-deleted'
+    user = user[0]
+    let newEmail = user.email + '-deleted'
     let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newEmail).digest("hex");
 
     let existingUser = await queryReal(hashEmail)
     while (existingUser.length > 0) {
-        newEmail = newEmail+'-deleted'
+        newEmail = newEmail + '-deleted'
         hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(newEmail).digest("hex");
         existingUser = await queryReal(hashEmail)
     }
 
-    const data = await sql.query("UPDATE user SET internal_user_id = ?, email = ? WHERE id = ?;", [hashEmail,newEmail,user.id])
+    const data = await sql.query("UPDATE user SET internal_user_id = ?, email = ? WHERE id = ?;", [hashEmail, newEmail, user.id])
     return data[0];
 }
 
@@ -128,46 +128,50 @@ async function updateReal(user) {
     const name = user.name ? user.name : oldUsers[0].name;
     let gender = user.gender ? user.gender : oldUsers[0].gender;
     const avatarIndex = user.avatarIndex != undefined ? user.avatarIndex : oldUsers[0].avatar_index;
+    const emojiIndex = user.emojiIndex != undefined ? user.emojiIndex : oldUsers[0].emoji_index;
+    const status = user.status != undefined ? user.status : oldUsers[0].status;
     let dob = user.dob ? user.dob : oldUsers[0].birth_date;
 
 
 
     let is_notification_on = oldUsers[0].is_notification_on;
-    if(user.is_notification_on){
+    if (user.is_notification_on) {
         is_notification_on = user.is_notification_on;
-    }else{
+    } else {
         is_notification_on = 0;
     }
     let is_match_card_notification_on = oldUsers[0].is_match_card_notification_on;
-    if(user.is_match_card_notification_on){
+    if (user.is_match_card_notification_on) {
         is_match_card_notification_on = user.is_match_card_notification_on;
-    }else{
+    } else {
         is_match_card_notification_on = 0;
     }
 
     let is_daily_quest_notification_on = oldUsers[0].is_daily_quest_notification_on;
-    if(user.is_daily_quest_notification_on){
+    if (user.is_daily_quest_notification_on) {
         is_daily_quest_notification_on = user.is_daily_quest_notification_on;
-    }else{
+    } else {
         is_daily_quest_notification_on = 0;
     }
 
     let is_new_blog_notification_on = oldUsers[0].is_new_blog_notification_on;
-    if(user.is_new_blog_notification_on){
+    if (user.is_new_blog_notification_on) {
         is_new_blog_notification_on = user.is_new_blog_notification_on;
-    }else{
+    } else {
         is_new_blog_notification_on = 0;
     }
     gender = gender.toLowerCase()
-    gender =  gender.charAt(0).toUpperCase() + gender.slice(1);
+    gender = gender.charAt(0).toUpperCase() + gender.slice(1);
 
 
     dob = getFormattedDate(new Date(dob))
-    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, birth_date = ? , is_notification_on = ?,is_match_card_notification_on = ?,is_daily_quest_notification_on = ?, is_new_blog_notification_on = ? WHERE internal_user_id = ?;", [
+    const data = await sql.query("UPDATE user SET password = ?, name = ?, gender = ?, avatar_index = ?, emoji_index = ?, status = ?, birth_date = ? , is_notification_on = ?,is_match_card_notification_on = ?,is_daily_quest_notification_on = ?, is_new_blog_notification_on = ? WHERE internal_user_id = ?;", [
         password,
         name,
         gender,
         avatarIndex,
+        emojiIndex,
+        status,
         dob,
         is_notification_on,
         is_match_card_notification_on,
@@ -183,7 +187,7 @@ async function updateIsPermanentUser(id, is_permanent_user) {
     return data[0];
 }
 
-export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser,findUserByEmail,deleteRealUser,deleteTmpUser,disableRealUser,getAllUser};
+export default { User, create, query, update, createReal, queryReal, updateReal, updateIsPermanentUser, findUserByEmail, deleteRealUser, deleteTmpUser, disableRealUser, getAllUser };
 
 /**
 async function test() {

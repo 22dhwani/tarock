@@ -15,32 +15,32 @@ import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 
 const dir = dirname(fileURLToPath(import.meta.url));
-const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
+const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir, '../../../../static/personality_code_definition.json')));
 
 
 function getFormattedDate(date) {
     let year = date.getFullYear();
     let month = (1 + date.getMonth()).toString().padStart(2, '0');
     let day = date.getDate().toString().padStart(2, '0');
-  
+
     return year + '-' + month + '-' + day;
 }
 
-async function getUser(req,res){          
+async function getUser(req, res) {
     let user = res.user;
-    if(!user){
+    if (!user) {
         res.status(422).json(
             {
-                data:user,
+                data: user,
                 message: "User Not found",
                 status: 0,
             }
         );
-    }  
+    }
 
-    if(req.query.internal_user_id){
+    if (req.query.internal_user_id) {
         let userData = await User.queryReal(req.query.internal_user_id)
-        if(userData.length > 0){
+        if (userData.length > 0) {
             user = userData[0]
         }
     }
@@ -60,7 +60,7 @@ async function getUser(req,res){
     }
     user.birth_date = getFormattedDate(new Date(user.birth_date))
     user.gender = user.gender.toLowerCase()
-    user.gender =  user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
+    user.gender = user.gender.charAt(0).toUpperCase() + user.gender.slice(1);
 
     res.json(
         {
@@ -69,20 +69,20 @@ async function getUser(req,res){
             status: 1,
         }
     );
-    
+
 }
 
-async function getUserType(req,res){
-    if(!req.query.device_id){
+async function getUserType(req, res) {
+    if (!req.query.device_id) {
         res.status(422).json(
             {
-                message:"device id is required",
+                message: "device id is required",
                 status: 0,
             }
         );
         return
     }
-    let tempUser=null;
+    let tempUser = null;
     let userType = "NEW";
     try {
         const data2 = await User.query(req.query.device_id);
@@ -97,8 +97,8 @@ async function getUserType(req,res){
     } catch (error) {
         res.status(422).json(
             {
-                error:error.message,
-                message:"something went wrong",
+                error: error.message,
+                message: "something went wrong",
                 status: 0,
             }
         );
@@ -107,56 +107,56 @@ async function getUserType(req,res){
 
     res.json(
         {
-            user:tempUser,
-            data:userType,
+            user: tempUser,
+            data: userType,
             message: "User type returned",
             status: 1,
         }
     );
-    
+
 }
 
-async function createTempUser(req,res){
-    if(!req.body.name){
+async function createTempUser(req, res) {
+    if (!req.body.name) {
         res.status(422).json(
             {
-                message:"name is required",
+                message: "name is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.device_id){
+    if (!req.body.device_id) {
         res.status(422).json(
             {
-                message:"device id is required",
+                message: "device id is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.avatar_index){
+    if (!req.body.avatar_index) {
         res.status(422).json(
             {
-                message:"avatar index is required",
+                message: "avatar index is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.gender){
+    if (!req.body.gender) {
         res.status(422).json(
             {
-                message:"gender is required",
+                message: "gender is required",
                 status: 0,
             }
         );
         return;
     }
     try {
-        let tempUser=null;
-        let existingUser = await User.query(req.body.device_id);    
-        if(existingUser.length > 0){
+        let tempUser = null;
+        let existingUser = await User.query(req.body.device_id);
+        if (existingUser.length > 0) {
             existingUser[0].id = req.body.device_id;
             existingUser[0].name = req.body.name;
             existingUser[0].gender = req.body.gender;
@@ -166,19 +166,19 @@ async function createTempUser(req,res){
             } catch (error) {
                 res.status(422).json(
                     {
-                        error:error.message,
-                        message:"something went wrong",
+                        error: error.message,
+                        message: "something went wrong",
                         status: 0,
                     }
                 );
                 return
             }
-    
-            tempUser = await User.query(req.body.device_id);    
+
+            tempUser = await User.query(req.body.device_id);
             tempUser = tempUser[0]
-    
+
             let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-            if(userAvatar.length <= 0){
+            if (userAvatar.length <= 0) {
                 await UserAvatarModel.addAvatar(req.body.device_id)
             }
             userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
@@ -192,38 +192,38 @@ async function createTempUser(req,res){
             let lips_index = userAvatar[0].lips_index
             let ear_index = userAvatar[0].ear_index
             let glasses_index = userAvatar[0].glasses_indexx
-    
-            if(req.body.face_index || req.body.face_index == 0){
+
+            if (req.body.face_index || req.body.face_index == 0) {
                 face_index = req.body.face_index
             }
-            if(req.body.hair_index || req.body.hair_index == 0){
+            if (req.body.hair_index || req.body.hair_index == 0) {
                 hair_index = req.body.hair_index
             }
-            if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
+            if (req.body.eyebrow_index || req.body.eyebrow_index == 0) {
                 eyebrow_index = req.body.eyebrow_index
             }
-            if(req.body.eye_index || req.body.eye_index == 0){
+            if (req.body.eye_index || req.body.eye_index == 0) {
                 eye_index = req.body.eye_index
             }
-            if(req.body.nose_index || req.body.nose_index == 0){
+            if (req.body.nose_index || req.body.nose_index == 0) {
                 nose_index = req.body.nose_index
             }
-            if(req.body.whiskers_index || req.body.whiskers_index == 0){
+            if (req.body.whiskers_index || req.body.whiskers_index == 0) {
                 whiskers_index = req.body.whiskers_index
             }
-            if(req.body.beard_index || req.body.beard_index == 0){
+            if (req.body.beard_index || req.body.beard_index == 0) {
                 beard_index = req.body.beard_index
             }
-            if(req.body.lips_index || req.body.lips_index == 0){
+            if (req.body.lips_index || req.body.lips_index == 0) {
                 lips_index = req.body.lips_index
             }
-            if(req.body.ear_index || req.body.ear_index == 0){
+            if (req.body.ear_index || req.body.ear_index == 0) {
                 ear_index = req.body.ear_index
             }
-            if(req.body.glasses_index || req.body.glasses_index == 0){
+            if (req.body.glasses_index || req.body.glasses_index == 0) {
                 glasses_index = req.body.glasses_index
             }
-        
+
             await UserAvatarModel.updateAvatar(userAvatar[0].id,
                 face_index,
                 hair_index,
@@ -237,13 +237,13 @@ async function createTempUser(req,res){
                 glasses_index
             )
             userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-        
+
             tempUser.user_avatar = userAvatar[0] ?? null
-    
-    
+
+
             res.json(
                 {
-                    user:tempUser,
+                    user: tempUser,
                     message: "Temp user updated",
                     status: 1,
                 }
@@ -258,22 +258,22 @@ async function createTempUser(req,res){
         });
         try {
             await User.create(user);
-    
+
             tempUser = await User.query(req.body.device_id);
             tempUser = tempUser[0];
         } catch (error) {
             res.status(422).json(
                 {
-                    error:error.message,
-                    message:"something went wrong",
+                    error: error.message,
+                    message: "something went wrong",
                     status: 0,
                 }
             );
             return
         }
-    
+
         let userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-        if(userAvatar.length <= 0){
+        if (userAvatar.length <= 0) {
             await UserAvatarModel.addAvatar(req.body.device_id)
         }
         userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
@@ -287,89 +287,89 @@ async function createTempUser(req,res){
         let lips_index = userAvatar[0].lips_index
         let ear_index = userAvatar[0].ear_index
         let glasses_index = userAvatar[0].glasses_index
-    
-    
-        if(req.body.face_index || req.body.face_index == 0){
+
+
+        if (req.body.face_index || req.body.face_index == 0) {
             face_index = req.body.face_index
         }
-        if(req.body.hair_index || req.body.hair_index == 0){
+        if (req.body.hair_index || req.body.hair_index == 0) {
             hair_index = req.body.hair_index
         }
-        if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
+        if (req.body.eyebrow_index || req.body.eyebrow_index == 0) {
             eyebrow_index = req.body.eyebrow_index
         }
-        if(req.body.eye_index || req.body.eye_index == 0){
+        if (req.body.eye_index || req.body.eye_index == 0) {
             eye_index = req.body.eye_index
         }
-        if(req.body.nose_index || req.body.nose_index == 0){
+        if (req.body.nose_index || req.body.nose_index == 0) {
             nose_index = req.body.nose_index
         }
-        if(req.body.whiskers_index || req.body.whiskers_index == 0){
+        if (req.body.whiskers_index || req.body.whiskers_index == 0) {
             whiskers_index = req.body.whiskers_index
         }
-        if(req.body.beard_index || req.body.beard_index == 0){
+        if (req.body.beard_index || req.body.beard_index == 0) {
             beard_index = req.body.beard_index
         }
-        if(req.body.lips_index || req.body.lips_index == 0){
+        if (req.body.lips_index || req.body.lips_index == 0) {
             lips_index = req.body.lips_index
         }
-        if(req.body.ear_index || req.body.ear_index == 0){
+        if (req.body.ear_index || req.body.ear_index == 0) {
             ear_index = req.body.ear_index
         }
-        if(req.body.glasses_index || req.body.glasses_index == 0){
+        if (req.body.glasses_index || req.body.glasses_index == 0) {
             glasses_index = req.body.glasses_index
         }
-    
-        await UserAvatarModel.updateAvatar(userAvatar[0].id,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+
+        await UserAvatarModel.updateAvatar(userAvatar[0].id, face_index, hair_index, eye_index, eyebrow_index, ear_index, nose_index, lips_index)
         userAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-    
+
         tempUser.user_avatar = userAvatar[0] ?? null
         res.json(
             {
-                user:tempUser,
+                user: tempUser,
                 message: "Temp user created",
                 status: 1,
             }
         );
         return
-        
+
     } catch (error) {
         res.status(422).json(
             {
-                error:error.message,
-                message:"something went wrong",
+                error: error.message,
+                message: "something went wrong",
                 status: 0,
             }
         );
         return;
     }
 
-   
+
 }
 
-async function createRealUser(req,res){
-    if(!req.body.email){
+async function createRealUser(req, res) {
+    if (!req.body.email) {
         res.status(422).json(
             {
-                message:"email is required",
+                message: "email is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.password){
+    if (!req.body.password) {
         res.status(422).json(
             {
-                message:"password is required",
+                message: "password is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.device_id){
+    if (!req.body.device_id) {
         res.status(422).json(
             {
-                message:"device id is required",
+                message: "device id is required",
                 status: 0,
             }
         );
@@ -377,65 +377,65 @@ async function createRealUser(req,res){
     }
     try {
         let emailExistUser = await User.findUserByEmail(req.body.email);
-        if(emailExistUser.length > 0){
+        if (emailExistUser.length > 0) {
             res.status(422).json(
                 {
-                    message:"User with this Email Already exists, please try another email",
+                    message: "User with this Email Already exists, please try another email",
                     status: 0,
                 }
             );
             return;
         }
-    
+
         let existingUser = await User.query(req.body.device_id);
-        if(existingUser.length <= 0) {
+        if (existingUser.length <= 0) {
             res.status(422).json(
                 {
-                    message:"Temp User not found",
+                    message: "Temp User not found",
                     status: 0,
                 }
             );
             return;
         }
-    
+
         let hashEmail = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.email).digest("hex");
         let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
-    
+
         let realUser = new User.User({
             id: hashEmail,
             name: existingUser[0].name,
             gender: existingUser[0].gender,
             avatarIndex: existingUser[0].avatar_index,
-            email:req.body.email,
+            email: req.body.email,
             password: hashPassword,
         });
         try {
             const oldResults = await Result.getByUser(req.body.device_id);
             if (oldResults.length > 0) {
-              const newResult = new Result.Result({
-                userId: hashEmail,
-                assessmentGroupId: oldResults[0].question_group_id,
-                numOfQuestions: oldResults[0].num_of_questions,
-                duration: oldResults[0].duration,
-                code: oldResults[0].result_code
-              });
-              await Result.create(newResult);
+                const newResult = new Result.Result({
+                    userId: hashEmail,
+                    assessmentGroupId: oldResults[0].question_group_id,
+                    numOfQuestions: oldResults[0].num_of_questions,
+                    duration: oldResults[0].duration,
+                    code: oldResults[0].result_code
+                });
+                await Result.create(newResult);
             }
             await User.createReal(realUser);
-            await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
-    
+            await User.updateIsPermanentUser(existingUser[0].internal_user_id, 1)
+
             let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
-            if(oldAvatar.length > 0){
-                let face_index  = oldAvatar[0].face_index
-                let hair_index  = oldAvatar[0].hair_index
-                let eyebrow_index  = oldAvatar[0].eyebrow_index
-                let eye_index  = oldAvatar[0].eye_index
-                let nose_index  = oldAvatar[0].nose_index
-                let whiskers_index  = oldAvatar[0].whiskers_index
-                let beard_index  = oldAvatar[0].beard_index
-                let lips_index  = oldAvatar[0].lips_index
-                let ear_index  = oldAvatar[0].ear_index
-                let glasses_index  = oldAvatar[0].glasses_index
+            if (oldAvatar.length > 0) {
+                let face_index = oldAvatar[0].face_index
+                let hair_index = oldAvatar[0].hair_index
+                let eyebrow_index = oldAvatar[0].eyebrow_index
+                let eye_index = oldAvatar[0].eye_index
+                let nose_index = oldAvatar[0].nose_index
+                let whiskers_index = oldAvatar[0].whiskers_index
+                let beard_index = oldAvatar[0].beard_index
+                let lips_index = oldAvatar[0].lips_index
+                let ear_index = oldAvatar[0].ear_index
+                let glasses_index = oldAvatar[0].glasses_index
                 await UserAvatarModel.addAvatar(
                     hashEmail,
                     face_index,
@@ -450,31 +450,31 @@ async function createRealUser(req,res){
                     glasses_index
                 )
             }
-    
+
         } catch (error) {
             res.status(422).json(
                 {
-                    error:error.message,
-                    message:"something went wrong",
+                    error: error.message,
+                    message: "something went wrong",
                     status: 0,
                 }
             );
             return
         }
         let data = await User.findUserByEmail(req.body.email);
-        let token = await ApiToken.generateToken(data[0].internal_user_id)    
-    
-        if(req.body.firebase_id){
-            let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,req.body.firebase_id);
-            if(userFirebase.length <= 0){
-                await UserFirebaseModel.addToken(data[0].internal_user_id,req.body.firebase_id);
+        let token = await ApiToken.generateToken(data[0].internal_user_id)
+
+        if (req.body.firebase_id) {
+            let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id, req.body.firebase_id);
+            if (userFirebase.length <= 0) {
+                await UserFirebaseModel.addToken(data[0].internal_user_id, req.body.firebase_id);
             }
         }
-    
+
         let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
         data[0].user_avatar = userAvatar[0] ?? null
         data[0].question_data = null
-    
+
         const tarcokResult = await Result.getByUser(data[0].internal_user_id);
         if (tarcokResult.length > 0) {
             const tarockData = tarockJsonData[tarcokResult[0].result_code];
@@ -484,44 +484,44 @@ async function createRealUser(req,res){
                 personality_mbti_code: tarockData.personality_mbti_code
             };
         }
-    
+
         res.json(
             {
-                token:token,
-                data:data[0],
+                token: token,
+                data: data[0],
                 message: "real user created",
                 status: 1,
-            }            
-        );   
-        return     
+            }
+        );
+        return
     } catch (error) {
         res.status(422).json(
             {
-                error:error.message,
-                message:"something went wrong",
+                error: error.message,
+                message: "something went wrong",
                 status: 0,
             }
         );
-        return        
+        return
     }
 
-    
+
 }
 
-async function login(req,res){
-    if(!req.body.email){
+async function login(req, res) {
+    if (!req.body.email) {
         res.status(422).json(
             {
-                message:"email is required",
+                message: "email is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.password){
+    if (!req.body.password) {
         res.status(422).json(
             {
-                message:"password is required",
+                message: "password is required",
                 status: 0,
             }
         );
@@ -529,10 +529,10 @@ async function login(req,res){
     }
 
     let emailExistUser = await User.findUserByEmail(req.body.email);
-    if(emailExistUser.length <= 0) {
+    if (emailExistUser.length <= 0) {
         res.status(422).json(
             {
-                message:"User with this email not exists",
+                message: "User with this email not exists",
                 status: 0,
             }
         );
@@ -540,21 +540,21 @@ async function login(req,res){
     }
 
     let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
-    if(emailExistUser[0].password != hashPassword){
+    if (emailExistUser[0].password != hashPassword) {
         res.status(422).json(
             {
-                message:"Incorrect Password",
+                message: "Incorrect Password",
                 status: 0,
             }
         );
         return;
     }
-    let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)    
+    let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)
 
-    if(req.body.firebase_id){
-        let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id,req.body.firebase_id);
-        if(userFirebase.length <= 0){
-            await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id,req.body.firebase_id);
+    if (req.body.firebase_id) {
+        let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id, req.body.firebase_id);
+        if (userFirebase.length <= 0) {
+            await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id, req.body.firebase_id);
         }
     }
     let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
@@ -574,31 +574,31 @@ async function login(req,res){
 
     res.json(
         {
-            token:token,
-            data:emailExistUser[0],
+            token: token,
+            data: emailExistUser[0],
             message: "User logged in",
             status: 1,
         }
     );
 }
 
-async function logout(req,res){
+async function logout(req, res) {
 
     let tokenArr = req.headers.authorization.split("Bearer ")
 
-    try {    
-        if(req.body.firebase_id){
-            await UserFirebaseModel.removeToken(res.user.internal_user_id,req.body.firebase_id)
+    try {
+        if (req.body.firebase_id) {
+            await UserFirebaseModel.removeToken(res.user.internal_user_id, req.body.firebase_id)
         }
         let apiToken = await ApiToken.getByToken(tokenArr[1]);
-        if(apiToken.length >= 0){    
+        if (apiToken.length >= 0) {
             await ApiToken.deleteToken(apiToken[0].id);
         }
     } catch (error) {
         res.status(422).json(
             {
-                error:error.message,
-                message:"something went wrong",
+                error: error.message,
+                message: "something went wrong",
                 status: 0,
             }
         );
@@ -614,12 +614,12 @@ async function logout(req,res){
     );
 }
 
-async function deleteUser(req,res){
+async function deleteUser(req, res) {
 
-    if(!req.body.device_id){
+    if (!req.body.device_id) {
         res.status(422).json(
             {
-                message:"device id is required",
+                message: "device id is required",
                 status: 0,
             }
         );
@@ -642,39 +642,45 @@ async function deleteUser(req,res){
     );
 }
 
-async function editUser(req,res){
+async function editUser(req, res) {
 
     let user = res.user
-    if(req.body.name){
+    if (req.body.name) {
         user.name = req.body.name
     }
-    if(req.body.birth_date){
+    if (req.body.birth_date) {
         user.dob = req.body.birth_date
     }
-    if(req.body.gender){
+    if (req.body.gender) {
         user.gender = req.body.gender
     }
-    if(req.body.avatar_index){
+    if (req.body.avatar_index) {
         user.avatarIndex = req.body.avatar_index
     }
-    if(req.body.is_notification_on){
+    if (req.body.emoji_index) {
+        user.emojiIndex = req.body.emoji_index
+    }
+    if (req.body.status) {
+        user.status = req.body.status
+    }
+    if (req.body.is_notification_on) {
         user.is_notification_on = req.body.is_notification_on
-    }else{
+    } else {
         user.is_notification_on = 0;
     }
-    if(req.body.is_match_card_notification_on){
+    if (req.body.is_match_card_notification_on) {
         user.is_match_card_notification_on = req.body.is_match_card_notification_on
-    }else{
-        user.is_match_card_notification_on =0;
+    } else {
+        user.is_match_card_notification_on = 0;
     }
-    if(req.body.is_daily_quest_notification_on){
+    if (req.body.is_daily_quest_notification_on) {
         user.is_daily_quest_notification_on = req.body.is_daily_quest_notification_on
-    }else{
+    } else {
         user.is_daily_quest_notification_on = 0;
     }
-    if(req.body.is_new_blog_notification_on){
+    if (req.body.is_new_blog_notification_on) {
         user.is_new_blog_notification_on = req.body.is_new_blog_notification_on
-    }else{
+    } else {
         user.is_new_blog_notification_on = 0;
     }
 
@@ -682,63 +688,63 @@ async function editUser(req,res){
     await User.updateReal(user);
 
     let userAvatar = await UserAvatarModel.getByUserId(user.id)
-    if(userAvatar.length <= 0){
+    if (userAvatar.length <= 0) {
         await UserAvatarModel.addAvatar(user.id)
     }
     userAvatar = await UserAvatarModel.getByUserId(user.id)
     let face_index = userAvatar[0].face_index
-	let hair_index = userAvatar[0].hair_index
-	let eyebrow_index = userAvatar[0].eyebrow_index
-	let eye_index = userAvatar[0].eye_index
-	let nose_index = userAvatar[0].nose_index
-	let whiskers_index = userAvatar[0].whiskers_index
-	let beard_index = userAvatar[0].beard_index
-	let lips_index = userAvatar[0].lips_index
-	let ear_index = userAvatar[0].ear_index
-	let glasses_index = userAvatar[0].glasses_index
+    let hair_index = userAvatar[0].hair_index
+    let eyebrow_index = userAvatar[0].eyebrow_index
+    let eye_index = userAvatar[0].eye_index
+    let nose_index = userAvatar[0].nose_index
+    let whiskers_index = userAvatar[0].whiskers_index
+    let beard_index = userAvatar[0].beard_index
+    let lips_index = userAvatar[0].lips_index
+    let ear_index = userAvatar[0].ear_index
+    let glasses_index = userAvatar[0].glasses_index
 
-    if(req.body.face_index || req.body.face_index == 0){
+    if (req.body.face_index || req.body.face_index == 0) {
         face_index = req.body.face_index
     }
-    if(req.body.hair_index || req.body.hair_index == 0){
+    if (req.body.hair_index || req.body.hair_index == 0) {
         hair_index = req.body.hair_index
     }
-    if(req.body.eyebrow_index || req.body.eyebrow_index == 0){
+    if (req.body.eyebrow_index || req.body.eyebrow_index == 0) {
         eyebrow_index = req.body.eyebrow_index
     }
-    if(req.body.eye_index || req.body.eye_index == 0){
+    if (req.body.eye_index || req.body.eye_index == 0) {
         eye_index = req.body.eye_index
     }
-    if(req.body.nose_index || req.body.nose_index == 0){
+    if (req.body.nose_index || req.body.nose_index == 0) {
         nose_index = req.body.nose_index
     }
-    if(req.body.whiskers_index || req.body.whiskers_index == 0){
+    if (req.body.whiskers_index || req.body.whiskers_index == 0) {
         whiskers_index = req.body.whiskers_index
     }
-    if(req.body.beard_index || req.body.beard_index == 0){
+    if (req.body.beard_index || req.body.beard_index == 0) {
         beard_index = req.body.beard_index
     }
-    if(req.body.lips_index || req.body.lips_index == 0){
+    if (req.body.lips_index || req.body.lips_index == 0) {
         lips_index = req.body.lips_index
     }
-    if(req.body.ear_index || req.body.ear_index == 0){
+    if (req.body.ear_index || req.body.ear_index == 0) {
         ear_index = req.body.ear_index
     }
-    if(req.body.glasses_index || req.body.glasses_index == 0){
+    if (req.body.glasses_index || req.body.glasses_index == 0) {
         glasses_index = req.body.glasses_index
     }
 
     await UserAvatarModel.updateAvatar(userAvatar[0].id,
         face_index,
-		hair_index,
-		eyebrow_index,
-		eye_index,
-		nose_index,
-		whiskers_index,
-		beard_index,
-		lips_index,
-		ear_index,
-		glasses_index
+        hair_index,
+        eyebrow_index,
+        eye_index,
+        nose_index,
+        whiskers_index,
+        beard_index,
+        lips_index,
+        ear_index,
+        glasses_index
     )
     userAvatar = await UserAvatarModel.getByUserId(user.id)
 
@@ -760,23 +766,23 @@ async function editUser(req,res){
 
     user[0].birth_date = getFormattedDate(new Date(user[0].birth_date))
     user[0].gender = user[0].gender.toLowerCase()
-    user[0].gender =  user[0].gender.charAt(0).toUpperCase() + user[0].gender.slice(1);
+    user[0].gender = user[0].gender.charAt(0).toUpperCase() + user[0].gender.slice(1);
     res.json(
         {
-            data:user[0],
+            data: user[0],
             message: "User Updated",
             status: 1,
         }
     );
 }
 
-async function forgotPassword(req,res){
+async function forgotPassword(req, res) {
 
 
-    if(!req.body.email){
+    if (!req.body.email) {
         res.status(422).json(
             {
-                message:"email is required",
+                message: "email is required",
                 status: 0,
             }
         );
@@ -795,10 +801,10 @@ async function forgotPassword(req,res){
     }
 
 
-    if(realUsers.length <= 0){
+    if (realUsers.length <= 0) {
         res.status(422).json(
             {
-                message:"No user with this email",
+                message: "No user with this email",
                 status: 0,
             }
         );
@@ -833,20 +839,20 @@ async function forgotPassword(req,res){
     );
 }
 
-async function contactUs(req,res){
-    if(!req.body.email){
+async function contactUs(req, res) {
+    if (!req.body.email) {
         res.status(422).json(
             {
-                message:"email is required",
+                message: "email is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.content){
+    if (!req.body.content) {
         res.status(422).json(
             {
-                message:"content is required",
+                message: "content is required",
                 status: 0,
             }
         );
@@ -883,20 +889,20 @@ async function contactUs(req,res){
     );
 }
 
-async function requestData(req,res){
-    if(!req.body.email){
+async function requestData(req, res) {
+    if (!req.body.email) {
         res.status(422).json(
             {
-                message:"email is required",
+                message: "email is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.password){
+    if (!req.body.password) {
         res.status(422).json(
             {
-                message:"password is required",
+                message: "password is required",
                 status: 0,
             }
         );
@@ -904,10 +910,10 @@ async function requestData(req,res){
     }
 
     let emailExistUser = await User.findUserByEmail(req.body.email);
-    if(emailExistUser.length <= 0) {
+    if (emailExistUser.length <= 0) {
         res.status(422).json(
             {
-                message:"User with this email not exists",
+                message: "User with this email not exists",
                 status: 0,
             }
         );
@@ -915,10 +921,10 @@ async function requestData(req,res){
     }
 
     let hashPassword = crypto.createHmac('md5', process.env['MD5_SECRET_KEY']).update(req.body.password).digest('hex');
-    if(emailExistUser[0].password != hashPassword){
+    if (emailExistUser[0].password != hashPassword) {
         res.status(422).json(
             {
-                message:"Incorrect Password",
+                message: "Incorrect Password",
                 status: 0,
             }
         );
@@ -955,12 +961,12 @@ async function requestData(req,res){
     );
 }
 
-async function sendForNewBlog(req,res){
-    const { link,user_email ,blog_id} = req.query
-    if(!link){
+async function sendForNewBlog(req, res) {
+    const { link, user_email, blog_id } = req.query
+    if (!link) {
         res.status(422).json(
             {
-                message:"Link is required",
+                message: "Link is required",
                 status: 0,
             }
         );
@@ -968,30 +974,30 @@ async function sendForNewBlog(req,res){
     }
     let sendToAll = true
 
-    if(user_email){
+    if (user_email) {
         sendToAll = false
     }
 
-    if(sendToAll){
+    if (sendToAll) {
         let allUsers = await User.getAllUser()
         for await (const user of allUsers) {
-            if(user.is_notification_on && user.is_new_blog_notification_on ){
-                await Notification.sendToUserId(user.internal_user_id,null,'NEW_BLOG','New blog added, check it out',link,0,blog_id)
+            if (user.is_notification_on && user.is_new_blog_notification_on) {
+                await Notification.sendToUserId(user.internal_user_id, null, 'NEW_BLOG', 'New blog added, check it out', link, 0, blog_id)
             }
-		};
-    }else{
+        };
+    } else {
         let user = await User.findUserByEmail(user_email)
-        if(user.length <= 0){
+        if (user.length <= 0) {
             res.status(422).json(
                 {
-                    message:"User with this email not found",
+                    message: "User with this email not found",
                     status: 0,
                 }
             );
             return;
         }
-        if(user[0].is_notification_on && user[0].is_new_blog_notification_on ){
-            await Notification.sendToUserId(user[0].internal_user_id,null,'NEW_BLOG','New blog added, check it out',link,0,blog_id)
+        if (user[0].is_notification_on && user[0].is_new_blog_notification_on) {
+            await Notification.sendToUserId(user[0].internal_user_id, null, 'NEW_BLOG', 'New blog added, check it out', link, 0, blog_id)
         }
     }
     res.json(
@@ -1002,33 +1008,33 @@ async function sendForNewBlog(req,res){
     );
 }
 
-async function sendForDailyQuestion(req,res){
+async function sendForDailyQuestion(req, res) {
     const { user_email } = req.query
     let sendToAll = true
 
-    if(user_email){
+    if (user_email) {
         sendToAll = false
     }
-    if(sendToAll){
+    if (sendToAll) {
         let allUsers = await User.getAllUser()
         for await (const user of allUsers) {
-            if(user.is_notification_on && user.is_daily_quest_notification_on ){
-                await Notification.sendToUserId(user.internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
+            if (user.is_notification_on && user.is_daily_quest_notification_on) {
+                await Notification.sendToUserId(user.internal_user_id, null, 'DAILY_QUESTION', 'Take your daily question now', null, 0)
             }
-		};
-    }else{
+        };
+    } else {
         let user = await User.findUserByEmail(user_email)
-        if(user.length <= 0){
+        if (user.length <= 0) {
             res.status(422).json(
                 {
-                    message:"User with this email not found",
+                    message: "User with this email not found",
                     status: 0,
                 }
             );
             return;
         }
-        if(user[0].is_notification_on && user[0].is_daily_quest_notification_on ){
-            await Notification.sendToUserId(user[0].internal_user_id,null,'DAILY_QUESTION','Take your daily question now',null,0)
+        if (user[0].is_notification_on && user[0].is_daily_quest_notification_on) {
+            await Notification.sendToUserId(user[0].internal_user_id, null, 'DAILY_QUESTION', 'Take your daily question now', null, 0)
         }
     }
     res.json(
@@ -1039,32 +1045,32 @@ async function sendForDailyQuestion(req,res){
     );
 }
 
-async function socialLogin(req,res){
+async function socialLogin(req, res) {
     let metaData = []
     let finalData = null
-    if(!req.body.device_id){
+    if (!req.body.device_id) {
         res.status(422).json(
             {
-                message:"device id is required",
+                message: "device id is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.provider){
+    if (!req.body.provider) {
         res.status(422).json(
             {
-                message:"provider is required",
+                message: "provider is required",
                 status: 0,
             }
         );
         return;
     }
-    if(!req.body.token){
+    if (!req.body.token) {
         res.status(422).json(
             {
-                message:"token is required",
-                status: 0,c
+                message: "token is required",
+                status: 0, c
             }
         );
         return;
@@ -1080,52 +1086,52 @@ async function socialLogin(req,res){
         let userName = 'Guest';
         let userEmail = null
 
-        if(provider == 'apple'){
+        if (provider == 'apple') {
             const json = jwt.decode(
                 bearerToken,
-                {complete: true})
+                { complete: true })
 
-            if(json.payload){
-                if(json.payload.email){
+            if (json.payload) {
+                if (json.payload.email) {
                     userEmail = json.payload.email
                 }
             }
-        }else{
+        } else {
             finalData = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?id_token=${bearerToken}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${bearerToken}`,
-                    Accept:'*/*'
-                }
-            })        
-            
-            if(finalData.data){
+                {
+                    headers: {
+                        Authorization: `Bearer ${bearerToken}`,
+                        Accept: '*/*'
+                    }
+                })
+
+            if (finalData.data) {
                 userName = finalData.data?.name
                 userEmail = finalData.data?.email
             }
-           
+
         }
 
 
-        if(!userName || !userEmail){
+        if (!userName || !userEmail) {
             res.status(422).json(
                 {
-                    message:"Invalid Token",
+                    message: "Invalid Token",
                     status: 0,
                 }
             );
             return;
         }
-        
+
         let emailExistUser = await User.findUserByEmail(userEmail);
-        if(emailExistUser.length > 0){
+        if (emailExistUser.length > 0) {
 
-            let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)    
+            let token = await ApiToken.generateToken(emailExistUser[0].internal_user_id)
 
-            if(firebase_id){
-                let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id,firebase_id);
-                if(userFirebase.length <= 0){
-                    await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id,firebase_id);
+            if (firebase_id) {
+                let userFirebase = await UserFirebaseModel.checkExists(emailExistUser[0].internal_user_id, firebase_id);
+                if (userFirebase.length <= 0) {
+                    await UserFirebaseModel.addToken(emailExistUser[0].internal_user_id, firebase_id);
                 }
             }
             let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
@@ -1143,8 +1149,8 @@ async function socialLogin(req,res){
 
             res.json(
                 {
-                    token:token,
-                    data:emailExistUser[0],
+                    token: token,
+                    data: emailExistUser[0],
                     message: "User logged in",
                     status: 1,
                 }
@@ -1152,7 +1158,7 @@ async function socialLogin(req,res){
             return;
         }
         let existingUser = await User.query(device_id);
-        if(existingUser.length <= 0) {
+        if (existingUser.length <= 0) {
             const tempuser = new User.User({
                 id: req.body.device_id,
                 name: userName,
@@ -1168,53 +1174,53 @@ async function socialLogin(req,res){
             name: existingUser[0].name,
             gender: existingUser[0].gender,
             avatarIndex: existingUser[0].avatar_index,
-            email:userEmail,
+            email: userEmail,
         });
         try {
             const oldResults = await Result.getByUser(device_id);
             if (oldResults.length > 0) {
-              const newResult = new Result.Result({
-                userId: hashEmail,
-                assessmentGroupId: oldResults[0].question_group_id,
-                numOfQuestions: oldResults[0].num_of_questions,
-                duration: oldResults[0].duration,
-                code: oldResults[0].result_code
-              });
-              await Result.create(newResult);
+                const newResult = new Result.Result({
+                    userId: hashEmail,
+                    assessmentGroupId: oldResults[0].question_group_id,
+                    numOfQuestions: oldResults[0].num_of_questions,
+                    duration: oldResults[0].duration,
+                    code: oldResults[0].result_code
+                });
+                await Result.create(newResult);
             }
             await User.createReal(realUser);
-            await User.updateIsPermanentUser(existingUser[0].internal_user_id,1)
-    
+            await User.updateIsPermanentUser(existingUser[0].internal_user_id, 1)
+
             let oldAvatar = await UserAvatarModel.getByUserId(device_id)
-            if(oldAvatar.length > 0){
-                let face_index  = oldAvatar[0].face_index
-                let eye_index  = oldAvatar[0].eye_index
-                let eyebrow_index  = oldAvatar[0].eyebrow_index
-                let ear_index  = oldAvatar[0].ear_index
-                let nose_index  = oldAvatar[0].nose_index
-                let lips_index  = oldAvatar[0].lips_index
-                let hair_index  = oldAvatar[0].hair_index
-                await UserAvatarModel.addAvatar(hashEmail,face_index,hair_index,eye_index,eyebrow_index,ear_index,nose_index,lips_index)
+            if (oldAvatar.length > 0) {
+                let face_index = oldAvatar[0].face_index
+                let eye_index = oldAvatar[0].eye_index
+                let eyebrow_index = oldAvatar[0].eyebrow_index
+                let ear_index = oldAvatar[0].ear_index
+                let nose_index = oldAvatar[0].nose_index
+                let lips_index = oldAvatar[0].lips_index
+                let hair_index = oldAvatar[0].hair_index
+                await UserAvatarModel.addAvatar(hashEmail, face_index, hair_index, eye_index, eyebrow_index, ear_index, nose_index, lips_index)
             }
-    
+
         } catch (error) {
             res.status(422).json(
                 {
-                    error:error.message,
-                    message:"something went wrong",
+                    error: error.message,
+                    message: "something went wrong",
                     status: 0,
                 }
             );
             return
         }
         let data = await User.findUserByEmail(userEmail);
-        let token = await ApiToken.generateToken(data[0].internal_user_id)   
-        if(firebase_id){
-            let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id,firebase_id);
-            if(userFirebase.length <= 0){
-                await UserFirebaseModel.addToken(data[0].internal_user_id,firebase_id);
+        let token = await ApiToken.generateToken(data[0].internal_user_id)
+        if (firebase_id) {
+            let userFirebase = await UserFirebaseModel.checkExists(data[0].internal_user_id, firebase_id);
+            if (userFirebase.length <= 0) {
+                await UserFirebaseModel.addToken(data[0].internal_user_id, firebase_id);
             }
-        } 
+        }
         let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
         data[0].user_avatar = userAvatar[0] ?? null
 
@@ -1229,33 +1235,33 @@ async function socialLogin(req,res){
         }
         res.json(
             {
-                token:token,
-                data:data[0],
+                token: token,
+                data: data[0],
                 message: "User Logged in",
                 status: 1,
             }
         );
-        
+
     } catch (err) {
         res.status(422).json(
             {
                 error: err.message,
-                message:"Something went wrong",
+                message: "Something went wrong",
                 status: 0,
             }
         );
         return;
     }
 
-    }
+}
 
-export default { 
+export default {
     getUser,
     getUserType,
     createTempUser,
     createRealUser,
     login,
-    logout ,
+    logout,
     deleteUser,
     editUser,
     forgotPassword,

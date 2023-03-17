@@ -12,15 +12,15 @@ import express from 'express';
 import ApiToken from '../../models/apiToken.js';
 import dailyQuestion from '../../controllers/v1/dailyQuestion.js';
 
-export default function(app) {
+export default function (app) {
     const router = express.Router();
 
     //MIDDLEWARE for AUTH
     router.all("/auth/*", async (req, res, next) => {
-        if(!req.headers || !req.headers.authorization){
+        if (!req.headers || !req.headers.authorization) {
             res.status(422).json(
                 {
-                    message:"Unauthorized",
+                    message: "Unauthorized",
                     status: 0,
                 }
             );
@@ -33,7 +33,7 @@ export default function(app) {
             res.status(422).json(
                 {
                     error: error.message,
-                    message:"Unauthorized",
+                    message: "Unauthorized",
                     status: 0,
                 }
             );
@@ -60,8 +60,8 @@ export default function(app) {
 
 
         //CONTACT US AND REQUEST DATA(EMAILS)
-        router.post("/user/request-data", User.requestData); 
-        router.post("/user/contact-us", User.contactUs); 
+        router.post("/user/request-data", User.requestData);
+        router.post("/user/contact-us", User.contactUs);
 
         //TEST(to quickly test some code)
         router.post("/test", test.test);
@@ -71,11 +71,11 @@ export default function(app) {
         //QUESTIONS
         router.get("/questions", question.getQuestion);
         router.post("/questions/add-result", question.addResult);
-        
+
         //API INSIDE AUTH
         router.get("/auth/user", User.getUser);
         router.post("/auth/logout", User.logout);
-        router.post("/auth/user-edit", User.editUser);    
+        router.post("/auth/user-edit", User.editUser);
         router.delete("/auth/delete-user", User.deleteUser);
 
         //CARDS
@@ -124,12 +124,12 @@ export default function(app) {
         res.status(422).json(
             {
                 error: error.message,
-                message:"Unauthorized",
+                message: "Unauthorized",
                 status: 0,
             }
         );
         return;
     }
-    
+
 }
 // Added: to restart 

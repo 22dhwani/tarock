@@ -13,6 +13,7 @@ import axios from 'axios';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
+import UserPointsModal from '../../models/userPoints.js';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const tarockJsonData = JSON.parse(fs.readFileSync(path.join(dir, '../../../../static/personality_code_definition.json')));
@@ -423,8 +424,8 @@ async function createRealUser(req, res) {
             }
             await User.createReal(realUser);
             await User.updateIsPermanentUser(existingUser[0].internal_user_id, 1)
-
-            let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id)
+            await UserPointsModal.addPoints(res.user.internal_user_id, '20', 'ADDED', 'SIGN_UP');
+            let oldAvatar = await UserAvatarModel.getByUserId(req.body.device_id);
             if (oldAvatar.length > 0) {
                 let face_index = oldAvatar[0].face_index
                 let hair_index = oldAvatar[0].hair_index

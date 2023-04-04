@@ -1,0 +1,43 @@
+{
+  "Open": {
+    "description": "The degree to which a person is curious, imaginative and open-minded.",
+    "personality_traits": "Creative; Imaginative; Curious; Uncoventional; Reflective",
+    "spirit_animal": "Dolphin-playful, adventurous, intelligent, and creative creatures of the sea",
+    "ideal_vaction": "Backpacking throught the mountains, exploring nature and discovering hidden gems along the way",
+    "famous_character": "Willy Wonka- a creative and imaginative character who defies convention and embraces his unque ideas.",
+    "power_song": "'Imagine' byJohn Lennon - a song that celebrates the power of imagination and creativity"
+  },
+  "Conscientious": {
+    "description": "The degree to which a person is organised,responsible and self disciplined.",
+    "personality_traits": "Organised; Responsible;Dependable; Detail-Oriented; Goal-driven",
+    "spirit_animal": "Ant - an incredibly organised and efficient insect that values teamwork and is always focussed on achieving its goals",
+    "ideal_vaction": "Planning a meticulously detailed itinearary for a trip to an exciting new destination, and executing it flawlessly",
+    "famous_character": "Hermione Ganger- an intelligent and detail-oriented character who values hard work and dedication",
+    "power_song": "'Eye of the Tiger' by Survivor - a song that celebrates the determination and the drive to achieve"
+  },
+  "Extravert": {
+    "description": "The degree to which a person is outgoing, assertive and sociable.",
+    "personality_traits": "Outgoing; Sociable; Energetic; Talkative;Enthusiastic",
+    "spirit_animal": "Butterfly- a social and outgoing creature that loves to contest with others and spread joy wherever it goes",
+    "ideal_vaction": "A weekend gateaway with a group of close friends, filled with lively conversation, fun activites and losts of laughter",
+    "famous_character": "Tony Stark (Iron Man) - a charismatic and outgoing character who loves to be the center of attention and thrives in social situations",
+    "power_song": "'Don't Stop Beiievin' by Journey - a song that celebrates the joy of connecting with others and the power of optimism"
+  },
+
+  "Aggreable": {
+    "description": "The degree to which a person is empathetic,cooperative and trusting.",
+    "personality_traits": "Empathetic; Cooperative; Friendly; Compassionate; Generous",
+    "spirit_animal": "Elephant- a kind and genetic creature that values its herd and shows empathy and kindness to all around it",
+    "ideal_vaction": "Volunteering in an developing country, working with a team to make a difference and help those in need",
+    "famous_character": "Forest Gump -a compassionate and friendly character who always looks out for the best intersts of those around him",
+    "power_song": "'Lean On Me' by Bill Wethers - a song that celebrates the power of human connection and the importance of supporting each other"
+  },
+  "Neurotic": {
+    "description": "The degree to which a person is introspective, sensitive and emotional",
+    "personality_traits": "Sensitive; Anxious; Emotional; Moody; Self-critical",
+    "spirit_animal": "Cat - a sensitive and emotional creature that can be moody and unpredictable, but is also fiercly independent and adaptable",
+    "ideal_vaction": "A retreat to a quiet and peacful villa, where you can soak up the ocean views and reflect on your mental and emotional well-being",
+    "famous_character": "Hamlet - a complex and emotional character who struggles with his own thoughts and feelings.",
+    "power_song": "'Shake It out' by Fiorence + The Machine - a song that encourages letting go of negative emotions and embracing positivity and self-acceptance."
+  }
+}

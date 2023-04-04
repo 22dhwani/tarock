@@ -1,0 +1,113 @@
+{
+  "Type_D/i": {
+    "personality_traits": "Assertive; Outgoing; Sociable; Results-Oriented",
+    "aspirations": "Taking charge, Building Relationships",
+    "influences_others_by": "Persuasion, Bold actions",
+    "anticipate": "Impatience, Lack of sensitivity to others",
+    "worries": "Being seen as weak or ineffective",
+    "in_conflict": "Addresses issues directly and may say things they regret",
+    "can_build_on": "Empathy, listening skills, patience"
+  },
+  "Type_D/S": {
+    "personality_traits": "Decisive; Dependable; Supportive; Task-focused",
+    "aspirations": "Getting things done with maintaining stability",
+    "influences_others_by": "Providing support and stability",
+    "anticipate": "Resistance to change, Lack of flexibility",
+    "worries": "Being seen as unreliable or undependable",
+    "in_conflict": "Tries to find a compromise and maintain relationships",
+    "can_build_on": "Willingness to take risks, Assertiveness, Vision"
+  },
+  "Type_D/C": {
+    "personality_traits": "Direct; Analytical; Result-oriented; Detail-focused",
+    "aspirations": "Making decisions while prioritizing accuracy and precision",
+    "influences_others_by": "Providing clear direction and making decisions",
+    "anticipate": "Dislike of spontaneity, Lack of creativity",
+    "worries": "Making the wrong decision, being seen as indecisive",
+    "in_conflict": "Uses data and analysis to make decisions and solve problems",
+    "can_build_on": "Flexibility, Willingness to take risks, Ability to adapt"
+  },
+
+  "Type_i/D": {
+    "personality_traits": "Sociable; Assertive; Outgoing; Results-Oriented",
+    "aspirations": "Building relationships and getting things done",
+    "influences_others_by": "Building relationships and networking",
+    "anticipate": "Impatience, Lack of follow-through",
+    "worries": "Being seen as uncaring or insensitive",
+    "in_conflict": "Tries to find a solution that benefits everyone",
+    "can_build_on": "Attention to detail, Persistence, Focus on results"
+  },
+  "Type_i/S": {
+    "personality_traits": "Supportive; Dependable; Outgoing; Results-Oriented",
+    "aspirations": "Building relationships while maintaining stability",
+    "influences_others_by": "Providing support and maintaining relationships",
+    "anticipate": "Resistance to change, Lack of vision",
+    "worries": "Being seen as unimportant or ignored",
+    "in_conflict": "Tries to find a solution that maintains stability and relationships",
+    "can_build_on": "Willingness to take risks, Assertiveness, Vision"
+  },
+  "Type_i/C": {
+    "personality_traits": "Optimistic; Analytical; Deatil-focused; Relationship-focused",
+    "aspirations": "Building relationships while prioritizing accuracy and precision",
+    "influences_others_by": "Providing a positive outlook and attention to detail",
+    "anticipate": "Resistance to change, Lack of decisiveness",
+    "worries": "Making mistakes, Being seen as unimportant",
+    "in_conflict": "Tries to find a solution that benefits everyone and is based on data",
+    "can_build_on": "Willingness to take risks, Assertiveness, Focus on results"
+  },
+
+  "Type_S/D": {
+    "personality_traits": "Supportive; Dependable; Stable; Results-Oriented",
+    "aspirations": "Getting things done with maintaining relationships",
+    "influences_others_by": "Providing support and maintaining stability",
+    "anticipate": "Lack of vision, Lack of assertiveness",
+    "worries": "Being seen as overly passive or unambitious",
+    "in_conflict": "Tries to find a solution that maintains stability and achieves results",
+    "can_build_on": "Willingness to take risks, Assertiveness, Vision"
+  },
+  "Type_S/i": {
+    "personality_traits": "Enthusiastic; Adaptable; Patient; Sociable; Emotional",
+    "aspirations": "Fun,Relationships, Recognition, Comfort, Stability",
+    "influences_others_by": "Building relationships, Charming, Energizing",
+    "anticipate": "Overcommitment, Resistance to change",
+    "worries": "Conflict, Change, Being ignored",
+    "in_conflict": "Non-confrontational, May not address issues directly, Avoids conflict",
+    "can_build_on": "Detail orientation, Analytical skills, Active listening"
+  },
+  "Type_S/C": {
+    "personality_traits": "Loyal; Methodical; Analytical; Conscientious; Deatil-oriented",
+    "aspirations": "Stability, Accuracy, Security, Comfort, Reliability",
+    "influences_others_by": "Being reliable, Building relationships, Loyalty",
+    "anticipate": "Resistance to change, Overanalyzing",
+    "worries": "Lack of standards, Risk-taking, Lack of control",
+    "in_conflict": "May become passive-aggressive, Avoids conflict, May overanalyze and become perfectionistic",
+    "can_build_on": "Risk-taking, Assertiveness, Decisiveness"
+  },
+
+  "Type_C/D": {
+    "personality_traits": "Objective; Practical; Precise; Strategic; Goal-oriented",
+    "aspirations": "Authority, Respect, Accomplishment",
+    "influences_others_by": "Through a result-driven approach",
+    "anticipate": "Impatience, Perceived indifference",
+    "worries": "Incompetence, Inefficiency, Disorganization,Lack of control",
+    "in_conflict": "Focuses on achieving the goal, Can be insensitive to others",
+    "can_build_on": "Flexibility, Empathy, Ability to delegate"
+  },
+  "Type_C/i": {
+    "personality_traits": "Charismatic; Tactful; Cooperative; Detail-oriented; People-oriented",
+    "aspirations": "Cooperation, High standards, Recognition",
+    "influences_others_by": "Building relationships and working collaboratively",
+    "anticipate": "Indecisiveness, Cautiousness",
+    "worries": "Criticism, Disorganization, Not meeting others’ expectations, Lack of influence",
+    "in_conflict": "Tries to find a win-win solution, May become emotional if the issue involves people",
+    "can_build_on": "Decisiveness, Confidence, Assertiveness"
+  },
+  "Type_C/S": {
+    "personality_traits": "Diplomatic; Empathetic; Patient; Methodical; Precise; Reserved",
+    "aspirations": "Collaboration, Stability, Consistency",
+    "influences_others_by": "Through collaboration and compromise",
+    "anticipate": "Analysis paralysis, Overly cautious",
+    "worries": "Criticism, Lack of support, Inconsistency, Conflict",
+    "in_conflict": "Seeks to avoid it, May become passive-aggressive",
+    "can_build_on": "Decisiveness, Assertiveness, Ability to take risks"
+  }
+}

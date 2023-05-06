@@ -220,6 +220,10 @@ async function updateReal(user) {
   return data[0];
 }
 
+async function updateCharacteristics(id,characteristics){
+  const data = await sql.query("UPDATE user SET characteristics = ? WHERE internal_user_id = ?;",[characteristics,id])
+}
+
 async function updateIsPermanentUser(id, is_permanent_user) {
   const data = await sql.query(
     "UPDATE tmp_user SET is_permanent_user = ? WHERE internal_user_id = ?;",
@@ -242,6 +246,7 @@ export default {
   deleteTmpUser,
   disableRealUser,
   getAllUser,
+  updateCharacteristics
 };
 
 /**

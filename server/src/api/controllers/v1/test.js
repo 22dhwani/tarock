@@ -2,14 +2,14 @@ import User from '../../models/user.js';
 import ApiToken from '../../models/apiToken.js';
 
 async function test(req,res){            
-    if(req.headers.authorization){        
-        res.json(
-            {
-                data: res.user,
-            }
-        );
-    }
-    
+    let data = JSON.parse(res.user.characteristics)
+    data[6] = "3434";
+    await User.updateCharacteristics(res.user.internal_user_id,JSON.stringify(data))
+    res.json(
+        {
+            data: data
+        }
+    );
 }
 
 async function getToken(req,res){

@@ -375,7 +375,6 @@ async function addCard(req,res) {
             }
         
             let selected_zodiac = small_map[0].zodiac
-            let characteristics = JSON.parse(user.characteristics)
             characteristics[7] = selected_zodiac
             await User.updateCharacteristics(user.internal_user_id,JSON.stringify(characteristics))
             data = await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
@@ -488,12 +487,10 @@ async function addCard(req,res) {
             console.log("here-1");
             console.log(user.characteristics);
             let selected_animal = final_map[0].animal
-            let characteristics = JSON.parse(user.characteristics)
             if(characteristics == null){
                 characteristics = []
             }
             characteristics[6] = selected_animal
-            console.log("here-2");
             await User.updateCharacteristics(user.internal_user_id,JSON.stringify(characteristics))
             data = await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_year,null,selected_animal)
             data = await userZodiac.getById(data.insertId)

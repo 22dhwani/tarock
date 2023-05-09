@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 
 
 const dir = dirname(fileURLToPath(import.meta.url));
-const cardData = JSON.parse(fs.readFileSync(path.join(dir , '../../../../static/personality_code_definition.json')));
+const cardData = JSON.parse(fs.readFileSync(path.join(dir, '../../../../static/personality_code_definition.json')));
 
 async function index(req, res) {
 
@@ -26,30 +26,30 @@ async function answer(req, res) {
 	let user = res.user
 	const { question_id, answer_id } = req.body
 
-	if(!question_id){
-        res.status(422).json(
-            {
-                message:"question_id is required",
-                status: 0,
-            }
-        );
-        return;
-    }   
-	if(!answer_id){
-        res.status(422).json(
-            {
-                message:"answer_id is required",
-                status: 0,
-            }
-        );
-        return;
-    }   
-
-	let data = await DailyQuestionUserAnswerOptionModel.checkExist(user.internal_user_id, question_id)
-	if(data.length > 0){
+	if (!question_id) {
 		res.status(422).json(
 			{
-				message:"You have already asnwered this question",
+				message: "question_id is required",
+				status: 0,
+			}
+		);
+		return;
+	}
+	if (!answer_id) {
+		res.status(422).json(
+			{
+				message: "answer_id is required",
+				status: 0,
+			}
+		);
+		return;
+	}
+
+	let data = await DailyQuestionUserAnswerOptionModel.checkExist(user.internal_user_id, question_id)
+	if (data.length > 0) {
+		res.status(422).json(
+			{
+				message: "You have already asnwered this question",
 				status: 0,
 			}
 		);
@@ -63,52 +63,52 @@ async function answer(req, res) {
 
 	await Promise.all(options.map(async (option) => {
 		let personalies = []
-		let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id,option.id)
+		let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id, option.id)
 		let tarcokResult = null
-
 		for await (const answer of totalAnswers) {
-			tarcokResult = await Result.getByUser(answer.user_id)
+			tarcokResult = await Result.getByUserNew(answer.user_id)
+
 			if (tarcokResult.length > 0) {
-				let personality_name = cardData[tarcokResult[0].result_code].personality_category
-				if(!personalies.some((element)=>{return element.personality_name == personality_name})){
+				let personality_name = tarcokResult[0].result_code
+				if (!personalies.some((element) => { return element.personality_name == personality_name })) {
 					personalies.push(
 						{
-							personality_name:personality_name,
-							count:1
+							personality_name: personality_name,
+							count: 1
 						}
 					)
-				}else{
+				} else {
 					let personality_index = personalies.findIndex((obj => obj.personality_name == personality_name));
 					personalies[personality_index].count = personalies[personality_index].count + 1
-				}				
+				}
 			}
 		};
 
-		option.total_personality_answers= totalAnswers.length
-		option.personalies= personalies
+		option.total_personality_answers = totalAnswers.length
+		option.personalies = personalies
 	}))
 	res.json({
-		data : {
-			"total_answers":totalAnswers.length,
-			"answers_count":options
+		data: {
+			"total_answers": totalAnswers.length,
+			"answers_count": options
 		},
 		message: "Answer Submitted",
 		status: 1,
 	});
 
 }
-async function getTodayQuestion(req,res){
+async function getTodayQuestion(req, res) {
 	let data = await DailyQuestionModel.getActiveFirst()
-	if(data.length <= 0){
+	if (data.length <= 0) {
 		res.status(422).json(
-            {
-                message:"No question for today",
-                status: 0,
-            }
-        );
-        return;
+			{
+				message: "No question for today",
+				status: 0,
+			}
+		);
+		return;
 	}
-	
+
 	data[0].options = await DailyQuestionOptionModel.index(data[0].id)
 	res.json({
 		data: data[0],
@@ -117,137 +117,137 @@ async function getTodayQuestion(req,res){
 	});
 }
 
-async function getStats(req,res){
+async function getStats(req, res) {
 
 	let user = res.user
 	const { question_id } = req.query
-	if(!question_id){
-        res.status(422).json(
-            {
-                message:"question_id is required",
-                status: 0,
-            }
-        );
-        return;
-    } 
+	if (!question_id) {
+		res.status(422).json(
+			{
+				message: "question_id is required",
+				status: 0,
+			}
+		);
+		return;
+	}
 	let options = await DailyQuestionOptionModel.indexWithCount(question_id)
 	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id)
 
 
 	await Promise.all(options.map(async (option) => {
 		let personalies = []
-		let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id,option.id)
+		let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id, option.id)
 		let tarcokResult = null
 
 		for await (const answer of totalAnswers) {
 			tarcokResult = await Result.getByUser(answer.user_id)
 			if (tarcokResult.length > 0) {
 				let personality_name = cardData[tarcokResult[0].result_code].personality_category
-				if(!personalies.some((element)=>{return element.personality_name == personality_name})){
+				if (!personalies.some((element) => { return element.personality_name == personality_name })) {
 					personalies.push(
 						{
-							personality_name:personality_name,
-							count:1
+							personality_name: personality_name,
+							count: 1
 						}
 					)
-				}else{
+				} else {
 					let personality_index = personalies.findIndex((obj => obj.personality_name == personality_name));
 					personalies[personality_index].count = personalies[personality_index].count + 1
-				}				
+				}
 			}
 		};
-		personalies = personalies.sort((a,b)=>b.count-a.count);
-		option.total_personality_answers= totalAnswers.length
-		option.personalies= personalies
+		personalies = personalies.sort((a, b) => b.count - a.count);
+		option.total_personality_answers = totalAnswers.length
+		option.personalies = personalies
 	}))
 
 	res.json({
-		data : {
-			"total_answers":totalAnswers.length,
-			"answers_count":options
+		data: {
+			"total_answers": totalAnswers.length,
+			"answers_count": options
 		},
 		message: "stats returned",
 		status: 1,
 	});
 }
 
-async function getOptionStats(req,res){
+async function getOptionStats(req, res) {
 	let user = res.user
-	const { question_id ,option_id} = req.query
-	if(!question_id){
-        res.status(422).json(
-            {
-                message:"question_id is required",
-                status: 0,
-            }
-        );
-        return;
-    } 
-	if(!option_id){
-        res.status(422).json(
-            {
-                message:"option_id is required",
-                status: 0,
-            }
-        );
-        return;
-    } 
+	const { question_id, option_id } = req.query
+	if (!question_id) {
+		res.status(422).json(
+			{
+				message: "question_id is required",
+				status: 0,
+			}
+		);
+		return;
+	}
+	if (!option_id) {
+		res.status(422).json(
+			{
+				message: "option_id is required",
+				status: 0,
+			}
+		);
+		return;
+	}
 	let personalies = []
-	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id,option_id)
+	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id, option_id)
 	let tarcokResult = null
 	for await (const answer of totalAnswers) {
 		tarcokResult = await Result.getByUser(answer.user_id)
 		if (tarcokResult.length > 0) {
 			let personality_name = cardData[tarcokResult[0].result_code].personality_category
-			if(!personalies.some((element)=>{return element.personality_name == personality_name})){
+			if (!personalies.some((element) => { return element.personality_name == personality_name })) {
 				personalies.push(
 					{
-						personality_name:personality_name,
-						count:1
+						personality_name: personality_name,
+						count: 1
 					}
 				)
-			}else{
+			} else {
 				let personality_index = personalies.findIndex((obj => obj.personality_name == personality_name));
 				personalies[personality_index].count = personalies[personality_index].count + 1
-			}				
+			}
 		}
 	};
 
 	res.json({
-		data:{
-			"total_answers":totalAnswers.length,
-			"personalies":personalies
+		data: {
+			"total_answers": totalAnswers.length,
+			"personalies": personalies
 		},
 		message: "stats returned",
 		status: 1,
 	});
 }
 
-async function getAnswer(req,res){
+async function getAnswer(req, res) {
 	let user = res.user
 	const { question_id } = req.query
-	if(!question_id){
-        res.status(422).json(
-            {
-                message:"question_id is required",
-                status: 0,
-            }
-        );
-        return;
-    } 
-	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswer(question_id,user.internal_user_id)
-	if(totalAnswers.length <= 0){
+	if (!question_id) {
 		res.status(422).json(
-            {
-                message:"Not asnwered yet",
-                status: 0,
-            }
-        );
-        return;
+			{
+				message: "question_id is required",
+				status: 0,
+			}
+		);
+		return;
+	}
+	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswer(question_id, user.internal_user_id)
+	if (totalAnswers.length <= 0) {
+		res.status(422).json(
+			{
+				message: "Not asnwered yet",
+				status: 0,
+			}
+		);
+		return;
 	}
 
 	res.json({
-		data : totalAnswers[0],
+		data: totalAnswers[0],
 		message: "Submitted Answer returned",
 		status: 1,
 	});
@@ -255,4 +255,4 @@ async function getAnswer(req,res){
 
 
 
-export default { index, answer,getTodayQuestion ,getStats,getAnswer,getOptionStats};
+export default { index, answer, getTodayQuestion, getStats, getAnswer, getOptionStats };

@@ -379,7 +379,7 @@ async function addCard(req, res) {
 
             let selected_zodiac = small_map[0].zodiac
 
-            let characteristics = JSON.parse(user.characteristics)
+            let characteristics = user.characteristics
             characteristics[7] = selected_zodiac
 
             let userHaveCard = await userZodiac.getUserZodiac(user.internal_user_id, card_type)
@@ -502,7 +502,7 @@ async function addCard(req, res) {
             }
 
             let selected_animal = final_map[0].animal
-            let characteristics = JSON.parse(user.characteristics);
+            let characteristics = user.characteristics;
             if (characteristics == null) {
                 characteristics = []
             }

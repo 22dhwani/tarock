@@ -22,13 +22,13 @@ async function getByUser(req, res) {
     const result = [];
     const id = req.params.id;
     try {
-        const tarcokResult = await Result.getByUser(id);
+        const tarcokResult = await Result.getByOldUser(id);//changes
         if (tarcokResult.length > 0) {
-            const tarockData = data[tarcokResult[0].result_code];
+            const tarockData = data[tarcokResult[0].tarock_socionics];//changes
             result.push({
                 type: 'Tarock',
                 data: {
-                    resultCode: tarcokResult[0].result_code,
+                    resultCode: tarcokResult[0].tarock_socionics,//changes
                     quadra: tarockData.personality_socionic_quadra
                 }
             }); 
@@ -39,7 +39,7 @@ async function getByUser(req, res) {
             data: await Promise.all(matchData.map(async (match) => {
                 const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
                 const matchedUserData = await User.queryReal(matchedUserId);
-                const matchedTarockResult = await Result.getByUser(matchedUserId);
+                const matchedTarockResult = await Result.getByOldUser(matchedUserId);
                 if (matchedTarockResult.length == 0) {
                     throw new Error('No matched user test result!');
                 }
@@ -47,8 +47,8 @@ async function getByUser(req, res) {
                     matchedUserId: matchedUserId,
                     matchedUserName: matchedUserData[0].name,
                     matchedUserAvatarIndex: matchedUserData[0].avatar_index,
-                    matchedUserResultCode: matchedTarockResult[0].result_code,
-                    matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                    matchedUserResultCode: matchedTarockResult[0].tarock_socionics,//changes
+                    matchedUserQuadra: data[matchedTarockResult[0].tarock_socionics].personality_socionic_quadra//changes
                 };
             }))
         });

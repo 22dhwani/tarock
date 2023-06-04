@@ -49,11 +49,11 @@ async function getUser(req, res) {
     user.user_avatar = userAvatar[0] ?? null
     user.question_data = null
 
-    const tarcokResult = await Result.getByUser(user.internal_user_id);
+    const tarcokResult = await Result.getByOldUser(user.internal_user_id);//changes
     if (tarcokResult.length > 0) {
-        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
         user.question_data = {
-            resultCode: tarcokResult[0].result_code,
+            resultCode: tarcokResult[0].tarock_socionics,//changes
             quadra: tarockData.personality_socionic_quadra,
             personality_mbti_code: tarockData.personality_mbti_code
         };
@@ -410,14 +410,15 @@ async function createRealUser(req, res) {
             password: hashPassword,
         });
         try {
-            const oldResults = await Result.getByUser(req.body.device_id);
+            const oldResults = await Result.getByOldUser(req.body.device_id);//changes
             if (oldResults.length > 0) {
                 const newResult = new Result.Result({
                     userId: hashEmail,
-                    assessmentGroupId: oldResults[0].question_group_id,
+                    assessmentGroupId: oldResults[0].question_group_id===1?8:req.body.assessment_group_id,//changes?
                     numOfQuestions: oldResults[0].num_of_questions,
                     duration: oldResults[0].duration,
-                    code: oldResults[0].result_code
+                    code: tarockJsonData[oldResults[0].tarock_socionics].personality_mbti_code,//changes
+                    tarockSocionics:oldResults[0].tarock_socionics,//changes
                 });
                 await Result.create(newResult);
             }
@@ -475,11 +476,11 @@ async function createRealUser(req, res) {
         data[0].user_avatar = userAvatar[0] ?? null
         data[0].question_data = null
 
-        const tarcokResult = await Result.getByUser(data[0].internal_user_id);
+        const tarcokResult = await Result.getByOldUser(data[0].internal_user_id);//changes
         if (tarcokResult.length > 0) {
-            const tarockData = tarockJsonData[tarcokResult[0].result_code];
+            const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
             data[0].question_data = {
-                resultCode: tarcokResult[0].result_code,
+                resultCode: tarcokResult[0].tarock_socionics,//changes
                 quadra: tarockData.personality_socionic_quadra,
                 personality_mbti_code: tarockData.personality_mbti_code
             };
@@ -562,11 +563,11 @@ async function login(req, res) {
 
     emailExistUser[0].question_data = null
 
-    const tarcokResult = await Result.getByUser(emailExistUser[0].internal_user_id);
+    const tarcokResult = await Result.getByOldUser(emailExistUser[0].internal_user_id);//changes
     if (tarcokResult.length > 0) {
-        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
         emailExistUser[0].question_data = {
-            resultCode: tarcokResult[0].result_code,
+            resultCode: tarcokResult[0].tarock_socionics,//changes
             quadra: tarockData.personality_socionic_quadra,
             personality_mbti_code: tarockData.personality_mbti_code
         };
@@ -753,11 +754,11 @@ async function editUser(req, res) {
 
     user[0].question_data = null
 
-    const tarcokResult = await Result.getByUser(user[0].internal_user_id);
+    const tarcokResult = await Result.getByOldUser(user[0].internal_user_id);//changes
     if (tarcokResult.length > 0) {
-        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
         user[0].question_data = {
-            resultCode: tarcokResult[0].result_code,
+            resultCode: tarcokResult[0].tarock_socionics,//changes
             quadra: tarockData.personality_socionic_quadra,
             personality_mbti_code: tarockData.personality_mbti_code
         };
@@ -1137,11 +1138,11 @@ async function socialLogin(req, res) {
             let userAvatar = await UserAvatarModel.getByUserId(emailExistUser[0].internal_user_id)
             emailExistUser[0].user_avatar = userAvatar[0] ?? null
 
-            const tarcokResult = await Result.getByUser(emailExistUser[0].internal_user_id);
+            const tarcokResult = await Result.getByOldUser(emailExistUser[0].internal_user_id);//changes
             if (tarcokResult.length > 0) {
-                const tarockData = tarockJsonData[tarcokResult[0].result_code];
+                const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
                 emailExistUser[0].question_data = {
-                    resultCode: tarcokResult[0].result_code,
+                    resultCode: tarcokResult[0].tarock_socionics,//changes
                     quadra: tarockData.personality_socionic_quadra,
                     personality_mbti_code: tarockData.personality_mbti_code
                 };
@@ -1177,14 +1178,15 @@ async function socialLogin(req, res) {
             email: userEmail,
         });
         try {
-            const oldResults = await Result.getByUser(device_id);
+            const oldResults = await Result.getByOldUser(device_id);//changes
             if (oldResults.length > 0) {
                 const newResult = new Result.Result({
                     userId: hashEmail,
-                    assessmentGroupId: oldResults[0].question_group_id,
+                    assessmentGroupId: oldResults[0].question_group_id===1?8:req.body.assessment_group_id,//changes?
                     numOfQuestions: oldResults[0].num_of_questions,
                     duration: oldResults[0].duration,
-                    code: oldResults[0].result_code
+                    code: tarockJsonData[oldResults[0].tarock_socionics].personality_mbti_code,//changes
+                    tarockSocionics:oldResults[0].tarock_socionics,//changes
                 });
                 await Result.create(newResult);
             }
@@ -1224,11 +1226,11 @@ async function socialLogin(req, res) {
         let userAvatar = await UserAvatarModel.getByUserId(data[0].internal_user_id)
         data[0].user_avatar = userAvatar[0] ?? null
 
-        const tarcokResult = await Result.getByUser(data[0].internal_user_id);
+        const tarcokResult = await Result.getByOldUser(data[0].internal_user_id);//changes
         if (tarcokResult.length > 0) {
-            const tarockData = tarockJsonData[tarcokResult[0].result_code];
+            const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
             data[0].question_data = {
-                resultCode: tarcokResult[0].result_code,
+                resultCode: tarcokResult[0].tarock_socionics,//changes
                 quadra: tarockData.personality_socionic_quadra,
                 personality_mbti_code: tarockData.personality_mbti_code
             };

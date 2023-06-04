@@ -27,16 +27,17 @@ async function getUserCard(req,res){
         }
     
         const id = user.internal_user_id;
+        
         try {
-            const tarcokResult = await Result.getByUser(id);
+            const tarcokResult = await Result.getByOldUser(id);
             if (tarcokResult.length > 0) {
-                const tarockData = data[tarcokResult[0].result_code];
+                const tarockData = data[tarcokResult[0].tarock_socionics];
                 result.push({
                     type: 'Tarock',
                     data: [
                         {
                             id:null,
-                            resultCode: tarcokResult[0].result_code,
+                            resultCode: tarcokResult[0].tarock_socionics,
                             quadra: tarockData.personality_socionic_quadra
                         }                        
                     ]
@@ -48,7 +49,7 @@ async function getUserCard(req,res){
                 data: await Promise.all(matchData.map(async (match) => {
                     const matchedUserId = id === match.orig_user_id ? match.matched_user_id : match.orig_user_id;
                     const matchedUserData = await User.queryReal(matchedUserId);
-                    const matchedTarockResult = await Result.getByUser(matchedUserId);
+                    const matchedTarockResult = await Result.getByOldUser(matchedUserId);
                     if (matchedTarockResult.length == 0) {
                         throw new Error('No matched user test result!');
                     }
@@ -71,8 +72,8 @@ async function getUserCard(req,res){
                             matched_user_ear_index: macthUserAvatar[0].ear_index,
                             matched_user_glasses_index: macthUserAvatar[0].glasses_index,
     
-                            matchedUserResultCode: matchedTarockResult[0].result_code,
-                            matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                            matchedUserResultCode: matchedTarockResult[0].tarock_socionics,
+                            matchedUserQuadra: data[matchedTarockResult[0].tarock_socionics].personality_socionic_quadra
                         };    
                     }else{
                         return {
@@ -92,8 +93,8 @@ async function getUserCard(req,res){
                             matched_user_ear_index: null,
                             matched_user_glasses_index: null,
     
-                            matchedUserResultCode: matchedTarockResult[0].result_code,
-                            matchedUserQuadra: data[matchedTarockResult[0].result_code].personality_socionic_quadra
+                            matchedUserResultCode: matchedTarockResult[0].tarock_socionics,
+                            matchedUserQuadra: data[matchedTarockResult[0].tarock_socionics].personality_socionic_quadra
                         };
                     }
                    
@@ -324,6 +325,7 @@ async function addCard(req,res) {
         
             let zodiac_birth_date = new Date(birth_date)
             let zodiac_birth_year = zodiac_birth_date.getFullYear()
+            
             small_map = small_map.filter((date)=>{
                 if(check_month == 1 && check_date >= 1 && check_date <= 19){
                     let start_date = null
@@ -363,7 +365,7 @@ async function addCard(req,res) {
                     }
                 }            
             })
-    
+            
             if(small_map.length <= 0){
                 res.status(422).json(
                     {
@@ -375,6 +377,7 @@ async function addCard(req,res) {
             }
         
             let selected_zodiac = small_map[0].zodiac
+            console.log(card_type,gender,birth_date,selected_zodiac);
             data = await userZodiac.createCard(user.internal_user_id,card_type,gender,birth_date,selected_zodiac,null)
             data = await userZodiac.getById(data.insertId)
         }else{

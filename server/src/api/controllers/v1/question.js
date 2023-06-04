@@ -46,10 +46,11 @@ async function addResult(req,res){
 
     const result = new ResultModel.Result({
         userId: req.body.device_id,
-        assessmentGroupId: req.body.assessment_group_id,
+        assessmentGroupId: req.body.assessment_group_id===1?8:req.body.assessment_group_id,//changes
         numOfQuestions: req.body.answers.length,
         duration: req.body.duration,
-        code: ResultController.getSocionicsResult(req.body.answers)
+        code: tarockJsonData[ResultController.getSocionicsResult(req.body.answers)].personality_mbti_code,//changes
+        tarockSocionics: ResultController.getSocionicsResult(req.body.answers)
     });
                     
     try {
@@ -122,25 +123,30 @@ async function updateResult(req,res){
 
     let user = res.user
 
-    let result= await ResultModel.getByUser(user.internal_user_id)
+    let result= await ResultModel.getByOldUser(user.internal_user_id)//changes
+    let questionId=req.body.assessment_group_id===1?8:req.body.assessment_group_id;//changes
+    console.log(questionId);//changes
     if(result.length <=0 ){
         const newResult = new Result.Result({
             userId: user.internal_user_id,
-            assessmentGroupId: req.body.assessment_group_id,
+            assessmentGroupId: questionId,//changes
             numOfQuestions: req.body.answers.length,
             duration: req.body.duration,
-            code: ResultController.getSocionicsResult(req.body.answers)
+            code: tarockJsonData[ResultController.getSocionicsResult(req.body.answers)].personality_mbti_code,//changes
+            tarockSocionics: ResultController.getSocionicsResult(req.body.answers)
           });
+        //   console.log(newResult);
         await Result.create(newResult);
-        result = await ResultModel.getByUser(user.internal_user_id)
+        result = await ResultModel.getByOldUser(user.internal_user_id)//changes
     }
                     
     try {
         await ResultModel.update(
             result[0].id,
-            req.body.assessment_group_id,
+            req.body.assessment_group_id===1?8:req.body.assessment_group_id,//changes
             req.body.answers.length,
             req.body.duration,
+            tarockJsonData[ResultController.getSocionicsResult(req.body.answers)].personality_mbti_code,//changes
             ResultController.getSocionicsResult(req.body.answers)
         )
     } catch (error) {
@@ -157,11 +163,11 @@ async function updateResult(req,res){
     user.user_avatar = userAvatar[0] ?? null
     user.question_data = null
 
-    const tarcokResult = await Result.getByUser(user.internal_user_id);
+    const tarcokResult = await Result.getByOldUser(user.internal_user_id);//changes
     if (tarcokResult.length > 0) {
-        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics];//changes
         user.question_data = {
-            resultCode: tarcokResult[0].result_code,
+            resultCode: tarcokResult[0].tarock_socionics,//changes
             quadra: tarockData.personality_socionic_quadra
         };
     }

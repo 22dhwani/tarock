@@ -113,7 +113,6 @@ async function updateResult(req, res) {
   let result = await ResultModel.getByOldUser(user.internal_user_id); //changes
   let questionId =
     req.body.assessment_group_id === 1 ? 8 : req.body.assessment_group_id; //changes
-  console.log(questionId); //changes
   if (result.length <= 0) {
     const newResult = new Result.UpdateResult({
       userId: user.internal_user_id,

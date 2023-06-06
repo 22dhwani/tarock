@@ -39,7 +39,6 @@ async function getUserCard(req, res) {
 
     try {
       const tarcokResult = await Result.getByOldUser(id);
-      console.log(tarcokResult);
       if (tarcokResult.length > 0) {
         const tarockData = data[tarcokResult[0].tarock_socionics];
         result.push({

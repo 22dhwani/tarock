@@ -43,10 +43,13 @@ async function getQuestion(req, res) {
 async function addResult(req, res) {
   const result = new ResultModel.Result({
     userId: req.body.device_id,
-    assessmentGroupId: req.body.assessment_group_id,
+    assessmentGroupId:
+      req.body.assessment_group_id === 1 ? 8 : req.body.assessment_group_id, //changes
     numOfQuestions: req.body.answers.length,
     duration: req.body.duration,
-    code: ResultController.getSocionicsResult(req.body.answers),
+    code: tarockJsonData[ResultController.getSocionicsResult(req.body.answers)]
+      .personality_mbti_code, //changes
+    tarockSocionics: ResultController.getSocionicsResult(req.body.answers),
   });
 
   try {

@@ -387,15 +387,14 @@ async function createRealUser(req, res) {
     try {
       const oldResults = await Result.getByUser(req.body.device_id);
       if (oldResults.length > 0) {
-        const newResult = new Result.NewResult({//changes
+        const newResult = new Result.Result({
           userId: hashEmail,
-          assessmentGroupId: oldResults[0].question_group_id === 1 ? 8 : oldResults[0].question_group_id,//changes
+          assessmentGroupId: oldResults[0].question_group_id,
           numOfQuestions: oldResults[0].num_of_questions,
           duration: oldResults[0].duration,
-          code: tarockJsonData[oldResults[0].result_code].personality_mbti_code,//changes
-          tarockSocionics: oldResults[0].result_code,//changes
+          code: oldResults[0].result_code,
         });
-        await Result.newCreate(newResult);//changes
+        await Result.create(newResult);
       }
       await User.createReal(realUser);
       await User.updateIsPermanentUser(existingUser[0].internal_user_id, 1);
@@ -1148,15 +1147,14 @@ async function socialLogin(req, res) {
     try {
       const oldResults = await Result.getByUser(device_id);
       if (oldResults.length > 0) {
-        const newResult = new Result.NewResult({//changes
+        const newResult = new Result.Result({
           userId: hashEmail,
-          assessmentGroupId: oldResults[0].question_group_id === 1 ? 8 : oldResults[0].question_group_id,//changes
+          assessmentGroupId: oldResults[0].question_group_id,
           numOfQuestions: oldResults[0].num_of_questions,
           duration: oldResults[0].duration,
-          code: tarockJsonData[oldResults[0].result_code].personality_mbti_code,//changes
-          tarockSocionics: oldResults[0].result_code,//changes
+          code: oldResults[0].tarock_socionics,
         });
-        await Result.newCreate(newResult);//changes
+        await Result.create(newResult);
       }
       await User.createReal(realUser);
       await User.updateIsPermanentUser(existingUser[0].internal_user_id, 1);

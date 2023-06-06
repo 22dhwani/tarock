@@ -8,6 +8,15 @@ const Result = function (result) {
   this.code = result.code;
 };
 
+const NewResult = function (result) {
+  this.userId = result.userId;
+  this.assessmentGroupId = result.assessmentGroupId;
+  this.numOfQuestions = result.numOfQuestions;
+  this.duration = result.duration;
+  this.code = result.code;
+  this.tarockSocionics = result.tarockSocionics;
+};
+
 const UpdateResult = function (result) {
   this.userId = result.userId;
   this.assessmentGroupId = result.assessmentGroupId;
@@ -50,6 +59,21 @@ async function create(result) {
   return data[0];
 }
 
+async function newCreate(result) {
+  //changes
+  const data = await sql.query(
+    "INSERT INTO user_assessment_result (internal_user_id, question_group_id, num_of_questions, duration, result_code, tarock_socionics) VALUES (?, ?, ?, ?, ?, ?);",
+    [
+      result.userId,
+      result.assessmentGroupId,
+      result.numOfQuestions,
+      result.duration,
+      result.code,
+    ]
+  );
+  return data[0];
+}
+
 async function update(
   id,
   question_group_id,
@@ -75,6 +99,8 @@ async function update(
 
 export default {
   Result,
+  NewResult,
+  newCreate,
   UpdateResult,
   getByUser,
   getByOldUser,

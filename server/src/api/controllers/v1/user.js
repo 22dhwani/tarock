@@ -50,11 +50,11 @@ async function getUser(req, res) {
   user.user_avatar = userAvatar[0] ?? null;
   user.question_data = null;
 
-  const tarcokResult = await Result.getByUser(user.internal_user_id);
+  const tarcokResult = await Result.getByOldUser(user.internal_user_id); //changes
   if (tarcokResult.length > 0) {
-    const tarockData = tarockJsonData[tarcokResult[0].result_code];
+    const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics]; //changes
     user.question_data = {
-      resultCode: tarcokResult[0].result_code,
+      resultCode: tarcokResult[0].tarock_socionics, //changes
       quadra: tarockData.personality_socionic_quadra,
       personality_mbti_code: tarockData.personality_mbti_code,
     };
@@ -539,13 +539,13 @@ async function login(req, res) {
 
   emailExistUser[0].question_data = null;
 
-  const tarcokResult = await Result.getByUser(
+  const tarcokResult = await Result.getByOldUser(
     emailExistUser[0].internal_user_id
-  );
+  ); //changes
   if (tarcokResult.length > 0) {
-    const tarockData = tarockJsonData[tarcokResult[0].result_code];
+    const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics]; //changes
     emailExistUser[0].question_data = {
-      resultCode: tarcokResult[0].result_code,
+      resultCode: tarcokResult[0].tarock_socionics, //changes
       quadra: tarockData.personality_socionic_quadra,
       personality_mbti_code: tarockData.personality_mbti_code,
     };
@@ -722,11 +722,11 @@ async function editUser(req, res) {
 
   user[0].question_data = null;
 
-  const tarcokResult = await Result.getByUser(user[0].internal_user_id);
+  const tarcokResult = await Result.getByOldUser(user[0].internal_user_id); //changes
   if (tarcokResult.length > 0) {
-    const tarockData = tarockJsonData[tarcokResult[0].result_code];
+    const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics]; //changes
     user[0].question_data = {
-      resultCode: tarcokResult[0].result_code,
+      resultCode: tarcokResult[0].tarock_socionics, //changes
       quadra: tarockData.personality_socionic_quadra,
       personality_mbti_code: tarockData.personality_mbti_code,
     };
@@ -1102,13 +1102,13 @@ async function socialLogin(req, res) {
       );
       emailExistUser[0].user_avatar = userAvatar[0] ?? null;
 
-      const tarcokResult = await Result.getByUser(
+      const tarcokResult = await Result.getByOldUser(
         emailExistUser[0].internal_user_id
-      );
+      ); //changes
       if (tarcokResult.length > 0) {
-        const tarockData = tarockJsonData[tarcokResult[0].result_code];
+        const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics]; //changes
         emailExistUser[0].question_data = {
-          resultCode: tarcokResult[0].result_code,
+          resultCode: tarcokResult[0].tarock_socionics, //changes
           quadra: tarockData.personality_socionic_quadra,
           personality_mbti_code: tarockData.personality_mbti_code,
         };
@@ -1152,7 +1152,7 @@ async function socialLogin(req, res) {
           assessmentGroupId: oldResults[0].question_group_id,
           numOfQuestions: oldResults[0].num_of_questions,
           duration: oldResults[0].duration,
-          code: oldResults[0].result_code,
+          code: oldResults[0].tarock_socionics,
         });
         await Result.create(newResult);
       }
@@ -1203,11 +1203,11 @@ async function socialLogin(req, res) {
     );
     data[0].user_avatar = userAvatar[0] ?? null;
 
-    const tarcokResult = await Result.getByUser(data[0].internal_user_id);
+    const tarcokResult = await Result.getByOldUser(data[0].internal_user_id); //changes
     if (tarcokResult.length > 0) {
-      const tarockData = tarockJsonData[tarcokResult[0].result_code];
+      const tarockData = tarockJsonData[tarcokResult[0].tarock_socionics]; //changes
       data[0].question_data = {
-        resultCode: tarcokResult[0].result_code,
+        resultCode: tarcokResult[0].tarock_socionics, //changes
         quadra: tarockData.personality_socionic_quadra,
         personality_mbti_code: tarockData.personality_mbti_code,
       };

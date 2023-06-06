@@ -66,11 +66,10 @@ async function answer(req, res) {
 		let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id, option.id)
 		let tarcokResult = null
 		for await (const answer of totalAnswers) {
-			tarcokResult = await Result.getByUserNew(answer.user_id)
-
+			tarcokResult = await Result.getByOldUser(answer.user_id)
 			if (tarcokResult.length > 0) {
-				let personality_name = tarcokResult[0].result_code
-				if (!personalies.some((element) => { return element.personality_name == personality_name })) {
+				let personality_name = cardData[tarcokResult[0].tarock_socionics].personality_mbti_code
+				if(!personalies.some((element)=>{return element.personality_name == personality_name})){
 					personalies.push(
 						{
 							personality_name: personality_name,
@@ -140,11 +139,10 @@ async function getStats(req, res) {
 		let tarcokResult = null
 
 		for await (const answer of totalAnswers) {
-			tarcokResult = await Result.getByUserNew(answer.user_id)
+			tarcokResult = await Result.getByOldUser(answer.user_id)
 			if (tarcokResult.length > 0) {
-				let personality_name = tarcokResult[0].result_code
-
-				if (!personalies.some((element) => { return element.personality_name == personality_name })) {
+				let personality_name = cardData[tarcokResult[0].tarock_socionics].personality_mbti_code
+				if(!personalies.some((element)=>{return element.personality_name == personality_name})){
 					personalies.push(
 						{
 							personality_name: personality_name,
@@ -197,10 +195,10 @@ async function getOptionStats(req, res) {
 	let totalAnswers = await DailyQuestionUserAnswerOptionModel.getAnswers(question_id, option_id)
 	let tarcokResult = null
 	for await (const answer of totalAnswers) {
-		tarcokResult = await Result.getByUserNew(answer.user_id)
+		tarcokResult = await Result.getByOldUser(answer.user_id)
 		if (tarcokResult.length > 0) {
-			let personality_name = tarcokResult[0].result_code
-			if (!personalies.some((element) => { return element.personality_name == personality_name })) {
+			let personality_name = cardData[tarcokResult[0].tarock_socionics].personality_mbti_code
+			if(!personalies.some((element)=>{return element.personality_name == personality_name})){
 				personalies.push(
 					{
 						personality_name: personality_name,

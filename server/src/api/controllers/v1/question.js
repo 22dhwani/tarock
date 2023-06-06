@@ -110,7 +110,6 @@ async function rateResult(req, res) {
 
 async function updateResult(req, res) {
   let user = res.user;
-
   let result = await ResultModel.getByOldUser(user.internal_user_id); //changes
   let questionId =
     req.body.assessment_group_id === 1 ? 8 : req.body.assessment_group_id; //changes

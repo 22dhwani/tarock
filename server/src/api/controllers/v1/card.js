@@ -42,7 +42,6 @@ async function getUserCard(req, res) {
       console.log(tarcokResult);
       if (tarcokResult.length > 0) {
         const tarockData = data[tarcokResult[0].tarock_socionics];
-
         result.push({
           type: "Tarock",
           data: [

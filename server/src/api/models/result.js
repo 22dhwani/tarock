@@ -6,6 +6,14 @@ const Result = function (result) {
   this.numOfQuestions = result.numOfQuestions;
   this.duration = result.duration;
   this.code = result.code;
+};
+
+const UpdateResult = function (result) {
+  this.userId = result.userId;
+  this.assessmentGroupId = result.assessmentGroupId;
+  this.numOfQuestions = result.numOfQuestions;
+  this.duration = result.duration;
+  this.code = result.code;
   this.tarockSocionics = result.tarockSocionics;
 };
 
@@ -65,4 +73,11 @@ async function update(
   return data[0];
 }
 
-export default { Result, getByUser, getByOldUser, create, update };
+export default {
+  Result,
+  UpdateResult,
+  getByUser,
+  getByOldUser,
+  create,
+  update,
+};
